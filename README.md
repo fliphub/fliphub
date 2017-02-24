@@ -7,6 +7,75 @@ the builder, of builders.
 
 It allows you to create configs that would take hundreds or thousands of lines, with just a few properties.
 
+## all you need
+
+#### minimal
+```js
+import FlipBox from 'flip-box'
+const apps = [{name: 'ez', entry: './src/index.js'}]
+new FlipBox({apps}).fullAuto()
+```
+
+
+#### all the apps
+one app? two apps? 100 apps? nodejs server, inferno, react, fusebox, _and_ webpack? existing configs? happy and no happy pack? at the same time? no sweat.
+```js
+const FlipBox = require('flip-box')
+const apps = [
+  {
+    name: 'reacted',
+    config: './webpack.config.js'
+    fusebox: true,
+  },
+  {
+    name: 'infernod',
+    entry: './src/index.js',
+    presets: ['inferno'],
+    html: './src/index.html',
+  },
+  {
+    name: 'backend',
+    entry: './backend/src',
+    presets: ['node'],
+    happypack: false,
+  },
+]
+module.exports = new FlipBox({apps}).fullAuto()
+```
+
+#### reusability?
+```js
+const FlipBox = require('flip-box')
+const apps = [
+  {
+    name: 'reacted',
+    presets: ['react', 'entry'],
+  },
+  {
+    name: 'infernod',
+    presets: ['inferno', 'entry'],
+  },
+]
+module.exports = new FlipBox({
+  apps,
+  presets: {
+    front: {
+      entry: './src/index.js',
+      html: '#root',
+      fusebox: true,
+    },
+  },
+}).fullAuto()
+```
+
+...oh and you can run those configs through webpack just like any other webpack config.
+which means you can also change the returned config in the same way.
+
+[they are configured for each environment by default](#-default settings)
+
+[and can be customized for any config you want](#-flags)
+
+
 ## the problem
 - [build systems are notorious for their difficulty][medium-webpack-difficulty].
 - finding and setting up the right
@@ -33,32 +102,49 @@ It allows you to create configs that would take hundreds or thousands of lines, 
 - [create plugins](#create-your-own-plugins) to start converting your build system to another, flip the switch to keep compatibility without breaking everything,
 
 
-===========================
+
+
 
 # legend
-- [middleware](#middleware)
-- [apps](#apps)
-- [commander](#commander)
-- [examples](#examples)
-- [terminology](#terminology)
-- [🏭 behind the scenes / internal](#behind-the-scenes)
-
-===================================================================
+- [middleware](#-middleware)
+- [apps](#-apps)
+- [commander](#-commander)
+- [examples](#-examples)
+- [terminology](#-terminology)
+- [🏭 behind the scenes / internal](#-behind-the-scenes)
 
 
-===========================
+
+
+# examples
+- [examples-basic][examples-basic]
+- [examples-basic-build][examples-basic-build]
+- [examples-compat][examples-compat] 🚧
+- [examples-flipbox][examples-flipbox]
+- [examples-fuse-canadas][examples-fuse-canadas]
+- [examples-fusebox][examples-fusebox]
+- [examples-intermediate][examples-intermediate]
+- [examples-intermediate-tests][examples-intermediate-tests] 🚧
+- [examples-verbose][examples-verbose]
+
+### ⚠
+- needs cleaning
+- needs general improvements
+- needs more thought in running them all
+- [todo-examples][todo-examples]
+
 
 # 🔌 middleware
 
 ------------------
 
-## add your own middleware
+### add your own middleware
 - you can add your own middleware before building apps
 - the name of the middleware maps in as a hook for the properties on the app
 - optional index property to insert middleware at any position
 - [middleware interface][flow-middleware]
 
-### example
+#### example
 ```js
 flipbox.addMiddlewares({
   index: 999, // optional
@@ -70,127 +156,15 @@ flipbox.addMiddlewares({
 })
 ```
 
-### ⚠
+#### ⚠
 - [todo-middleware][todo-middleware]
 
 
-------------------
 ## 🐛 debugging
 - ⚙ with full options for debugging everything in the flipping process, debugging is a breeze.
 - see [debugging - deep](#deep-debugging) for all of the options
 
-------------------
 
-## 🍰 presets
-
-### add your own presets
-```js
-.extendPresets({
-  'inferno': {
-    loaders: ['styleloader'],
-    alias: ['moose', 'igloo', 'inferno'],
-    html: '#root',
-  },
-})
-```
-
-### built in presets
-- [built in presets][src-presets]
-
--------------
-
-## 🍦 default defaults
-- [see the code][src-defaults]
-
-### example
-this would make it so if `fusebox` [flag](#flags) are true, it would add the fusebox property to any app that has passed [filters](#filters) and is being built.
-```js
-flipbox.addDefaults({
-  flags: {
-    // this can also be a objects,
-    // or an array of strings
-    // or a string
-    names: [{flag: 'compile', type: 'bool', default: false}],
-    cb: ({fusebox}) => {
-      return {fusebox}
-    },
-  },
-})
-```
-
-### ⚠
-- ✔️💣🕸
-- needs docs
-- [todo-presets][todo-presets]
-
------------
-
-## params
-- converts shorthand code to webpack configs
-- [read the code][src-params]
-- ✔️💣🕸
-
-## fusebox
-- converts webpack configs to fusebox configs
-- [read the code][src-fusebox-middleware]
-- ✔️💣
-- [todo-build-systems][todo-build-systems]
-- needs to pass in more of the config
-
------------
-
-## happypack
-- [happypack][happypack]
-- ✔️🕸
-
-### defaults
-```js
-happypack: {
-  cache: false,
-  threads: 4,
-  include: [
-    './',
-  ],
-}
-```
-```js
-{
-  _noop: true,
-  clean: false, // bool, or array<string>
-}
-```
-
-
--------
-## 🗺 sourcemaps
-- ✔️💣🕸
-
-### defaults
-```js
-env: {
-  development: {
-    useSourceMaps: true,
-    sourceMapTool: '#source-map',
-  }
-  production: {
-    useSourceMaps: true,
-    sourceMapTool: 'hidden',
-  },
-}
-```
--------
-
-## ⚖️ loaders
-- ✔️💣🕸
-### defaults
-```js
-loaders: {
-  'babel': {},
-  'json': {},
-},
-```
-
---------
 
 ## 🏹 aliasing
 
@@ -215,9 +189,131 @@ loaders: {
 - [💣 fusebox aliases][fusebox-alias]
 - ✔️💣🕸
 
+## 🍰 presets
 
------------
--------
+### add your own presets
+```js
+.extendPresets({
+  'inferno': {
+    loaders: ['styleloader'],
+    alias: ['moose', 'igloo', 'inferno'],
+    html: '#root',
+  },
+})
+```
+
+### built in presets
+- [built in presets][src-presets]
+
+
+## 🍦 default settings
+- [see the code][src-defaults]
+
+### default defaults
+```
+{
+  env: {
+     production: {
+       uglify: true,
+       defineProduction: true,
+       run: false,
+       compile: true,
+       useSourceMaps: false,
+       sourceMapTool: 'hidden',
+     },
+     development: {
+       noEmitErrors: true,
+     },
+  }
+}
+```
+
+### adding your own defaults
+this would make it so if `fusebox` [flag](#flags) are true, it would add the fusebox property to any app that has passed [filters](#filters) and is being built.
+```js
+flipbox.addDefaults({
+  flags: {
+    // this can also be a objects,
+    // or an array of strings
+    // or a string
+    names: [{flag: 'compile', type: 'bool', default: false}],
+    cb: ({fusebox}) => {
+      return {fusebox}
+    },
+  },
+})
+```
+
+### ⚠
+- ✔️💣🕸
+- needs docs
+- [todo-presets][todo-presets]
+
+
+## params
+- converts shorthand code to webpack configs
+- [read the code][src-params]
+- ✔️💣🕸
+
+## 💣🛅 fusebox
+- converts webpack configs to fusebox configs
+- [read the code][src-fusebox-middleware]
+- ✔️💣
+- [todo-build-systems][todo-build-systems]
+- needs to pass in more of the config
+
+## ☺️️🛅 happypack
+- [happypack][happypack]
+- ✔️🕸
+
+### defaults
+```js
+happypack: {
+  cache: false,
+  threads: 4,
+  include: [
+    './',
+  ],
+}
+```
+```js
+{
+  _noop: true,
+  clean: false, // bool, or array<string>
+}
+```
+
+
+## 🗺 sourcemaps
+- ✔️💣🕸
+
+### defaults
+```js
+env: {
+  development: {
+    useSourceMaps: true,
+    sourceMapTool: '#source-map',
+  }
+  production: {
+    useSourceMaps: true,
+    sourceMapTool: 'hidden',
+  },
+}
+```
+
+## ⚖️ loaders
+- ✔️💣🕸
+- .loaderOptions
+
+### defaults
+```js
+loaders: {
+  'babel': {},
+  'json': {},
+},
+```
+
+
 
 ## 🚩 flags
 flags can be used to find global variables passed around for configuration
@@ -303,14 +399,11 @@ white [flags](#flags) are used to filter which apps are run for different [opera
 apps, and app operations can be filtered based on flags either per app, or for all apps.
 [see the examples](#examples)
 
-------
------
 
 ## configOut
 - writes the generated config to a file, for use with [babel-module-resolver][babel-module-resolver]
 - ✔️💣🕸
 
------
 
 ## polyfills
 - can be used currently only for polyfilling window when you `.exec` in [app operations](#app-operations)
@@ -319,7 +412,6 @@ apps, and app operations can be filtered based on flags either per app, or for a
 - needs docs
 - [todo-polyfill][todo-polyfill]
 
------
 
 ## externals
 - allows you to exclude paths from a bundle
@@ -327,7 +419,7 @@ apps, and app operations can be filtered based on flags either per app, or for a
 - [webpack externals][webpack-externals]
 - [fuse exclude][fuse-arithmetic]
 
------
+
 
 ## tests
 - run tests in mocha
@@ -341,10 +433,8 @@ apps, and app operations can be filtered based on flags either per app, or for a
 - needs links to karma and mocha
 - [todo-tests][todo-tests]
 
-===========================
 
-# commander
-- 🖥 commander
+# 👑⚔️ commander
 
 ### resources
 - [commanderjs][commanderjs]
@@ -354,11 +444,12 @@ apps, and app operations can be filtered based on flags either per app, or for a
 - needs lots of work
 - [todo-commander][todo-commander]
 
-===========================
+
+
 # apps
 - multiple apps [flow-app][flow-app]
 
-## app-operations
+### app-operations
   - 🏃🏸 running
     - 🔮🌐 automatic safety in ports
   - ⌛ compiling
@@ -376,17 +467,15 @@ apps, and app operations can be filtered based on flags either per app, or for a
 ### ⚠
 - needs docs
 
-===================================================================
 
 
 
-========================
+
+
 # 🕳 digging deeper
-========================
 
-----------
 ## 🖇 helpers
------------
+
 ## 🐛 deep-debugging
 - 🎨 logs are styled with color & emoji for easy searchability & scannability
 - 👀 full source options, when you want to see deep inside the contents, you can
@@ -422,9 +511,10 @@ debug: {
 }
 ```
 ### ⚠
-- [todo-helpers][todo-helpers#log]
+- [todo-helpers#log][todo-helpers]
 
------------
+
+
 
 ## 📒 files
 - write
@@ -443,7 +533,7 @@ debug: {
 ### ⚠
 - needs types
 
-------
+
 
 ## 🌐 port
 used for finding available ports if preferred ones are not available
@@ -452,7 +542,8 @@ used for finding available ports if preferred ones are not available
 - needs types
 - needs option to disable
 
-------
+
+
 ## html
 
 ## example
@@ -484,14 +575,20 @@ used for finding available ports if preferred ones are not available
 - needs docs
 - needs more fusebox support, only supports html file
 
-## 🚧 HMR
-## 🚧 include
-## 🚧 tests
-## 🚧 builderInstance
-## 🚧 init
-## 🚧 instructions
 
-========================
+## 📚🚧 (need docs)
+- HMR
+- include
+- builderInstance
+- init
+- instructions
+- tasks
+- copy
+- define
+- uglify
+- analyze
+- clean
+- provide
 
 
 ## 🗝️⎁ terminology / key
@@ -507,7 +604,8 @@ used for finding available ports if preferred ones are not available
 - 🕸🛅 webpack compatible
 
 
-===========================
+
+
 ## 🏭 behind the scenes
   ## core
   ## middleware
@@ -519,7 +617,7 @@ used for finding available ports if preferred ones are not available
   ## 🖇 helpers
     reference & context
 
-## plans
+## 📅 plans
 - [todo-architecture][todo-architecture]
 - [todo-later-soon-next][todo-later-soon-next]
 - [todo-perf][todo-perf]
@@ -527,32 +625,11 @@ used for finding available ports if preferred ones are not available
 ### ⚠
 - needs docs
 
-===================================================================
 
 
 
-===========================
-# examples
-- [examples-basic][examples-basic]
-- [examples-basic-build][examples-basic-build]
-- [examples-compat][examples-compat] 🚧
-- [examples-flipbox][examples-flipbox]
-- [examples-fuse-canadas][examples-fuse-canadas]
-- [examples-fusebox][examples-fusebox]
-- [examples-intermediate][examples-intermediate]
-- [examples-intermediate-tests][examples-intermediate-tests] 🚧
-- [examples-verbose][examples-verbose]
 
-### ⚠
-- needs cleaning
-- needs general improvements
-- needs more thought in running them all
-- [todo-examples][todo-examples]
-
-===================================================================
-
-===========================
-# build systems / builders
+# 🏗 build systems / builders
 - fusebox
 ```js
   app = {
@@ -562,7 +639,8 @@ used for finding available ports if preferred ones are not available
 ```
 - webpack - is default
 
-===================================================================
+
+
 
 # 🎃 tips n tricks
 - 🚧 this is a wip, it has been in development for about a week and as such is not 100% stable, but is definitely worth trying
@@ -619,8 +697,8 @@ used for finding available ports if preferred ones are not available
 [babel-setup]: https://babeljs.io/docs/setup/
 [babel-module-resolver]: https://github.com/tleunen/babel-plugin-module-resolver
 [babel-loader-builder]: https://github.com/aretecode/babel-loader-builder
-[babel-monorepo][https://github.com/babel/babel/blob/master/doc/design/monorepo.md]
-[babel-make][https://github.com/babel/babel/blob/master/Makefile]
+[babel-monorepo]: [https://github.com/babel/babel/blob/master/doc/design/monorepo.md]
+[babel-make]: [https://github.com/babel/babel/blob/master/Makefile]
 
 [webpack]: https://webpack.js.org/
 [webpack-alias]: https://webpack.js.org/configuration/resolve/

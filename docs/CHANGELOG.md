@@ -1,11 +1,18 @@
 # 🔈 changelog 🔈
 
 # part 10 - feb 24 17
-- _lots_ more on docs
+- 📚 _lots_ more on docs
 - add compileEnd hook
 - improve canada example
 - make fullauto return mediator
 - release
+- 👾 add minimal example
+- 📚 format docs, all you need, reordering docs
+- 📚📅👑⚔️
+- ⚙ optionally pass presets and middleware to constructor
+- 🏷 version bump and name example
+- 📚🚧 (need docs) loaderOptions, define, uglify, analyze, clean, provide
+- 📚⚒🔗 fix some links
 
 # part 9 - feb 23 17
 - doing lots on readme

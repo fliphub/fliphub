@@ -28,6 +28,13 @@ class AppsBuilder {
     this.helpers.builder = this
     this.helpers.fuseCommander = fuseCommander
     this.setAppBuilder(config.appBuilder)
+
+    if (config.presets) {
+      this.addPresets(config.presets)
+    }
+    if (config.middleware) {
+      this.addMiddlewares(config.middleware)
+    }
   }
 
   // 1)

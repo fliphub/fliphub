@@ -1,5 +1,5 @@
 {
-  "name": "example",
+  "name": "flipbox-example",
   "scripts": {
     "eh": "webpack --config webpack.config.js",
     "build": "webpack --config configs/basic/mediator.js",

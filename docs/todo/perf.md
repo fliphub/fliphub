@@ -1,0 +1,3 @@
+- [ ] 80/20 optimize the loops
+- [ ] add option for flags to limit the search
+- [ ] add cache to apps

@@ -1,0 +1,2 @@
+- [ ] support for merging multiple definitions
+- [ ] support for converting definitions to fusebox

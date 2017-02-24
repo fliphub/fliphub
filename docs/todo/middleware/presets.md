@@ -1,0 +1,3 @@
+- [x] client addPresets
+- [x] user set defaults for all apps
+- [ ] extend presets with a new name

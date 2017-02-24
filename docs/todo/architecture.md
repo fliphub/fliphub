@@ -1,0 +1,3 @@
+- [ ] plan out a refactor trying typescript with fusebox
+- [ ] plan out how to best refactor middleware
+  - [ ] extension points?

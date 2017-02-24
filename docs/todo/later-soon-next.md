@@ -1,0 +1,7 @@
+- [ ] add support for default building replacement callbacks (such as projectroot for path replacement)
+- [ ] auto detect which plugins & loaders to use?
+- [ ] build out uglified deps/vendors (for proprietary packages)
+- [ ] updatable babel-loader-builder
+- [ ] validate config, either params or config required
+- [ ] http://jspm.io/
+- [ ] skeleton generator

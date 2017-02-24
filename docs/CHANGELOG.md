@@ -13,6 +13,7 @@
 - 🏷 version bump and name example
 - 📚🚧 (need docs) loaderOptions, define, uglify, analyze, clean, provide
 - 📚⚒🔗 fix some links
+- ⚒app builder fixes
 
 # part 9 - feb 23 17
 - doing lots on readme

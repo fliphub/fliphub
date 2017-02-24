@@ -46,6 +46,7 @@ class AppsBuilder {
   // to pass in the name of your webpack preconfigured package
   // and the module exports is the decorated webpack config
   mediator() {
+    if (!this.builtApps) this.build()
     var exportee = this.builtApps
 
     // if it is webpack cli,
@@ -54,7 +55,7 @@ class AppsBuilder {
         exportee = this.builtApps[0].webpack
       }
     }
-
+    console.log(exportee)
     return exportee
   }
 
@@ -66,7 +67,7 @@ class AppsBuilder {
 
     if (AppsBuilder.isWebpackCli) {
       this.helpers.log.text('🕸  🛅  🖥  was webpack cli: fullAuto()')
-      if (!options.force) return
+      if (!options.force) return this.mediator()
     }
 
     var flag = this.helpers.flags.searchAll
@@ -153,7 +154,7 @@ class AppsBuilder {
     if (AppsBuilder.isWebpackCli) {
       this.helpers.log.text('🕸  🛅  🖥  was webpack cli: devServer()')
       if (!options) options = {}
-      if (!options.force) return
+      if (!options.force) return this.mediator()
     }
 
     var devServers = require('./devServer')
@@ -166,7 +167,7 @@ class AppsBuilder {
     if (AppsBuilder.isWebpackCli) {
       this.helpers.log.text('🕸  🛅  🖥  was webpack cli: compile()')
       if (!options) options = {}
-      if (!options.force) return
+      if (!options.force) return this.mediator()
     }
     this.helpers.log.text('🖥  compile()')
 

@@ -12,8 +12,7 @@ It allows you to create configs that would take hundreds or thousands of lines, 
 #### minimal
 ```js
 import FlipBox from 'flip-box'
-const apps = [{name: 'ez', entry: './src/index.js'}]
-new FlipBox({apps}).fullAuto()
+new FlipBox({entry: './src/index.js'}).fullAuto()
 ```
 
 
@@ -75,6 +74,7 @@ which means you can also change the returned config in the same way.
 
 [and can be customized for any config you want](#-flags)
 
+[it can build itself with webpack or fusebox, with the flip of an env flag][src-pkg-json]
 
 ## the problem
 - [build systems are notorious for their difficulty][medium-webpack-difficulty].
@@ -645,7 +645,7 @@ used for finding available ports if preferred ones are not available
 # 🎃 tips n tricks
 - 🚧 this is a wip, it has been in development for about a week and as such is not 100% stable, but is definitely worth trying
 
-
+[src-pkg-json]: https://github.com/flip-box/flipbox/tree/master/package.json
 [src-params]: https://github.com/flip-box/flipbox/tree/master/src/middleware/defaults.js
 [src-fusebox-middleware]: https://github.com/flip-box/flipbox/tree/master/src/middleware/builders/fusebox.js
 [src-presets]: https://github.com/flip-box/flipbox/tree/master/src/middleware/presets.js

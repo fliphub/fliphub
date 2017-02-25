@@ -1,5 +1,12 @@
 # 🔈 changelog 🔈
 
+# part 12 - feb 26 17
+- 📜 script to run fusebox, or webpack and it will swap just on cli!
+- ⚙ make `apps` as an array optional and just pass in `app`
+- ⚙ make `app` optional and just pass in `entry`
+- 📦⬆💣🛅 update fusebox ^1.3.122-preview.4
+- 🗝️ update keywords
+
 # part 11 - feb 25 17
 - 🖇🔣 start arithmetics
 - 📚⚒ fixing example for compat, add it to root package as script
@@ -25,15 +32,15 @@
 - 🏷 version bump and name example
 - 📚🚧 (need docs) loaderOptions, define, uglify, analyze, clean, provide
 - 📚⚒🔗 fix some links
-- ⚒app builder fixes
+- ⚒ app builder fixes
 
 # part 9 - feb 23 17
 - doing lots on readme
-- add gitter
+- 🗣 add gitter
 - add badges
-- cleaning
-- added note to json loader to just use for fuse
-- add node utils to logger
+- 🚮 cleaning
+- ℹ️️ added note to json loader to just use for fuse
+- 🔈 add node utils to logger
 
 # part 8 - feb 22 17
 - ⚙🔈 added debug config for fusebox
@@ -44,12 +51,12 @@
 - add fuseboxPlugins option
 - use lodash merge for merging defaults
 - named it - flipbox
-- built itself with itself, with fuse and webpack
+- 🏗🏗 built itself with itself, with fuse and webpack
 - published empty package on npm & created github repo
 - add gitignore, eslint, ~commander basic at root
-- add debug option for exec, flags, testOutput
-- fix case where builder builds itself and the test runner that strips out strict mode strips out the built test runners strict mode check hahaha
-- tests for building itself pass, but issue with running those tests in the test runner
+- 🔈⚙ add debug option for exec, flags, testOutput
+- ⚒ fix case where builder builds itself and the test runner that strips out strict mode strips out the built test runners strict mode check hahaha
+- ⚒🔬🏃 tests for building itself pass, but issue with running those tests in the test runner
 
 # part 8 - feb 21st
 - 🔈 add changelog
@@ -68,7 +75,7 @@
 - 🔬⚙ karma and mocha presets
 - 📒🚚 put fusebox middleware in transformers
 - 📒🚚🔬 move mocha and karma into testing folder for abstraction and easily
-- ⚙⚒ fix configout order typo
+- ⚙⌨️⚒ fix configout order typo
 - 💣🛅⛓🔧🏹 finally get fusebox aliasing working using babel
 - 💣🛅⛓🔧🏹 use latest fusebox homedir aliasing
 - 💣🛅📖📚 fusebox example

@@ -20,7 +20,16 @@ class AppsBuilder {
     } = config
     this.debug = debug || false
 
-    this.setApps(config.apps)
+    // @TODO: do better
+    if (config.app && !config.apps)
+      this.setApps([config.app])
+    else if (config.apps)
+      this.setApps(config.apps)
+    else if (config.entry)
+      this.setApps([config])
+    else
+      console.log('!!! not valid apps')
+
     this.setFilters(config.filters)
     this.setDefaultAppNames(config.defaultAppNames)
 

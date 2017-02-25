@@ -10,6 +10,7 @@
 - ⌨️⚒ fix typo on example in flags for fusebox
 - 🔈 logging in tests
 - 🔈⚠☺️️🛅 log warning fn and use with happypack
+- 🏷 version bump
 
 # part 10 - feb 24 17
 - 📚 _lots_ more on docs

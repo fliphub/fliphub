@@ -1,6 +1,6 @@
 {
   "name": "flipbox",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "the builder of builders",
   "main": "src/index.js",
   "scripts": {

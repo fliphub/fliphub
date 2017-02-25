@@ -1,5 +1,16 @@
 # 🔈 changelog 🔈
 
+# part 11 - feb 25 17
+- 🖇🔣 start arithmetics
+- 📚⚒ fixing example for compat, add it to root package as script
+- ⚙ make name optional
+- 🚑🐛 debug the webpack not compiling bug - was not excluding webpack and fusebox
+- 📦⬆💣🛅 update fusebox
+- 📜 script to run fusebox, or webpack and it will swap just on cli!
+- ⌨️⚒ fix typo on example in flags for fusebox
+- 🔈 logging in tests
+- 🔈⚠☺️️🛅 log warning fn and use with happypack
+
 # part 10 - feb 24 17
 - 📚 _lots_ more on docs
 - add compileEnd hook

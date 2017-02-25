@@ -236,7 +236,7 @@ flipbox.addDefaults({
     // this can also be a objects,
     // or an array of strings
     // or a string
-    names: [{flag: 'compile', type: 'bool', default: false}],
+    names: [{flag: 'fusebox', type: 'bool', default: false}],
     cb: ({fusebox}) => {
       return {fusebox}
     },

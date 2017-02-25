@@ -122,21 +122,21 @@ function happypack(app, helpers) {
     cache: false,
   }
 
+  if (app.debug.happypack && app.debug.verbose) {
+    params.debug = true
+  }
+
   // only valid params
   var filtered = Object.assign({}, app.happypack)
 
-  if (app.debug.happypack)
-    helpers.log(app.happypack, {level: '☺️️  🛅  🏗  happypack', verbose: false})
+  // if (app.debug.happypack)
+  //   helpers.log(app.happypack, {level: '☺️️  🛅  🏗  happypack', verbose: false})
 
   // @NOTE: include is only used in loaders, not plugin
   delete filtered.include
 
   // merge options
   params = Object.assign(params, filtered)
-
-  if (params.include) {
-    params.include = params.include.map(helpers.resolve)
-  }
 
   var happypacks = []
   app.happypack.loaders.forEach(loader => {
@@ -147,8 +147,11 @@ function happypack(app, helpers) {
     happypacks.push(new HappyPack(loaderParams))
   })
 
-  if (app.debug.happypack && app.debug.verbose) {
-    helpers.log(happypacks, {level: '☺️️  🛅  🏗  happypacks', verbose: true})
+  if (app.debug.happypack) {
+    if (app.debug.verbose)
+      helpers.log.verbose(happypacks, {level: '☺️️  🛅  🏗  happypacks'})
+    else
+      helpers.log(happypacks, {level: '☺️️  🛅  🏗  happypacks'})
   }
 
   return helpers.injectPlugins(app, happypacks)

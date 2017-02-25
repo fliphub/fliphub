@@ -3,7 +3,8 @@
   "scripts": {
     "eh": "webpack --config webpack.config.js",
     "build": "webpack --config configs/basic/mediator.js",
-    "pixi": "webpack --config configs/pixi/webpack.config.js",
+    "pixi": "webpack --config configs/compat/mediator.js",
+    "pixiw": "webpack --config configs/pixi/webpack.config.js",
     "karma": "karma start --conf /Users/james/code/ds/back/webpack-env-builder/src/middleware/testing/karma.config.js",
     "nwb": "nwb test --c /Users/james/code/ds/back/webpack-env-builder/src/middleware/testing/nwb.config.js"
   },

@@ -1,10 +1,10 @@
 var webpack = require('webpack')
 var babelLoaderBuilder = require('babel-loader-builder')
 var CleanWebpackPlugin = require('clean-webpack-plugin')
-var CopyWebpackPlugin = require('copy-webpack-plugin')
 var path = require('path')
-var pathToResolveTo = path.join(__dirname, '../../')
+var pathToResolveTo = path.join(__dirname, './pixi')
 var resolve = resolvee => path.resolve(pathToResolveTo, resolvee)
+var resolveHere = resolvee => path.resolve(__dirname, resolvee)
 
 var babelLoader = babelLoaderBuilder({
   async: true,
@@ -14,8 +14,8 @@ var babelLoader = babelLoaderBuilder({
 var config = {
   devtool: '#source-map',
   entry: {
-    'ds-renderer': [
-      resolve('./src/renderer/index.js'),
+    'eh': [
+      resolve('./src/game.js'),
     ],
   },
   output: {
@@ -27,7 +27,7 @@ var config = {
     loaders: [
       {
         test: /\.js$/,
-        loaders: 'babel-loader',
+        loader: 'babel-loader',
         exclude: /(node_modules)/,
         query: babelLoader,
       },
@@ -38,14 +38,16 @@ var config = {
     ],
   },
   resolve: {
-    alias: {},
+    alias: {
+      'pixijs': resolveHere('./apps.js'),
+    },
+  },
+  externals: {
+    'pixijs': 'pixijs',
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
     new CleanWebpackPlugin(['tmp/dev', 'dist']),
-    new CopyWebpackPlugin([
-      {from: resolve('./src/renderer/assets'), to: 'assets', force: true},
-    ]),
   ],
 }
 

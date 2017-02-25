@@ -29,12 +29,14 @@ module.exports = function(app, helpers) {
     useSourceMaps: true,
     sourceMapTool: '#source-map',
 
+    // happypack: false,
     happypack: {
       cache: false,
       threads: 4,
-      include: [
-        './',
-      ],
+
+      // this will make it load everything in node_modules if it is root...
+      // - issue was it was not setting builders as external
+      include: ['___________'],
     },
     loaders: {
       'babel': {},

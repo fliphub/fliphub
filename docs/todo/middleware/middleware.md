@@ -7,6 +7,7 @@
   - [ ] the program actually registers the middleware
   - [ ] and allows users to do the same
 - [ ] remove middleware fn
+- 🔌🛂 add validate middleware
 
 ## html
 - [x] if html is not a path, and is a string, use that for the id of the root div

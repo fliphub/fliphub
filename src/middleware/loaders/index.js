@@ -61,7 +61,19 @@ module.exports = function(app, helpers) {
         loaders: ['happypack/loader?id=' + name],
         // loaders: ['happypack/loader'],
       }
-      if (app.happypack.include) happypack.include = app.happypack.include
+      var appyhap = app.happypack
+      // if (appyhap.include)
+      //   console.log(appyhap.include)
+      if (appyhap.include && appyhap.include[0] && appyhap.include[0].includes('___________')) {
+        helpers.log.warn('using default happypack include which is `src/`')
+        appyhap.include = [helpers.resolve('./src/')]
+      }
+      if (appyhap.include) {
+        // if (!Array.isArray(appyhap.include)) appyhap.include = [appyhap.include]
+        happypack.include = appyhap.include.map(helpers.resolve)
+      } else {
+        throw new Error('when using happypack, you have to specify which to include')
+      }
 
       happypacks.push(happypack)
     })

@@ -1,24 +1,24 @@
 
 var externals = {
-  // 'webpack': 'webpack',
-  // 'fs': 'fs',
-  // 'path': 'path',
-  // 'net': 'net',
-  // 'yargs': 'yargs',
-  // 'child_process': 'child_process',
-  // 'connect-history-api-fallback': 'connect-history-api-fallback',
-  // 'webpack-dev-middleware': 'webpack-dev-middleware',
-  // 'string-replace-webpack-plugin': 'string-replace-webpack-plugin',
-  // 'webpack-bundle-analyzer': 'webpack-bundle-analyzer',
-  //
-  // 'mocha': 'mocha',
-  // 'karma': 'karma',
-  // 'karma-sinon-chai': 'karma-sinon-chai',
-  // 'karma-mocha-reporter': 'karma-mocha-reporter',
-  // 'karma-notify-reporter': 'karma-notify-reporter',
+  'webpack': 'webpack',
+  'fs': 'fs',
+  'path': 'path',
+  'net': 'net',
+  'yargs': 'yargs',
+  'child_process': 'child_process',
+  'connect-history-api-fallback': 'connect-history-api-fallback',
+  'webpack-dev-middleware': 'webpack-dev-middleware',
+  'string-replace-webpack-plugin': 'string-replace-webpack-plugin',
+  'webpack-bundle-analyzer': 'webpack-bundle-analyzer',
 
-  // 'fuse-box': 'fuse-box',
-  'happypack': 'happypack',
+  'mocha': 'mocha',
+  'karma': 'karma',
+  'karma-sinon-chai': 'karma-sinon-chai',
+  'karma-mocha-reporter': 'karma-mocha-reporter',
+  'karma-notify-reporter': 'karma-notify-reporter',
+
+  'fuse-box': 'fuse-box',
+  // 'happypack': 'happypack',
   'nwb': 'nwb',
   'clean-webpack-plugin': 'clean-webpack-plugin',
   'copy-webpack-plugin': 'copy-webpack-plugin',
@@ -33,48 +33,57 @@ var externals = {
   'json': 'json',
   'json-loader': 'json-loader',
 
-  './dist/flipbox.js': './dist/flipbox.js',
+  // './dist/flipbox.js': './dist/flipbox.js',
 }
 
 var flipbox = {
   name: 'flipbox',
   // compile: true,
-  happypack: false,
-  debug: {
-    built: true,
-    loaders: true,
-  },
+  // happypack: false,
+  // debug: {
+  //   built: true,
+  //   loaders: true,
+  // },
   alias: ['moose', 'igloo'],
 
   // fuseboxAlias: true,
-  fusebox: true,
+  // fusebox: true,
+  flags: {
+    names: [{flag: 'fusebox', type: 'bool', default: false}],
+    cb: ({fusebox}) => {
+      return {fusebox}
+    },
+  },
+
+
   // fuseboxPlugins: [],
   // fuseboxPluginConfigs: ['json'],
   presets: ['node'],
-  loaders: {
-    // 'babel': false,
-    // 'json': false,
-    // 'babel': {
-    //   exclude: /node_modules/,
-    // },
-  },
+  // loaders: {
+  //   // 'babel': false,
+  //   // 'json': false,
+  //   // 'babel': {
+  //   //   exclude: /node_modules/,
+  //   // },
+  // },
 
   // @TODO: map to fusebox bundling
   externals,
+  // entry: '>[./src/index.js]',
   entry: './src/index.js',
   outFile: './dist/flipbox.js',
 }
 
-var flipboxTests = Object.assign({}, flipbox)
-flipboxTests = Object.assign(flipboxTests, {
-  name: 'flipbox-tests',
-  // alias: {
-  //   'flipbox-dist': './dist/flipbox.js',
-  // },
-  entry: './tests/builds-itself.js',
-  outFile: './dist/flipbox-tests.js',
-  presets: ['test', 'mocha'],
-})
+// var flipboxTests = Object.assign({}, flipbox)
+// flipboxTests = Object.assign(flipboxTests, {
+//   name: 'flipbox-tests',
+//   // alias: {
+//   //   'flipbox-dist': './dist/flipbox.js',
+//   // },
+//   entry: './tests/builds-itself.js',
+//   outFile: './dist/flipbox-tests.js',
+//   presets: ['test', 'mocha'],
+// })
 
 var apps = [
   flipbox,
@@ -95,5 +104,11 @@ var flip = new FlipBox({
   },
 })
 
-flip.fullAuto()
-module.exports = flip.mediator()
+// var output = flip.fullAuto()
+var built = flip.build()
+var mediator = flip.fullAuto()
+console.log('\n'.repeat(10))
+const helpers = FlipBox.helpers
+helpers.log.verbose(mediator)
+console.log('\n'.repeat(10))
+module.exports = mediator

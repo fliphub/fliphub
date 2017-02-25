@@ -55,7 +55,10 @@ class AppsBuilder {
         exportee = this.builtApps[0].webpack
       }
     }
-    console.log(exportee)
+    if (this.builtApps && this.builtApps[0]) {
+      exportee = this.builtApps[0].webpack
+    }
+
     return exportee
   }
 
@@ -289,7 +292,10 @@ class AppsBuilder {
   // @param Array
   // @chainable
   setApps(apps) {
-    this.apps = apps
+    this.apps = apps.map((app, index) => {
+      if (!app.name) app.name = index
+      return app
+    })
     return this
   }
 

@@ -1,6 +1,6 @@
 var apps = [
   {
-    config: './build/compat/webpack.config.js',
+    config: './example/configs/compat/webpack.config.js',
     env: {
       // develop
     },

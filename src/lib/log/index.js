@@ -97,5 +97,13 @@ log.error = function(msg, options) {
   options = Object.assign(defaults, options)
   log(msg, options)
 }
+log.warn = function(msg, options) {
+  var defaults = {
+    level: '⚠ warning',
+    color: 'bgYellow.black',
+  }
+  options = Object.assign(defaults, options)
+  log(msg, options)
+}
 
 module.exports = log

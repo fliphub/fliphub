@@ -193,6 +193,7 @@ module.exports = function(app, helpers) {
     var params = {
       // dev: true,
       debug: true,
+      log: true,
       cache: false,
       homeDir: app.rootDir,
       outFile: app.outFile,

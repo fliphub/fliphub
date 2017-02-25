@@ -45,6 +45,7 @@ module.exports = function(app, helpers) {
       /node_modules\/core-js\//m,
     ],
   }
+  loader.exclude = /node_modules/
 
   if (app.debug.loaders && app.debug.loaders.babel) {
     if (app.debug.verbose || app.debug.loaders.babel === 'verbose') {

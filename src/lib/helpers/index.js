@@ -1,14 +1,16 @@
-var walk = require('../file/walk')
-var output = require('./output')
-var inject = require('./inject')
-var es5exports = require('./es5exports')
-var injectLoaders = inject.injectLoaders
-var injectPlugins = inject.injectPlugins
-var tosource = require('tosource')
-var path = require('path')
-var fs = require('fs')
+const walk = require('../file/walk')
+const output = require('./output')
+const inject = require('./inject')
+const es5exports = require('./es5exports')
+const injectLoaders = inject.injectLoaders
+const injectPlugins = inject.injectPlugins
+const tosource = require('tosource')
+const path = require('path')
+const fs = require('fs')
+const arithmetics = require('./arithmetics')
+const strIncludesAnyOf = require('./str')
 
-module.exports = {
+let exportee = {
   fs,
   path,
   tosource,
@@ -17,4 +19,8 @@ module.exports = {
   injectPlugins,
   injectLoaders,
   getOutputPath: output,
+  strIncludesAnyOf,
 }
+exportee = Object.assign(exportee, arithmetics)
+
+module.exports = exportee

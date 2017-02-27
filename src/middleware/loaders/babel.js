@@ -1,6 +1,6 @@
-var babelLoaderBuilder = require('babel-loader-builder')
-
 module.exports = function(app, helpers) {
+  var babelLoaderBuilder = require('babel-loader-builder')
+
   var params = {
     asObject: true,
     // stringify: true,
@@ -59,7 +59,6 @@ module.exports = function(app, helpers) {
     var babelLoader = app.loaders.babel
     if (babelLoader.exclude)
       loader.exclude = babelLoader.exclude
-
     if (babelLoader.include)
       loader.include = babelLoader.include
     if (babelLoader.test)

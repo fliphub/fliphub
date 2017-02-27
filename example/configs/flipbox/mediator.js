@@ -1,16 +1,19 @@
+var FlipBox = require('../../../src')
 
 var externals = {
   'webpack': 'webpack',
-  'fs': 'fs',
-  'path': 'path',
-  'net': 'net',
+  'bluebird': 'bluebird',
+  // 'fs': 'fs',
+  // 'path': 'path',
+  // 'net': 'net',
+  'fsevents': 'fsevents',
   'yargs': 'yargs',
   'child_process': 'child_process',
-  'connect-history-api-fallback': 'connect-history-api-fallback',
-  'webpack-dev-middleware': 'webpack-dev-middleware',
+  // 'connect-history-api-fallback': 'connect-history-api-fallback',
+  // 'webpack-dev-middleware': 'webpack-dev-middleware',
   'string-replace-webpack-plugin': 'string-replace-webpack-plugin',
   'webpack-bundle-analyzer': 'webpack-bundle-analyzer',
-
+  //
   'mocha': 'mocha',
   'karma': 'karma',
   'karma-sinon-chai': 'karma-sinon-chai',
@@ -18,22 +21,22 @@ var externals = {
   'karma-notify-reporter': 'karma-notify-reporter',
 
   'fuse-box': 'fuse-box',
-  // 'happypack': 'happypack',
-  'nwb': 'nwb',
-  'clean-webpack-plugin': 'clean-webpack-plugin',
-  'copy-webpack-plugin': 'copy-webpack-plugin',
-
+  'happypack': 'happypack',
+  // 'nwb': 'nwb',
+  // 'clean-webpack-plugin': 'clean-webpack-plugin',
+  // 'copy-webpack-plugin': 'copy-webpack-plugin',
+  //
   'jsdom-global': 'jsdom-global',
   'jsdom': 'jsdom',
-  'express': 'express',
-
-  'html-webpack-plugin': 'html-webpack-plugin',
+  // 'express': 'express',
+  //
+  // 'html-webpack-plugin': 'html-webpack-plugin',
   'buble': 'buble',
-
+  //
   'json': 'json',
   'json-loader': 'json-loader',
 
-  // './dist/flipbox.js': './dist/flipbox.js',
+  './dist/flipbox.js': './dist/flipbox.js',
 }
 
 var flipbox = {
@@ -48,12 +51,12 @@ var flipbox = {
 
   // fuseboxAlias: true,
   // fusebox: true,
-  flags: {
-    names: [{flag: 'fusebox', type: 'bool', default: false}],
-    cb: ({fusebox}) => {
-      return {fusebox}
-    },
-  },
+  // flags: {
+  //   names: [{flag: 'fusebox', type: 'bool', default: false}],
+  //   cb: ({fusebox}) => {
+  //     return {fusebox}
+  //   },
+  // },
 
 
   // fuseboxPlugins: [],
@@ -70,7 +73,15 @@ var flipbox = {
   // @TODO: map to fusebox bundling
   externals,
   // entry: '>[./src/index.js]',
+  // entry: '>[./src/index.js]',
   entry: './src/index.js',
+  arithmetics: FlipBox.arithmetics
+    .startBundle('flipbox')
+    .excludeDeps()
+    .execute('./src/index.js')
+    .finishBundle()
+    .finish(),
+
   outFile: './dist/flipbox.js',
 }
 
@@ -90,7 +101,6 @@ var apps = [
   // flipboxTests,
 ]
 
-var FlipBox = require('../../../src')
 var flip = new FlipBox({
   // if undefined, still falls back to root
   // since condition is falsy

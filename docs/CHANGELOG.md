@@ -1,13 +1,28 @@
 # 🔈 changelog 🔈
 
-# part 12 - feb 26 17
-- 📜 script to run fusebox, or webpack and it will swap just on cli!
-- ⚙ make `apps` as an array optional and just pass in `app`
-- ⚙ make `app` optional and just pass in `entry`
-- 📦⬆💣🛅 update fusebox ^1.3.122-preview.4
-- 🗝️ update keywords
+# part 14 - feb 26 17
+- move deps to lib
+- start on events
+- start on refactor
 
-# part 11 - feb 25 17
+# part 13 - feb 26 17
+- rename commander -> flip
+- make it work a lot better
+- changing defaults for ts
+- added caching prop passed down
+- caching prop used in fusebox
+- caching prop turns off happypack
+- installing only missing deps
+- added canary version
+- fusebox plugin to output js to ts
+- [x] make ts a flag
+- add cache flag defaults
+- add compile debug
+- add alias plugin for fusebox
+- add better bool checks in flags
+- add default bool and num checks for flags
+
+# part 12 - feb 25 17
 - 🖇🔣 start arithmetics
 - 📚⚒ fixing example for compat, add it to root package as script
 - ⚙ make name optional
@@ -19,7 +34,24 @@
 - 🔈⚠☺️️🛅 log warning fn and use with happypack
 - 🏷 version bump
 
-# part 10 - feb 24 17
+- 📜 script to run fusebox, or webpack and it will swap just on cli!
+- ⚙ make `apps` as an array optional and just pass in `app`
+- ⚙ make `app` optional and just pass in `entry`
+- 📦⬆💣🛅 update fusebox ^1.3.122-preview.8
+- 🗝️ update keywords
+- 📦⬆ add missing deps!
+- 📦⬆ added realm utils
+- 📦⬆💣🛅 update fusebox
+- 📜📦 script to install deps on postinstall npm hook
+- 🖇 add strIncludesAnyOf helper
+- 🔈⚙ debug.fuseAlias
+- ⚒🖇🔣 fix some in arithmetics, add to exports on fusebox, use in example for building itself
+- 📦 added `asNeeded` requirer to cache deps and install if they are not installed... experiment
+- @TODO: validator could figure out which deps were needed for that run...
+- ⚙🕸🛅 config `webpack` to start making 💣🛅 fusebox a first class citizen
+
+
+# part 11 - feb 24 17
 - 📚 _lots_ more on docs
 - add compileEnd hook
 - improve canada example
@@ -34,7 +66,7 @@
 - 📚⚒🔗 fix some links
 - ⚒ app builder fixes
 
-# part 9 - feb 23 17
+# part 10 - feb 23 17
 - doing lots on readme
 - 🗣 add gitter
 - add badges
@@ -42,7 +74,7 @@
 - ℹ️️ added note to json loader to just use for fuse
 - 🔈 add node utils to logger
 
-# part 8 - feb 22 17
+# part 9 - feb 22 17
 - ⚙🔈 added debug config for fusebox
 - put in its own repo
 - 📦⬆ added missing deps

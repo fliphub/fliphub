@@ -48,6 +48,20 @@ class Aliaser {
     return magicAliases
   }
 
+  fromObj(aliases) {
+    // go through the object keys
+    // assign to config
+    // resolve the value
+    const resolvedAliases = {}
+    const keys = Object.keys(aliases)
+    for (let i = 0; i < keys.length; i++) {
+      var key = keys[i]
+      var alias = aliases[key]
+      resolvedAliases[alias] = this.resolve(aliases[alias])
+    }
+    return resolvedAliases
+  }
+
   // AliasType => ?AliasType
   requireAlias(alias) {
     if (typeof alias !== 'string' && typeof alias == 'object') {

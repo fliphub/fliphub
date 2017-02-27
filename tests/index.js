@@ -1,3 +1,7 @@
+var {expect} = require('chai')
+global.expect = expect
+
+require('./fluent-arithmetics')
 require('./builds-itself')
 require('./config-and-params')
 require('./dev-server')
@@ -5,22 +9,12 @@ require('./fuse')
 require('./overriding-defaults')
 require('./presets')
 require('./require-after-build')
-import {expect} from 'chai'
+require('./require-after-build')
 
-describe('flipbox', () => {
-  // beforeEach(() => {
-  //   process.env.argv.push('--compile')
-  //   process.env.argv.push('--exec')
-  //   // process.env.argv.push('--manual')
-  // })
-  // afterEach(() => {})
-
+describe('test-gatherer', () => {
   describe('compiling', () => {
-    it('exports an object', (done) => {
-      var configs = require('./example/configs/flipbox/mediator')
-      console.log(configs)
-      expect(configs).to.be.an('object')
-      done()
+    it('runs the other tests', () => {
+      expect(true).to.eql(true)
     })
   })
 })

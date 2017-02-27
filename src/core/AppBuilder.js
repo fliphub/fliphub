@@ -1,4 +1,4 @@
-var _sortBy = require('lodash.sortby')
+const _sortBy = require('lodash.sortby')
 
 // for building 1 app
 class AppBuilder {
@@ -179,7 +179,7 @@ class AppBuilder {
       })
     }
     if (app.debug.decorated) {
-      this.helpers.log(app, {color: 'blue', level: '🍬  decorated'})
+      this.helpers.log.verbose(app, {color: 'blue', level: '🍬  decorated'})
       if (app.debug.verbose) this.helpers.log.verbose(app)
     }
 

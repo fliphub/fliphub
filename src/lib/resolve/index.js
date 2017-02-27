@@ -11,8 +11,14 @@
 // var resolve = global.resolve
 // var resolveTo = global.resolveTo
 
-var path = require('path')
-var rootpath = require('./rootpath')
+const path = require('path')
+const rootpath = require('./rootpath')
+
+let resolvedRoot = null
+global.resolveRoot = (resolvee) => {
+  if (!resolvedRoot) resolvedRoot = rootpath()
+  return path.resolve(resolvedRoot, resolvee)
+}
 
 // could also bind root as first param in resolve
 function makeResolver(root, helpers) {

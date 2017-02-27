@@ -52,20 +52,23 @@ function staticDevServer(app, helpers) {
 }
 
 function coreDevServer(app, helpers) {
-  // var fused = app.fuser()
-  // fused.devServer(full.fusedConfig.instructions, {
-  //   port: 8080,
-  //   httpServer: false,
-  //   emitter: (self, fileInfo) => {
-  //     console.log({fileInfo}, '____')
-  //     // self.socketServer.send('source-changed', fileInfo)
-  //   },
-  // })
+  let fused = app.fuser()
+  let params = {}
+  if (app.serverType === 'fusebox-custom')
+    params = {
+      port: 8080,
+      httpServer: false,
+      emitter: (self, fileInfo) => {
+        console.log({fileInfo}, '____')
+        // self.socketServer.send('source-changed', fileInfo)
+      },
+    }
+  return fused.devServer(app.fusedConfig.instructions, params)
 }
 
 function compile(app, helpers) {
-  var fused = app.fuser()
   return new Promise((resolve, reject) => {
+    var fused = app.fuser()
     var bundled = fused.bundle(app.fusedConfig.instructions, () => {
       helpers.log('COMPILED', {color: 'blue'})
       if (app.compileEnd) app.compileEnd(app, helpers)
@@ -115,5 +118,6 @@ fuseboxCommander.compile = compile
 fuseboxCommander.staticDevServer = staticDevServer
 fuseboxCommander.exec = exec
 fuseboxCommander.staticServerMiddleware = staticServerMiddleware
+fuseboxCommander.coreDevServer = coreDevServer
 
 module.exports = fuseboxCommander

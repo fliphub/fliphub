@@ -7,6 +7,7 @@
 
 ## scripts
 - [ ] then match script building with commander to each package or app
+- [ ] make it runnable with cli
 - [ ] and console log the commands
   - [ ] use the env to build commands too o.o
 - [ ] write commands to package json for each app

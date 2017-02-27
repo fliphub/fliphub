@@ -12,3 +12,6 @@ documentation
 - [x] gitter chat,
 - [x] npm,
 - [ ] travis
+- [ ] alias path
+
+- [ ] fix require statements in docs

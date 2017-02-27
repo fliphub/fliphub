@@ -1,6 +1,5 @@
-var fs = require('fs')
-var mkdirp = require('mkdirp')
-
+const fs = require('fs')
+const mkdirp = require('mkdirp')
 
 // http://stackabuse.com/read-files-with-node-js/
 function read(dir, helpers) {

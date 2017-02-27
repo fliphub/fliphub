@@ -1,15 +1,15 @@
-var log = require('./log')
-var Aliaser = require('./alias')
-var flags = require('./flags')
-var makeResolver = require('./resolve')
-var helpers = require('./helpers')
-var port = require('./port')
-var file = require('./file')
+const log = require('./log')
+const Aliaser = require('./alias')
+const flags = require('./flags')
+const makeResolver = require('./resolve')
+const helpers = require('./helpers')
+const port = require('./port')
+const file = require('./file')
 // const env = require('./env')
 
 let lib = {flags, log, file, firstOpenPort: port}
 
-// assign each helper to the lib
+// assign each helper to the lib / flatten
 lib = Object.assign(lib, helpers)
 
 // --- will be better with context or at least oop

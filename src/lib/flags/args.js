@@ -1,5 +1,5 @@
-var nodeFlags = require('./node-flags')
-var yargs = require('yargs')
+const nodeFlags = require('./node-flags')
+const yargs = require('yargs')
 
 // searches through the commandline arguments
 // check if it matches what we are searching for
@@ -76,7 +76,17 @@ function findIn(prop, obj) {
 function realValue(value, options) {
   if (options && options.type) {
     var type = options.type
+
     if (type === 'bool' || type === 'boolean') {
+      if (value === 'true') return true
+      if (value === 'false') return true
+      if (typeof value === 'string') {
+        if (value.includes('true')) return true
+        if (value.includes('false')) return false
+      }
+      if (value == 'true') return true
+      if (value == 'false') return false
+
       return !!value
     }
 
@@ -90,6 +100,15 @@ function realValue(value, options) {
       }
     }
   }
+
+  if (Number.isInteger(value)) return value + 0
+  if (value === 'true') return true
+  if (value === 'false') return true
+  if (typeof value === 'string') {
+    if (value.includes('true')) return true
+    if (value.includes('false')) return false
+  }
+
   if (value == 'undefined') return undefined
   return value
 }

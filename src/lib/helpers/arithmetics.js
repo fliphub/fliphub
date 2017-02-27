@@ -1,4 +1,9 @@
-const ArithmeticStringParser = require('fuse-box/dist/commonjs/ArithmeticStringParser.js')
+// const ArithmeticStringParser = require('fuse-box/dist/commonjs/ArithmeticStringParser.js')
+var ArithmeticStringParser = {
+  PropParser() {},
+}
+const PropParser = ArithmeticStringParser.PropParser
+const strIncludesAnyOf = require('./str')
 
 // handle if there are multiple bundles
 // translate into arithmetics
@@ -10,6 +15,7 @@ const ArithmeticStringParser = require('fuse-box/dist/commonjs/ArithmeticStringP
 // **/*.js - Bundle everything with dependencies
 // **/*.js -path - Bundle everything with dependencies except for module path
 
+// @TODO: resolve, resolveTo
 class FluentBundle {
   // public array cmds
   // public string name
@@ -45,7 +51,10 @@ class FluentBundle {
   // should add support to make it not need to take in the bundle
   execute(bundle) {
     this.addCmd('execute', bundle)
-    this.str = `>` + bundle
+    if (this.noDeps)
+      this.str += `\n >[${bundle}]`
+    else
+      this.str += `\n >${bundle}`
     return this
   }
   add(bundle) {
@@ -96,6 +105,11 @@ class FluentArithmetics {
     this.bundled = {}
   }
 
+  reset() {
+    this.bundled = {}
+    return this
+  }
+
   // name is also output place if multiple
   startBundle(name) {
     this.bundled[name] = new FluentBundle(name, this)
@@ -117,41 +131,45 @@ class FluentArithmetics {
   }
 }
 
-const fuse = new FluentArithmetics()
+function parse(instructions) {
+  const parser = new PropParser(instructions)
+  parser.parse(instructions)
+  return parser
+}
 
-const result = fuse
-  .startBundle('coolbundle')
-  .ignoreDeps()
-  .and('>ooo.js')
-  .add('ahhhh.js')
-  .add('fuse.magic.ts')
-  .add('*/**.js')
-  .include('path')
-  .include('fs')
-  .finishBundle()
+function forWebpack(parsed) {
+  const forWebpack = {}
+  if (parsed.excluding) {
+    forWebpack.exclude = parsed.excluding
+  }
+  if (parsed.including) {
+    forWebpack.include = parsed.including
+  }
+  if (parsed.entry) {
+    forWebpack.include = Object.keys(parsed.entry).pop()
+  }
 
-const singleBundle = result.finish()
+  return forWebpack
+}
 
-const multipleBundles = result
-  .startBundle('webworker')
-  .includeDeps()
-  .execute('/src/eh.js')
-  .add('webworkerfile.js')
-  .exclude('fs')
-  .finishBundle()
-  .finish()
+function isArithmetic(str) {
+  if (strIncludesAnyOf(str, '[,>,],+[,-,**', ',')) return true
+  return false
+}
 
-// console.log(result, singleBundle, multipleBundles)
-console.assert(typeof singleBundle === 'string', 'result with single is string')
-console.assert(typeof multipleBundles === 'object', 'result with multi isobj')
+FluentArithmetics.webpack = forWebpack
+FluentArithmetics.parse = parse
 
-// console.log(ArithmeticStringParser)
-const parser = new ArithmeticStringParser.PropParser(singleBundle)
-const parsed = parser.parse(singleBundle)
-// console.log(parser)
-console.log(parsed)
+const arithmetics = new FluentArithmetics()
+arithmetics.FluentArithmetics = FluentArithmetics
+arithmetics.webpack = forWebpack
+arithmetics.parse = parse
+arithmetics.isArithmetic = isArithmetic
 
 module.exports = {
+  isArithmetic,
+  arithmetics,
+  PropParser,
   ArithmeticStringParser,
   FluentArithmetics,
   FluentBundle,

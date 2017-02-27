@@ -1,8 +1,8 @@
-var buble = require('buble')
-var tosource = require('tosource')
-var fs = require('fs')
-
 function run() {
+  var buble = require('buble')
+  var tosource = require('tosource')
+  var fs = require('fs')
+
   var file = '' // input filename
   var fileOut = '' // output filename
   var input = fs.readFileSync(file, {encoding: 'utf8'})

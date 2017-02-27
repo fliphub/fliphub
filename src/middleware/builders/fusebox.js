@@ -1,6 +1,36 @@
+// var JSTS = require('./plugins/JavaScriptToTypeScriptPlugin')
+// var AliasPlugin = require('./plugins/AliasPlugin')
+var babelLoaderBuilder = require('babel-loader-builder')
+var params = {
+  asObject: true,
+  // stringify: true,
+  // react: false,
+  // reactjsx: false,
+  stripFlow: true,
+  async: false,
+  reactjsx: false,
+  inferno: {
+    imports: true,
+    compat: true,
+  },
+  // sourceMaps: true,
+  plugins: [
+    ['transform-runtime', {
+      helpers: false,
+      polyfill: false,
+      regenerator: true},
+    ],
+  ],
+}
+var config = babelLoaderBuilder(params)
+delete config.babelrc
+delete config.cacheDirectory
+// config = JSON.stringify(config)
+
 module.exports = function(app, helpers) {
   if (!app.fusebox) return app
-  var fsbx = require('fuse-box')
+  // var fsbx = require('fuse-box')
+  // var fsbx = require('fsbx')
 
   // @TODO: deal with relative better
   // @TODO: resolve better & deal with multiple entries
@@ -22,6 +52,7 @@ module.exports = function(app, helpers) {
 
   app.homeToEntry = helpers.path.relative(app.homeDir, app.entryAbs)
   instructions = '>' + app.homeToEntry
+  if (app.arithmetics) instructions = app.arithmetics
 
   if (app.externals) {
     Object.keys(app.externals).forEach(external => instructions += ' -' + external)
@@ -31,13 +62,14 @@ module.exports = function(app, helpers) {
   // - [ ] improve
   // - [ ] check if last is /
   // if it does not have a `.` it might not be a full entry point
-  if (!instructions.includes('.')) {
+  if (typeof instructions === 'string' && !instructions.includes('.')) {
     instructions = instructions + '/index.js'
   }
 
   // @TODO: if last char is not already a `/`
   app.rootDir = app.rootDir + '/'
   app.homeDir = app.homeDir + '/'
+
   app.outFileSourcemaps = app.outFileSourcemaps || helpers.resolve('./dist/sourcemaps.js.map')
 
   app.configOut = app.configOut ? app.configOut : './dist/aliasConfig.js'
@@ -48,6 +80,13 @@ module.exports = function(app, helpers) {
   catch (e) {
     console.log(e)
   }
+
+  // var realm = require('realm-utils')
+  // realm.transpiler({
+  //   preffix: 'test',
+  //   base: 'test-app-backend',
+  //   target: './test-backend.js',
+  // }
 
   // @TODO: try again eh
   // var babelAlias = []
@@ -73,6 +112,7 @@ module.exports = function(app, helpers) {
       'transform-object-rest-spread',
       'transform-decorators-legacy',
       'transform-class-properties',
+      'transform-strip-flow-type',
       'add-module-exports',
     ],
   }
@@ -88,10 +128,15 @@ module.exports = function(app, helpers) {
   app.fusedConfig = {
     instructions,
   }
-  helpers.log.verbose(app.fused)
-  // helpers.log.verbose(app.fusedConfig)
-  helpers.log.text('💣  🛅  🏗 fuseboxed')
-  helpers.log.verbose(babelConfig)
+  if (app.debug.fused) {
+    helpers.log.text('💣  🛅  🏗 fuseboxed')
+
+    if (app.debug.verbose) {
+      helpers.log.verbose(app.fused)
+      helpers.log.verbose(app.fusedConfig)
+      helpers.log.verbose(babelConfig)
+    }
+  }
 
   // to log ^
   helpers.fuseCommander(app, helpers)
@@ -101,6 +146,7 @@ module.exports = function(app, helpers) {
   // https://webpack.github.io/docs/resolving.html
   // @TODO: move this into a helper, and into the aliaser
   var aliases = app.webpack.resolve.alias
+
   var aliasesKeys = Object.keys(aliases)
   var relativeAliases = {}
   var arithmetices = {}
@@ -110,7 +156,13 @@ module.exports = function(app, helpers) {
     // @TODO: if aliases are outside of the homedir, warn
     // var arithmetic = helpers.path.relative(app.homeDir, aliasPath)
     var arithmetic = '~/' + aliasPath.split(app.homeDir).pop()
-    arithmetices[name] = arithmetic
+    // arithmetices[name] = arithmetic
+    arithmetices[name] = arithmetic.replace('.js', '').replace('.ts', '')
+    arithmetices[name] = arithmetices[name].replace('.js', '')
+    arithmetices[name] = arithmetices[name].replace('.ts', '')
+
+
+    // arithmetices[name] = arithmetic.replace('.js', '.ts')
 
     // var relativeAlias = helpers.path.relative(entry, aliasPath)
     // var relativeAlias = helpers.path.relative(entry, aliasPath)
@@ -157,72 +209,94 @@ module.exports = function(app, helpers) {
   // fsbx.EnvPlugin({NODE_ENV: 'production'}),
   // http://fuse-box.org/#loader-plugins
   // fsbx.UglifyJSPlugin(),
-  //
+
+  // var babelPlugin = fsbx.BabelPlugin({config})
+  const {FuseBox, BabelPlugin} = require('fsbx')
 
   loaders = [
-    {
-      hmrUpdate: (evt) => true,
-    },
+    BabelPlugin({config}),
+    // {
+    //   hmrUpdate: (evt) => true,
+    // },
+    // [babelPlugin, new AliasPlugin({helpers, aliases})],
+    // [new AliasPlugin({helpers, aliases})],
+    // fsbx.TypeScriptHelpers()
+    // [new AliasPlugin({helpers, aliases}), babelPlugin],
+    // new AliasPlugin({helpers, aliases, babelPlugin}),
+    // [new AliasPlugin({helpers, aliases}), fsbx.BabelPlugin({config}), fsbx.TypeScriptHelpers()],
+    // fsbx.TypeScriptHelpers(),
     // fsbx.CoffeePlugin(),
     // fsbx.HTMLPlugin(),
-    fsbx.SVGPlugin(),
-    fsbx.CSSPlugin(),
-    fsbx.BabelPlugin({
-      config: babelConfig,
-    }),
-    fsbx.JSONPlugin(),
+    // [new JSTS({helpers}), fsbx.TypeScriptHelpers()],
+    // [fsbx.BabelPlugin({config: babelConfig}), new JSTS({helpers})],
+    // [babelPlugin, new JSTS({helpers, babelPlugin})],
+    // fsbx.JSONPlugin(),
   ]
 
+
+  // var appLoaders = Object.keys(app.loaders)
+  var appLoaders = app.loaders
+  // if (appLoaders.svg) loaders.push(fsbx.SVGPlugin(appLoaders.svg))
+  // if (appLoaders.css) loaders.push(fsbx.CSSPlugin(appLoaders.css))
+  // if (appLoaders.babel && !helpers.isArithmetic(app.instructions)) {
+  //   loaders.push(babelPlugin)
+  // }
+  // if (appLoaders.tsjs) {
+  //   loaders.unshift([babelPlugin, new JSTS({helpers, babelPlugin})])
+  // }
+
   if (app.fuseboxPlugins) loaders = app.fuseboxPlugins
-  if (app.fuseboxPluginConfigs) {
-    loaders = []
-    // @TODO: handle
-    // if (typeof app.fuseboxPluginConfigs === 'object')
-    app.fuseboxPluginConfigs.forEach(pluginName => {
-      var FusePlugin = fsbx[pluginName.toUpperCase() + 'Plugin']
-      var config = app.fuseboxPluginConfigs[pluginName]
-      if (FusePlugin) {
-        loaders.push(FusePlugin(config))
-      }
-    })
-  }
+  // if (app.fuseboxPluginConfigs) {
+  //   loaders = []
+  //   // @TODO: handle
+  //   // if (typeof app.fuseboxPluginConfigs === 'object')
+  //   app.fuseboxPluginConfigs.forEach(pluginName => {
+  //     var FusePlugin = fsbx[pluginName.toUpperCase() + 'Plugin']
+  //     var config = app.fuseboxPluginConfigs[pluginName]
+  //     if (FusePlugin) {
+  //       loaders.push(FusePlugin(config))
+  //     }
+  //   })
+  // }
 
   // -----
   var fuser = () => {
-    console.log('fusa')
     var params = {
       // dev: true,
       debug: true,
       log: true,
-      cache: false,
+      cache: app.cache,
       homeDir: app.rootDir,
       outFile: app.outFile,
       package: app.name,
       globals: {[app.name]: '*'},
       plugins: loaders,
+      // tsConfig: helpers.resolve(`./tsconfig.json`),
     }
-    if (fuseboxAlias) {
-      params.alias = fuseboxAlias.alias
-    }
-    if (app.useSourceMaps) {
-      params.sourceMap = {
-        bundleReference: 'sourcemaps.js.map',
-        outFile: app.outFileSourcemaps,
-      }
-    }
+    // if (fuseboxAlias) {
+    // params.alias = arithmetices
+    // params.alias = fuseboxAlias.alias
+
+    // }
+    // if (app.useSourceMaps) {
+    //   params.sourceMap = {
+    //     bundleReference: 'sourcemaps.js.map',
+    //     outFile: app.outFileSourcemaps,
+    //   }
+    // }
 
     if (app.debug.fuse) {
       helpers.log.text('💣  🛅   fuseboxed... fuser... ')
       helpers.log.verbose(params)
     }
-    var fuse = new fsbx.FuseBox(params)
+    var fuse = new FuseBox(params)
 
     return fuse
   }
   app.fuser = fuser
   // -----
 
-  if (app.debug.fuse) {
+  if (app.debug.fuseAlias) {
     helpers.log.text('⛓  🔧  🏹 fuseboxed')
     helpers.log.verbose(arithmetices)
     // helpers.log.verbose(relativeAliases)

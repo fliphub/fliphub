@@ -1,15 +1,14 @@
 // https://sungwoncho.io/run-multiple-apps-in-one-droplet/
 // http://serverfault.com/questions/208656/routing-to-various-node-js-servers-on-same-machine
 // @TODO: only require what is needed
-var express = require('express')
-var historyAPIFallback = require('connect-history-api-fallback')
-var webpack = require('webpack')
-var devMiddleware = require('webpack-dev-middleware')
 
 var listeningTo = {}
 
 // @TODO: split out
 function devServer(apps, helpers) {
+  var express = require('express')
+  var historyAPIFallback = require('connect-history-api-fallback')
+
   helpers.log('🏃  running dev servers', {color: 'green.italic', text: true})
 
   var devApps = {}
@@ -27,10 +26,16 @@ function devServer(apps, helpers) {
 
       if (appConfig.fusebox) {
         helpers.log.text('USING DEVSERVER FUSE')
-        currentApp = helpers
-          .fuseCommander
-          .staticServerMiddleware(currentApp, appConfig, helpers)
-        helpers.log.verbose(currentApp)
+        if (appConfig.devServer === 'fusebox') {
+          currentApp = helpers
+            .fuseCommander
+            .coreDevServer(appConfig, helpers)
+        } else {
+          currentApp = helpers
+            .fuseCommander
+            .staticServerMiddleware(currentApp, appConfig, helpers)
+        }
+        // helpers.log.verbose(currentApp)
       }
       else {
         currentApp.use(historyAPIFallback())
@@ -56,6 +61,8 @@ function devServer(apps, helpers) {
 }
 
 function configFor(aWebpackConfig) {
+  var webpack = require('webpack')
+  var devMiddleware = require('webpack-dev-middleware')
   var compiler = webpack(aWebpackConfig)
   return devMiddleware(compiler, {
     // It suppress error shown in console, so it has to be set to false.

@@ -1,7 +1,8 @@
-var tosource = require('tosource')
 
+// https://github.com/npm/npmlog
 // @TODO: more args, but this kind of forces a nice terseness
 function log(message, options) {
+  const tosource = require('tosource')
   const chalk = require('chalk')
   const util = require('util')
 

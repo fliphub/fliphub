@@ -10,8 +10,8 @@ prioritized:
   - [ ] should have switch between apps before build without filter?
 
 - [ ] cli + scripts
-  - [ ] commander
-  - [ ] interactive
+  - [x] commander pt2
+  - [ ] interactive pt2
   - [ ] package builder release scripts finished
 
 - [ ] allow app configs without app keyword (just flat)
@@ -28,7 +28,8 @@ prioritized:
 
 
 # next stage
-- [ ] could use es6
+- [ ] put all todos as github issues with a board
+- [x] could use es6 configs
 - [ ] should find out how best to do things like exteralizing pieces so they could be dynamically attached with their deps, such as webpack, fusebox, testing, helpers, babel adapter... -> monorepo :3 ?
 - [ ] run configs with fusebox, webpack, etc right from cli which means transform the config file by building it which would be huge
 - [ ] add `useDefaults` to not decorate...

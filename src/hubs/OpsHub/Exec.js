@@ -1,18 +1,16 @@
 class ExecOp {
   // should it subscribe to the event
   // or have a .test?
-  handle({context}) {
+  handle({context, bundles}) {
     const {name} = context
-    context.debugFor('exec', `🖥  ops.exec for ${name}`, 'orange')
-
+    const path = bundles.getBundles().getOut()
     if (context.polyfills.window) require('jsdom-global')()
-    var result = this.helpers.getOutputPath(app)
-    if (app.debug.exec)
-      this.helpers.log(result, {level: 'exec for built output path:'})
-    var exec = require(result)
-    if (app.debug.exec)
-      this.helpers.log(exec, {level: 'exec result:'})
-    required[app.name] = exec
-    if (typeof exec === 'function') exec()
+    context.debugFor('exec', `🖥  ops.exec for ${name}`, 'blue', path)
+
+    const execed = require(path)
+    context.DebugFor('exec', 'exec result:', 'blue', execed)
+    if (typeof execed === 'function') execed()
   }
 }
+
+module.exports = ExecOp

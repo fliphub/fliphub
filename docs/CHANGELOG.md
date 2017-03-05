@@ -1,5 +1,17 @@
 # 🔈 changelog 🔈
 
+# part 21 - mar 5 17
+- pushed to refactor branch
+- adding find and scripts to scripthub/pkg
+- updating ExecOp
+- improving commander
+- tidy the script lib a little
+- moving sleepFor helper into lib
+- added building of config file so configs can be in es6 when running from cli ^w^
+- update todos
+
+------------
+
 # part 20 - mar 5 17
 - move some playground to playground
 - fix typo on clibundle -> clihub

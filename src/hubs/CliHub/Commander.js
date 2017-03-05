@@ -7,16 +7,8 @@
  *
  */
 const program = require('commander')
-const {Scripty, exec, execSync} = require('./lib/scripty')
+const {Scripty} = require('../../lib/scripty')
 const scripty = new Scripty()
-
-// @NOTE: emulate webpack
-// process.argv.push('bin/webpack')
-// var mediated = require('./example/configs/flipbox/mediator')
-// console.log(mediated)
-// var flipbox = require('./dist/flipbox')
-// console.log(flipbox)
-// require('./example/configs/flipbox/mediator')
 
 // @TODO:
 // - [ ] AND DO THINGS LIKE SET LOADERS TO USE IF WANTED
@@ -24,10 +16,9 @@ const scripty = new Scripty()
 // - [ ] ADD ALL DEBUG OPTIONS IN HERE
 // - [ ] run only if it has a port or require
 program
-  .version('0.0.1')
+  .version('0.1.1')
   .option('-c, --compile', 'compile and build using node api')
   .option('-C, --cache', 'cache or no cache')
-  .option('-F, --fuseboxalias', 'use fusebox + fusebox aliases')
   .option('-f, --fusebox', 'use fusebox')
   .option('-w, --webpack', 'use webpack')
   .option('-wb, --wbuild', 'build using webpack cli')
@@ -42,84 +33,79 @@ program
   .option('-T, --notest', 'run without tests')
   .option('-l, --loaders', 'pick loaders to use')
   .option('-sm, --sourcemaps', 'choose a type of sourcemap')
+  .option('-config, --config', 'config location')
+  // .option('-handler, --handler', 'location of config that contains flipbox instance to run?')
 program
   .command('[system]')
   .action(function(name, options) {
-    var use = ''
+    let use = ''
     if (options.webpack) use = 'webpack=true'
     else if (options.fusebox) use = 'fusebox=true'
-    if (options.fuseboxalias) use = 'fusebox=true fuseboxa=true'
+    // if (options.fuseboxalias) use = 'fusebox=true fuseboxa=true'
 
     if (options.cache) use += ' cache=true'
     if (options.exec) use += ' exec=true'
+    if (options.config) use += ' config=' + options.config
 
     var p = typeof prod != 'undefined' ? ' -p ' : ''
-    var d = typeof debug != 'undefined' ? `NODE_ENV=DEVELOPMENT DEBUG="1" ` : ''
-    var env = `servers=${name} compile=true ${d} ${p} ${use}`
+    var d = typeof debug != 'undefined' ? `NODE_ENV=DEVELOPMENT ` : ''
+    var env = `apps=${name} ${d} ${p} ${use}`
     return scripty.x(`./back/webpack.mediator.js`, {env})
+  })
+
+  .option('-bundle, --bundle', 'config location')
+
+program
+  .command('flipbox [config]')
+  // .option('-config, --config', 'config location')
+  .action(function(config, options) {
+    console.log('flipping', config)
+    require('./CliFlip')(config)
   })
 
 // build package registry
 // write to disk
-// program
-//   .command('release [name]')
-//   .option('-m, --mock', 'release mock (test / emulate) mode')
-//   .action(function(name, options) {
-//   })
+program
+  .command('release [name]')
+  .option('-m, --mock', 'release mock (test / emulate) mode')
+  .action(function(name, options) {
+  })
 
 // program
 //   .command('test [names]')
-//   .action(function(names, options) {
-//   })
-//
+//   .action(function(names, options) {})
 // program
-//   .command('build [names]')
+//   .command('compile [names]')
 //   .action(function(names, options) {
 //     var d = '', p = ''
 //     scripty.build(names, {p, d})
 //   })
 
-// program
-//   .command('run [names]')
-//   .action(function(names, options) {
-//     var d = '', p = ''
-//     // scripty.x('./dist/generateInletRegistry.js')
-//     var env = {env: `${d} servers=${names} INIT=${names} EXEC="./dist/generateInletRegistry.js"`}
-//     // return scripty.x(`./back/solver.js`, env)
-//     return scripty.x(`./back/webpack.mediator.js`, env)
-//   })
-
 // https:// github.com/tj/commander.js/#custom-help
 program.on('--help', () => {
-  var o = {
+  const opts = {
     debug: false,
   }
 
-  // console.log(program)
+  const helpLog = {text: true, color: 'italic'}
+  const helpMsg = {text: true, color: 'underline'}
 
-  var helpLog = {text: true, color: 'italic', space: 0}
-  var helpMsg = {text: true, color: 'underline'}
+  console.text.color('test', 'cyan')
+  scripty.x('flip flipbox --help', opts)
 
-  // scripty.x('com.js ds --help', o)
-  // log('', {color: 'cyan', level: 'test'})
-  // scripty.x('com.js test --help', o)
-  // log('', {color: 'cyan', level: 'release'})
-  // scripty.x('com.js release --help', o)
-  //
+  console.text.color('release', 'cyan')
+  scripty.x('flip release --help', opts)
+
   // log('@TODO:', {color: 'yellow', level: 'stream'})
   // log('@TODO:', {color: 'yellow', level: 'exec'})
   // log('@TODO:', {color: 'yellow', level: 'run'})
   // log('@TODO:', {color: 'yellow', level: 'build'})
-  //
-  // var helpS = {text: true, color: 'italic'}
-  // console.log('\n')
-  // log('🏃  run the demo', helpMsg)
-  //
-  // log('node flip it', {
-  //   text: true,
-  //   color: 'bold.italic',
-  //   space: 1,
-  // })
+
+  console.text('node flip it', {
+    text: true,
+    color: 'bold.italic',
+    space: 1,
+  })
 })
 
 module.exports = program

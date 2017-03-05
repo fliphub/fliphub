@@ -79,6 +79,7 @@ class PathMaster {
   //  - use
   //  - fallback: app.name.js
   getOut(app) {
+    if (this.out.abs) return this.out.abs
     if (app.outFile) return app.outFile
     const pathname = app.path || './dist'
     const filename = app.filename || app.name + '.js'

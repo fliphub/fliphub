@@ -10,6 +10,7 @@ const fs = require('fs')
 // const arithmetics = require('./arithmetics')
 const strIncludesAnyOf = require('./str')
 const toArr = require('./toArr')
+const sleepFor = require('./sleepFor')
 const initClassOrObj = require('./initClassOrObj')
 const {utils, realm} = require('./realm')
 const {
@@ -18,6 +19,7 @@ const {
 } = require('./deepReplace')
 
 let exportee = {
+  sleepFor,
   deepReplaceProp,
   deepReplaceTest,
   utils, realm,

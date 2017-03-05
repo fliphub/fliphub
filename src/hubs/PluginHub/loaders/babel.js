@@ -20,7 +20,6 @@ const BabelLoader = {
       //   ],
       // ],
     }
-    console.exit()
     if (adapter && adapter.params) params = adapter.params(params)
 
     // @TODO:

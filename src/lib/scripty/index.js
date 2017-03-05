@@ -1,6 +1,5 @@
-const log = require('./src/lib/log')
-const exec = require('child_process').exec
-const execSync = require('child_process').execSync
+const log = require('../log')
+const {exec, execSync} = require('child_process')
 
 /**
  * build:app:dev
@@ -20,14 +19,12 @@ const execSync = require('child_process').execSync
  * release:app:s3
  */
 function s(script, options = {}) {
-  var defaults = {
+  const defaults = {
     node: 'node',
   }
   options = Object.assign(defaults, options)
   var {env, debug} = options
   if (debug) log({options, env})
-
-  // SOLVE=d4 mocks=undefined npm_lifecycle_event=run node ./back/solver.js --color --progress --harmony --max_old_space_size=8000
 
   var decorated = `${script}`
   if (decorated.includes('--config')) {
@@ -64,7 +61,7 @@ class Scripty {
   }
   findNodePath() {
     // simpler with `process.env.NODE`
-    // exec('node commander.js --harmony -e --help', puts)
+    // exec('node flip --harmony -e --help', puts)
     return new Promise(resolve => {
       exec('npm config get prefix', (error, stdout) => {
         this.nodePath = stdout.replace('\n', '') + '/bin/node'
@@ -81,21 +78,20 @@ class Scripty {
     return execSync(cmd, {stdio: 'inherit'})
   }
 
-  // @TODO: append the servers in decorator
+  // @TODO: append the apps in decorator
   build(name, {p, d}) {
-    return this.x(`servers=${name} ${d} webpack --config ./back/webpack.mediator.js ${p}`)
+    return this.x(`apps=${name} ${d} webpack --config ./back/webpack.mediator.js ${p}`)
   }
   compile(name, {p, d}) {
-    var env = `servers=${name} compile=${name} ${d} ${p}`
+    var env = `apps=${name} compile=${name} ${d} ${p}`
     return this.x(`./back/webpack.mediator.js`, {env})
   }
   serve({system, mocks}, {p, d}) {
     log('serving', {level: 'commander', color: 'white'})
 
-    // this.x(`${this.nodePath} ./back/server.js --env.servers=${names}`)
+    // this.x(`${this.nodePath} ./back/server.js --env.apps=${names}`)
 
-    // return this.x(`./back/server.js`, {env: `${d} servers=${system} mocks=${mocks} run=true`})
-    return this.x(`./back/webpack.mediator.js`, {env: `${d} servers=${system} mocks=${mocks} run=true`})
+    return this.x(`./back/webpack.mediator.js`, {env: `${d} apps=${system} mocks=${mocks} run=true`})
   }
 }
 

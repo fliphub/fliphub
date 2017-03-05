@@ -2,6 +2,8 @@
 [![Build Status](https://travis-ci.org/flip-box/flipbox.svg?branch=master)](https://travis-ci.org/flip-box/flipbox)
 [![Fusebox-bundler](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg)](https://gitter.im/flip-box/Lobby)
 [![NPM version][npm-image]][npm-url]
+[![Dependencies][david-deps-img]][david-deps-url]
+
 
 the builder, of builders.
 
@@ -687,6 +689,8 @@ used for finding available ports if preferred ones are not available
 
 [npm-image]: https://img.shields.io/npm/v/flipbox.svg
 [npm-url]: https://npmjs.org/package/flipbox
+[david-deps-img]: https://david-dm.org/flip-box/flipbox.svg
+[[david-deps-url]: https://david-dm.org/flip-box/flipbox
 
 [emoji-commits]: https://github.com/aretecode/emoji-commits/
 [chalk]: https://github.com/chalk/chalk

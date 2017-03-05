@@ -28,30 +28,49 @@ function write(dir, contents, helpers) {
 
 // is dir?
 // @return boolean
+// function isFile(file) {
+//   if (file && file.includes('/')) {
+//     return false
+//   }
+//   if (file.includes('.'))
+//     return true
+//   return false
+// }
+//
+// https://nodejs.org/docs/latest/api/fs.html#fs_class_fs_stats
+// isSocket
 function isFile(file) {
-  if (file && file.includes('/')) {
-    return false
-  }
-  if (file.includes('.'))
-    return true
-  return false
+  return fs.lstatSync(file).isFile()
+}
+function isDir(file) {
+  return fs.lstatSync(file).isDirectory()
+}
+
+// @TODO: could trim too
+function isRel(url) {
+  if (!url || !url.slice) return false
+  return (/^(\.){1,2}(\/){1,2}$/.test(url.slice(0, 3)) ||
+    /(\/){1,2}(\.){1,2}(\/){1,2}/.test(url)) ||
+    url.indexOf('./') === 0 ||
+    url.indexOf('../') === 0
 }
 
 function getFileAndPath(file) {
-  var split = file.split('/')
-  return {
+  const split = file.split('/')
+  const fileAndPath = {
     file: split.pop(),
     path: split.join('/'),
   }
+  fileAndPath.dir = fileAndPath.path
+  return fileAndPath
 }
 
 
-function fses() {
-
-}
+function fses() {}
 fses.write = write
 fses.read = read
-fses.isFile = isFile
 fses.getFileAndPath = getFileAndPath
-
+fses.isFile = isFile
+fses.isDir = isDir
+fses.isRel = isRel
 module.exports = fses

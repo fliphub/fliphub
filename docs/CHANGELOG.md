@@ -1,5 +1,123 @@
 # 🔈 changelog 🔈
 
+# part 20 - mar 5 17
+- move some playground to playground
+- fix typo on clibundle -> clihub
+- move examples back into the repo but into packages
+
+# part 19 - mar 4 17
+- add initClassOrObj
+- start working on adapters for loaders and plugins to do the close to finishing touches
+- add webpack config model schema pt 1
+- verbose webpack reporting
+- basic LoaderSettings to convert adapters with in bundler model
+- safety for no apps
+- testing multi in multi out
+- implementing dry run
+- adding deepReplace lib util
+- add deepReplaceTest ^
+- added realm utils to helpers
+- added contextRequire util
+- adding deepReplace to resolve paths in PathMaster
+- resolved multi-inout (webpack will work, is not converted for fuse fully though it should give a different bundle)
+- add empty test and minimal test to see how bundlers apis do
+- add includeEmpty to toArr
+- get Plugins setup similar to Loaders
+- add adapters for plugins for webpack
+- test passing in custom webpack plugins + built in ones
+- abstract out plugin subscriber into plugin hub
+- add first adapter plugins for fusebox with env plugin using plugin subscriber
+- merge params passed for fusebox
+- prioritizing before releasing soonish
+- fixing if no loaders are added yet other params are
+- move examples out into their own repo
+- example fuse-canada working
+- adding babel-env preset
+- putting node preset back in built in
+- fix typo on babel adapter for includes
+- move original to packages/original
+- move testing deps to packages/testing
+
+# part 18 - mar 3 17
+- try catch some ops
+- start on loaders and plugins
+- move all webpack and fuse into the bundler hub
+- get at least babel plugin added
+- add parallel-webpack
+- fix html model pt 1
+
+# part 17 - mar 2 17
+- add lerna, vorpal, semver for releasing scripts
+- make translator events bubble up from context -> box so it is easy to register more translators
+- update todos
+- require abstract hub
+- verbose log errors for full understanding of schema to clients
+- adding computed props
+- experiment with observable
+- fix args boolean typo for returning true when it was false :facepalm:
+- start builderhub
+- split up Aliases and SourceMaps from builder context
+- regex replace util inspections for empty fn!
+- fix key emitting
+- set up html model
+- add fuse-test-runner
+- add filter auto hooked up to flags
+- add filter to box
+- sending all op keys out
+- ops.compile working for webpack + fusebox, and ops.run (with built in dev server) for fusebox
+- adding .server property to context from ops, add port and middleware to it
+- flush out a sourcemaps compat obj in GeneralTranslator
+- fix typo on envhub
+- add pretty-error
+- move pathmaster and BundleContext to bundlehub
+
+# part 16 - mar 1 17
+- finally found a reasonable pattern for managing the lifecycle flow, refactor to hubs
+- start sourcemaps: builder, translator, bundler.config
+- start Classes for Ops
+- use childToParentMethods on bundle context with child pm for easier access
+- add childToParentMethods helper
+- add toArr helper
+- make fusebox operation for compile bundle part 1
+- start webpack usage
+- redo happypack -> class
+- flush out ts loader a little, add todos to webpack loaders
+- typescript experiment #2, not super great
+- remove workflow context to simplify
+
+# part 15 - feb 28 17
+- added debug all option
+- making the filterer
+- removed evt from lib
+- a lot on refactoring
+- using eventemitter2
+- inspectorGadget eventemitter2
+- add whitelist to inspectorgadget
+- start on extendable
+- start on extensions
+- start implementing extendable with flags and presets
+- adding middleware and a more customizable devserver
+- adding dry op
+- added xterm colors for logging
+- add logger to console, with prefix underscore to avoid main compatibility issues ```js
+console.
+_log, _color, _text, _error, _warn, _verbose
+```
+
+
+# part 15 - feb 27 17
+- pushed to refactor
+- started timer helper
+- furthering refactor with:
+  - core: AppContext, BundleContext, Events, PathMaster
+  - translators: flatten, bundles
+  - loaders: Babel, BabelAlias
+  - agnostic: sourcemaps
+  - example/experiment/z
+  - added FlipValidationError
+  - made helpers fs and path functions to return for debugging easier
+  - added inspectorGadget
+
 # part 14 - feb 26 17
 - move deps to lib
 - start on events

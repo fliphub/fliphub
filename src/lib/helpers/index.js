@@ -7,12 +7,25 @@ const injectPlugins = inject.injectPlugins
 const tosource = require('tosource')
 const path = require('path')
 const fs = require('fs')
-const arithmetics = require('./arithmetics')
+// const arithmetics = require('./arithmetics')
 const strIncludesAnyOf = require('./str')
+const toArr = require('./toArr')
+const initClassOrObj = require('./initClassOrObj')
+const {utils, realm} = require('./realm')
+const {
+  deepReplaceProp,
+  deepReplaceTest,
+} = require('./deepReplace')
 
 let exportee = {
-  fs,
-  path,
+  deepReplaceProp,
+  deepReplaceTest,
+  utils, realm,
+
+  initClassOrObj,
+  toArr,
+  fs: () => fs,
+  path: () => path,
   tosource,
   walk,
   es5exports,
@@ -21,6 +34,6 @@ let exportee = {
   getOutputPath: output,
   strIncludesAnyOf,
 }
-exportee = Object.assign(exportee, arithmetics)
+// exportee = Object.assign(exportee, arithmetics)
 
 module.exports = exportee

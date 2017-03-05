@@ -1,5 +1,7 @@
+// https://www.npmjs.com/package/minimist
+// https://npmcompare.com/compare/commander,minimist,nomnom,optimist,yargs
 const nodeFlags = require('./node-flags')
-const yargs = require('yargs')
+// const yargs = require('yargs')
 
 // searches through the commandline arguments
 // check if it matches what we are searching for
@@ -23,12 +25,25 @@ function get(needle, options) {
 
     if (arg.includes(needle) || needle.includes(arg)) {
       let argStripped = arg
+
+      // remove prefixes
       if (arg.replace) argStripped = arg.replace('--', '').replace('env.', '')
+
+      // check it
       if (argStripped.includes(needle) || needle.includes(argStripped)) {
+        let argResult = argStripped
+        // take value after `=`
+        if (argStripped.includes && argStripped.includes('='))
+          argResult = argStripped.split('=').pop()
+
         // if it is an empty string
         // that is evaluated to false in a condition
-        if ('' === argStripped) return true
-        return argStripped
+        // if ('' === argStripped) return true
+        // return argStripped
+
+        // use result
+        if ('' === argResult) return true
+        return argResult
       }
     }
   }
@@ -103,7 +118,7 @@ function realValue(value, options) {
 
   if (Number.isInteger(value)) return value + 0
   if (value === 'true') return true
-  if (value === 'false') return true
+  if (value === 'false') return false
   if (typeof value === 'string') {
     if (value.includes('true')) return true
     if (value.includes('false')) return false
@@ -142,11 +157,15 @@ const flags = {
     value = findIn(nEeDlE, global) || findIn(needle, global) || findIn(NEEDLE, global)
     if (value) return realValue(value, options)
 
+    if (process.argv.includes(needle)) return true
+    if (process.argv.includes('--' + needle)) return true
+    if (process.argv.includes('.env' + needle)) return true
+
     if (options && options.default) return options.default
   },
   val,
   get,
-  yargs,
+  // yargs,
 }
 
 module.exports = flags

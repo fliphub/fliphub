@@ -1,0 +1,32 @@
+~~~
+FLAGS
+- [ ] should have a better handler for flags for so `withType`
+      so you can do things with `ops` and `filter` such as
+      `--compile=true / -c / --compile`
+      but also
+      `--compile=eh,canada`
+- [ ] finish implementing commander as an extendable
+- [ ] use commander as an implementation to handle flags as well to perform ops
+      seems much cleaner
+      plus we can handle subprocess for each as needed
+
+- [ ] handle core ops + filtering not just from flags,
+      but function calls as well
+      and the flags should use those function calls to keep one api
+      which internally does integration tests by ensuring client api is 1:1
+
+- [ ] add app creation factory to handle other options like just passing in app without apps
+
+- [ ] should allow npm lifecycle event hooks
+- [ ] should allow `.` notation for accessing other flags?
+- [ ] CHOOSE WHETHER FLAGS OVERRIDE OR NOT
+~~~
+
+
+~~~
+ENV
+- [ ] should allow extending other env,
+      @example: default/undefined extends development
+  - [ ] OR at least have an array with string properties to trigger
+        (instead of obj keys) which merges them more easily
+~~~

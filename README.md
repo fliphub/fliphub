@@ -5,6 +5,10 @@
 
 the builder, of builders.
 
+-----------------------------------
+🚧 WIP - refactor coming soon
+-----------------------------------
+
 It allows you to create configs that would take hundreds or thousands of lines, with just a few properties.
 
 ## all you need

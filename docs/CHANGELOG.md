@@ -1,5 +1,8 @@
 # 🔈 changelog 🔈
 
+# part 24 - mar 6 17
+- remove lerna built in experiment
+
 # part 23 - mar 5-6 17
 - move all examples into an example repo
 - pushed, did pr, connected with issues

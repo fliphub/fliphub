@@ -7,7 +7,7 @@ require('../../../lib/log')
 
 // https://github.com/lerna/lerna/tree/master/src
 const lerna = require('lerna')
-const prompt = require('./lerna/lib/PromptUtilities')
+const prompt = require('lerna/lib/PromptUtilities')
 const semver = require('semver')
 
 class Publisher {

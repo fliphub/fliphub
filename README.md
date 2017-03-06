@@ -7,10 +7,6 @@
 
 the builder, of builders.
 
------------------------------------
-🚧 WIP - refactor coming soon
------------------------------------
-
 It allows you to create configs that would take hundreds or thousands of lines, with just a few properties.
 
 ## all you need
@@ -694,7 +690,7 @@ used for finding available ports if preferred ones are not available
 [npm-image]: https://img.shields.io/npm/v/flipbox.svg
 [npm-url]: https://npmjs.org/package/flipbox
 [david-deps-img]: https://david-dm.org/flip-box/flipbox.svg
-[[david-deps-url]: https://david-dm.org/flip-box/flipbox
+[david-deps-url]: https://david-dm.org/flip-box/flipbox
 
 [emoji-commits]: https://github.com/aretecode/emoji-commits/
 [chalk]: https://github.com/chalk/chalk

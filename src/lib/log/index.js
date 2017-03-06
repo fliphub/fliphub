@@ -4,6 +4,9 @@
 //   ref = msg.helpers
 //   delete msg.helpers
 // }
+//
+// https://developer.mozilla.org/en-US/docs/Web/API/Console/table
+// https://github.com/Automattic/cli-table
 require('./inspector')
 require('./timer')
 const chalk = require('chalk')
@@ -36,16 +39,21 @@ const combinations = clrs.concat(bgColors).concat(em)
 
 global.inspector = (message) => {
   const util = require('util')
-  return util.inspect(message, {
+  let msg = util.inspect(message, {
     showHidden: true,
-    depth: null,
+    depth: 30,
     showProxy: true,
-    maxArrayLength: null,
-    colors: true,
+    maxArrayLength: 100,
+    colors: {
+      'undefined': 'bold',
+    },
     // colorize: true,
     // customInspect: false,
     // colors: {}
   })
+  // const un = clc.bgBlackBright('undefined')
+  // msg = msg.replace(/(undefined)/gmi, un)
+  return msg
 }
 
 // global.sleep = (time) => {
@@ -122,17 +130,21 @@ function log(message, options) {
 
       // const emptyFnReg = /(\[Function\] \[length]: [0-9]+, \[name]: '')/gmi
       // (?:.*)
-      const emptyFnReg = /(\{(?:.*)\[Function\](?:.*)\[length]:(?:.*),(?:.*)\[name]:(?:.*)''(?:.*))/gm
-      const matches = message.match(emptyFnReg)
-      if (matches) {
-        message = message.replace(emptyFnReg, chalk.italic('[NoNameFn]'))
-        // message = message.replace(/: undefined,/, chalk.black('undefined'))
-        // console.log(matches)
-        // process.exit(1)
-        // message = JSON.stringify(message)
-        // console.log(message)
-        // process.exit(1)
-      }
+
+      // usually works but was causing an infinite loop...
+      // const emptyFnReg = /(\{(?:.*)\[Function\](?:.*)\[length]:(?:.*),(?:.*)\[name]:(?:.*)''(?:.*))/gm
+      // const matches = message.match(emptyFnReg)
+      // if (matches) {
+      //  -> // message = message.replace(emptyFnReg, chalk.italic('[NoNameFn]'))
+      //
+      //
+      //   // message = message.replace(/: undefined,/, chalk.black('undefined'))
+      //   // console.log(matches)
+      //   // process.exit(1)
+      //   // message = JSON.stringify(message)
+      //   // console.log(message)
+      //   // process.exit(1)
+      // }
     }
     if (typeof message === 'object' && options.source) message = tosource(message)
 

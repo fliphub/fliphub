@@ -18,13 +18,14 @@ const filter = [
 ]
 global.inspectorGadget = (thisArg, moreFilters) => {
   return function(depth, options) {
+    // return thisArg
     let toInspect = Object.keys(thisArg)
     .filter(key => !filter.includes(key))
 
     if (Array.isArray(moreFilters))
       toInspect = toInspect.filter(key => !moreFilters.includes(key))
-    else if (typeof moreFilters === 'function')
-      toInspect = toInspect.map(key => moreFilters(key, this[key]))
+    // else if (typeof moreFilters === 'function')
+    //   toInspect = toInspect.map(key => moreFilters(key, this[key]))
     else if (typeof moreFilters === 'object') {
       // if (moreFilters.blacklist)
       if (moreFilters.whitelist) {

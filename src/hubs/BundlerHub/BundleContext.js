@@ -1,26 +1,14 @@
-// https://webpack.js.org/configuration/output/#output-library
-// http://fuse-box.org/#global-variables
-// http://fuse-box.org/#package-name
-// Package? Library? Exports?
-
 // https://webpack.js.org/configuration/entry-context/
 // http://fuse-box.org/#home-directory
 
 // https://webpack.js.org/guides/caching/#components/sidebar/sidebar.jsx
 // http://fuse-box.org/#cache
 
-// https://webpack.js.org/guides/shimming/
-// http://fuse-box.org/#shimming
-// http://fuse-box.org/#auto-import
-
 // https://webpack.js.org/guides/code-splitting-import/
-
-// https://webpack.js.org/guides/environment-variables/
-// https://webpack.js.org/guides/production-build/
-// http://fuse-box.org/#envplugin
 
 // ProjectContext would be Box context?
 
+// const {PropParser} = require('fsbx/dist/commonjs/ArithmeticStringParser.js')
 const PathMaster = require('./PathMaster')
 const arrToObj = require('../../lib/helpers/arrToObj')
 const childToParentMethods = require('../../lib/helpers/childToParentMethods')
@@ -51,6 +39,7 @@ class BundleContext {
     this.include = new Include()
     this.exclude = new Exclude()
     this.pm = new PathMaster(props)
+    
     const handle = this.handle
     childToParentMethods({parent: this, child: this.pm})
     this.handle = handle

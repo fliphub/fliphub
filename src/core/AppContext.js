@@ -22,6 +22,7 @@ class AppContext {
     this.polyfills = {}
     this.settings = {}
     this.name = app.name
+    if (Array.isArray(this.name)) this.name = this.name.join(',')
 
     this.box = box
     this.app = app

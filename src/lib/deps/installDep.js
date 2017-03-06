@@ -1,5 +1,4 @@
-const child_process = require('child_process')
-const spawn = child_process.spawnSync
+const {spawnSync} = require('child_process')
 
 // @TODO:
 // - [ ] only install ones that are missing
@@ -21,7 +20,7 @@ module.exports = function(deps) {
   })
 
   if (depsToInstall.length) {
-    spawn('npm', ['install'].concat(depsToInstall), {
+    spawnSync('npm', ['install'].concat(depsToInstall), {
       stdio: 'inherit',
     })
   }

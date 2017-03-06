@@ -7,6 +7,7 @@ module.exports = {
   ],
   ext: ['.ts', '.js'],
   globals: {
+    '$FlipBox': true,
     'asNeeded': true,
     'webpack': true,
     'fusebox': true,

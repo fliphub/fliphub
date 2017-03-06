@@ -1,5 +1,19 @@
 # 🔈 changelog 🔈
 
+# part 23 - mar 5-6 17
+- move all examples into an example repo
+- pushed, did pr, connected with issues
+- updating more issues from prioritized todos and docs/todos
+- exposing cli hub on exports
+- adjust depth on inspector
+- adding fusebox help commands https://github.com/flip-box/flipbox/issues/30
+- move fluent arithmetic bundle to fusebox and out of flipbox
+- adding bin to bin/flip and to pkg json bin https://github.com/flip-box/flipbox/issues/31
+- refactor scripter -> ScriptCreator
+- adding alias hijacker for flipImport
+- fixing alias fromObj typo
+- testing flipbox as a module with clients above
+
 # part 22 - mar 5 17
 - using latest `sourcemaps` option for fusebox https://github.com/flip-box/flipbox/issues/20
 - updating fsbx

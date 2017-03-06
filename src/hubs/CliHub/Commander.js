@@ -63,12 +63,12 @@ program
     require('./CliFlip')(config)
   })
 program
-    .command('handler [config]')
-    // .option('-config, --config', 'config location')
-    .action(function(config, options) {
-      console.log('flipping with handler', config)
-      require('./CliFlipHandler')(config)
-    })
+  .command('handler [config]')
+  // .option('-config, --config', 'config location')
+  .action(function(config, options) {
+    console.log('flipping with handler', config)
+    require('./CliFlipHandler')(config)
+  })
 
 // build package registry
 // write to disk
@@ -87,6 +87,25 @@ program
 //     var d = '', p = ''
 //     scripty.build(names, {p, d})
 //   })
+
+program
+  .command('fusebox-lang')
+  .option('-i, --include', '+ adds a package / file')
+  .option('-e, --exclude', '- excludes a package / file')
+  .option('-c, --nocache', '^ disables the cache')
+  .option('-a, --noapi', '! removes the wrapping fusebox')
+  .option('-e, --execute', '> executes the index')
+  .option('-b, --bundle', '[glob] bundles with no dependencies')
+  .option('-g, --glob', '**/*, [**/*.js], http://www.globtester.com/')
+  .action(function(name, options) {
+  })
+program
+  .command('fusebox-plugins')
+  // make your own plugins -> docs
+  // existing plugins -ls
+  // command for name
+  .action(function(name, options) {
+  })
 
 // https:// github.com/tj/commander.js/#custom-help
 program.on('--help', () => {

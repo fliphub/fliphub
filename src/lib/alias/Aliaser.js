@@ -1,4 +1,4 @@
-var path = require('path')
+const path = require('path')
 
 // type AliasType = {
 //   // fs path
@@ -15,14 +15,15 @@ class Aliaser {
 
   // string => mixed
   resolve(relativePath) {
+    console.log({relativePath}, this.__dirname)
     return path.resolve(this.__dirname, relativePath)
   }
 
   // AliasType => AliasType
   reAlias(aliases) {
-    var keys = Object.keys(aliases)
+    const keys = Object.keys(aliases)
     keys.forEach(key => {
-      var val = aliases[key]
+      const val = aliases[key]
       aliases[key] = this.resolve(val)
     })
     return aliases
@@ -36,12 +37,12 @@ class Aliaser {
   //
   // Array<AliasType> => AliasType
   mergeAliases(aliases) {
-    var magicAliases = {}
+    const magicAliases = {}
     // [{aliasEh: 'eh'}, {aliasCanada: 'canada'}]
     // -> {aliasEh}
     // ->> 'aliasEh'
     aliases.forEach(aliasGroup => Object.keys(this.reAlias(aliasGroup)).forEach(key => {
-      var alias = aliasGroup[key]
+      const alias = aliasGroup[key]
       magicAliases[key] = alias
     }))
 
@@ -55,20 +56,18 @@ class Aliaser {
     const resolvedAliases = {}
     const keys = Object.keys(aliases)
     for (let i = 0; i < keys.length; i++) {
-      var key = keys[i]
-      var alias = aliases[key]
-      resolvedAliases[alias] = this.resolve(aliases[alias])
+      const key = keys[i]
+      const alias = aliases[key]
+      resolvedAliases[alias] = this.resolve(alias)
     }
     return resolvedAliases
   }
 
   // AliasType => ?AliasType
   requireAlias(alias) {
-    if (typeof alias !== 'string' && typeof alias == 'object') {
-      return alias
-    }
-    var resolved = this.resolve(this.prefix + alias)
-    var required = require(resolved)
+    if (typeof alias !== 'string' && typeof alias == 'object') return alias
+    const resolved = this.resolve(this.prefix + alias)
+    const required = require(resolved)
     return required
   }
 

@@ -60,5 +60,10 @@ vorpal
   })
 
 vorpal
+  .command('setup-aliases')
+  .action(function(args, cb) {
+  })
+
+vorpal
  .show()
  .parse(process.argv)

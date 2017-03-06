@@ -23,7 +23,8 @@ const WebPackConfig = {
   },
 
   // test: app => app.webpack,
-  parse({context, builder, api, app}) {
+  parse(args) {
+    const {context, builder, api, app} = args
     let {config} = builder
     const {sourcemaps, target, params} = builder
     const {bundles} = context
@@ -90,7 +91,7 @@ const WebPackConfig = {
     // },
     // resolve: {alias: {}},
     // plugins: [],
-
+    console.verbose(args.box)
     console.verbose(config, {level: '🛠  webpack config', color: 'green'})
     // helpers.log(tosource(config),
     // {level: '🛠 builder_config_tosource', color: 'green'})

@@ -5,6 +5,7 @@ class DryOp {
     const config = Config.parse(args)
     this.api = api
     this.config = config
+    console.verbose(args.box)
     console.verbose(api)
   }
 }

@@ -7,6 +7,10 @@ const WebPackHub = require('./webpack/WebPackHub')
 const {BundleContext, BundlesContext} = require('./BundleContext')
 
 class BundlerHub extends AbstractHub {
+  boxInit() {
+    this.box.arithmetics = FuseBoxHub.Arithmetics
+  }
+
   appInit(args) {
     const {context} = args
 
@@ -23,7 +27,6 @@ class BundlerHub extends AbstractHub {
 
     // @TODO: other ones here
     context.once('builder.fusebox', (builderArgs) => {
-      console.debug('builder.webpack' + builderArgs)
       context.bundler = new FuseBoxHub(args)
     })
     context.once('builder.webpack', (builderArgs) => {

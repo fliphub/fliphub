@@ -1,4 +1,3 @@
-var fsbx = require('fuse-box')
 function escapeRegExp(str) {
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
 }

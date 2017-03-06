@@ -1,7 +1,8 @@
-// global.require = require
-// const FlipBox = require('./core/AppsBuilder')
+// require('./lib/alias/hijacker')(require('path').resolve(__dirname, '../'))
 const FlipBox = require('./core/FlipBox')
+const cli = require('./hubs/CliHub')
 
+exports.cli = cli
 exports.helpers = FlipBox.helpers
 exports.flags = FlipBox.flags
 // exports.isWebpackCli = FlipBox.isWebpackCli

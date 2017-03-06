@@ -1,4 +1,5 @@
 const fs = require('fs')
+const path = require('path')
 const mkdirp = require('mkdirp')
 
 // http://stackabuse.com/read-files-with-node-js/
@@ -74,12 +75,21 @@ function getFileAndPath(file) {
   return fileAndPath
 }
 
+function getDirectories(srcpath, filter = ['.bin', '.cache']) {
+  return fs.readdirSync(srcpath)
+    .filter(file => fs.statSync(path.join(srcpath, file)).isDirectory())
+    .filter(folder => !filter.includes(folder))
+}
+
 
 function fses() {}
+fses.mkdirp = mkdirp
+fses.getDirectories = getDirectories
 fses.write = write
 fses.read = read
 fses.getFileAndPath = getFileAndPath
 fses.isFile = isFile
 fses.isDir = isDir
 fses.isRel = isRel
+
 module.exports = fses

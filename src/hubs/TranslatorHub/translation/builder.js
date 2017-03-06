@@ -14,8 +14,12 @@ const BuilderTranslator = {
     }
     if (app.fusebox || name === 'fusebox')
       context.emit('builder.fusebox', params)
-    else if (app.webpack || name === 'webpack')
+    else if (app.webpack || name === 'webpack') {
+      // if (typeof app.webpack === 'object') {
+      //   app = Object.assign(app.params, app.webpack)
+      // }
       context.emit('builder.webpack', params)
+    }
     else {
       console._warn('no builder specified, using webpack by default')
       context.emit('builder.webpack', params)

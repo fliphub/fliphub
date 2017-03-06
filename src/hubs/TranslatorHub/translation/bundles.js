@@ -1,7 +1,7 @@
 const BundleTranslator = {
   name: 'bundle',
   // test: app => app.alias || !app._alias,
-  translate: ({app, lib, context}) => {
+  translate: ({app, helpers, context}) => {
     // first let's do in out per bundle
     // then we do scripts, such as copy, clean
     // then ops (maybe not here) compile, run, exec etc
@@ -10,6 +10,10 @@ const BundleTranslator = {
     // will need to parse this -.- do this last
     // app.instructions
 
+    // if (Array.isArray(app.entry)) {
+    //   console.exit(app.entry)
+    //   app.entry = helpers.arrToObj(app.entry)
+    // }
     // @TODO: needs multi `out`
     // multi bundle
     if (typeof app.entry === 'object') {
@@ -51,6 +55,9 @@ const BundleTranslator = {
         out: app.output || app.out,
       })
     }
+    // else if (Array.isArray(app.entry)) {
+    //
+    // }
     // single bundle
     else {
       context.emit('bundles.add', app)

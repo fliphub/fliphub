@@ -44,6 +44,9 @@ module.exports = function(configPath) {
   })
   fuse.bundle('>[' + file + ']').then((args) => {
     contents = eval(contents)
+    contents.root = require('path').resolve(homeDir, contents.root)
+    // contents.root = homeDir
+    // console.exit(contents.root)
     const FlipBox = require('../../core/FlipBox')
     const flip = FlipBox.init(contents)
     const built = flip.build()

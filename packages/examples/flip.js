@@ -9,7 +9,6 @@ global._dirname = __dirname
 // process.env.NODE_ENV = 'production'
 
 // @NOTE: should have the commander be doing this dynamically
-//
 // var output = require('./configs/basic/mediator')
 
 // require('./configs/basic/mediator')

@@ -148,6 +148,9 @@ class PathMaster {
 
   // @chainable
   handle(app) {
+    // @TODO: improve
+    if (Array.isArray(app.entry)) app.entry = app.entry.pop()
+
     this.handleWorkSpace(app)
     this.handleIn(app)
     this.handleOut(app)

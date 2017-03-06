@@ -40,10 +40,19 @@ function write(dir, contents, helpers) {
 // https://nodejs.org/docs/latest/api/fs.html#fs_class_fs_stats
 // isSocket
 function isFile(file) {
-  return fs.lstatSync(file).isFile()
+  try {
+    const result = fs.lstatSync(file).isFile()
+    return result
+  } catch (e) {
+    return false
+  }
 }
 function isDir(file) {
-  return fs.lstatSync(file).isDirectory()
+  try {
+    return fs.lstatSync(file).isDirectory()
+  } catch (e) {
+    return false
+  }
 }
 
 // @TODO: could trim too

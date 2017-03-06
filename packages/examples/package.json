@@ -80,7 +80,6 @@
     "webpack-dev-server": "1.16.3",
     "webpack-hot-middleware": "2.17.0",
     "webpack-node-externals": "^1.5.4",
-    "babel-eslint": "*",
     "eslint": "^3.16.1",
     "eslint-config-aretecode": "^1.0.3",
     "eslint-plugin-flowtype": "^2.30.0",

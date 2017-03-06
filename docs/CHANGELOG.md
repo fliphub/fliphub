@@ -1,5 +1,17 @@
 # 🔈 changelog 🔈
 
+# part 22 - mar 5 17
+- using latest `sourcemaps` option for fusebox https://github.com/flip-box/flipbox/issues/20
+- updating fsbx
+- cleaning most prioritized todos into github milestones
+- cleaning readmes
+- make compat example work part 1
+- make compat example work with fusebox pt 1 https://github.com/flip-box/flipbox/issues/1
+- make array of entries on an object of entries work pt 1 https://github.com/flip-box/flipbox/issues/21
+- fix package.json
+- cli build config handler https://github.com/flip-box/flipbox/issues/19
+- safety to handling paths pt 1 on pathmaster https://github.com/flip-box/flipbox/issues/18
+
 # part 21 - mar 5 17
 - pushed to refactor branch
 - adding find and scripts to scripthub/pkg

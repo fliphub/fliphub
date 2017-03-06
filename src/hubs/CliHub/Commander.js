@@ -62,6 +62,13 @@ program
     console.log('flipping', config)
     require('./CliFlip')(config)
   })
+program
+    .command('handler [config]')
+    // .option('-config, --config', 'config location')
+    .action(function(config, options) {
+      console.log('flipping with handler', config)
+      require('./CliFlipHandler')(config)
+    })
 
 // build package registry
 // write to disk

@@ -20,12 +20,11 @@ const FuseBoxConfig = {
     }
 
     const sm = sourcemaps.interpret({context})
-    if (sm.use) {
-      config.sourceMap = {
-        bundleReference: sm.fileToMapLink,
-        outFile: sm.file,
-      }
-    }
+    if (sm.use) config.sourcemaps = sm.use
+    // config.sourceMap = {
+    //   bundleReference: sm.fileToMapLink,
+    //   outFile: sm.file,
+    // }
 
     // @NOTE: this allows replacing them
     if (params && params.mergeable === false) {

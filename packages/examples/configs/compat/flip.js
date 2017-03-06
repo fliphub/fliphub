@@ -1,7 +1,8 @@
 const apps = [
   {
+    name: 'compat',
     // webpack: './example/configs/compat/webpack.config.js',
-    webpack: require('./webpack.config.js'),
+    params: require('./webpack.config.js'),
     // env: {
     //   // develop
     // },

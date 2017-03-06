@@ -28,7 +28,7 @@ const apps = [
 const FlipBox = require('../flipbox')
 const builder = new FlipBox({
   apps,
-  root: global._dirname,
+  root: require('path').resolve(__dirname, '../../'),
   aliasDir: './configs/aliases/',
   defaultAppNames: ['basic'],
 })

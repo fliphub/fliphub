@@ -1,5 +1,5 @@
 export default {
-  root: global._dirname,
+  root: './',
   aliasDir: './configs/aliases/',
   apps: [{
     name: 'canadas',

@@ -60,5 +60,5 @@ vorpal
   })
 
 vorpal
-   .show()
-   .parse(process.argv)
+ .show()
+ .parse(process.argv)

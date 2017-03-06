@@ -12,3 +12,11 @@ documentation
 - [x] gitter chat,
 - [x] npm,
 - [ ] travis
+- [ ] alias path
+
+- [ ] fix require statements in docs
+- [ ] add explanation using new stuff from refactor
+  - [ ] devserver middleware, listen, express
+  - [ ] all ops
+  - [ ] adding extendable
+  - [ ] event emitting

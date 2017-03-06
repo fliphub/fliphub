@@ -1,13 +1,187 @@
 # 🔈 changelog 🔈
 
-# part 12 - feb 26 17
-- 📜 script to run fusebox, or webpack and it will swap just on cli!
-- ⚙ make `apps` as an array optional and just pass in `app`
-- ⚙ make `app` optional and just pass in `entry`
-- 📦⬆💣🛅 update fusebox ^1.3.122-preview.4
-- 🗝️ update keywords
+# part 24 - mar 6 17
+- remove lerna built in experiment
 
-# part 11 - feb 25 17
+# part 23 - mar 5-6 17
+- move all examples into an example repo
+- pushed, did pr, connected with issues
+- updating more issues from prioritized todos and docs/todos
+- exposing cli hub on exports
+- adjust depth on inspector
+- adding fusebox help commands https://github.com/flip-box/flipbox/issues/30
+- move fluent arithmetic bundle to fusebox and out of flipbox
+- adding bin to bin/flip and to pkg json bin https://github.com/flip-box/flipbox/issues/31
+- refactor scripter -> ScriptCreator
+- adding alias hijacker for flipImport
+- fixing alias fromObj typo
+- testing flipbox as a module with clients above
+
+# part 22 - mar 5 17
+- using latest `sourcemaps` option for fusebox https://github.com/flip-box/flipbox/issues/20
+- updating fsbx
+- cleaning most prioritized todos into github milestones
+- cleaning readmes
+- make compat example work part 1
+- make compat example work with fusebox pt 1 https://github.com/flip-box/flipbox/issues/1
+- make array of entries on an object of entries work pt 1 https://github.com/flip-box/flipbox/issues/21
+- fix package.json
+- cli build config handler https://github.com/flip-box/flipbox/issues/19
+- safety to handling paths pt 1 on pathmaster https://github.com/flip-box/flipbox/issues/18
+
+# part 21 - mar 5 17
+- pushed to refactor branch
+- adding find and scripts to scripthub/pkg
+- updating ExecOp
+- improving commander
+- tidy the script lib a little
+- moving sleepFor helper into lib
+- added building of config file so configs can be in es6 when running from cli ^w^
+- update todos
+
+------------
+
+# part 20 - mar 5 17
+- move some playground to playground
+- fix typo on clibundle -> clihub
+- move examples back into the repo but into packages
+
+# part 19 - mar 4 17
+- add initClassOrObj
+- start working on adapters for loaders and plugins to do the close to finishing touches
+- add webpack config model schema pt 1
+- verbose webpack reporting
+- basic LoaderSettings to convert adapters with in bundler model
+- safety for no apps
+- testing multi in multi out
+- implementing dry run
+- adding deepReplace lib util
+- add deepReplaceTest ^
+- added realm utils to helpers
+- added contextRequire util
+- adding deepReplace to resolve paths in PathMaster
+- resolved multi-inout (webpack will work, is not converted for fuse fully though it should give a different bundle)
+- add empty test and minimal test to see how bundlers apis do
+- add includeEmpty to toArr
+- get Plugins setup similar to Loaders
+- add adapters for plugins for webpack
+- test passing in custom webpack plugins + built in ones
+- abstract out plugin subscriber into plugin hub
+- add first adapter plugins for fusebox with env plugin using plugin subscriber
+- merge params passed for fusebox
+- prioritizing before releasing soonish
+- fixing if no loaders are added yet other params are
+- move examples out into their own repo
+- example fuse-canada working
+- adding babel-env preset
+- putting node preset back in built in
+- fix typo on babel adapter for includes
+- move original to packages/original
+- move testing deps to packages/testing
+
+# part 18 - mar 3 17
+- try catch some ops
+- start on loaders and plugins
+- move all webpack and fuse into the bundler hub
+- get at least babel plugin added
+- add parallel-webpack
+- fix html model pt 1
+
+# part 17 - mar 2 17
+- add lerna, vorpal, semver for releasing scripts
+- make translator events bubble up from context -> box so it is easy to register more translators
+- update todos
+- require abstract hub
+- verbose log errors for full understanding of schema to clients
+- adding computed props
+- experiment with observable
+- fix args boolean typo for returning true when it was false :facepalm:
+- start builderhub
+- split up Aliases and SourceMaps from builder context
+- regex replace util inspections for empty fn!
+- fix key emitting
+- set up html model
+- add fuse-test-runner
+- add filter auto hooked up to flags
+- add filter to box
+- sending all op keys out
+- ops.compile working for webpack + fusebox, and ops.run (with built in dev server) for fusebox
+- adding .server property to context from ops, add port and middleware to it
+- flush out a sourcemaps compat obj in GeneralTranslator
+- fix typo on envhub
+- add pretty-error
+- move pathmaster and BundleContext to bundlehub
+
+# part 16 - mar 1 17
+- finally found a reasonable pattern for managing the lifecycle flow, refactor to hubs
+- start sourcemaps: builder, translator, bundler.config
+- start Classes for Ops
+- use childToParentMethods on bundle context with child pm for easier access
+- add childToParentMethods helper
+- add toArr helper
+- make fusebox operation for compile bundle part 1
+- start webpack usage
+- redo happypack -> class
+- flush out ts loader a little, add todos to webpack loaders
+- typescript experiment #2, not super great
+- remove workflow context to simplify
+
+# part 15 - feb 28 17
+- added debug all option
+- making the filterer
+- removed evt from lib
+- a lot on refactoring
+- using eventemitter2
+- inspectorGadget eventemitter2
+- add whitelist to inspectorgadget
+- start on extendable
+- start on extensions
+- start implementing extendable with flags and presets
+- adding middleware and a more customizable devserver
+- adding dry op
+- added xterm colors for logging
+- add logger to console, with prefix underscore to avoid main compatibility issues ```js
+console.
+_log, _color, _text, _error, _warn, _verbose
+```
+
+
+# part 15 - feb 27 17
+- pushed to refactor
+- started timer helper
+- furthering refactor with:
+  - core: AppContext, BundleContext, Events, PathMaster
+  - translators: flatten, bundles
+  - loaders: Babel, BabelAlias
+  - agnostic: sourcemaps
+  - example/experiment/z
+  - added FlipValidationError
+  - made helpers fs and path functions to return for debugging easier
+  - added inspectorGadget
+
+# part 14 - feb 26 17
+- move deps to lib
+- start on events
+- start on refactor
+
+# part 13 - feb 26 17
+- rename commander -> flip
+- make it work a lot better
+- changing defaults for ts
+- added caching prop passed down
+- caching prop used in fusebox
+- caching prop turns off happypack
+- installing only missing deps
+- added canary version
+- fusebox plugin to output js to ts
+- [x] make ts a flag
+- add cache flag defaults
+- add compile debug
+- add alias plugin for fusebox
+- add better bool checks in flags
+- add default bool and num checks for flags
+
+# part 12 - feb 25 17
 - 🖇🔣 start arithmetics
 - 📚⚒ fixing example for compat, add it to root package as script
 - ⚙ make name optional
@@ -19,7 +193,24 @@
 - 🔈⚠☺️️🛅 log warning fn and use with happypack
 - 🏷 version bump
 
-# part 10 - feb 24 17
+- 📜 script to run fusebox, or webpack and it will swap just on cli!
+- ⚙ make `apps` as an array optional and just pass in `app`
+- ⚙ make `app` optional and just pass in `entry`
+- 📦⬆💣🛅 update fusebox ^1.3.122-preview.8
+- 🗝️ update keywords
+- 📦⬆ add missing deps!
+- 📦⬆ added realm utils
+- 📦⬆💣🛅 update fusebox
+- 📜📦 script to install deps on postinstall npm hook
+- 🖇 add strIncludesAnyOf helper
+- 🔈⚙ debug.fuseAlias
+- ⚒🖇🔣 fix some in arithmetics, add to exports on fusebox, use in example for building itself
+- 📦 added `asNeeded` requirer to cache deps and install if they are not installed... experiment
+- @TODO: validator could figure out which deps were needed for that run...
+- ⚙🕸🛅 config `webpack` to start making 💣🛅 fusebox a first class citizen
+
+
+# part 11 - feb 24 17
 - 📚 _lots_ more on docs
 - add compileEnd hook
 - improve canada example
@@ -34,7 +225,7 @@
 - 📚⚒🔗 fix some links
 - ⚒ app builder fixes
 
-# part 9 - feb 23 17
+# part 10 - feb 23 17
 - doing lots on readme
 - 🗣 add gitter
 - add badges
@@ -42,7 +233,7 @@
 - ℹ️️ added note to json loader to just use for fuse
 - 🔈 add node utils to logger
 
-# part 8 - feb 22 17
+# part 9 - feb 22 17
 - ⚙🔈 added debug config for fusebox
 - put in its own repo
 - 📦⬆ added missing deps

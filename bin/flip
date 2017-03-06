@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+// https://github.com/lodash/lodash-cli/blob/master/bin/lodash
+const flipper = require('../flip')
+const programs = require('./src/hubs/CliHub')
+const program = programs.commander
+program.parse(process.argv)

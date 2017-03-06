@@ -1,0 +1,3 @@
+options: {
+  transpileOnly: true
+}

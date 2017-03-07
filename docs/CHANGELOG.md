@@ -1,5 +1,12 @@
 # 🔈 changelog 🔈
 
+# part 26 - mar 7 17
+- adding initial rollup setup from inferno
+- playing with webpack chain
+- working on headless api on fusebox
+- make exec op work
+- using publishing to publish multiple names with flipbox in the cli
+
 # part 24 - mar 6 17
 - remove lerna built in experiment
 

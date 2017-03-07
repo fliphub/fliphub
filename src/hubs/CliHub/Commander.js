@@ -27,7 +27,7 @@ program
   .option('-p, --production', 'production mode')
   .option('-P, --devprod', 'run production in development')
   .option('-d, --debug', 'debug / dev mode')
-  .option('-r, --release', 'release an app')
+  // .option('-r, --release', 'release an app')
   .option('-m, --mock', 'release mock (test / emulate) mode')
   .option('-t, --test', 'run tests')
   .option('-T, --notest', 'run without tests')
@@ -75,8 +75,24 @@ program
 program
   .command('release [name]')
   .option('-m, --mock', 'release mock (test / emulate) mode')
-  .action(function(name, options) {
+  .action(function(name, options) {})
+
+program
+  .command('publish [name]')
+  // .option('-n, --names', 'publish to npm with multiple names')
+  // .option('-N, --name', 'publish to npm with a single name')
+  .option('-v, --version', 'publish to npm with a version already picked out')
+  .action(function(names, options) {
+    if (names && names.includes(',')) names = names.split(',')
+    else if (names) names = [names]
+    else return console.log('must provide a name!')
+
+    const Publisher = require('../ScriptHub/pkg/Publisher')
+    const p = new Publisher()
+    p.init()
+    p.promtReleaseForNames(names)
   })
+
 
 // program
 //   .command('test [names]')

@@ -3,6 +3,7 @@ const AbstractHub = require('../AbstractHub')
 const builtIn = require('./built-in')
 const defaultsDeep = require('lodash.defaultsdeep')
 const merge = require('lodash.merge')
+const chain = require('webpack-chain')
 
 class PresetHub extends AbstractHub {
   // test({context}) { return context.presets }
@@ -30,6 +31,8 @@ class PresetHub extends AbstractHub {
   // ----------
 
   boxInit({box, helpers}) {
+    console.verbose(chain)
+    
     this.box = box
     this.list = builtIn(true)
     box.addPresets = (preset) => this._addPreset({helpers, preset})

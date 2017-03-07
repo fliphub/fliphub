@@ -21,7 +21,7 @@ class FuseBoxTranslator {
 
     global._timer.start('fsbx')
     // @TODO: needs to be moved to fusebox folder
-    global.fsbx = global.fsbx || require('fsbx')
+    global.fsbx = global.fsbx || require('../api')
     builder.api = global.fsbx
     global._timer.stop('fsbx').log('fsbx')
 

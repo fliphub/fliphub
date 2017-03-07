@@ -1,7 +1,9 @@
 // require('./lib/alias/hijacker')(require('path').resolve(__dirname, '../'))
 const FlipBox = require('./core/FlipBox')
 const cli = require('./hubs/CliHub')
+const paths = require('./paths')
 
+exports.paths = paths
 exports.cli = cli
 exports.helpers = FlipBox.helpers
 exports.flags = FlipBox.flags

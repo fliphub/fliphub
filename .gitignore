@@ -11,3 +11,4 @@ lerna-debug.log
 .tmp
 .happypack
 .fusebox
+.flipbox

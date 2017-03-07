@@ -4,6 +4,7 @@
 const AbstractHub = require('../AbstractHub')
 const FuseBoxHub = require('./fusebox/FuseBoxHub')
 const WebPackHub = require('./webpack/WebPackHub')
+const RollupHub = require('./rollup/RollupHub')
 const {BundleContext, BundlesContext} = require('./BundleContext')
 
 class BundlerHub extends AbstractHub {
@@ -31,6 +32,9 @@ class BundlerHub extends AbstractHub {
     })
     context.once('builder.webpack', (builderArgs) => {
       context.bundler = new WebPackHub(args)
+    })
+    context.once('builder.rollup', (builderArgs) => {
+      context.bundler = new RollupHub(args)
     })
 
     // context.evts.once('appBuilt', () => context.bundler.ops(args))

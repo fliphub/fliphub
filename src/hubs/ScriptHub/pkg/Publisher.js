@@ -3,7 +3,9 @@
 // if name has , then npmlush for each
 const {spawnSync} = require('child_process')
 const paths = require('../../../paths')
+const path = require('path')
 require('../../../lib/log')
+const file = require('../../../lib/file')
 
 // https://github.com/lerna/lerna/tree/master/src
 const lerna = require('lerna')
@@ -26,20 +28,57 @@ class Publisher {
   // https://github.com/lerna/lerna/blob/62a8f2ae0c221c0557a1748def851659d414c381/src/commands/PublishCommand.js#L212
   promptVersion(name, currentVersion) {
     this.p.promptVersion(name, currentVersion, (err, version) => {
-      console.exit(version)
+      this.version = version
+      this.releaseForNames()
     })
   }
 
-  promtReleaseForNames(names) {
+  releaseForNames() {
+    this.names.forEach(name => {
+      let pkg = this.pkgjson
+      pkg.version = this.version
+      pkg.name = name
 
+      console.text(`publishing ${name} V${pkg.version}`)
+
+      pkg = JSON.stringify(pkg, null, 2)
+      file.write(this.pkgpath, pkg)
+
+      const result = spawnSync('npm', ['publish'])
+      // if (result) console.verbose(result)
+      console.text(`published!`)
+    })
+
+    let pkg = this.pkgjsonog
+    pkg.version = this.version
+    console.text(`back to original name ${pkg.name}`)
+    pkg = JSON.stringify(pkg, null, 2)
+    file.write(this.pkgpath, pkg)
   }
+
+  promtReleaseForNames(names) {
+    this.names = names
+    this.promptVersion(names[0], this.pkgjson.version)
+    // paths.CLIENT_ROOT
+  }
+
+  init(dir) {
+    const pkgpath = path.join(dir || paths.FLIPBOX_ROOT, 'package.json')
+    const pkgjson = require(pkgpath)
+    this.pkgpath = pkgpath
+    this.pkgjson = pkgjson
+    this.pkgjsonog = JSON.parse(JSON.stringify(pkgjson))
+  }
+
   // publishPackagesToNpm
 }
 
-const p = new Publisher()
-p.addPackage('flipbox', '0.0.1', '../')
-p.promptVersion('flipbox', '0.0.1')
+module.exports = Publisher
 
+// const p = new Publisher()
+// p.addPackage('flipbox', '0.0.1', '../')
+// p.promptVersion('flipbox', '0.0.1')
+// console.exit(process.cwd())
 // prompt.input('message', {}, (ver) => {
 //   console.log('wut', ver)
 //   promptv(ver)

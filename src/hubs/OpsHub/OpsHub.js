@@ -1,4 +1,5 @@
 const AbstractHub = require('../AbstractHub')
+const ExecOp = require('./Exec')
 
 // @TODO:
 //
@@ -7,10 +8,25 @@ const AbstractHub = require('../AbstractHub')
 // then if app has the op that was emitted,
 // remove other listeners for it,
 // since it is per appcontext
+//
+//
+// @TODO:
+// should do ops in order with promises...
+// can't exec until built...
+// can do this by checking subscriptions to these ops
 class OpsHub extends AbstractHub {
-  appInit({context, app, helpers, box}) {
-    const args = {context, helpers, box}
-    const name = app.name
+  appInit(args) {
+    const {context, app, helpers, box} = args
+    const {name} = context
+
+    context.evts.once(`ops.exec.${name}`, () => {
+      const exec = new ExecOp()
+      if (context.evts.listeners(`ops.compile.${name}`))
+        context.evts.once(`opted.compiled.${name}`, () => exec.handle(args))
+      else
+        exec.handle(args)
+    })
+
     context.evts.once('appBuilt', () => {
       const {ops} = context
       Object.keys(ops).forEach(op => {
@@ -21,8 +37,7 @@ class OpsHub extends AbstractHub {
     })
   }
 
-  defaults() {
-
+  defaults(args) {
   }
 
   decorate({context, app}) {

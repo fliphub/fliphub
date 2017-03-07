@@ -20,6 +20,9 @@ const BuilderTranslator = {
       // }
       context.emit('builder.webpack', params)
     }
+    else if (typeof name === 'string') {
+      context.emit('builder.' + name, params)
+    }
     else {
       console._warn('no builder specified, using webpack by default')
       context.emit('builder.webpack', params)

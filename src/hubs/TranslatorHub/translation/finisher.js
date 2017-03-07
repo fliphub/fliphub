@@ -10,6 +10,7 @@ const GeneralTranslator = {
     context.name = name
 
     if (instructions) context.builder.config.instructions = instructions
+    if (instructions) context.builder.instructions = instructions
 
     const {
       // use or obj

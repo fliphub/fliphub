@@ -18,7 +18,7 @@ module.exports = function(configPath) {
     }
   }
 
-  const fsbx = require('fsbx')
+  const fsbx = require('../BundlerHub/fusebox/api')
   const FuseBox = fsbx.FuseBox
   const fuse = FuseBox.init({
     debug: true,

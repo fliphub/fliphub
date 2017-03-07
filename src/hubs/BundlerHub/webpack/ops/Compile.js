@@ -5,7 +5,7 @@ const Config = require('../config/config')
 class CompileOp {
   // wrap all ops in a promise, then can promise.all
   handle(args) {
-    const {api, context, resolve} = args
+    const {api, context, resolve, name} = args
     const config = Config.parse(args)
 
     // @NOTE: to throw a validation error and see the log
@@ -36,7 +36,7 @@ class CompileOp {
           // chunksSort
         }))
 
-        // context.evts.emit('compiled.${name}')
+        context.evts.emit(`opted.compiled.${name}`)
         resolve(context)
       })
     } catch (e) {

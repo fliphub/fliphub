@@ -5,7 +5,7 @@ const cli = {
     extend: (args) => require('./Commander'),
     run: (args) => {
       const program = require('./Commander')
-      program.parse(process.argv)
+      program.parse(args || process.argv)
     },
   },
   interactive: (args) => require('./Interactive'),

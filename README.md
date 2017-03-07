@@ -13,7 +13,7 @@ It allows you to create configs that would take hundreds or thousands of lines, 
 
 #### minimal
 ```js
-import FlipBox from 'flip-box'
+import FlipBox from 'flipbox'
 new FlipBox({entry: './src/index.js'}).fullAuto()
 ```
 
@@ -21,7 +21,7 @@ new FlipBox({entry: './src/index.js'}).fullAuto()
 #### all the apps
 one app? two apps? 100 apps? nodejs server, inferno, react, fusebox, _and_ webpack? existing configs? happy and no happy pack? at the same time? no sweat.
 ```js
-const FlipBox = require('flip-box')
+const FlipBox = require('flipbox')
 const apps = [
   {
     name: 'reacted',
@@ -46,7 +46,7 @@ module.exports = new FlipBox({apps}).fullAuto()
 
 #### reusability?
 ```js
-const FlipBox = require('flip-box')
+const FlipBox = require('flipbox')
 const apps = [
   {
     name: 'reacted',

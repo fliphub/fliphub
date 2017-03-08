@@ -1,5 +1,12 @@
 # 🔈 changelog 🔈
 
+# part 28 - mar 8 17
+- reduce logging on deps installation
+- use deps in deps installation script from pkg json not hardcoded
+- reduce unused deps
+- add flipbox and client pkg jsons, and require.main to paths config
+- version bump
+
 # part 27 - mar 7 17
 - update es6 config with ability to use ts, output to tmp file in .flipbox, resolve some paths and update the todos related
 - cleanup/remove the gulpfile rollup contents

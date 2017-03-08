@@ -11,6 +11,14 @@ const file = require('../../../lib/file')
 const lerna = require('lerna')
 const prompt = require('lerna/lib/PromptUtilities')
 const semver = require('semver')
+const inquirer = require('inquirer')
+
+const toGithub = {
+  type: 'confirm',
+  name: 'aliases',
+  message: 'Push to github?',
+  default: false,
+}
 
 class Publisher {
   constructor() {
@@ -34,6 +42,11 @@ class Publisher {
   }
 
   releaseForNames() {
+    inquirer.prompt(toGithub).then(answers => {
+      this.publishPackagesToNpm()
+    })
+  }
+  publishPackagesToNpm() {
     this.names.forEach(name => {
       let pkg = this.pkgjson
       pkg.version = this.version
@@ -69,8 +82,6 @@ class Publisher {
     this.pkgjson = pkgjson
     this.pkgjsonog = JSON.parse(JSON.stringify(pkgjson))
   }
-
-  // publishPackagesToNpm
 }
 
 module.exports = Publisher

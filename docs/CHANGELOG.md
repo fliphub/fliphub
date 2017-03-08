@@ -1,5 +1,10 @@
 # 🔈 changelog 🔈
 
+# part 27 - mar 7 17
+- update es6 config with ability to use ts, output to tmp file in .flipbox, resolve some paths and update the todos related
+- cleanup/remove the gulpfile rollup contents
+- update fusebox
+
 # part 26 - mar 7 17
 - adding initial rollup setup from inferno
 - playing with webpack chain

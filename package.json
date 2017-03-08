@@ -1,6 +1,6 @@
 {
   "name": "flipbox",
-  "version": "0.0.95",
+  "version": "0.0.96",
   "description": "the builder of builders",
   "main": "src/index.js",
   "bin": {
@@ -46,8 +46,7 @@
     "eventemitter2": "^3.0.1",
     "flow-bin": "^0.40.0",
     "flowtype": "^2.0.0",
-    "fsbx": "^1.3.123-preview.15",
-    "fuse-box": "1.3.122",
+    "fuse-box": "^1.3.124-preview.1",
     "fuse-test-runner": "^1.0.5",
     "glob": "^7.1.1",
     "gulp": "^3.9.1",
@@ -108,7 +107,8 @@
     "bundler",
     "fusebox",
     "fuse-box",
-    "webpack"
+    "webpack",
+    "flipbox"
   ],
   "author": "James <aretecode@gmail.com>",
   "homepage": "https://github.com/flip-box/flipbox#readme",

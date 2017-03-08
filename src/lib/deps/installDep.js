@@ -6,15 +6,13 @@ const {spawnSync} = require('child_process')
 // - [ ]
 module.exports = function(deps) {
   if (!Array.isArray(deps)) deps = [deps]
-  console.log('flip: installing missing dependency!')
-
   const depsToInstall = []
   deps.forEach(dep => {
     try {
       require(dep)
     } catch (e) {
-      console.log(e)
-      console.log('installing ', dep)
+      // console.log(e)
+      console.log('installing missing: ', dep)
       depsToInstall.push(dep)
     }
   })

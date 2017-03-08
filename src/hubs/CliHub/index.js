@@ -1,5 +1,5 @@
 const cli = {
-  flip: (args) => require('./CliFlip'),
+  flip: (config, dir) => require('./CliFlip')(config, dir),
   flipHandler: (flipHandler) => require('./CliFlipHandler')(flipHandler),
   commander: {
     extend: (args) => require('./Commander'),

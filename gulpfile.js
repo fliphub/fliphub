@@ -7,26 +7,4 @@ gulp.task('change', function() {
       .pipe(gulp.dest('ts'))
 })
 
-var gulp = require('gulp')
-rollup = require('rollup')
-rollupTypescript = require('rollup-plugin-typescript')
-
-
-gulp.task('build', function() {
-  return rollup.rollup({
-    entry: './src/main.ts',
-    plugins: [
-      rollupTypescript(),
-    ],
-  })
-    .then(function(bundle) {
-      bundle.write({
-        format: 'umd',
-        moduleName: 'library',
-        dest: './dist/library.js',
-        sourceMap: true,
-      })
-    })
-})
-
 gulp.task('default', ['change'])

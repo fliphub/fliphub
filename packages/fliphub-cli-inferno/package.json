@@ -1,0 +1,41 @@
+{
+  "name": "fliphub-cli-inferno",
+  "version": "0.1.3",
+  "description": "fliphub cli for inferno",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "true"
+  },
+  "files": [
+    "src"
+  ],
+  "engines": {
+    "node": "7.7.2",
+    "npm": "4.1.2"
+  },
+  "dependencies": {
+    "commander": "^2.9.0",
+    "inquirer": "^3.0.6",
+    "lodash.sortby": "^4.7.0",
+    "minimalist": "^1.0.0"
+  },
+  "keywords": [
+    "fliphub-inferno-cli",
+    "inferno",
+    "cli",
+    "fliphub",
+    "flipbox"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  },
+  "devDependencies": {
+    "fuse-box": "1.3.126"
+  }
+}

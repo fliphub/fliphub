@@ -1,0 +1,46 @@
+{
+  "name": "fliphub-cli",
+  "version": "0.1.1",
+  "description": "the builder of builders - cli",
+  "main": "src/index.js",
+  "bin": "bin/flip",
+  "scripts": {
+    "test": "true"
+  },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "engines": {
+    "node": "7.7.1",
+    "npm": "4.1.2"
+  },
+  "devDependencies": {
+    "deepmerge": "^1.3.2",
+    "semver": "^5.3.0",
+    "sinon": "^1.17.7"
+  },
+  "dependencies": {
+    "app-root-path": "^2.0.1",
+    "commander": "^2.9.0",
+    "inquirer": "^3.0.6"
+  },
+  "keywords": [
+    "cli",
+    "app-builder",
+    "fusebox",
+    "fuse-box",
+    "webpack",
+    "fliphub",
+    "flipbox"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/flip-box/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flip-box/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flip-box/fliphub/issues"
+  }
+}

@@ -1,5 +1,17 @@
 # 🔈 changelog 🔈
 
+# part 30 - mar 13 17
+- play around with webpack chain as ts
+- pushing to github
+# part 29 - mar 10 17
+- extract out core of cli functionality to make inferno-cli
+- create fusebox cli
+- adding directories to link to packages
+- move things to playground
+# part 28 - mar 9 17
+- convert to monorepo to start splitting up functionality
+- more playing with webpack chain
+
 # part 28 - mar 8 17
 - reduce logging on deps installation
 - use deps in deps installation script from pkg json not hardcoded

@@ -1,12 +1,15 @@
 {
-  "name": "fliphub-root",
-  "version": "0.1.0",
+  "name": "fliphub-core",
+  "version": "0.1.2",
   "description": "the builder of builders",
   "main": "src/index.js",
   "scripts": {
+    "tsc": "tsc",
+    "gulp": "gulp",
     "test": "true"
   },
   "directories": {
+    "fliphub": "packages/fliphub",
     "cli": "packages/fliphub-cli",
     "chain": "packages/fliphub-chain",
     "cli-inferno": "packages/fliphub-cli-inferno",
@@ -15,8 +18,6 @@
     "docs": "docs"
   },
   "files": [
-    "lib",
-    "src",
     "packages"
   ],
   "engines": {
@@ -24,7 +25,12 @@
     "npm": "4.1.2"
   },
   "devDependencies": {
+    "@types/atom": "0.0.36",
+    "@types/atom-keymap": "^5.1.29",
+    "@types/node": "^7.0.8",
+    "babel-core": "^6.24.0",
     "babel-eslint": "^7.1.1",
+    "babel-register": "^6.24.0",
     "eslint": "^3.16.1",
     "eslint-config-aretecode": "^1.0.3",
     "eslint-plugin-flowtype": "^2.30.0",
@@ -35,6 +41,7 @@
     "lerna": "2.0.0-beta.38",
     "oao": "^0.7.3",
     "tslint-eslint-rules": "^3.4.0",
+    "typescript": "^2.2.1",
     "typescript-eslint-parser": "^2.0.0"
   },
   "dependencies": {},

@@ -1,9 +1,13 @@
 # 🏗🏗 flipbox
-[![Build Status](https://travis-ci.org/flip-box/flipbox.svg?branch=master)](https://travis-ci.org/flip-box/flipbox)
+[![Build Status](https://travis-ci.org/fliphub/fliphub.svg?branch=master)](https://travis-ci.org/fliphub/fliphub)
 [![Fusebox-bundler](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg)](https://gitter.im/flip-box/Lobby)
 [![NPM version][npm-image]][npm-url]
 [![Dependencies][david-deps-img]][david-deps-url]
+[![Standard JS Style][standard-image]][standard-url]
+[![MIT License][license-image]][license-url]
 
+## another refactor is in progress
+### huge wins for simplicity, power, and stability
 
 the builder, of builders.
 
@@ -741,6 +745,10 @@ used for finding available ports if preferred ones are not available
 [yargs]: https://www.npmjs.com/package/yargs
 [node-flag]: https://www.npmjs.com/package/node-flag
 
+[standard-image]: https://img.shields.io/badge/code%20style-standard%2Bes7-brightgreen.svg
+[standard-url]: https://github.com/crocodilejs/eslint-config-crocodile
+[license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
+[license-url]: https://spdx.org/licenses/MIT
 
 [com-avoid-symlinks]: @TODO
 [com-massive-package-sizes]: @TODO

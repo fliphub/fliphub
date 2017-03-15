@@ -1,6 +1,11 @@
 {
   "include": [
-    "src/**/*"
+    "packages/fliphub2/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/node_modules",
+    "node_modules/**"
   ],
   "compilerOptions": {
     "target": "es6",
@@ -25,7 +30,14 @@
     "noImplicitUseStrict": false,
     "suppressImplicitAnyIndexErrors": true,
     "preserveConstEnums": true,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "lib": [ "dom", "es5", "scripthost", "es6" ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+       "node", "atom", "atom-keymap"
+    ]
   },
   "compileOnSave": true,
   "buildOnSave": true

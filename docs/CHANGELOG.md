@@ -1,5 +1,53 @@
 # 🔈 changelog 🔈
 
+# part 34 - mar 16 17
+- adding license badge
+- add code style badge
+- start prototyping a more minimal powerful interface
+- extracting built in core code into presets
+- xterm to log
+- api chain example
+- preset default env
+- preset replace
+- preset uglify
+- preset define env
+- preset sourceMap
+- is.windows
+- cleaning core and hubs
+- start neutrino-happypack-plugin
+- gitignore playground which has next refactor wip
+- add modules folder for handling a bunch of flat submodules without cluttering packages
+- a bit of cleanup on logs
+- publish flipchain
+- publish fliplog
+- publish inspector-gadget
+- start cleaning up some globals
+- add refactor notice
+- push to github
+
+# part 33 - mar 15 17
+- plan stripping it down
+- start stripping it down
+## helpers:
+- add `rooter`
+- expand file
+- fix up inspect helper with safety
+- add javascript stringify to inspector
+- add deps extractor
+- add str helpers (strHasAny, prefix)
+- add context
+- improve `debugFor`
+
+# part 32 - mar 14 17
+- major fliphub-helpers revamp
+- add `jsonParse` just easy accessor
+- add `lap` to timer
+- add `minimalist` to flags
+
+# part 31 - mar 13 17
+- use chain for logging! lovely
+- putting a new fusebox folder to start splitting and simplifying and using presets
+
 # part 30 - mar 13 17
 - play around with webpack chain as ts
 - pushing to github

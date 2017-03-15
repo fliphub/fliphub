@@ -1,18 +1,20 @@
 // @TODO:
-// var ref = null
-// if (msg.helpers) {
-//   ref = msg.helpers
-//   delete msg.helpers
-// }
-//
+// - [ ] add debugFor filters here
+// - [ ] more formatting such as easy table
+// - [ ] storyline
+// - [ ] docs
+
 // https://developer.mozilla.org/en-US/docs/Web/API/Console/table
 // https://github.com/Automattic/cli-table
-require('./inspector')
-require('./timer')
+// const table = require('cli-table')
+// const ansi = require('ansi')
+// const cursor = ansi(process.stdout)
 const chalk = require('chalk')
 const clc = require('cli-color')
-global.inspector = require('./inspect')
+const {inspector} = require('inspector-gadget')
+const ChainedMapExtendable = require('flipchain/ChainedMapExtendable.js')
 
+// https://github.com/npm/npmlog
 // http://tostring.it/2014/06/23/advanced-logging-with-nodejs/
 // http://www.100percentjs.com/best-way-debug-node-js/
 // https://www.loggly.com/ultimate-guide/node-logging-basics/
@@ -26,8 +28,7 @@ const bgColors = [
 const em = [
   'italic', 'bold', 'underline',
 ]
-
-const xterm = {
+const xtermByName = {
   colors: {
     'orange': 202,
   },
@@ -35,120 +36,166 @@ const xterm = {
     'orange': 236,
   },
 }
-
 const combinations = clrs.concat(bgColors).concat(em)
 
+// https://www.youtube.com/watch?v=SwSle66O5sU
+const OFF = (~315 >>> 3) + '@@'
 
-// global.sleep = (time) => {
-//   if (!time) time = 200
-//   var i = 0
-//   while (i < time) {
-//     i++
-//     console.log('eh?')
-//     // sleep()
-//   }
-// }
+class LogChain extends ChainedMapExtendable {
+  constructor(parent) {
+    super(parent)
+    this.extend([
+      'text',
+      'color',
+      'data',
+      '_xterm',
+    ])
+    this.extendTrue([
+      'space',
+      'tosource',
+      'time',
+      'table',
+      'verbose',
+      'exit',
+      'silent',
+    ])
 
-// https://github.com/npm/npmlog
-// @TODO: more args, but this kind of forces a nice terseness
-function log(message, options) {
-  const tosource = require('tosource')
-  if (typeof options === 'string') options = {level: options}
-  var defaults = {
-    level: 'debug',
-    space: false,
-    color: 'purple',
-    verbose: false,
-    source: false,
-    text: false,
-    time: true,
-    data: false,
-  }
-  options = Object.assign(defaults, options)
-  if (options.name) options.level = options.name
-  if (options.data) {
-    if (options.level !== 'debug') options.level = message
-    message = options.data
+    this.presets = {}
+    this.echo = this.log
+    this.reset()
+    return this
   }
 
-  if (Number.isInteger(options.space)) console.log('\n'.repeat(options.space))
-  if (options.space === true) console.log('\n\n\n')
-  try {
-    if (typeof options.color === 'function' || options.color === false) {}
-    else if (!options.color || (!chalk[options.color] && !options.color.includes('.')))
-      options.color = 'magenta'
-
-    // var {level, color} = options
-    var level = options.level
-    var color = options.color
-    var text = options.text
-    if (color === 'purple') color = 'magenta'
-
-    if (typeof message != 'string' && options.verbose) {
-      // const omitDeep = require('omit-deep-lodash')
-      // const _ = require('lodash')
-      // _.omit(message, 'helpers', 'fs', 'ws')
-      // message = util.inspect(message, {
-      //   showHidden: true,
-      //   depth: null,
-      //   showProxy: true,
-      //   maxArrayLength: null,
-      //   colors: true,
-      //   // colors: {}
-      // })
-      // console.log(message)
-      // message = omitDeep(message, ['helpers', 'flags', 'ws'])
-      const util = require('util')
-      const PrettyError = require('pretty-error')
-      let err = false
-      if (message && message.stack) {
-        const pe = new PrettyError()
-        err = console.log(pe.render(message))
-        delete message.stack
-        message.message = message.message.split('\n')
-        // delete message.message
-      }
-
-      message = inspector(message)
-
-      // const emptyFnReg = /(\[Function\] \[length]: [0-9]+, \[name]: '')/gmi
-      // (?:.*)
-
-      // usually works but was causing an infinite loop...
-      // const emptyFnReg = /(\{(?:.*)\[Function\](?:.*)\[length]:(?:.*),(?:.*)\[name]:(?:.*)''(?:.*))/gm
-      // const matches = message.match(emptyFnReg)
-      // if (matches) {
-      //  -> // message = message.replace(emptyFnReg, chalk.italic('[NoNameFn]'))
-      //
-      //
-      //   // message = message.replace(/: undefined,/, chalk.black('undefined'))
-      //   // console.log(matches)
-      //   // process.exit(1)
-      //   // message = JSON.stringify(message)
-      //   // console.log(message)
-      //   // process.exit(1)
-      // }
+  addPreset(name, preset) {
+    this.presets[name] = preset
+    return this
+  }
+  preset(names) {
+    if (!Array.isArray(names)) names = [names]
+    for (const index in names) {
+      const name = names[index]
+      this.presets[name](this)
     }
-    if (typeof message === 'object' && options.source) message = tosource(message)
+    return this
+  }
 
-    var logger = chalk
+  // just output
+  just(data) {
+    if (typeof data === 'string') this.text(data)
+    else this.data(data)
+    this.verbose(true)
+    return this.log()
+  }
 
-    // maybe we colored with something not in chalk
-    // like xterm
-    if (typeof color === 'function') logger = color
-    else if (color === false) logger = msg => msg
+  log(data) {
+    if (!data) data = this.get('data')
+
+    if (this.get('silent')) return
+
+    // so we can have them on 1 line
+    const text = this.logText()
+    const datas = this.logData()
+
+    if (datas !== OFF && text !== OFF) console.log(text, datas)
+    else if (datas !== OFF) console.log(datas)
+    else if (text !== OFF) console.log(text)
+    else console.log(text, datas)
+
+    this.logSpaces()
+    this.reset()
+    return this
+  }
+
+  exit() {
+    for (let arg of arguments) this.verbose().data(arg).echo()
+    console.warn('log.exit')
+    setTimeout(() => process.exit(1), 1)
+    throw new Error('log.exit.trace')
+  }
+
+  reset() {
+    // persist the time logging
+    if (this.get('time')) this.time(true)
+
+    this.color('magenta')
+    this.text('debug')
+    this.data(null)
+    this.table(false)
+    this.tosource(false)
+    this.verbose(false)
+    this.space(false)
+    this.exit(false)
+    return this
+  }
+  clear() {
+    process.stdout.write(clc.reset)
+    return this
+  }
+  logText() {
+    let text = this.get('text')
+    if (this.get('text')) text = this.get('text')
+    text = this.getColored(text)
+    text = this.getTime(text)
+
+    if (!text) return OFF
+    return text
+  }
+  logData() {
+    let data = this.get('data')
+    if (!data) return OFF
+
+    data = this.getToSource(data)
+    data = this.getVerbose(data)
+
+    return data
+  }
+  logSpaces(msg) {
+    const space = this.get('space')
+    if (Number.isInteger(space)) console.log('\n'.repeat(space))
+    if (space === true) console.log('\n\n\n')
+    return msg
+  }
+
+  getColored(msg) {
+    const logWrapFn = this.getLogWrapFn()
+    if (this.get('text')) return `${logWrapFn(msg)}`
+    return `${logWrapFn(this.get('text'))}:`
+  }
+  getLogWrapFn() {
+    let logWrapFn = chalk
+    let color = this.get('color')
+
+    // maybe we colored with something not in chalk, like xterm
+    if (typeof color === 'function') logWrapFn = color
+    else if (color === false) logWrapFn = msg => msg
     else if (color.includes('.'))
-      color.split('.').forEach(clr => logger = logger[clr])
+      color.split('.').forEach(clr => logWrapFn = logWrapFn[clr])
     else if (combinations.includes(color))
-      logger = logger[color]
+      logWrapFn = logWrapFn[color]
+    else if (logWrapFn[color]) logWrapFn = logWrapFn[color]
+    return logWrapFn
+  }
+  getChalked(msg) {}
 
-    let lvl
-    if (text)
-      lvl = `${logger(message)}`
+  xterm(color, bgColor) {
+    if (typeof color === 'string' && color.includes('.')) {
+      const colorArr = color.split('.')
+      const txt = colorArr.shift()
+      const bg = colorArr.pop()
+      color = clc.xterm(txt).bgXterm(bg)
+    }
+    else if (color && bgColor)
+      color = clc.xterm(color).bgXterm(bgColor)
+    else if (Number.isInteger(color))
+      color = clc.xterm(color)
     else
-      lvl = `${logger(level)}:`
+      color = clc.xterm(202).bgXterm(236)
 
-    if (options.time) {
+    return this.color(color)
+  }
+
+  getTime(msg) {
+    if (this.get('time')) {
       let data = new Date()
       let hour = data.getHours()
       let min = data.getMinutes()
@@ -158,157 +205,68 @@ function log(message, options) {
       min = min < 10 ? `0${min}` : min
       sec = sec < 10 ? `0${sec}` : sec
       ms = ms < 10 ? `0${sec}` : ms
-      // message = chalk.yellow(`${hour}:${min}:${sec}:${ms} `) + message
-      // lvl = chalk.yellow(`:${ms}: `) + lvl
-      lvl = chalk.yellow(`${min}:${sec}:${ms}: `) + lvl
+      return chalk.yellow(`${min}:${sec}:${ms}: `) + msg
     }
+    return msg
+  }
 
-    if (text)
-      console.log(lvl)
-    else
-      console.log(lvl, message)
+  getToSource(msg) {
+    // typeof msg === 'object' &&
+    if (this.get('tosource')) {
+      const tosource = require('tosource')
+      return tosource(msg)
+    }
+    return msg
+  }
 
-    if (Number.isInteger(options.space)) console.log('\n'.repeat(options.space))
-    if (options.space === true) console.log('\n\n\n')
+  getVerbose(msg) {
+    if (typeof msg != 'string' && this.get('verbose')) {
+      const PrettyError = require('pretty-error')
+      let err = false
+      if (msg && msg.stack) {
+        const pe = new PrettyError()
+        err = console.log(pe.render(msg))
+        delete msg.stack
+        msg.message = msg.message.split('\n')
+      }
 
-    clc.reset
-  } catch (e) {
-    console.log(e)
-    console.log(`${color}${(level)}:`, message)
-    clc.reset
+      msg = inspector(msg)
+    }
+    return msg
+  }
+
+  // @TODO:
+  story() {
+    if (!this.mainStory) {
+      const {mainStory} = require('storyboard')
+      this.mainStory = mainStory
+    }
+    return this
+  }
+  child(title) {
+    const story = this.mainStory.child({title})
+    story.parent = this
+    return story
   }
 }
 
-function underline(str) {
-  return '\x1B[4m' + str + '\x1B[24m'
-}
-function bold(str) {
-  return '\x1B[1m' + str + '\x1B[22m'
-}
+// instantiate
+const log = new LogChain()
 
+// presets
+function presetError(chain) {
+  return chain.text('error').color('bgRed.black').verbose()
+}
+function presetWarning(chain) {
+  return chain.text('⚠ warning').color('bgYellow.black').verbose()
+}
+log.addPreset('error', presetError)
+log.addPreset('warning', presetWarning)
+
+// statics
+function underline(str) {return '\x1B[4m' + str + '\x1B[24m'}
+function bold(str) {return '\x1B[1m' + str + '\x1B[22m'}
 log.underline = underline
 log.bold = bold
-log.verbose = function(msg, options) {
-  var defaults = {
-    verbose: true,
-    level: 'verbose',
-  }
-  options = Object.assign(defaults, options)
-  log(msg, options)
-}
-log.text = function(msg, options) {
-  var defaults = {
-    text: true,
-  }
-  options = Object.assign(defaults, options)
-  log(msg, options)
-}
-log.text.color = function(msg, color, options) {
-  var defaults = {
-    text: true,
-    color,
-  }
-  options = Object.assign(defaults, options)
-  log(msg, options)
-}
-
-clrs.forEach(clr => {
-  log.text.color[clr] = function(msg, options) {
-    var defaults = {
-      text: true,
-      color: clr,
-    }
-    options = Object.assign(defaults, options)
-    log(msg, options)
-  }
-})
-
-log.text.color.xterm = function(msg, color, options) {
-  // console.log(color)
-  // if (!color)
-
-  if (typeof color === 'string' && color.includes('.')) {
-    const colorArr = color.split('.')
-    const txt = colorArr.shift()
-    const bg = colorArr.pop()
-    // color = clc[txt][bg]
-    color = clc.xterm(txt).bgXterm(bg)
-  }
-  else if (Number.isInteger(color))
-    color = clc.xterm(color)
-  else
-    color = clc.xterm(202).bgXterm(236)
-  options = Object.assign({
-    text: true,
-    // time: false,
-    color: false,
-  }, options)
-
-  // console.log(color('eh'))
-  log(color(msg), options)
-}
-
-
-log.error = function(msg, options) {
-  var defaults = {
-    level: 'error',
-    verbose: true,
-    color: 'bgRed.black',
-  }
-  options = Object.assign(defaults, options)
-  log(msg, options)
-}
-log.warn = function(msg, options) {
-  var defaults = {
-    level: '⚠ warning',
-    color: 'bgYellow.black',
-  }
-  options = Object.assign(defaults, options)
-  log(msg, options)
-}
-
-log.debug = function(msg, options) {
-  var defaults = {
-    level: 'DEBUG::::::::::',
-    color: 'bgBlue.white',
-    space: 20,
-  }
-  options = Object.assign(defaults, options)
-  log(msg, options)
-}
-
-log.exit = function() {
-  // let all = arguments // Object.values(arguments)
-  // log.verbose(all)
-  for (let arg of arguments) log.verbose(arg)
-
-
-  console.warn('log.exit')
-  setTimeout(() => process.exit(1), 1)
-  throw new Error('log.exit.trace')
-}
-console._log = log
-console._color = log.text.color
-console._text = log.text
-console._error = log.error
-console._warn = log.warn
-console._verbose = log.verbose
-console._exit = log.exit
-console._debug = log.debug
-
-// Object.defineProperty(console, 'exit', {value: console.exit})
-// Object.defineProperty(console, 'debug', {value: console.debug})
-// Object.defineProperty(console, 'debug', {value: console.debug})
-// Object.defineProperty(console, 'debug', {value: console.debug})
-console.exit = console._exit
-console.color = console._color
-console.error = console._error
-console.verbose = console._verbose
-console.text = console._text
-console.debug = console._debug
-console.xterm = log.text.color.xterm
-
-
-// if (!console.debug) console.debug = console.debug
 
 module.exports = log

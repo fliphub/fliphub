@@ -38,4 +38,4 @@ class ChainedSet extends Chainable {
 }
 
 export {ChainedSet}
-export default {ChainedSet}
+export default ChainedSet

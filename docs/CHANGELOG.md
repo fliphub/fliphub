@@ -4,8 +4,8 @@
 - update github issues
 - rename array-to-object folder -> arr-to-obj
 - remove build folder
-- add to gitignore
 - fix something with fliphub helpers not showing in git
+- add build folder to gitignore
 
 # part 41 - mar 19 17
 - better mergeable config

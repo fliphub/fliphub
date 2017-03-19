@@ -70,6 +70,8 @@ class ChainedMap extends Chainable {
 
   merge(obj) {
     Object.keys(obj).forEach(key => {
+      if (this[key] && this[key] instanceof Chainable)
+        return this[key].merge(obj[key])
       this.set(key, obj[key])
     })
     return this

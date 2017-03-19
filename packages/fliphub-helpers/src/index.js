@@ -1,26 +1,30 @@
 const log = require('./log')
 const Aliaser = require('./alias')
 const flags = require('./flags')
-const makeResolver = require('./resolve')
-const helpers = require('./helpers')
+const resolve = require('./resolve')
 const port = require('./port')
 const file = require('./file')
+const deepReplace = require('./deepReplace')
+const inspect = require('./inspect')
+const timer = require('./timer')
+const arrToObj = require('./arrToObj')
+const toArr = require('./toArr')
+// const arr = require('./arr')
+// const obj = require('./obj')
 require('./err')
 
-
-// could have fn buildHelpers with configs to pass in to say alias and resolve?
-function makeHelpers(options) {
-  var {root} = options
-  var resolve = makeResolver(root, lib)
-  var rootpath = resolve('./')
-
-  lib.root = rootpath
-  lib.aliaser = aliaser
-  lib.resolve = resolve
-  return lib
+module.exports = {
+  toArr,
+  arrToObj,
+  // arr,
+  // obj,
+  timer,
+  inspect,
+  deepReplace,
+  resolve,
+  port,
+  file,
+  log,
+  flags,
+  Aliaser,
 }
-
-// for easy access to everything aside from aliaser and resolver
-makeHelpers.lib = lib
-
-module.exports = makeHelpers

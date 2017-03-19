@@ -1,0 +1,6 @@
+*
+!src
+!src/*
+!.gitignore
+!package.json
+!pkgxp.js

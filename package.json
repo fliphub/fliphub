@@ -1,12 +1,20 @@
 {
-  "name": "fliphub-core",
+  "name": "fliphub-monorepo",
   "version": "0.1.2",
   "description": "the builder of builders",
   "main": "src/index.js",
   "scripts": {
     "tsc": "tsc",
     "gulp": "gulp",
-    "test": "true"
+    "test": "true",
+    "clean": "rm -rf node_modules && lerna exec -- rm -rf node_modules",
+    "changelog": "changelog mozilla-neutrino/neutrino-dev all --markdown > CHANGELOG.md",
+    "bootstrapl": "lerna bootstrap",
+    "bootstrap": "oao bootstrap",
+    "deps:add": "oao add",
+    "deps:remove": "oao remove",
+    "deps:upgrade": "oao upgrade",
+    "deps:clean": "oao clean"
   },
   "directories": {
     "fliphub": "packages/fliphub",

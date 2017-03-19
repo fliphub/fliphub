@@ -39,6 +39,6 @@
        "node", "atom", "atom-keymap"
     ]
   },
-  "compileOnSave": true,
-  "buildOnSave": true
+  "compileOnSave": false,
+  "buildOnSave": false
 }

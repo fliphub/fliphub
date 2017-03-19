@@ -19,7 +19,7 @@
     "help": "node flip --help",
     "example-compat": "webpack --config example/configs/compat/mediator.js",
     "mocha-dist": "mocha ./dist/fliphub-tests.js",
-    "postinstall": "node src/lib/deps"
+    "_postinstall": "node src/lib/deps"
   },
   "files": [
     "bin",

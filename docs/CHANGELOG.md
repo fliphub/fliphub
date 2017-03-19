@@ -1,5 +1,12 @@
 # 🔈 changelog 🔈
 
+# part 42 - mar 19 17
+- update github issues
+- rename array-to-object folder -> arr-to-obj
+- remove build folder
+- add to gitignore
+- fix something with fliphub helpers not showing in git
+
 # part 41 - mar 19 17
 - better mergeable config
   - reusable for fusebox and rollup

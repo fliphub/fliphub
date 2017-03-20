@@ -50,6 +50,32 @@ module.exports = class extends ChainedMap {
   extendFalse(methods) { this.extendWith(methods, false) }
   extendTrue(methods) { this.extendWith(methods, true) }
 
+  // @TODO: should use merge?
+  decorateParent(decorations) {
+    if (!this.decorated) this.decorated = new ChainedMap(this.parent)
+    decorations.forEach(decoration => {
+      const method = decoration.method
+      const returnee = decoration.return || this.parent
+      const key = decoration.key || method
+
+      this.parent[method] = (data) => {
+        this.set(key, data)
+        return returnee
+      }
+    })
+  }
+
+  addChain(name, Chain) {
+    // making name available as a property on chainable
+    if (typeof name !== 'string') Chain = name
+    const chained = new Chain(this)
+    name = chained.name || name
+    this[name] = chained
+    this.chains.push(name)
+    return this
+  }
+
+
   extendDefault(methods) {
     this.shorthands = [...this.shorthands, ...methods]
     Object.keys(methods).forEach(method => {

@@ -1,10 +1,22 @@
 import ChainedMap from './core/ChainedMap'
+import {Plugin as PluginInterface} from '../plugins/Plugin'
 
-class Plugin extends ChainedMap {
+function isClass(obj): boolean {
+  return toString.call(obj) === '[object Function]'
+}
+
+class Plugin extends ChainedMap implements PluginInterface {
   constructor(parent: any) {
     super(parent)
     this.extend(['init'])
-    this.init((Plugin, args = []) => new Plugin(...args))
+
+    // @TODO: HACK: !IMPORTANT: this silly map .call issue + ts
+    this.init((PluginClassOrFn, args = []) => {
+      if (!PluginClassOrFn) return args
+      if (isClass(PluginClassOrFn)) return new PluginClassOrFn(args)
+      if (typeof PluginClassOrFn === 'function') return PluginClassOrFn.call(null, args)
+      return PluginClassOrFn
+    })
   }
 
   // @NOTE: should be decorated by parent...

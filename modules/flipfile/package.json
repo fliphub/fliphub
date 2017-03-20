@@ -1,0 +1,17 @@
+{
+  "name": "flipfile",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/flip-box/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flip-box/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flip-box/fliphub/issues"
+  },
+  "devDependencies": {
+    "mkdirp": "^0.5.1"
+  }
+}

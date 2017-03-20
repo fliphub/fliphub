@@ -13,6 +13,10 @@ class Aliaser {
     this.prefix = prefix
   }
 
+  setDir(dirname) {
+    this.__dirname = dirname
+  }
+
   // string => mixed
   resolve(relativePath) {
     console.log({relativePath}, this.__dirname)

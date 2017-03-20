@@ -1,7 +1,9 @@
 // https://www.npmjs.com/package/minimist
 // https://npmcompare.com/compare/commander,minimist,nomnom,optimist,yargs
 const nodeFlags = require('./node-flags')
+const timer = require('../timer')
 // const yargs = require('yargs')
+// const minimalist = require('minimalist')
 
 // searches through the commandline arguments
 // check if it matches what we are searching for
@@ -91,6 +93,7 @@ function findIn(prop, obj) {
 function realValue(value, options) {
   if (options && options.type) {
     var type = options.type
+    timer.stop('flagger')
 
     if (type === 'bool' || type === 'boolean') {
       if (value === 'true') return true
@@ -128,11 +131,9 @@ function realValue(value, options) {
   return value
 }
 
-// @TODO:
-// - [ ] optimize
-// - [ ] respect options for which vals to search through
-const flags = {
+const flagger = {
   searchAll(nEeDlE, options) {
+    timer.start('flagger')
     if (!options) options = {}
     let value
     let NEEDLE = nEeDlE.toUpperCase()
@@ -165,7 +166,15 @@ const flags = {
   },
   val,
   get,
+  argv: require('minimist')(process.argv.slice(2)),
   // yargs,
 }
+
+
+// @TODO:
+// - [ ] optimize
+// - [ ] respect options for which vals to search through
+let flags = flagger.searchAll
+flags = Object.assign(flags, flagger)
 
 module.exports = flags

@@ -1,17 +1,12 @@
 {
-  "name": "arr-to-obj",
-  "version": "0.0.2",
+  "name": "to-arr",
+  "version": "0.0.1",
   "main": "index.js",
-  "description": "convert arrays to objects (arr to obj)",
-  "dependencies": {
-    "izz": "*"
-  },
+  "description": "convert anything to array if it is not already one",
   "keywords": [
     "utils",
     "array",
-    "object",
-    "array-to-object",
-    "arr-to-obj",
+    "to-array",
     "fliphub",
     "flipbox"
   ],

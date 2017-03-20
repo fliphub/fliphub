@@ -41,14 +41,18 @@ module.exports = class Presetter extends ChainedMapExtendable {
   // in case these plugins themselves add more plugins
   handlePresetDecoration(bundler, context) {
     const presetList = context.presets
+    // log.text('list').data({presetList}).verbose().exit(1)
 
     // first we go through the presets
     // which allows presets to add other presets
     const list = presetList.list.entries()
     const used = presetList.used.entries()
+
     for (let name in used) {
       const preset = list[name]
       const args = used[preset]
+      // log.text(name).data({preset, args}).verbose().echo()
+
       if (!preset) continue
       if (preset.setArgs) preset.setArgs(args)
       if (preset.decorate) preset.decorate(context, bundler)
@@ -114,15 +118,17 @@ module.exports = class Presetter extends ChainedMapExtendable {
     }
 
     const {used, list} = this.handlePresetDecoration(bundlerConfig, contextChain)
+    // log.data({used}).verbose().exit(1)
 
     // then we gather all presets into an array
+    // log.text(name).data({preset, args}).verbose().echo()
     const presets = {}
     for (let name in used) {
       const preset = list[name]
-      const args = used[preset]
+      const args = used[name]
       if (!preset) continue
-      if (preset.setArgs) preset.setArgs(args)
       if (preset.init) preset.init(bundlerConfig, contextChain)
+      if (preset.setArgs) preset.setArgs(args)
       else log.preset('note').addText(name + ' had no .setArgs').echo()
       presets[name] = preset
     }

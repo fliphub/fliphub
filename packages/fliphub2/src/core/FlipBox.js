@@ -36,7 +36,6 @@ module.exports = class FlipBox extends ChainedMapExtendable {
     this.setupEvents()
     this.preSetup(config)
 
-
     this.ops = {
       build: () => {
         const results = []
@@ -86,6 +85,9 @@ module.exports = class FlipBox extends ChainedMapExtendable {
   //
   // so we could do dry runs and such as needed
   preSetup(config) {
+    log.filter(config.debug)
+    delete config.debug
+
     this.hubs = new Hubs(this)
     this.apps = new AppsContext(config.apps, this)
 

@@ -5,4 +5,6 @@
 //
 // maybe make my own better webpack replace
 // that runs before everything and has an easy api
+//
+// https://github.com/jetiny/rollup-plugin-re
 module.exports = class PresetReplace {}

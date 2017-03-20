@@ -1,5 +1,7 @@
 // https://github.com/webpack-contrib/babili-webpack-plugin
 // https://github.com/mozilla-neutrino/neutrino-dev/blob/master/packages/neutrino-middleware-minify/index.js
+// https://github.com/babel/babili/blob/master/packages/babel-preset-babili/README.md#options
+/* eslint camelcase: 0 */
 module.exports = class PresetUglify {
   init() {
     this.args = {
@@ -9,7 +11,10 @@ module.exports = class PresetUglify {
         dead_code: true,
         unused: true,
         drop_debugger: true,
-        booleans: true, // various optimizations for boolean context, for example !!a ? b : c → a ? b : c
+
+        // various optimizations for boolean context,
+        // for example !!a ? b : c → a ? b : c
+        booleans: true,
       },
       mangle: {
         screw_ie8: true,
@@ -22,17 +27,13 @@ module.exports = class PresetUglify {
   }
 
   toWebpack() {
+    // uglify is not as helpful as babeli
     const {optimize} = require('webpack')
     const {UglifyJsPlugin} = optimize
-    return (neutrino) => {
-      const eh = neutrino.config
-      .merge({plugins: [new UglifyJsPlugin(this.args)]})
-      console.log(eh)
-      return eh
-      // .plugin('uglify')
-      // .use(UglifyJsPlugin, this.args)
-      // .init(() => new UglifyJsPlugin(this.args))
-    }
+    return {plugins: [new UglifyJsPlugin(this.args)]}
+    // .plugin('uglify')
+    // .use(UglifyJsPlugin, this.args)
+    // .init(() => new UglifyJsPlugin(this.args))
     // return {plugins: [new UglifyJsPlugin(this.args)]}
   }
   toRollup() {

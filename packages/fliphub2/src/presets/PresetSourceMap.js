@@ -1,18 +1,15 @@
 const is = require('izz')
 const log = require('fliplog')
 
-module.exports = class PresetSourceMap {
+class PresetSourceMap {
   init() {
     this.devtool = null
     this.file = null
   }
 
-  // !!!!
-  // manual config
   // if !manual config,
   // default would set it
   // (which means having a hook to `add` presets...)
-  //
   //
   // this would take in preset arg
   setArgs(arg) {
@@ -39,3 +36,5 @@ module.exports = class PresetSourceMap {
     // output: {sourceMapFile: ''}
   }
 }
+
+module.exports = PresetSourceMap

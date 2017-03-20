@@ -1,7 +1,9 @@
 const ChainedMapExtendable = require('flipchain/ChainedMapExtendable')
-const timer = require('fliptime')
 const Config = require('./Config')
+const timer = require('fliptime')
+const log = require('fliplog')
 
+// https://github.com/rollup/rollup-plugin-commonjs/issues/137
 // https://github.com/thgh/rollup-plugin-serve
 // https://github.com/rollup/rollup-watch
 module.exports = class Rollup extends ChainedMapExtendable {
@@ -15,6 +17,8 @@ module.exports = class Rollup extends ChainedMapExtendable {
     timer.start('rollup')
     const config = this.config.toConfig()
     const rollup = require('rollup')
+    log.data({config}).text('rollup').tags('rollup,config,bundler').echo()
+
     rollup.rollup(config).then(function(bundle) {
       // write it out ourselves...
       // Generate bundle + sourcemap

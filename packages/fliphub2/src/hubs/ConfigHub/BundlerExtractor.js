@@ -1,10 +1,16 @@
 const ChainedMapExtendable = require('flipchain/ChainedMapExtendable')
 
 module.exports = class BundlerConfig extends ChainedMapExtendable {
-  constructor(parent) {
+  constructor(parent = Object) {
     super(parent)
   }
-  merge(config) {
+  merge(config = Object) {
+    const data = this.derefAndClean(config)
+    super.merge(data)
+    return this
+  }
+
+  derefAndClean(config = Object) {
     const data = Object.assign({}, {}, config)
     delete data.name
     delete data.unified
@@ -12,9 +18,10 @@ module.exports = class BundlerConfig extends ChainedMapExtendable {
     delete data.config
     delete data.presets
     delete data.root
-    super.merge(data)
-    return this
+    delete data.presetArgs
+    return data
   }
+
   toConfig() {
     let config = this.entries()
     return config

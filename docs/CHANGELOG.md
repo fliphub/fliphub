@@ -1,5 +1,42 @@
 # 🔈 changelog 🔈
 
+# part 44 - mar 20 17
+- add `boxen` todo for fliplog
+- fix array order in config for plugins - needs to keep a `holey` array until the end to retain position unless an object is used
+- adding https://github.com/nolanlawson/optimize-js
+- start adding support for preset args
+- start on monorepo `yuge` example to do a real test
+- add `to-arr` module
+- start enableTags, disableTags, tags for logs
+- swap cli-table for cli-table2 in fliplog
+- add deep-diff dep for fliplog
+- fix having Object.assign backwards in arr-to-obj defaults...
+- added schema validation
+- fixing preset initting
+- supporting preset args pt 2
+- add splitting to to-arr
+- add nodesecurity
+- more finicking with tags for logs, disabled for now, updated todos
+- added PresetMinify for babeli
+- move the preset registering out of the defaults env since I know the functionality works and there are getting to be a lot of presets, just keep the defaults as `using` the presets for now, and keeping just registering `minify` & `uglify` in defaults to make sure it stays working
+- clean neutrino-preset-happypack a little
+- test fusebox, webpack, and rollup with babili on the yuge project
+- add PresetBabel
+- start on PresetTypeScript part 2... not so nice with rollup
+- run two apps at the same time
+- gitignore yuge until I move it to an examples only pr
+- push to github
+- prettier to eslint
+
+# part 43 - mar 19 17
+- update webpack-chain so it will allow merging plugins
+- submit pr
+- izz-class just for the webpack-chain pr
+- updating todos
+- [x] built in presets get registered by config defaulter
+- atom theme https://github.com/aretecode/one-dark-syntax-colors-of-the-year-pantone
+- setup nuclide for atom for types in refactor 3
+
 # part 42 - mar 19 17
 - update github issues
 - rename array-to-object folder -> arr-to-obj

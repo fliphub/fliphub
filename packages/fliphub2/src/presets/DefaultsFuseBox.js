@@ -13,10 +13,6 @@
 //   plugins: builder.loaders.get(),
 // }
 
-const PresetLibrary = require('./PresetLibrary')
-const PresetTarget = require('./PresetTarget')
-const PresetProgress = require('./PresetProgress')
-
 module.exports = class PresetDefaultsFuseBox {
   setArgs(args) {
     if (args) this.args = args

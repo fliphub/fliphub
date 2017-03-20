@@ -1,0 +1,80 @@
+====================================================
+------------------------ p0 ------------------------
+====================================================
+
+# built in presets
+!!!
+- [ ] flags preset
+- [ ] make presets work per app
+- [ ] + arithmetics for presets
+!!!
+
+
+- [x] built in presets get registered by config defaulter
+  - [ ]  IF THERE IS NO DEFAULTS: FALSE
+         https://github.com/fliphub/fliphub/issues/17
+  -> this should actually be only for *using* the presets,
+     not registering them
+
+# debugging
+- [x] add back debugging options
+- [x] add arithmetic debugging options with tags
+- [ ] fix debugging silence persisting or false positives that prevent `building...` orange log from echoing
+  -> might not be calling `echo` somewhere
+
+# presets
+- [x] plugin indexes
+- [ ] aliasing for preset names
+- [ ] `cars` breaks rollup
+  - [ ] so ensure commonjs and node resolve are setup correctly
+
+- [ ] fix args
+  - [ ] should names be in https://lodash.com/docs/4.17.4#camelCase or https://lodash.com/docs/4.17.4#kebabCase https://lodash.com/docs/4.17.4#snakeCase?
+
+- [ ] plugin presets for fusebox such as babel
+
+- [ ] try with packages/ts
+
+- [ ] `env` should properly use env
+  - [ ] which means detect current env
+  - [ ] also means using flag preset to set the env first
+
+====================================================
+------------------------ p1 ------------------------
+====================================================
+
+# presets
+- [ ] https://github.com/fliphub/fliphub/issues/35 shim preset
+- [ ] finish the rest of the required presets (in order)
+  - []
+
+# examples
+- [ ] update all examples, ensure all of them work for all cases
+- [ ] example running a monorepo
+  - [ ] which asserts inheriting and resolver functionality
+  - [ ] flush out autoalias
+  - [ ] improve pkg tool
+
+# tests
+- [ ] add tests - assert based on the `.toConfig`
+- [ ] run on travis to ensure deps are setup correctly
+
+# docs & external
+- [ ] pr neutrino-preset-happypack
+- [ ] update readme
+
+====================================================
+------------------------ p3 ------------------------
+====================================================
+
+# simplification
+- use module alias?
+
+# flatten & clean
+- [x] move index files to play folders
+- [ ] flatten `hubs` and `core` more nicely with
+  - [ ] `core`
+  - [ ] bundlers
+  - [ ] config
+  - [ ] builtin ?
+- [ ] clean presets/todo & presets/next

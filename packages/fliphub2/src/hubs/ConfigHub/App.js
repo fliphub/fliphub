@@ -1,10 +1,12 @@
 const ChainedMapExtendable = require('flipchain/ChainedMapExtendable')
 const Presets = require('./Presets')
+const log = require('fliplog')
 
 module.exports = class AppConfig extends ChainedMapExtendable {
   constructor(parent) {
     super(parent)
     this.extend([
+      'root',
       'name',
       'unified',
       'from',
@@ -12,7 +14,7 @@ module.exports = class AppConfig extends ChainedMapExtendable {
       'flips',
       'config',
       'presets',
-      'root',
+      'presetArgs',
     ])
     this.presets = new Presets(this)
   }
@@ -32,6 +34,23 @@ module.exports = class AppConfig extends ChainedMapExtendable {
     return this
   }
 
+  handlePresetArgs() {
+    const args = this.get('presetArgs')
+
+    // log
+    //   .tags('presets,args')
+    //   .preset('important')
+    //   .addText('handling preset args...')
+    //   .data({args})
+    //   .echo()
+
+    if (!args) return
+    for (const name in args) {
+      const arg = args[name]
+      this.presets.use(name, arg)
+    }
+  }
+
   merge(app) {
     const deref = Object.assign({}, {}, app)
     const {unified, flips, config, presets, name, inherit, root} = deref
@@ -46,6 +65,8 @@ module.exports = class AppConfig extends ChainedMapExtendable {
       const presetConfig = this.parent.box.flipConfig.presets.toConfig()
       this.presets.merge(presetConfig)
     }
+
+    this.handlePresetArgs()
 
     return this
   }

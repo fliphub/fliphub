@@ -1,7 +1,3 @@
-const PresetLibrary = require('./PresetLibrary')
-const PresetTarget = require('./PresetTarget')
-const PresetProgress = require('./PresetProgress')
-
 module.exports = class PresetDefaultsRollup {
   setArgs(args) {
     if (args) this.args = args
@@ -11,15 +7,11 @@ module.exports = class PresetDefaultsRollup {
   decorate(context, {config}) {
     context
     .presets
-    .addAll({
-      'presetTarget': new PresetTarget,
-      'presetLibrary': new PresetLibrary,
-      'presetProgress': new PresetProgress,
-    })
     .useAll({
-      'presetTarget': null,
-      'presetLibrary': null,
-      'presetProgress': null,
+      target: null,
+      library: null,
+      progress: null,
+      babili: null,
     })
   }
 }

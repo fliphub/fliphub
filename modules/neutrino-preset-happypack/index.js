@@ -1,8 +1,7 @@
 // @NOTE:
-// from index of loaders previously
 // if we use happypack,
-// it is the only loader,
-// and it takes in all of our other loaders
+// it replaces compatible loaders
+// and uses workers to do the processing in the plugins
 //
 // https://github.com/amireh/happypack/issues/53#issuecomment-226356543
 // https://github.com/amireh/happypack/issues/119
@@ -15,14 +14,12 @@ function nameFromPath(name) {
     name = name.split('node_modules/').pop()
 
     if (name.includes('/')) name = name.split('/').shift()
-    // is for babel specifically
-    // .replace('/lib/index.js', '')
+    // is for babel specifically: .replace('/lib/index.js', '')
   }
 
   return name
 }
 
-// module.exports =
 class HappyPack {
   constructor(rules, config) {
     this.init(rules, config)
@@ -30,9 +27,10 @@ class HappyPack {
   init(rules, config) {
     this.config = config
     this.rules = rules
-    this.plugins = false
     this.rulesToRemove = []
     this.compatibilityList = ['babel', 'sass', 'style', 'transform']
+    this.happyRules = []
+    this.happyPlugins = []
 
     this.params = {
       // cache: false,
@@ -55,7 +53,6 @@ class HappyPack {
     const happyParams = Object.assign({}, {}, this.params)
     delete happyParams.include
 
-    const happyPlugins = []
     for (let i = 0; rules.length > i; i++) {
       const rule = rules[i]
       const params = happyParams
@@ -84,17 +81,16 @@ class HappyPack {
         .use(HappyPackAPI, params)
         .init(() => new HappyPackAPI(params))
 
-      happyPlugins.push(new HappyPackAPI(params))
+      this.happyPlugins.push(new HappyPackAPI(params))
     }
 
-    return happyPlugins
+    return this
   }
 
   // @NOTE:
   // always loaded before plugins
-  getHappyRules() {
+  happyRules() {
     const {rules, config} = this
-    const happyRules = []
     for (let i = 0; rules.length > i; i++) {
       const rule = rules[i]
 
@@ -142,10 +138,10 @@ class HappyPack {
       }
 
       this.rulesToRemove.push(rule)
-      happyRules.push(happypack)
+      this.happyRules.push(happypack)
     }
 
-    return happyRules
+    return this
   }
 }
 
@@ -153,12 +149,10 @@ module.exports = function handleNeutrino(neutrino) {
   const {config} = neutrino
   const toConfig = config.toConfig()
   if (!toConfig.module || !toConfig.module.rules) return
-  
-  const rules2 = toConfig.module.rules
-  const rules = config.module.rules.values().map(r => r.toConfig())
 
+  const rules = config.module.rules.values().map(r => r.toConfig())
   const happypack = new HappyPack(rules, config)
-  const happyRules = happypack.getHappyRules()
+  const happyRules = happypack.happyRules()
   const happyPlugins = happypack.getHappyPlugins()
   const {rulesToRemove} = happypack
   for (const i in rulesToRemove) {

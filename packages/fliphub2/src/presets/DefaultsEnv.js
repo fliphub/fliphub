@@ -1,6 +1,5 @@
-const PresetDefineEnv = require('./PresetDefineEnv')
-const PresetSourceMap = require('./PresetSourceMap')
 const PresetUglify = require('./PresetUglify')
+const PresetMinify = require('./PresetMinify')
 
 module.exports = class PresetDefaultsEnv {
   setArgs(args) {
@@ -12,14 +11,16 @@ module.exports = class PresetDefaultsEnv {
     context
     .presets
     .addAll({
-      'defineEnv': new PresetDefineEnv,
-      'sourceMap': new PresetSourceMap,
       'uglify': new PresetUglify,
+      'babili': new PresetMinify,
+      'minify': new PresetMinify,
     })
     .useAll({
       'defineEnv': null,
       'sourceMap': null,
-      'uglify': null,
+      // 'babili': null,
+      // 'minify': null,
+      // 'uglify': null,
     })
   }
 }

@@ -14,7 +14,7 @@ module.exports = class PresetProgress {
   toRollup() {
     const progress = require('rollup-plugin-progress')
     return {
-      pluginIndex: 0,
+      pluginIndex: 30,
       plugins: [
         progress({
           clearLine: false, // default: true

@@ -1,19 +1,18 @@
 {
-  "name": "arr-to-obj",
-  "version": "0.0.2",
+  "name": "izz-class",
+  "version": "0.0.3",
   "main": "index.js",
-  "description": "convert arrays to objects (arr to obj)",
-  "dependencies": {
-    "izz": "*"
-  },
+  "description": "is type shorthands for fliphub - mini package with just class",
   "keywords": [
+    "helpers",
     "utils",
-    "array",
-    "object",
-    "array-to-object",
-    "arr-to-obj",
+    "typeof",
     "fliphub",
-    "flipbox"
+    "flipbox",
+    "is",
+    "izz",
+    "is-class",
+    "type"
   ],
   "author": "James <aretecode@gmail.com>",
   "homepage": "https://github.com/fliphub/fliphub#readme",

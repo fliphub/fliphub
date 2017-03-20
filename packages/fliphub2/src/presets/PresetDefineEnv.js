@@ -1,4 +1,4 @@
-module.exports = class PresetDefineEnv {
+class PresetDefineEnv {
   // if this is defined, others are not
   // toConfig(bundler, app) {}
   // from() {}
@@ -12,15 +12,17 @@ module.exports = class PresetDefineEnv {
   toRollup() {
     const replace = require('rollup-plugin-replace')
     return {
+      pluginIndex: 90,
       plugins: [
         replace({'process.env.NODE_ENV': JSON.stringify('production')}),
       ],
     }
   }
   toFuseBox() {
-    const {FuseBox, UglifyJSPlugin, ReplacePlugin} = require('fuse-box')
+    const {FuseBox, ReplacePlugin} = require('fuse-box')
 
     return {
+      pluginIndex: 90,
       plugins: [
         ReplacePlugin({'process.env.NODE_ENV': JSON.stringify('production')}),
       ],
@@ -42,7 +44,7 @@ module.exports = class PresetDefineEnv {
   // this will allow manual merges for things like
   // output which is a `string` with an object like using `sourceMap`
   // could just be done in `to` tho
-  mergeWebpack() {
-
-  }
+  mergeWebpack() {}
 }
+
+module.exports = PresetDefineEnv

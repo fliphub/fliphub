@@ -23,8 +23,7 @@ module.exports = class FuseBox extends ChainedMapExtendable {
     config.output = 'dist/$name.js'
     config.log = config.debug = true
     config.homeDir = root
-
-    console.log(config)
+    // config.cache = false
 
     const fuse = FuseBox.init(config)
 

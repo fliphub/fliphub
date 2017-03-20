@@ -5,6 +5,7 @@
 [![Dependencies][david-deps-img]][david-deps-url]
 [![Standard JS Style][standard-image]][standard-url]
 [![MIT License][license-image]][license-url]
+[![NSP Status](https://nodesecurity.io/orgs/fliphub/projects/d37f0cc6-02ea-4f05-a8aa-3b6c1e08bd21/badge)](https://nodesecurity.io/orgs/fliphub/projects/d37f0cc6-02ea-4f05-a8aa-3b6c1e08bd21)
 
 ## another refactor is in progress
 ### huge wins for simplicity, power, and stability

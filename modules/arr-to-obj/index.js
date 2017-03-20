@@ -13,10 +13,6 @@ function defaultValFn({val, i, array, obj}) {
 // array items become object values,
 // fn maps items to keys
 function arrToObj(array, keyValFns = {}) {
-  Object.assign(keyValFns, {
-    valFn: defaultValFn,
-    keyFn: defaultKeyFn,
-  })
   const key = keyValFns.keyFn || defaultKeyFn
   const val = keyValFns.valFn || defaultValFn
 
@@ -38,7 +34,7 @@ function arrToObj(array, keyValFns = {}) {
 function valAsKey(array, fn) {
   return arrToObj(array, {
     valFn: () => undefined,
-    keyFn: ({i, val}) => typeof fn === 'function' ? fn(val, i) : (fn || i),
+    keyFn: ({i}) => typeof fn === 'function' ? fn(i) : (fn || array[i]),
   })
 }
 

@@ -11,7 +11,6 @@ module.exports = class PresetDefaultsRollup {
       target: null,
       library: null,
       progress: null,
-      babili: null,
     })
   }
 }

@@ -1,18 +1,15 @@
 {
-  "name": "inspector-gadget",
-  "version": "0.1.4",
+  "name": "sleepfor",
+  "version": "0.0.1",
   "main": "index.js",
-  "files": [
-    "index.js", "inspector.js", "inspector-gadget.js"
-  ],
-  "dependencies": {
-    "javascript-stringify": "^1.6.0"
+  "browser": "index.js",
+  "description": "sleepfor(1000); sleeping using while loops.",
+  "scripts": {
+    "test": "node test.js"
   },
   "keywords": [
-    "helpers",
-    "utils",
-    "debugging",
-    "nodejs",
+    "sleep",
+    "sleepfor",
     "fliphub",
     "flipbox"
   ],

@@ -36,14 +36,14 @@ const inspectorGadget = (thisArg, moreFilters) => {
       // if (moreFilters.map)
     }
 
-    let inspectorGadget = {}
+    let inspected = {}
     toInspect.forEach(key => {
       // @TODO: filter out .length on function...
       // let val = thisArg[key]
       // if (typeof val === 'function')
-      inspectorGadget[key] = thisArg[key]
+      inspected[key] = thisArg[key]
     })
-    return inspectorGadget
+    return inspected
   }
 }
 

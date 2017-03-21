@@ -11,7 +11,9 @@ module.exports = class PresetNeutrino {
   // this would also need to check if it has already been added...
   // init(config, context)
   decorate(context, {config}) {
-    if (context.presets.used.has('neutrino-preset-node')) {
+    const presets = context.presets
+    if (presets.hasUsed('neutrino-preset-node')) {
+      process.exit()
       let neutrinoPresetNode = requirePreset('neutrino-preset-node')[0]
       const presetNode = {
         toWebpack: (neutrino) => neutrinoPresetNode(neutrino),
@@ -22,7 +24,7 @@ module.exports = class PresetNeutrino {
       .add('neutrino-preset-node', presetNode)
     }
 
-    if (context.presets.used.has('neutrino-preset-happypack')) {
+    if (presets.hasUsed('neutrino-preset-happypack')) {
       let presetHappyPack = requirePreset('flip-neutrino-preset-happypack')[0]
       const flipPreset = {toWebpack: neutrino => presetHappyPack(neutrino)}
 

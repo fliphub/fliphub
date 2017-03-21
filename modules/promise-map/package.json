@@ -1,18 +1,14 @@
 {
-  "name": "inspector-gadget",
-  "version": "0.1.4",
+  "name": "tiny-promise-map",
+  "version": "0.0.1",
   "main": "index.js",
-  "files": [
-    "index.js", "inspector.js", "inspector-gadget.js"
-  ],
-  "dependencies": {
-    "javascript-stringify": "^1.6.0"
+  "scripts": {
+    "test": "index.js"
   },
+  "description": "simple, minimal, tiny promise map",
   "keywords": [
-    "helpers",
-    "utils",
-    "debugging",
-    "nodejs",
+    "promise",
+    "map",
     "fliphub",
     "flipbox"
   ],

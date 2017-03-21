@@ -18,6 +18,7 @@ const isNotSet = require('./notSet')
 const isSet = require('./set')
 const isMap = require('./map')
 const num = require('./num')
+const arrOf = require('./arrOf')
 
 // @TODO: add support for plurals
 // loop, give back string of them
@@ -76,6 +77,7 @@ const is = Object.assign({
 
   array: Array.isArray,
   arr: Array.isArray,
+  arrOf,
 
   isObject,
   obj: isObject,

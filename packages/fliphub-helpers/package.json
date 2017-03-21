@@ -18,6 +18,8 @@
     "npm": "4.1.2"
   },
   "dependencies": {
+    "inspector-gadget": "*",
+    "sleepfor": "*",
     "commander": "^2.9.0",
     "inquirer": "^3.0.6",
     "lodash.sortby": "^4.7.0",
@@ -33,7 +35,8 @@
     "flipflag": "*",
     "mono-root": "*",
     "izz": "*",
-    "arr-to-obj": "*"
+    "arr-to-obj": "*",
+    "to-arr": "*"
   },
   "keywords": [
     "helpers",

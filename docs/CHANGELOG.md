@@ -1,5 +1,42 @@
 # 🔈 changelog 🔈
 
+# part 46 - mar 21 17
+- renaming modules2 into modules-sub, reordering some into `_next`
+- adding aretecode-eslint-config to modules-sub
+- updating aretecode-eslint-config deps
+- fixing name in inspector-gadget
+- better merging with shorthands in flipchain
+- adding CONTRIBUTING in docs for later
+- adding http://makeapullrequest.com badge
+- add emoji-commits as submodule
+- add how to use as a url in emoji-commits
+- abstract out `mergeFor` from flipConfig into `Presets`
+- reducing dependencies
+- sleepfor module
+- clean up fliphub helpers duplication with modules
+- add hasUsed to presets as happypack was not registering
+- use node_env in defaultsenv
+- fix happypack-preset naming
+- play with threads, pools, child processes, vm, tosourcing
+- make super simple tiny-promise-map for sync promise execing - almost 2x as fast
+- added buildSync and buildFast
+- use output path for webpack and rollup in y config
+- push to github
+
+# part 45 - mar 20 17
+- update pkg jsons to remove strict engine and do >=
+- add arrOf to izz
+- setup slack team
+- add slackin
+- add badge
+- updating travis integration for org
+- pt 3 of PresetFlags
+  - supporting arrOf strings,
+  - decorating obj,
+  - added aliasing
+- updated todos
+- resources to cache preset for later
+
 # part 44 - mar 20 17
 - add `boxen` todo for fliplog
 - fix array order in config for plugins - needs to keep a `holey` array until the end to retain position unless an object is used

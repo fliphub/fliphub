@@ -3,8 +3,6 @@ const Presets = require('./Presets')
 const ConfigDefaulter = require('./ConfigDefaulter')
 
 const is = require('izz')
-const arrToObj = require('arr-to-obj')
-const deepmerge = require('deepmerge')
 const log = require('fliplog')
 
 // this needs its own defaulter?
@@ -14,30 +12,6 @@ module.exports = class FlipConfig extends ChainedMapExtendable {
     this.presets = new Presets(this)
     this.extend(['inherit', 'from', 'to', 'defaults', 'presetArgs'])
     ConfigDefaulter.defaultPresets(this.presets)
-  }
-
-  handlePresets({config, presets, presetArgs}) {
-    if (presets) {
-      presets = arrToObj.valAsKey(presets)
-      // log.diff(presets)
-      if (presetArgs) presets = deepmerge(presets, presetArgs)
-      // log.diff(presets)
-      // log.doDiff()
-
-      // log
-      //   .tags('flipconfig,presets,args,setup')
-      //   .data(presets)
-      //   .verbose()
-      //   .text('presets')
-      //   .echo()
-
-      for (const preset in presets) {
-        if (!preset) continue
-        this.presets.use(preset,
-          presets[preset] === preset ? undefined : presets[preset])
-      }
-    }
-    delete config.presets
   }
 
   merge(config) {
@@ -58,8 +32,7 @@ module.exports = class FlipConfig extends ChainedMapExtendable {
       }
     })
 
-    this.handlePresets({config, presets, presetArgs})
-
+    Presets.mergeFor({presets, presetArgs, context: this})
     return this
   }
 }

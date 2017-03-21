@@ -4,3 +4,4 @@
 !.gitignore
 !package.json
 !pkgxp.js
+.DS_STORE

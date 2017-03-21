@@ -2,10 +2,9 @@ module.exports = {
   parser: 'babel-eslint',
   // parser: 'typescript-eslint-parser',
   extends: 'aretecode',
-  plugins: [
-    'prettier'
-    // 'typescript',
-  ],
+  // plugins: [
+  //   'typescript',
+  // ],
   ext: ['.ts', '.js'],
   globals: {
     '$FlipBox': true,

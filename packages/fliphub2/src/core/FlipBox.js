@@ -8,10 +8,16 @@ const helpers = require('fliphub-helpers')
 const resolve = require('fliphub-resolve')
 const timer = require('fliptime')
 const log = require('fliplog')
+const flipflag = require('flipflag')
+
 const {debugForFlags} = require('fliplog/debugFor')
 const {inspectorGadget} = require('inspector-gadget')
 
 const ChainedMapExtendable = require('flipchain/ChainedMapExtendable')
+const is = require('izz')
+
+const execa = require('execa')
+const tinyPromiseMap = require('tiny-promise-map')
 
 module.exports = class FlipBox extends ChainedMapExtendable {
   static init(config) {
@@ -20,6 +26,8 @@ module.exports = class FlipBox extends ChainedMapExtendable {
 
   constructor(config) {
     super(config)
+    if (!flipflag('apps')) timer.start('totals')
+
     this.inspect = inspectorGadget(this, ['hubs', 'filterer', 'parent'])
 
     timer.start('flip')
@@ -43,9 +51,38 @@ module.exports = class FlipBox extends ChainedMapExtendable {
           const context = this.built[name]
           results.push(context.api.build())
         }
+        // if (is.arrOf(results, is.promise)) {
+        //   Promise.all(results).then(() => timer.stop('totals').log('totals'))
+        // }
         return results
       },
+      buildSync: () => {
+        return tinyPromiseMap(this.built, name => {
+          const context = this.built[name]
+          return context.api.build()
+        })
+      },
     }
+
+    // @TODO: flag the other builds, preset for flagging which op to call
+    const buildFast = () => {
+      if (!flipflag('apps')) {
+        let closed = 0
+        const main = require.main.filename
+        const timed = () => {
+          if (2 === closed++) timer.stop('totals').log('totals')
+        }
+
+        for (let name in this.built) {
+          const cliFlags = [main, '--apps=' + name]
+          execa('node', cliFlags, {stdio: 'inherit'}).then(timed)
+        }
+      } else {
+        return this.ops.build()
+      }
+    }
+
+    this.ops.buildFast = buildFast
 
     // build builds the config setup...
     // need to expose other methods

@@ -13,7 +13,7 @@ module.exports = class AppConfig extends ChainedMapExtendable {
       'to',
       'flips',
       'config',
-      'presets',
+      'inherit',
       'presetArgs',
     ])
     this.presets = new Presets(this)
@@ -34,7 +34,22 @@ module.exports = class AppConfig extends ChainedMapExtendable {
     return this
   }
 
-  handlePresetArgs() {
+  mergePresets(presets) {
+    const presetArgs = this.get('presetArgs')
+
+    // @NOTE: technically this should be parent when we instantiate
+    // but we want to conditionally merge...
+    //
+    // merge in parent, unless client says not to
+    if (this.get('inherit') !== false) {
+      const presetConfig = this.parent.box.flipConfig.presets.toConfig()
+      this.presets.merge(presetConfig)
+    }
+
+    Presets.mergeFor({presets, presetArgs, context: this})
+    return this
+  }
+  mergePresetArgs() {
     const args = this.get('presetArgs')
 
     // log
@@ -49,24 +64,31 @@ module.exports = class AppConfig extends ChainedMapExtendable {
       const arg = args[name]
       this.presets.use(name, arg)
     }
+
+    return this
   }
 
   merge(app) {
     const deref = Object.assign({}, {}, app)
-    const {unified, flips, config, presets, name, inherit, root} = deref
-    const data = {unified, flips, config, presets, name, inherit, root}
+    const {
+      unified, flips, config,
+      presets, presetArgs,
+      name, inherit, root} = deref
+    const data = {
+      unified, flips, config,
+      presetArgs,
+      name, inherit, root}
+
+    // log.data({presets, presetArgs}).verbose().exit()
 
     // would be good as a lib: removeEmptyProps
     for (const prop in data) if (!data[prop] || !prop) delete data[prop]
 
-    super.merge(data)
-
-    if (this.get('inherit') !== false) {
-      const presetConfig = this.parent.box.flipConfig.presets.toConfig()
-      this.presets.merge(presetConfig)
-    }
-
-    this.handlePresetArgs()
+    super
+      .merge(data)
+    this
+      .mergePresets(presets)
+      .mergePresetArgs()
 
     return this
   }

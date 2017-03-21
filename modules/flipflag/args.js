@@ -1,9 +1,122 @@
+// @TODO: handle parsing cli such as `node eh --canada -- foo bar baz -- --cool io`
+
 // https://www.npmjs.com/package/minimist
 // https://npmcompare.com/compare/commander,minimist,nomnom,optimist,yargs
 const nodeFlags = require('./node-flags')
 const timer = require('fliptime')
 const argv = require('minimist')(process.argv.slice(2))
+const cache = Object.assign({}, {}, argv)
+const IS = require('izz')
 // const yargs = require('yargs')
+
+const aliased = {
+
+}
+function aliasFor(flag) {
+  if (flag.includes(',')) flag = flag.split(',').pop()
+  let alias = false
+  for (const key in aliased) {
+    const aliasValues = aliased[key]
+    if (aliasValues.includes(flag)) return key
+  }
+  return alias
+}
+
+function addAliases(aliases) {
+  Object.assign(aliased, aliases)
+}
+function parseAliases(aliases) {
+  if (Array.isArray(aliases)) {
+    return aliases.forEach(parseAliases)
+  } else if (aliases && typeof aliases === 'object') {
+    return
+  }
+
+  // split for each one
+  if (aliases.includes(',')) {
+    aliases = aliases.replace(/\s\S/gmi, '').split(',')
+
+    // last one is the name
+    const alias = aliases[aliases.length - 1]
+    addAliases({
+      [alias]: aliases,
+    })
+    return
+  }
+  return
+}
+
+function searchAll(nEeDlE, options) {
+  if (!options) options = {}
+
+  if (nEeDlE && nEeDlE.includes(',')) {
+    const possibleAlias = nEeDlE.split(',').pop()
+    if (aliased[possibleAlias]) nEeDlE = possibleAlias
+  }
+
+  if (aliased[nEeDlE]) {
+    const result = aliased[nEeDlE]
+       .map(alias => _searchAll(alias, options))
+       .filter(value => value)
+       .pop()
+
+    if (result) return result
+
+    // const alias = aliasFor(nEeDlE)
+    // if (alias) nEeDlE = alias
+  }
+
+  return _searchAll(nEeDlE, options)
+}
+
+function _searchAll(nEeDlE, options) {
+  timer.start('flagger')
+  if (!options) options = {}
+  let value
+
+  // console.log({aliased, nEeDlE, alias: aliased[nEeDlE]})
+  // console.log('\n\n')
+
+  let NEEDLE = nEeDlE.toUpperCase()
+  let needle = nEeDlE.toLowerCase()
+  options.needle = needle
+
+
+  // log('0', {level: 'cache'})
+  if (cache[needle]) return cache[needle]
+  if (cache[NEEDLE]) return cache[NEEDLE]
+  if (cache[nEeDlE]) return cache[nEeDlE]
+
+  // log('1', {level: 'val'})
+  value = val(nEeDlE, options) || val(needle, options) || val(NEEDLE, options)
+  if (value) return realValue(value, options)
+
+  // log('2', {level: 'get'})
+  value = nodeFlags.get(nEeDlE) || nodeFlags.get(NEEDLE) || nodeFlags.get(needle)
+  if (value) return realValue(value, options)
+
+  // log('3', {level: 'env'})
+  value = findIn(nEeDlE, process.env) || findIn(needle, process.env) || findIn(NEEDLE, process.env)
+  if (value) return realValue(value, options)
+
+  // log('4', {level: 'global'})
+  value = findIn(nEeDlE, global) || findIn(needle, global) || findIn(NEEDLE, global)
+  if (value) return realValue(value, options)
+
+  // log('5', {level: 'argv minimalist'})
+  if (argv[needle]) return argv[needle]
+
+  // log('6', {level: 'fallback argv'})
+  if (process.argv.includes(needle)) return true
+  if (process.argv.includes('--' + needle)) return true
+  if (process.argv.includes('.env' + needle)) return true
+
+  // log('6', {level: 'fallback default'})
+  if (options && options.default) return options.default
+}
+
+// used to export a callable fn obj
+let flagger = searchAll
 
 // searches through the commandline arguments
 // check if it matches what we are searching for
@@ -84,13 +197,75 @@ function findIn(prop, obj) {
   return null
 }
 
-// @TODO:
-// - [ ] flush out
-// - [x] bool
-// - [x] default undefined
-// - [ ] parse str
-// - [ ] safety to array
-function realValue(value, options) {
+function findAll(flags, cb = false) {
+  const found = {}
+  const allStr = IS.arrOf(flags, IS.str)
+  const allObj = IS.arrOf(flags, IS.obj)
+  // ['ca', 'eu']
+  if (allStr) {
+    const names = flags
+    flags = {}
+    flags.names = names
+  } else if (allObj) {
+    return flags.forEach(flag => findAll(flag, flag.cb || cb))
+  }
+
+  // names: [{flag: ['run'], type: 'bool', default: false}]
+  for (let i = 0; i < flags.names.length; i++) {
+    let flag = flags.names[i]
+    const names = flag.flag || flag
+
+    parseAliases(names)
+
+    // flag: 'run', type: 'bool', default: false
+    if (typeof flag === 'string') {
+      // use alias key if it exists
+      const alias = aliasFor(flag)
+      if (alias) flag = alias
+
+      // console.log({alias, flag, aliased}, flagger(flag))
+      // console.log('\n\n\n')
+
+      // add to object
+      found[flag] = flagger(flag)
+      continue
+    }
+
+    // 'run'
+    if (typeof names === 'string') {
+      found[names] = flagger(names, flag)
+      continue
+    }
+    // flag: ['run'], type: 'bool', default: false
+    if (IS.arr(names)) {
+      names.forEach(sub => {
+        // use alias key if it exists
+        const alias = aliasFor(sub)
+        if (alias) sub = alias
+
+        // add result to the object
+        found[sub] = flagger(sub, flag)
+      })
+    }
+  }
+
+  // log
+  //   .tags('flags')
+  //   .title('🚩  built for flags')
+  //   .color('italic')
+  //   .data(found)
+  //   .echo()
+
+  // taylored for this specific environment
+  // so if certain flags are added
+  // there would be different properties
+  if (cb) return cb(found)
+
+  return found
+}
+
+function _realValue(value, options) {
+  // console.log({value, options})
   if (options && options.type) {
     var type = options.type
     timer.stop('flagger')
@@ -108,7 +283,7 @@ function realValue(value, options) {
       return !!value
     }
 
-    // be more specific
+      // be more specific
     if (type === 'arr' || type === 'array') {
       if (value && value.includes) {
         if (value.includes(',')) return value.split(',')
@@ -131,53 +306,57 @@ function realValue(value, options) {
   return value
 }
 
-const flagger = {
-  searchAll(nEeDlE, options) {
-    timer.start('flagger')
-    if (!options) options = {}
-    let value
-    let NEEDLE = nEeDlE.toUpperCase()
-    let needle = nEeDlE.toLowerCase()
-    options.needle = needle
+// @TODO:
+// - [ ] flush out
+// - [x] bool
+// - [x] default undefined
+// - [ ] parse str
+// - [ ] safety to array
+function realValue(value, opts) {
+  const {needle} = opts
+  const val = _realValue(value, opts)
+  cache[needle] = val
+  return val
+}
 
-    // log('1', {level: 'val'})
-    value = val(nEeDlE, options) || val(needle, options) || val(NEEDLE, options)
-    if (value) return realValue(value, options)
+function decorate(obj = {}, flag, opts = {override: true}) {
+  const {override} = opts
+  const name = Object.keys(flag)[0]
+  const val = flag[name]
+  const valIsReal = val != undefined
+  const valNotOnContext = (obj[name] == undefined)
+  const valIsRealAndNotOnContext = valIsReal && valNotOnContext
+  if (override || valIsRealAndNotOnContext) obj[name] = val
+  return obj
+}
+decorate.obj = function(obj) {
+  return decorate.bind(null, obj)
+}
 
-    // log('2', {level: 'get'})
-    value = nodeFlags.get(nEeDlE) || nodeFlags.get(NEEDLE) || nodeFlags.get(needle)
-    if (value) return realValue(value, options)
+function findAndDecorate(flags, obj, opts = {override: true}) {
+  return decorate(obj, flags, opts)
+}
 
-    // log('3', {level: 'env'})
-    value = findIn(nEeDlE, process.env) || findIn(needle, process.env) || findIn(NEEDLE, process.env)
-    if (value) return realValue(value, options)
+const flaggerObj = {
+  aliased,
+  addAliases,
+  parseAliases,
 
-    // log('4', {level: 'global'})
-    value = findIn(nEeDlE, global) || findIn(needle, global) || findIn(NEEDLE, global)
-    if (value) return realValue(value, options)
+  findAndDecorate,
+  decorate,
+  findAll,
 
-    // log('5', {level: 'argv minimalist'})
-    if (argv[needle]) return argv[needle]
-
-    // log('6', {level: 'fallback argv'})
-    if (process.argv.includes(needle)) return true
-    if (process.argv.includes('--' + needle)) return true
-    if (process.argv.includes('.env' + needle)) return true
-
-    // log('6', {level: 'fallback default'})
-    if (options && options.default) return options.default
-  },
+  // @TODO: should be lowercasing props when checking
+  searchAll,
   val,
   get,
   argv,
   // yargs,
 }
 
-
 // @TODO:
 // - [ ] optimize
 // - [ ] respect options for which vals to search through
-let flags = flagger.searchAll
-flags = Object.assign(flags, flagger)
+flagger = Object.assign(flagger, flaggerObj)
 
-module.exports = flags
+module.exports = flagger

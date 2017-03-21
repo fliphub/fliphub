@@ -16,6 +16,7 @@ const PresetProgress = require('./PresetProgress')
 const PresetReplace = require('./PresetReplace')
 const PresetBabel = require('./PresetBabel')
 const PresetTypeScript = require('./PresetTypeScript')
+const PresetFlags = require('./PresetFlags')
 
 module.exports = {
   DefaultsEnv,
@@ -33,4 +34,5 @@ module.exports = {
   PresetReplace,
   PresetBabel,
   PresetTypeScript,
+  PresetFlags,
 }

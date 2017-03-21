@@ -29,8 +29,10 @@ class HappyPack {
     this.rules = rules
     this.rulesToRemove = []
     this.compatibilityList = ['babel', 'sass', 'style', 'transform']
-    this.happyRules = []
-    this.happyPlugins = []
+    this.happy = {
+      rules: [],
+      plugins: [],
+    }
 
     this.params = {
       // cache: false,
@@ -48,7 +50,7 @@ class HappyPack {
     return false
   }
 
-  getHappyPlugins() {
+  happyPlugins() {
     const {rules, config} = this
     const happyParams = Object.assign({}, {}, this.params)
     delete happyParams.include
@@ -81,7 +83,7 @@ class HappyPack {
         .use(HappyPackAPI, params)
         .init(() => new HappyPackAPI(params))
 
-      this.happyPlugins.push(new HappyPackAPI(params))
+      this.happy.plugins.push(new HappyPackAPI(params))
     }
 
     return this
@@ -138,7 +140,7 @@ class HappyPack {
       }
 
       this.rulesToRemove.push(rule)
-      this.happyRules.push(happypack)
+      this.happy.rules.push(happypack)
     }
 
     return this
@@ -152,8 +154,7 @@ module.exports = function handleNeutrino(neutrino) {
 
   const rules = config.module.rules.values().map(r => r.toConfig())
   const happypack = new HappyPack(rules, config)
-  const happyRules = happypack.happyRules()
-  const happyPlugins = happypack.getHappyPlugins()
+  happypack.happyRules().happyPlugins()
   const {rulesToRemove} = happypack
   for (const i in rulesToRemove) {
     const rule = rulesToRemove[i]

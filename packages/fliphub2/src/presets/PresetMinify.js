@@ -1,6 +1,7 @@
 // https://github.com/Comandeer/rollup-plugin-babili
 // https://github.com/babel/babili/blob/master/packages/babel-preset-babili/README.md#options
 // https://github.com/babel/babili#individual-plugins
+// https://github.com/babel/babel-preset-env/pull/178
 module.exports = class PresetMinify {
   init() {
     this.args = {

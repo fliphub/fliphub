@@ -6,15 +6,16 @@
     "test": "node examples.js --env"
   },
   "engines": {
-    "node": "7.7.2",
-    "npm": "4.1.2"
+    "node": ">= 7.7.2",
+    "npm": ">= 4.1.2"
   },
   "devDependencies": {
     "yargs": "^6.6.0"
   },
   "dependencies": {
     "minimalist": "^1.0.0",
-    "fliptime": "*"
+    "fliptime": "*",
+    "izz": "*"
   },
   "author": "James <aretecode@gmail.com>",
   "homepage": "https://github.com/flip-box/fliphub#readme",

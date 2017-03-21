@@ -1,4 +1,5 @@
 const Chainable = require('./Chainable')
+const deepmerge = require('deepmerge')
 
 class ChainedMap extends Chainable {
   constructor(parent) {
@@ -69,10 +70,25 @@ class ChainedMap extends Chainable {
   }
 
   merge(obj) {
-    Object.keys(obj).forEach(key => {
+    Object
+    .keys(obj)
+    .forEach(key => {
+      const value = obj[key]
       if (this[key] && this[key] instanceof Chainable)
-        return this[key].merge(obj[key])
-      this.set(key, obj[key])
+        return this[key].merge(value)
+      if (this.shorthands.includes(key)) {
+        const existing = this.get(key)
+        if (existing) {
+          const merged = deepmerge(existing, value)
+          console.log({merged})
+          process.exit()
+          return this[key](merged)
+        }
+
+        return this[key](value)
+      }
+      // if (this[key])
+      this.set(key, value)
     })
     return this
   }

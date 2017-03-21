@@ -1,8 +1,11 @@
-const ChainedMapExtendable = require('flipchain/ChainedMapExtendable')
-const log = require('fliplog')
 // const kebabCase = require('lodash.kebabcase')
 // const snakeCase = require('lodash.snakecase')
 const camelCase = require('lodash.camelcase')
+
+const ChainedMapExtendable = require('flipchain/ChainedMapExtendable')
+const deepmerge = require('deepmerge')
+const arrToObj = require('arr-to-obj')
+const log = require('fliplog')
 
 module.exports = class Presets extends ChainedMapExtendable {
   constructor(parent) {
@@ -13,7 +16,14 @@ module.exports = class Presets extends ChainedMapExtendable {
 
   // --- single ---
 
+  hasUsed(name) {
+    console.log(name)
+    console.log(camelCase(name))
+    console.log(this.used.has(camelCase(name)))
+    return this.used.has(camelCase(name))
+  }
   has(name) {
+    console.log(camelCase(name))
     return super.has(camelCase(name))
   }
 
@@ -98,5 +108,35 @@ module.exports = class Presets extends ChainedMapExtendable {
     })
 
     return this
+  }
+
+  static mergeFor({presets, presetArgs, context}) {
+    if (presets) {
+      presets = arrToObj.valAsKey(presets)
+
+
+      if (presetArgs) {
+        // allows cloning, and then doing the diff
+        // since deep merge mutates
+        log.tags('diff,deepmerge,mergefor,presets,config')
+        log.diff(presets)
+        presets = deepmerge(presets, presetArgs)
+        log.diff(presets)
+        log.doDiff()
+      }
+
+      // log
+      //   .tags('flipconfig,presets,args,setup')
+      //   .data(presets)
+      //   .verbose()
+      //   .text('presets')
+      //   .echo()
+
+      for (const preset in presets) {
+        if (!preset) continue
+        context.presets.use(preset,
+          presets[preset] === preset ? undefined : presets[preset])
+      }
+    }
   }
 }

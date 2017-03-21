@@ -23,6 +23,7 @@ class ConfigDefaulter extends ChainedMapExtendable {
       PresetReplace,
       PresetBabel,
       PresetTypeScript,
+      PresetFlags,
     } = require('../../presets')
 
     return presets
@@ -38,6 +39,7 @@ class ConfigDefaulter extends ChainedMapExtendable {
       .add('defaults-rollup', new PresetDefaultsRollup)
       .add('babel', new PresetBabel)
       .add('typescript', new PresetTypeScript)
+      .add('flags', new PresetFlags)
 
       // .add('uglify', new PresetUglify)
       // .add('babili', new PresetMinify)
@@ -55,9 +57,9 @@ class ConfigDefaulter extends ChainedMapExtendable {
     if (!flips) context.flips({from: 'webpack', to: 'webpack'})
 
     // if not flipping `to` anything, to is the same as from
-    if (flips.from && !flips.to)
+    else if (flips.from && !flips.to)
       context.flips({from: flips.from, to: 'webpack'})
-    if (!flips.from && flips.to)
+    else if (!flips.from && flips.to)
       context.flips({from: 'webpack', to: flips.to})
 
     return this

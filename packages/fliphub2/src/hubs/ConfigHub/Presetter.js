@@ -98,7 +98,7 @@ module.exports = class Presetter extends ChainedMapExtendable {
     // even just empty chains with deepmerge
     if (to === 'webpack') {
       const Neutrino = require('../Bundlers/Neutrino')
-      const WebpackChain = require('../../../../../modules2/webpack-chain')
+      const WebpackChain = require('webpack-chain')
       bundlerConfig = new WebpackChain().merge(bundlerConfig)
       const neutrino = new Neutrino()
       neutrino.toConfig = neutrino.getWebpackOptions
@@ -170,12 +170,5 @@ module.exports = class Presetter extends ChainedMapExtendable {
 
     this.parent.api = bundlerConfig
     return bundlerConfig.config.toConfig()
-
-    // console.log(bundlerConfig)
-    // console.log(bundlerConfig.config.toConfig())
-    // bundlerConfig.build()
-    // log.data(flipConfig).text('flipconfig').verbose().echo()
-    // log.data(list).text('list').verbose().echo()
-    // log.data(used).text('used').verbose().echo()
   }
 }

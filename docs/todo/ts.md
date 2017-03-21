@@ -11,3 +11,4 @@ https://djcordhose.github.io/flow-vs-typescript/2016_hhjs.html#/
 https://medium.com/@basarat/typescript-vs-flowlang-caee1386b4fc#.mez8520cx
 https://codemix.github.io/flow-runtime/#/babel-plugin-flow-runtime
 https://nuclide.io/
+https://egghead.io/lessons/react-setup-nuclide-to-use-flow-and-eslint-mac

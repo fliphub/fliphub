@@ -4,9 +4,12 @@
 
 # built in presets
 !!!
-- [ ] flags preset
-- [ ] make presets work per app
+- [x] flags preset
+- [x] make presets work per app
+- [ ] ensure presets do not conflict or merge or bleed across apps
 - [ ] + arithmetics for presets
+- [ ] see about using `fusebox` task runner to run them sync-or-async?
+- [ ] think more about the presets-as-collections-of-plugins, adding a third type, decorators/middleware/core to do the more application logic
 !!!
 
 
@@ -43,6 +46,17 @@
 ------------------------ p1 ------------------------
 ====================================================
 
+# flags
+- [ ] do a cleanup on flags,
+- [ ] split into a class,
+- [ ] make it safer,
+- [ ] better options,
+- [ ] chainable
+- [ ] support for ` -- ` handling (see how libs handle this)
+- [ ] manage resetting argv so it is ignored if conflicting arguments...
+// log.data(process.argv).text('argv').verbose().exit()
+
+
 # presets
 - [ ] https://github.com/fliphub/fliphub/issues/35 shim preset
 - [ ] finish the rest of the required presets (in order)
@@ -66,6 +80,7 @@
 ====================================================
 ------------------------ p3 ------------------------
 ====================================================
+
 
 # simplification
 - use module alias?

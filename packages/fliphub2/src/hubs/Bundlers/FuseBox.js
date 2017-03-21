@@ -38,6 +38,6 @@ module.exports = class FuseBox extends ChainedMapExtendable {
       .completed(proc => {
         timer.stop('fusebox').log('fusebox')
       })
-    fuse.run()
+    return fuse.run()
   }
 }

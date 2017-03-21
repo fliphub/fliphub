@@ -1,6 +1,1 @@
-function sleepFor(sleepDuration) {
-  var now = new Date().getTime()
-  while (new Date().getTime() < now + sleepDuration) { /* do nothing */ }
-}
-
-module.exports = sleepFor
+module.exports = require('sleepfor')

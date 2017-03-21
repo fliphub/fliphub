@@ -17,15 +17,12 @@ class ChainedMapTill extends ChainedMapExtendable {
 
   // used to bypass keys if you just pass in everything as obj
   public use(obj: Object) {
-    console.verbose(obj)
-
     if (obj) {
       for (const key in obj) {
         this.set(key, obj[key])
       }
       return this.parent
     }
-    // console.log(this)
     return this
   }
 

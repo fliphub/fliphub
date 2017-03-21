@@ -1,0 +1,24 @@
+{
+  "name": "regexes",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "index.js"
+  },
+  "description": "a collection of regexes",
+  "keywords": [
+    "regexes",
+    "regex",
+    "fliphub",
+    "flipbox"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

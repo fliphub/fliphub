@@ -1,0 +1,1 @@
+- [ ] should have BuilderContext take in an adapter for WebPack or FuseBox to have defaults setup and interfaces instead of the translator also decorating

@@ -1,9 +1,14 @@
-# 🏗🏗 flipbox
-[![Build Status](https://travis-ci.org/flip-box/flipbox.svg?branch=master)](https://travis-ci.org/flip-box/flipbox)
-[![Fusebox-bundler](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg)](https://gitter.im/flip-box/Lobby)
+# 🏗🏗 fliphub
+[![Build Status](https://travis-ci.org/fliphub/fliphub.svg?branch=master)](https://travis-ci.org/fliphub/fliphub)
+[![fliphub](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg)](https://gitter.im/fliphub/Lobby)
 [![NPM version][npm-image]][npm-url]
 [![Dependencies][david-deps-img]][david-deps-url]
+[![Standard JS Style][standard-image]][standard-url]
+[![MIT License][license-image]][license-url]
+[![NSP Status](https://nodesecurity.io/orgs/fliphub/projects/d37f0cc6-02ea-4f05-a8aa-3b6c1e08bd21/badge)](https://nodesecurity.io/orgs/fliphub/projects/d37f0cc6-02ea-4f05-a8aa-3b6c1e08bd21)
 
+## another refactor is in progress
+### huge wins for simplicity, power, and stability
 
 the builder, of builders.
 
@@ -13,15 +18,15 @@ It allows you to create configs that would take hundreds or thousands of lines, 
 
 #### minimal
 ```js
-import FlipBox from 'flipbox'
-new FlipBox({entry: './src/index.js'}).fullAuto()
+import FlipHub from 'fliphub'
+new FlipHub({entry: './src/index.js'}).fullAuto()
 ```
 
 
 #### all the apps
 one app? two apps? 100 apps? nodejs server, inferno, react, fusebox, _and_ webpack? existing configs? happy and no happy pack? at the same time? no sweat.
 ```js
-const FlipBox = require('flipbox')
+const FlipHub = require('fliphub')
 const apps = [
   {
     name: 'reacted',
@@ -41,12 +46,12 @@ const apps = [
     happypack: false,
   },
 ]
-module.exports = new FlipBox({apps}).fullAuto()
+module.exports = new FlipHub({apps}).fullAuto()
 ```
 
 #### reusability?
 ```js
-const FlipBox = require('flipbox')
+const FlipHub = require('fliphub')
 const apps = [
   {
     name: 'reacted',
@@ -57,7 +62,7 @@ const apps = [
     presets: ['inferno', 'entry'],
   },
 ]
-module.exports = new FlipBox({
+module.exports = new FlipHub({
   apps,
   presets: {
     front: {
@@ -122,7 +127,7 @@ which means you can also change the returned config in the same way.
 - [examples-basic][examples-basic]
 - [examples-basic-build][examples-basic-build]
 - [examples-compat][examples-compat] 🚧
-- [examples-flipbox][examples-flipbox]
+- [examples-fliphub][examples-fliphub]
 - [examples-fuse-canadas][examples-fuse-canadas]
 - [examples-fusebox][examples-fusebox]
 - [examples-intermediate][examples-intermediate]
@@ -148,7 +153,7 @@ which means you can also change the returned config in the same way.
 
 #### example
 ```js
-flipbox.addMiddlewares({
+fliphub.addMiddlewares({
   index: 999, // optional
   name: 'propertyOnApp',
   inject(app, helpers) {
@@ -233,7 +238,7 @@ flipbox.addMiddlewares({
 ### adding your own defaults
 this would make it so if `fusebox` [flag](#flags) are true, it would add the fusebox property to any app that has passed [filters](#filters) and is being built.
 ```js
-flipbox.addDefaults({
+fliphub.addDefaults({
   flags: {
     // this can also be a objects,
     // or an array of strings
@@ -647,50 +652,50 @@ used for finding available ports if preferred ones are not available
 # 🎃 tips n tricks
 - 🚧 this is a wip, it has been in development for about a week and as such is not 100% stable, but is definitely worth trying
 
-[src-pkg-json]: https://github.com/flip-box/flipbox/tree/master/package.json
-[src-params]: https://github.com/flip-box/flipbox/tree/master/src/middleware/defaults.js
-[src-fusebox-middleware]: https://github.com/flip-box/flipbox/tree/master/src/middleware/builders/fusebox.js
-[src-presets]: https://github.com/flip-box/flipbox/tree/master/src/middleware/presets.js
-[src-defaults]: https://github.com/flip-box/flipbox/tree/master/src/middleware/defaults.js
+[src-pkg-json]: https://github.com/fliphub/fliphub/tree/master/package.json
+[src-params]: https://github.com/fliphub/fliphub/tree/master/src/middleware/defaults.js
+[src-fusebox-middleware]: https://github.com/fliphub/fliphub/tree/master/src/middleware/builders/fusebox.js
+[src-presets]: https://github.com/fliphub/fliphub/tree/master/src/middleware/presets.js
+[src-defaults]: https://github.com/fliphub/fliphub/tree/master/src/middleware/defaults.js
 
-[flow-middleware]: https://github.com/flip-box/flipbox/tree/master/flow/MiddlewareInterface
-[flow-app]: https://github.com/flip-box/flipbox/tree/master/flow/MiddlewareInterface
+[flow-middleware]: https://github.com/fliphub/fliphub/tree/master/flow/MiddlewareInterface
+[flow-app]: https://github.com/fliphub/fliphub/tree/master/flow/MiddlewareInterface
 
-[examples-basic]: https://github.com/flip-box/flipbox/tree/master/example/configs/basic
-[examples-basic-build]: https://github.com/flip-box/flipbox/tree/master/example/configs/basic-build
-[examples-compat]: https://github.com/flip-box/flipbox/tree/master/example/configs/compat
-[examples-flipbox]: https://github.com/flip-box/flipbox/tree/master/example/configs/flipbox
-[examples-fuse-canadas]: https://github.com/flip-box/flipbox/tree/master/example/configs/fuse-canadas
-[examples-fusebox]: https://github.com/flip-box/flipbox/tree/master/example/configs/fusebox
-[examples-intermediate]: https://github.com/flip-box/flipbox/tree/master/example/configs/intermediate
-[examples-intermediate-tests]: https://github.com/flip-box/flipbox/tree/master/example/configs/intermediate-tests
-[examples-verbose]: https://github.com/flip-box/flipbox/tree/master/example/configs/verbose
+[examples-basic]: https://github.com/fliphub/fliphub/tree/master/example/configs/basic
+[examples-basic-build]: https://github.com/fliphub/fliphub/tree/master/example/configs/basic-build
+[examples-compat]: https://github.com/fliphub/fliphub/tree/master/example/configs/compat
+[examples-fliphub]: https://github.com/fliphub/fliphub/tree/master/example/configs/fliphub
+[examples-fuse-canadas]: https://github.com/fliphub/fliphub/tree/master/example/configs/fuse-canadas
+[examples-fusebox]: https://github.com/fliphub/fliphub/tree/master/example/configs/fusebox
+[examples-intermediate]: https://github.com/fliphub/fliphub/tree/master/example/configs/intermediate
+[examples-intermediate-tests]: https://github.com/fliphub/fliphub/tree/master/example/configs/intermediate-tests
+[examples-verbose]: https://github.com/fliphub/fliphub/tree/master/example/configs/verbose
 
-[todo-flags]: https://github.com/flip-box/flipbox/tree/master/docs/todos/middleware/flags.md
-[todo-aliasing]: https://github.com/flip-box/flipbox/tree/master/docs/todos/middleware/aliasing.md
-[todo-compat]: https://github.com/flip-box/flipbox/tree/master/docs/todos/middleware/compat.md
-[todo-HMR]: https://github.com/flip-box/flipbox/tree/master/docs/todos/middleware/HMR.md
-[todo-loaders]: https://github.com/flip-box/flipbox/tree/master/docs/todos/middleware/loaders.md
-[todo-middleware]: https://github.com/flip-box/flipbox/tree/master/docs/todos/middleware/middleware.md
-[todo-polyfill]: https://github.com/flip-box/flipbox/tree/master/docs/todos/middleware/polyfill.md
-[todo-presets]: https://github.com/flip-box/flipbox/tree/master/docs/todos/middleware/presets.md
-[todo-tasks]: https://github.com/flip-box/flipbox/tree/master/docs/todos/middleware/tasks.md
-[todo-architecture]: https://github.com/flip-box/flipbox/tree/master/docs/todos/architecture.md
-[todo-build-systems]: https://github.com/flip-box/flipbox/tree/master/docs/todos/build-systems.md
-[todo-commander]: https://github.com/flip-box/flipbox/tree/master/docs/todos/commander.md
-[todo-core]: https://github.com/flip-box/flipbox/tree/master/docs/todos/core.md
-[todo-docs]: https://github.com/flip-box/flipbox/tree/master/docs/todos/docs.md
-[todo-examples]: https://github.com/flip-box/flipbox/tree/master/docs/todos/examples.md
-[todo-helpers]: https://github.com/flip-box/flipbox/tree/master/docs/todos/helpers.md
-[todo-later-soon-next]: https://github.com/flip-box/flipbox/tree/master/docs/todos/later-soon-next.md
-[todo-perf]: https://github.com/flip-box/flipbox/tree/master/docs/todos/perf.md
-[todo-tests]: https://github.com/flip-box/flipbox/tree/master/docs/todos/tests.md
+[todo-flags]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/flags.md
+[todo-aliasing]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/aliasing.md
+[todo-compat]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/compat.md
+[todo-HMR]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/HMR.md
+[todo-loaders]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/loaders.md
+[todo-middleware]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/middleware.md
+[todo-polyfill]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/polyfill.md
+[todo-presets]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/presets.md
+[todo-tasks]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/tasks.md
+[todo-architecture]: https://github.com/fliphub/fliphub/tree/master/docs/todos/architecture.md
+[todo-build-systems]: https://github.com/fliphub/fliphub/tree/master/docs/todos/build-systems.md
+[todo-commander]: https://github.com/fliphub/fliphub/tree/master/docs/todos/commander.md
+[todo-core]: https://github.com/fliphub/fliphub/tree/master/docs/todos/core.md
+[todo-docs]: https://github.com/fliphub/fliphub/tree/master/docs/todos/docs.md
+[todo-examples]: https://github.com/fliphub/fliphub/tree/master/docs/todos/examples.md
+[todo-helpers]: https://github.com/fliphub/fliphub/tree/master/docs/todos/helpers.md
+[todo-later-soon-next]: https://github.com/fliphub/fliphub/tree/master/docs/todos/later-soon-next.md
+[todo-perf]: https://github.com/fliphub/fliphub/tree/master/docs/todos/perf.md
+[todo-tests]: https://github.com/fliphub/fliphub/tree/master/docs/todos/tests.md
 
 
-[npm-image]: https://img.shields.io/npm/v/flipbox.svg
-[npm-url]: https://npmjs.org/package/flipbox
-[david-deps-img]: https://david-dm.org/flip-box/flipbox.svg
-[david-deps-url]: https://david-dm.org/flip-box/flipbox
+[npm-image]: https://img.shields.io/npm/v/fliphub.svg
+[npm-url]: https://npmjs.org/package/fliphub
+[david-deps-img]: https://david-dm.org/fliphub/fliphub.svg
+[david-deps-url]: https://david-dm.org/fliphub/fliphub
 
 [emoji-commits]: https://github.com/aretecode/emoji-commits/
 [chalk]: https://github.com/chalk/chalk
@@ -741,6 +746,10 @@ used for finding available ports if preferred ones are not available
 [yargs]: https://www.npmjs.com/package/yargs
 [node-flag]: https://www.npmjs.com/package/node-flag
 
+[standard-image]: https://img.shields.io/badge/code%20style-standard%2Bes6+-brightgreen.svg
+[standard-url]: https://github.com/crocodilejs/eslint-config-aretecode
+[license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
+[license-url]: https://spdx.org/licenses/MIT
 
 [com-avoid-symlinks]: @TODO
 [com-massive-package-sizes]: @TODO

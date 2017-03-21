@@ -1,9 +1,13 @@
 {
   "name": "fliphub-helpers",
-  "version": "0.1.1",
-  "description": "fliphub helpers for inferno with the builder of builders",
+  "version": "0.1.5",
+  "description": "fliphub helpers with the builder of builders",
   "main": "src/index.js",
   "scripts": {
+    "copy": "node pkgxp --copy",
+    "clean": "node pkgxp --del",
+    "_prepublish": "npm run copy",
+    "_postpublish": "npm run clean",
     "test": "true"
   },
   "files": [
@@ -16,7 +20,20 @@
   "dependencies": {
     "commander": "^2.9.0",
     "inquirer": "^3.0.6",
-    "lodash.sortby": "^4.7.0"
+    "lodash.sortby": "^4.7.0",
+    "glob-fs": "^0.1.6",
+    "minimalist": "^1.0.0",
+    "trash": "^4.0.1",
+    "deep-replace": "0.0.2",
+    "flipchain": "*",
+    "flipfile": "*",
+    "fliphub-resolve": "*",
+    "fliplog": "*",
+    "fliptime": "*",
+    "flipflag": "*",
+    "mono-root": "*",
+    "izz": "*",
+    "arr-to-obj": "*"
   },
   "keywords": [
     "helpers",

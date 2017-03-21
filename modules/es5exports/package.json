@@ -1,0 +1,18 @@
+{
+  "name": "es5exports",
+  "version": "0.0.2",
+  "description": "when you want named exports in es5",
+  "main": "index.js",
+  "author": "James <aretecode@gmail.com>",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "homepage": "https://github.com/flip-box/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flip-box/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flip-box/fliphub/issues"
+  }
+}

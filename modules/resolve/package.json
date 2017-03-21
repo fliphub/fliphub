@@ -1,0 +1,30 @@
+{
+  "name": "fliphub-resolve",
+  "version": "0.0.7",
+  "dependencies": {
+    "deep-replace": "*",
+    "flipfile": "*",
+    "fliplog": "*",
+    "fliptime": "*",
+    "mono-root": "*",
+    "izz": "*"
+  },
+  "main": "index.js",
+  "description": "resolve objects, arrays, or your app root",
+  "keywords": [
+    "helpers",
+    "utils",
+    "debugging",
+    "fliphub",
+    "flipbox"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

@@ -8,7 +8,7 @@ class ChainableMap extends Chainable {
     if (this.parent.parent) return this.parent.parent
     return this.parent
   }
-  
+
   public use(obj: Object) {
     return this.merge(obj).parent
   }
@@ -71,8 +71,6 @@ class ChainableMap extends Chainable {
   public merge(obj: Object) {
     Object.keys(obj).forEach(key => {
       this.set(key, obj[key])
-      // const eh = this.get(key)
-      // console.verbose(, obj[key])
     })
     return this
   }

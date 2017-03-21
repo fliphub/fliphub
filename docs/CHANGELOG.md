@@ -1,5 +1,184 @@
 # 🔈 changelog 🔈
 
+# part 44 - mar 20 17
+- add `boxen` todo for fliplog
+- fix array order in config for plugins - needs to keep a `holey` array until the end to retain position unless an object is used
+- adding https://github.com/nolanlawson/optimize-js
+- start adding support for preset args
+- start on monorepo `yuge` example to do a real test
+- add `to-arr` module
+- start enableTags, disableTags, tags for logs
+- swap cli-table for cli-table2 in fliplog
+- add deep-diff dep for fliplog
+- fix having Object.assign backwards in arr-to-obj defaults...
+- added schema validation
+- fixing preset initting
+- supporting preset args pt 2
+- add splitting to to-arr
+- add nodesecurity
+- more finicking with tags for logs, disabled for now, updated todos
+- added PresetMinify for babeli
+- move the preset registering out of the defaults env since I know the functionality works and there are getting to be a lot of presets, just keep the defaults as `using` the presets for now, and keeping just registering `minify` & `uglify` in defaults to make sure it stays working
+- clean neutrino-preset-happypack a little
+- test fusebox, webpack, and rollup with babili on the yuge project
+- add PresetBabel
+- start on PresetTypeScript part 2... not so nice with rollup
+- run two apps at the same time
+- gitignore yuge until I move it to an examples only pr
+- push to github
+- prettier to eslint
+
+# part 43 - mar 19 17
+- update webpack-chain so it will allow merging plugins
+- submit pr
+- izz-class just for the webpack-chain pr
+- updating todos
+- [x] built in presets get registered by config defaulter
+- atom theme https://github.com/aretecode/one-dark-syntax-colors-of-the-year-pantone
+- setup nuclide for atom for types in refactor 3
+
+# part 42 - mar 19 17
+- update github issues
+- rename array-to-object folder -> arr-to-obj
+- remove build folder
+- fix something with fliphub helpers not showing in git
+- add build folder to gitignore
+
+# part 41 - mar 19 17
+- better mergeable config
+  - reusable for fusebox and rollup
+  - change bundlerconfig -> bundler config extractor
+- do quick comparison between the 3 bundlers for speed
+- module arr-to-obj
+- added izz.class
+- push to github
+- keep playground out of commit but include fliphub2 this time
+- experiment with oao
+- rename examples -> fliphub-examples
+
+# part 40 - mar 18 17
+- adding fusebox
+- updating the `to` method as fusebox is `toFuse*B*ox`
+- sourceMaps working for all 3!
+- do happypack preset for neutrino part 2/3
+- module flip-neutrino-preset-happypack
+- fixed up happypack preset again
+
+# part 39 - mar 18 17
+- update eslint-plugin-no-for-each badges
+- use neutrino for config if webpack
+- fork neutrino to do `entry` point fixes
+- writing preset todos for neutrino
+- starting PresetLibrary
+- starting PresetTarget
+- starting PresetVisualize
+- cleaning & reordering presets, moving neutrino from config to Bundlers, starting Bundlers to go alongside the configs (as APIS)
+- starting defaults rollup
+- started defaults typescript
+- added izz.notReal
+- experiment with require nodejs hijacker to see about installing missing deps
+- add PresetProgress
+- add Presetter
+- start DefaultFuseBox
+- get rollup working
+- updating ts interfaces - big update
+
+# part 38 - mar 17 17
+- exposing filter method on flipbox to allow client filtering, adjusting setup filter
+- using the confighub in core
+- static init back to fliphub
+- add preset chain
+- expose preset fn on fliphub
+- add presets
+- tidy presets
+- use a preset
+- fix arrToObj presets
+- use arrToObj to simplify preset assignment
+- add config defaulter
+- filter props for just appconfig and flipconfig
+- add inherit props
+- improving default chainable merge
+- making app config inherit from flipconfig and merge in
+- adding toConfigs for presets to staet using them
+- adding `add`, `addAll`, `use`, `useAll` to presets and AppConfig for presets to use
+- change `arrToObj` to use `undefined` with valAsKey to allow defaults being used
+- experiment with babel-register to see speed diff
+- flipflag module, add node to packagejson engine
+- adding es5exports module
+
+# part 37 - mar 16 17
+- updated fliplog with debugFor which returns a new instance
+- izz module
+- adding more resolve options for use in flipconfig
+
+# part 36 - mar 16 17
+- fliptime module
+- updating inspector
+- updating log
+- mono-root module
+- resolve module
+- deep-replace module
+- fliplog module updated
+- flipfile module
+- some thoughts on ts
+- updating inferno pr
+
+# part 35 - mar 16 17
+- fix some readme links
+- minor tweaks to log and chain and inspector
+- make a package exposer to allow better modular exports!
+- adding easy-npm-files as a module
+- interfacing the hub
+- starting to run the config to test it and see where it breaks
+
+# part 34 - mar 16 17
+- adding license badge
+- add code style badge
+- start prototyping a more minimal powerful interface
+- extracting built in core code into presets
+- xterm to log
+- api chain example
+- preset default env
+- preset replace
+- preset uglify
+- preset define env
+- preset sourceMap
+- is.windows
+- cleaning core and hubs
+- start neutrino-happypack-plugin
+- gitignore playground which has next refactor wip
+- add modules folder for handling a bunch of flat submodules without cluttering packages
+- a bit of cleanup on logs
+- publish flipchain
+- publish fliplog
+- publish inspector-gadget
+- start cleaning up some globals
+- add refactor notice
+- push to github
+
+# part 33 - mar 15 17
+- plan stripping it down
+- start stripping it down
+## helpers:
+- add `rooter`
+- expand file
+- fix up inspect helper with safety
+- add javascript stringify to inspector
+- add deps extractor
+- add str helpers (strHasAny, prefix)
+- add context
+- improve `debugFor`
+
+# part 32 - mar 14 17
+- major fliphub-helpers revamp
+- add `jsonParse` just easy accessor
+- add `lap` to timer
+- add `minimalist` to flags
+
+# part 31 - mar 13 17
+- use chain for logging! lovely
+- putting a new fusebox folder to start splitting and simplifying and using presets
+
 # part 30 - mar 13 17
 - play around with webpack chain as ts
 - pushing to github

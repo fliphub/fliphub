@@ -1,20 +1,23 @@
 {
   "name": "fliphub-chain",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "chains for the builder of builders",
   "main": "fusebox-chain/src/index.js",
   "scripts": {
     "test": "true"
   },
   "files": [
-    "fusebox-chain/src"
+    "fusebox-chain/src",
+    "core"
   ],
   "engines": {
     "node": "7.7.2",
     "npm": "4.1.2"
   },
   "dependencies": {
-    "deepmerge": "^1.3.2"
+    "deepmerge": "^1.3.2",
+    "fliphub-helpers": "0.1.1",
+    "webpack-chain": "^2.0.0"
   },
   "keywords": [
     "fliphub-chain",

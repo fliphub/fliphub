@@ -3,6 +3,7 @@ module.exports = {
   // parser: 'typescript-eslint-parser',
   extends: 'aretecode',
   plugins: [
+    'prettier'
     // 'typescript',
   ],
   ext: ['.ts', '.js'],

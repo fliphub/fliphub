@@ -1,7 +1,6 @@
 // const kebabCase = require('lodash.kebabcase')
 // const snakeCase = require('lodash.snakecase')
 const camelCase = require('lodash.camelcase')
-
 const ChainedMapExtendable = require('flipchain/ChainedMapExtendable')
 const deepmerge = require('deepmerge')
 const arrToObj = require('arr-to-obj')
@@ -17,18 +16,42 @@ module.exports = class Presets extends ChainedMapExtendable {
   // --- single ---
 
   hasUsed(name) {
-    console.log(name)
-    console.log(camelCase(name))
-    console.log(this.used.has(camelCase(name)))
-    return this.used.has(camelCase(name))
+    name = camelCase(name)
+
+    log
+      .tags('used,preset,has,hasUsed')
+      .color('cyan')
+      .text('hasUsedPreset: ' + name)
+      .data(this.used.has(name))
+      .tosource()
+      .echo()
+
+    return this.used.has(name)
   }
   has(name) {
-    console.log(camelCase(name))
-    return super.has(camelCase(name))
+    name = camelCase(name)
+
+    log
+      .tags('preset,has')
+      .color('cyan')
+      .text('hasPreset: ' + name)
+      .data(super.has(name))
+      .tosource()
+      .echo()
+
+    return super.has(name)
   }
 
   use(name, args) {
     name = camelCase(name)
+
+    log
+    .color('green')
+    .tags('preset,use,args')
+    .text('using preset: ' + name)
+    // .data({args})
+    .echo()
+
     if (this.used.has(name)) {
       log
       .tags('preset,use,args,has')
@@ -39,10 +62,10 @@ module.exports = class Presets extends ChainedMapExtendable {
 
       // if it already has it and the args are empty
       // ignore --- for now
-      if (!args) {
-        return this
-      } else {
+      if (args) {
         console.log('continuing...')
+      } else {
+        return this
       }
       // return this
     }
@@ -56,7 +79,11 @@ module.exports = class Presets extends ChainedMapExtendable {
     }
     name = camelCase(name)
 
-    log.tags('add,preset').text('adding: ' + name).echo()
+    log
+    .tags('add,preset')
+    .text('adding: ' + name)
+    .echo()
+
     if (this.list.has(name)) {
       log
         .tags('preset,add,has')
@@ -97,13 +124,15 @@ module.exports = class Presets extends ChainedMapExtendable {
     if (!obj) return this
     Object
     .keys(obj)
-    .forEach(key => {
+    .forEach((key) => {
       const value = obj[key]
       switch (key) {
         case 'used':
         case 'list':
           if (!value) return this
           return this[key].merge(value)
+        default:
+          return this
       }
     })
 
@@ -113,7 +142,6 @@ module.exports = class Presets extends ChainedMapExtendable {
   static mergeFor({presets, presetArgs, context}) {
     if (presets) {
       presets = arrToObj.valAsKey(presets)
-
 
       if (presetArgs) {
         // allows cloning, and then doing the diff

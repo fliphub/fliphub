@@ -1,6 +1,7 @@
 const ChainedMapExtendable = require('flipchain/ChainedMapExtendable')
-const Presets = require('./Presets')
 const log = require('fliplog')
+const cleanObj = require('clean-obj')
+const Presets = require('./Presets')
 
 module.exports = class AppConfig extends ChainedMapExtendable {
   constructor(parent) {
@@ -15,6 +16,7 @@ module.exports = class AppConfig extends ChainedMapExtendable {
       'config',
       'inherit',
       'presetArgs',
+      'debug',
     ])
     this.presets = new Presets(this)
   }
@@ -51,15 +53,8 @@ module.exports = class AppConfig extends ChainedMapExtendable {
   }
   mergePresetArgs() {
     const args = this.get('presetArgs')
+    if (!args) return null
 
-    // log
-    //   .tags('presets,args')
-    //   .preset('important')
-    //   .addText('handling preset args...')
-    //   .data({args})
-    //   .echo()
-
-    if (!args) return
     for (const name in args) {
       const arg = args[name]
       this.presets.use(name, arg)
@@ -71,24 +66,40 @@ module.exports = class AppConfig extends ChainedMapExtendable {
   merge(app) {
     const deref = Object.assign({}, {}, app)
     const {
-      unified, flips, config,
-      presets, presetArgs,
-      name, inherit, root} = deref
-    const data = {
-      unified, flips, config,
+      unified,
+      flips,
+      config,
+
+      presets,
       presetArgs,
-      name, inherit, root}
 
-    // log.data({presets, presetArgs}).verbose().exit()
+      name,
+      inherit,
+      root,
+      debug,
+    } = deref
+    const data = {
+      unified,
+      flips,
+      config,
+      presetArgs,
+      name,
+      inherit,
+      root,
+      debug,
+    }
 
-    // would be good as a lib: removeEmptyProps
-    for (const prop in data) if (!data[prop] || !prop) delete data[prop]
+    // removing empty properties
+    cleanObj(data)
 
     super
       .merge(data)
     this
       .mergePresets(presets)
       .mergePresetArgs()
+
+    // filtering logs per context
+    if (debug) log.filter(debug)
 
     return this
   }

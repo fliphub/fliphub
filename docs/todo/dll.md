@@ -7,3 +7,8 @@ http://engineering.invisionapp.com/post/optimizing-webpack/
 https://engineering.bitnami.com/2016/11/15/optimizing-your-webpack-builds.html
 http://odetocode.com/blogs/scott/archive/2016/12/01/building-vendor-and-feature-bundles-with-webpack.aspx
 https://bendyworks.com/blog/optimizing-ci-and-webpack
+https://webpack.js.org/guides/caching/
+https://github.com/danethurber/webpack-manifest-plugin
+https://github.com/danethurber/webpack-manifest-plugin/tree/master/spec
+https://webpack.js.org/guides/code-splitting-libraries/#manifest-file
+https://medium.com/connect-the-dots/caching-assets-long-term-with-webpack-5ad24a4c39bd#.58yunf3an

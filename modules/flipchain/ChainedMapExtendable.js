@@ -1,15 +1,15 @@
-const ChainedMap = require('./ChainedMap')
 const {addPrefix, removePrefix} = require('fliphub-helpers/src/str/prefix')
-const arrToObj = require('fliphub-helpers/src/array/arrToObj')
+const arrToObj = require('arr-to-obj')
+const ChainedMap = require('./ChainedMap')
 
 class ChainedMapExtendable extends ChainedMap {
   decorateParent(decorations) {
     if (!this.decorated) this.decorated = new ChainedMap(this.parent)
-    decorations.forEach(decoration => {
+    decorations.forEach((decoration) => {
       const method = decoration.method
       const returnee = decoration.return || this.parent
       const key = decoration.key || method
-      this.parent[method] = data => {
+      this.parent[method] = (data) => {
         this.set(key, data)
         return returnee
       }
@@ -29,17 +29,15 @@ class ChainedMapExtendable extends ChainedMap {
   // @TODO: extendBool which would add `no` firstChar.toUpperCase() + rest()
   extendBool(methods, val, prefix = 'no') {
     this.extendWith(methods, val)
-    this.extendWith(methods.map(method => (0, addPrefix)(method, prefix)), !val, prefix)
+    this.extendWith(methods.map((method) => (0, addPrefix)(method, prefix)), !val, prefix)
   }
 
   extendWith(methods, val, prefix) {
     const objMethods = (0, arrToObj)(methods, val)
     const keys = Object.keys(objMethods)
     this.shorthands = [...this.shorthands, ...keys]
-    keys.forEach(method => {
-      this[method] = (value = objMethods[method]) => {
-        return this.set((0, removePrefix)(method, 'no'), value)
-      }
+    keys.forEach((method) => {
+      this[method] = (value = objMethods[method]) => this.set((0, removePrefix)(method, 'no'), value)
     })
   }
 
@@ -53,7 +51,7 @@ class ChainedMapExtendable extends ChainedMap {
 
   extendDefault(methods) {
     this.shorthands = [...this.shorthands, ...methods]
-    Object.keys(methods).forEach(method => {
+    Object.keys(methods).forEach((method) => {
       this[method] = (value = methods[method]) => this.set(method, value)
     })
   }

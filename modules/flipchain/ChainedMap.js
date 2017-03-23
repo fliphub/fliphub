@@ -5,7 +5,11 @@ class ChainedMap extends Chainable {
   constructor(parent) {
     super(parent)
     this.shorthands = []
-    this.options = new Map()
+    this.store = new Map()
+  }
+
+  new(parent) {
+    return new this(parent || this)
   }
 
   and() {
@@ -27,23 +31,23 @@ class ChainedMap extends Chainable {
 
   extend(methods) {
     this.shorthands = methods
-    methods.map(method => {
-      this[method] = value => this.set(method, value)
+    methods.map((method) => {
+      this[method] = (value) => this.set(method, value)
     })
   }
 
   clear() {
-    this.options.clear()
+    this.store.clear()
     return this
   }
 
   delete(key) {
-    this.options.delete(key)
+    this.store.delete(key)
     return this
   }
 
   entries() {
-    const entries = [...this.options]
+    const entries = [...this.store]
     if (!entries.length) {
       return
     }
@@ -54,25 +58,41 @@ class ChainedMap extends Chainable {
   }
 
   values() {
-    return [...this.options.values()]
+    return [...this.store.values()]
   }
   get(key) {
-    return this.options.get(key)
+    return this.store.get(key)
   }
 
   has(key) {
-    return this.options.has(key)
+    return this.store.has(key)
   }
 
   set(key, value) {
-    this.options.set(key, value)
+    this.store.set(key, value)
+    return this
+  }
+
+  override(obj) {
+    Object
+    .keys(obj)
+    .forEach((key) => {
+      const value = obj[key]
+      if (this[key] && this[key] instanceof Chainable) {
+        return this[key].override(value)
+      }
+      if (this.shorthands.includes(key)) {
+        return this[key](value)
+      }
+      return this.set(key, value)
+    })
     return this
   }
 
   merge(obj) {
     Object
     .keys(obj)
-    .forEach(key => {
+    .forEach((key) => {
       const value = obj[key]
       if (this[key] && this[key] instanceof Chainable)
         return this[key].merge(value)
@@ -80,15 +100,13 @@ class ChainedMap extends Chainable {
         const existing = this.get(key)
         if (existing) {
           const merged = deepmerge(existing, value)
-          console.log({merged})
-          process.exit()
           return this[key](merged)
         }
 
         return this[key](value)
       }
       // if (this[key])
-      this.set(key, value)
+      return this.set(key, value)
     })
     return this
   }

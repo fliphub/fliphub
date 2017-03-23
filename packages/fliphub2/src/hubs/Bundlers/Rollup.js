@@ -17,11 +17,15 @@ module.exports = class Rollup extends ChainedMapExtendable {
     timer.start('rollup')
     const config = this.config.toConfig()
     const rollup = require('rollup')
+
+    const dest = config.output || './dist/bundle.js'
+    delete config.output
+
     log.data({config}).text('rollup').tags('rollup,config,bundler').echo()
     // log.data({eh: rollup.rollup(config)}).verbose(true).exit()
     // log.data({eh: rollup.rollup(config).then(bundle => {console.log('ro')})}).verbose(true).exit()
 
-    return rollup.rollup(config).then(function(bundle) {
+    return rollup.rollup(config).then((bundle) => {
       // write it out ourselves...
       // Generate bundle + sourcemap
       // var result = bundle.generate({
@@ -35,7 +39,7 @@ module.exports = class Rollup extends ChainedMapExtendable {
       // easier if you're generating a sourcemap
       bundle.write({
         format: 'cjs',
-        dest: './dist/bundle.js',
+        dest,
       })
 
       timer.stop('rollup').log('rollup')

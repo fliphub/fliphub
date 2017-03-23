@@ -1,12 +1,13 @@
+const is = require('izz')
+const log = require('fliplog')
 const {inspectorGadget} = require('inspector-gadget')
 const {debugForFlags} = require('fliplog/debugFor')
-const evts = require('./Events')
+const ChainedMapExtendable = require('flipchain/ChainedMapExtendable')
 const AppConfig = require('../hubs/ConfigHub/App')
 const BundlerExtractor = require('../hubs/ConfigHub/BundlerExtractor')
 const ConfigDefaulter = require('../hubs/ConfigHub/ConfigDefaulter')
-const ChainedMapExtendable = require('flipchain/ChainedMapExtendable')
-const is = require('izz')
 const Presetter = require('../hubs/ConfigHub/Presetter')
+const evts = require('./Events')
 
 class AppContext extends ChainedMapExtendable {
   constructor(app, box) {
@@ -27,28 +28,30 @@ class AppContext extends ChainedMapExtendable {
 
     // @TODO: remove this.app, use appConfig
     this.app = app
-    this.hubs = box.hubs
-    this.hubs.appInit({
-      context: this,
-      app: this.app,
-      helpers: box.helpers,
-      box,
-    })
   }
 
   toConfig() {
     const config = this.bundlerConfig.toConfig()
     const bundler = this.bundlerConfig
     const contextChain = this.appConfig
-    const context = contextChain.entries()
     const presetter = new Presetter(this).merge({
       contextChain,
-      context,
       config,
       bundler,
       box: this.box,
     })
-    return presetter.toConfig()
+
+    const toConfig = presetter.toConfig()
+
+    log
+      .tags('toconfig,app,context,bundler')
+      .color('bold')
+      .text('app-context-to-config')
+      .data(this.appConfig)
+      .verbose()
+      .echo()
+
+    return toConfig
   }
 
   // maybe should just use the flipbox one
@@ -80,18 +83,11 @@ class AppContext extends ChainedMapExtendable {
       }
       this
         .debugFor('event').color.xterm('orange')
-        .text('📢  ' + event + ' ' + this.app.name).echo()
+        .text(`📢  ${event} ${this.app.name}`).echo()
     })
   }
 
-  setup() {
-    this.hubs.appBuild({
-      context: this,
-      app: this.app,
-      helpers: this.box.helpers,
-      box: this.box,
-    })
-  }
+  setup() {}
 }
 
 module.exports = AppContext

@@ -12,17 +12,17 @@ module.exports = class PresetDefaultsEnv {
       context
       .presets
       .addAll({
-        'uglify': new PresetUglify,
-        'babili': new PresetMinify,
-        'minify': new PresetMinify,
+        uglify: new PresetUglify(),
+        babili: new PresetMinify(),
+        minify: new PresetMinify(),
       })
       .useAll({
-        'defineEnv': JSON.stringify('production'),
-        'sourceMap': 'hidden',
+        defineEnv: JSON.stringify('production'),
+        sourceMap: 'hidden',
         babili: null,
-        // 'babili': null,
-        // 'minify': null,
-        // 'uglify': null,
+        // 'babili: null,
+        // 'minify: null,
+        // 'uglify: null,
       })
     } else {
       context

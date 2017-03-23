@@ -10,7 +10,10 @@ module.exports = class PresetProgress {
       debug: true,
     }
   }
-  toWebpack() {}
+  toWebpack() {
+    const progress = require('neutrino-middleware-progress')
+    return (neutrino) => neutrino.use(progress)
+  }
   toRollup() {
     const progress = require('rollup-plugin-progress')
     return {

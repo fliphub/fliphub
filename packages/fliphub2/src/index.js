@@ -1,4 +1,7 @@
-// const FlipBox = require('./core/FlipBox')
+// require('babel-core/register')
+// require('babel/dist/external-helpers')
+
+const FlipBox = require('./core/FlipBox')
 // const cli = require('./hubs/CliHub')
 // const paths = require('./paths')
 // const es5exports = require('es5exports')
@@ -10,4 +13,4 @@
 // exports['default'] = FlipBox
 //
 // module.exports = es5exports(exports['default'], exports)
-// // module.exports = FlipBox
+module.exports = FlipBox

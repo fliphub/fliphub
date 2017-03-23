@@ -1,11 +1,11 @@
 // @TODO: if regex tests, convert to fn
 function deepReplaceMatch(obj, testVal, testProp, cb) {
   // https://github.com/aretecode/eslint-plugin-no-for-each
-  var keys = Object.keys(obj)
-  for (var i = 0, len = keys.length; i < len; i++) {
-    var prop = keys[i]
-    var val = obj[prop]
-    console.verbose({prop, val, keys, i})
+  const keys = Object.keys(obj)
+  for (let i = 0, len = keys.length; i < len; i++) {
+    const prop = keys[i]
+    const val = obj[prop]
+    // console.verbose({prop, val, keys, i})
 
     // if val is an object and has the prop
     if (val && typeof val === 'object') {

@@ -1,3 +1,4 @@
+const mkdirp = require('mkdirp')
 const getFileAndPath = require('./getFileAndPath')
 const getDirectories = require('./getDirectories')
 const isDir = require('./isDir')
@@ -6,7 +7,9 @@ const isRel = require('./isRel')
 const walk = require('./walk')
 const read = require('./read')
 const write = require('./write')
-const mkdirp = require('mkdirp')
+const exists = require('./exists')
+const fileName = require('./fileName')
+const isFileOrDir = require('./isFileOrDir')
 
 module.exports = {
   getFileAndPath,
@@ -17,5 +20,8 @@ module.exports = {
   walk,
   read,
   write,
+  exists,
+  fileName,
+  isFileOrDir,
   mkdirp,
 }

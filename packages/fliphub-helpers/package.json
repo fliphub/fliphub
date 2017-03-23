@@ -1,42 +1,37 @@
 {
   "name": "fliphub-helpers",
-  "version": "0.1.5",
+  "version": "0.1.9",
   "description": "fliphub helpers with the builder of builders",
   "main": "src/index.js",
   "scripts": {
     "copy": "node pkgxp --copy",
     "clean": "node pkgxp --del",
-    "_prepublish": "npm run copy",
-    "_postpublish": "npm run clean",
+    "prepublish": "npm run copy",
+    "postpublish": "npm run clean",
     "test": "true"
   },
-  "files": [
-    "src"
-  ],
   "engines": {
-    "node": "7.7.2",
-    "npm": "4.1.2"
+    "node": ">= 7.7.2",
+    "npm": ">= 4.1.2"
   },
   "dependencies": {
-    "inspector-gadget": "*",
-    "sleepfor": "*",
-    "commander": "^2.9.0",
-    "inquirer": "^3.0.6",
-    "lodash.sortby": "^4.7.0",
-    "glob-fs": "^0.1.6",
-    "minimalist": "^1.0.0",
-    "trash": "^4.0.1",
-    "deep-replace": "0.0.2",
+    "arr-to-obj": "*",
+    "deep-replace": "*",
     "flipchain": "*",
     "flipfile": "*",
+    "flipflag": "*",
+    "fliphub-alias": "*",
     "fliphub-resolve": "*",
     "fliplog": "*",
     "fliptime": "*",
-    "flipflag": "*",
-    "mono-root": "*",
+    "glob-fs": "^0.1.6",
+    "inspector-gadget": "*",
     "izz": "*",
-    "arr-to-obj": "*",
-    "to-arr": "*"
+    "mono-root": "*",
+    "sleepfor": "*",
+    "to-arr": "*",
+    "trash": "^4.0.1",
+    "minimist": "*"
   },
   "keywords": [
     "helpers",
@@ -53,5 +48,39 @@
   },
   "bugs": {
     "url": "https://github.com/fliphub/fliphub/issues"
-  }
+  },
+  "files": [
+    "Utils.js",
+    "alias.js",
+    "arrToObj.js",
+    "computed",
+    "contextRequire.js",
+    "debugFor.js",
+    "deepReplace.js",
+    "err",
+    "es5exports.js",
+    "file.js",
+    "flags.js",
+    "hacks.js",
+    "index.js",
+    "inspect.js",
+    "is.js",
+    "log.js",
+    "loggers",
+    "obj",
+    "parseJSON.js",
+    "pkgxp.js",
+    "port",
+    "realm.js",
+    "resolve.js",
+    "settingsStorage.js",
+    "sleepFor.js",
+    "src",
+    "str",
+    "timer.js",
+    "toArr.js",
+    "trycatch.js",
+    "validate",
+    "yarn.lock"
+  ]
 }

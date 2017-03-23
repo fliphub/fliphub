@@ -1,5 +1,5 @@
 {
-  "name": "flip-neutrino-preset-happypack",
+  "name": "neutrino-preset-happypack",
   "version": "0.0.1",
   "description": "a neutrino preset to use happypack",
   "main": "index.js",

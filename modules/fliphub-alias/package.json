@@ -1,0 +1,20 @@
+{
+  "name": "fliphub-alias",
+  "version": "0.0.3",
+  "main": "index.js",
+  "description": "require, handling, and resolving aliases for use with build tools/systems/bundlers",
+  "engines": {
+    "node": ">= 7.7.2",
+    "npm": ">= 4.1.2"
+  },
+  "dependencies": {},
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/flip-box/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flip-box/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flip-box/fliphub/issues"
+  }
+}

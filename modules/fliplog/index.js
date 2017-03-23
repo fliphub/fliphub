@@ -17,7 +17,9 @@ const chalk = require('chalk')
 const clc = require('cli-color')
 const {inspector} = require('inspector-gadget')
 const ChainedMapExtendable = require('flipchain/ChainedMapExtendable.js')
+const Chainable = require('flipchain/Chainable.js')
 const toarr = require('to-arr')
+const emojiByName = require('./emoji-by-name')
 
 // https://github.com/npm/npmlog
 // http://tostring.it/2014/06/23/advanced-logging-with-nodejs/
@@ -44,7 +46,7 @@ const xtermByName = {
 const combinations = clrs.concat(bgColors).concat(em)
 
 // https://www.youtube.com/watch?v=SwSle66O5sU
-const OFF = (~315 >>> 3) + '@@'
+const OFF = `${~315 >>> 3}@@`
 
 // presets
 function presetError(chain) {
@@ -68,13 +70,33 @@ class LogChain extends ChainedMapExtendable {
   // here, object.assign to a function,
   // then allow passing in an object which could chain the calls
   new() {
-    return new LogChain(this)
+    const logChain = new LogChain(this)
+    return logChain
+
+
+    function logfn(arg) {
+      if (arg === OFF) return logChain
+      console.log('calling as fn?', arg)
+      return logChain.data(arg).verbose().echo()
+    }
+
+    logfn.__proto__ = LogChain.prototype
+
+    // console.log(Object.keys(logChain))
+    const newed = new logfn(OFF)
+    newed.handleParent(this)
+    // const newed = Object.assign(logfn, logChain)
+    // const newed = create(logfn, logChain)
+    // console.log(newed)
+    // process.exit()
+    return newed
   }
   constructor(parent) {
     super(parent)
     this.extend([
       'color',
-      'data',
+      '_tags',
+      '_data',
       '_xterm',
       '_text',
       'title',
@@ -95,7 +117,14 @@ class LogChain extends ChainedMapExtendable {
     this.echo = this.log
     this.reset()
 
-    if (!parent) return
+    // so it can be called with
+    // `.catch(log.catch)`
+    this.catch = this.catch.bind(this)
+    this.handleParent(parent)
+  }
+
+  handleParent(parent) {
+    if (!parent || !(parent instanceof Chainable)) return
     const {filters} = parent.entries()
     const {presets} = parent
     if (presets) this.presets = presets
@@ -118,7 +147,7 @@ class LogChain extends ChainedMapExtendable {
   diff() {
     const clone = require('lodash.clonedeep')
     const diffs = this.get('diffs')
-    const args = Array.from(arguments).map(arg => clone(arg))
+    const args = Array.from(arguments).map((arg) => clone(arg))
 
     this.diffs(diffs.concat(args))
     return this
@@ -138,7 +167,7 @@ class LogChain extends ChainedMapExtendable {
     // console.log({heads, datas})
     for (const i in heads) {
       const head = heads[i]
-      const data = datas[i].map(d => tosource(d))
+      const data = datas[i].map((d) => tosource(d))
       // console.log({head, data})
 
       const table = new Table({
@@ -151,14 +180,40 @@ class LogChain extends ChainedMapExtendable {
     return this
   }
 
+
+  returnVals() {
+    const text = this.logText()
+    const datas = this.logData()
+    if (datas !== OFF && text !== OFF) return {text, datas}
+    else if (datas !== OFF) return {datas}
+    else if (text !== OFF) return {text}
+    else return {text, datas}
+  }
+  return() {
+    this._filterByTag()
+    const returnVals = this.returnVals()
+    const entries = this.entries()
+    this.reset()
+    return Object.assign(entries, returnVals)
+  }
+
+  data(arg) {
+    const args = Array.from(arguments)
+    if (args.length === 1) {
+      return this._data(arg)
+    }
+    return this._data(arguments)
+  }
   text(text) {
-    const title = this.get('title') ? this.get('title') + ' ' : ''
+    const title = this.get('title') ? `${this.get('title')} ` : ''
     this._text(title + text)
     return this
   }
-
+  emoji(name) {
+    return this.title(`${emojiByName(name)}  `)
+  }
   addText(msg) {
-    this.text(this.get('_text') + ' ' + msg)
+    this.text(`${this.get('_text')} ${msg}`)
     return this
   }
   addPreset(name, preset) {
@@ -185,16 +240,16 @@ class LogChain extends ChainedMapExtendable {
     return this
   }
   tags(names) {
-    const tags = this.get('tags') || []
+    const tags = this.get('_tags') || []
     const updated = tags.concat(toarr(names))
-    this.set('tags', updated)
+    this.set('_tags', updated)
     return this
   }
 
   // @TODO: filter with `&` so only filter if it has all tags
   // maybe flipfilter?
   _filterTagsByFilter(filter, not) {
-    const tags = this.get('tags') || []
+    const tags = this.get('_tags') || []
 
     if (tags.length === 0) return true
 
@@ -204,7 +259,7 @@ class LogChain extends ChainedMapExtendable {
       if (not && filter.includes(tag)) return false
 
       // @TODO: later if only whitelisting...
-      // if (filter.includes(tag)) return true
+      if (filter.includes(tag)) return true
     }
 
     return true
@@ -213,7 +268,11 @@ class LogChain extends ChainedMapExtendable {
   // check if the filters allow the tags
   _filterByTag() {
     const filters = this.get('filters') || []
+    // console.log({filters})
     if (filters.includes('*')) return this
+
+    // silence all
+    if (filters.includes('silent')) return this.silent()
 
     for (let i = 0; i < filters.length; i++) {
       const filter = filters[i]
@@ -223,8 +282,8 @@ class LogChain extends ChainedMapExtendable {
 
       const result = this._filterTagsByFilter(filter, not)
       if (result === false) {
-        // console.log({not,filter})
-        // return this.silent(true)
+        // console.log({not, filter})
+        return this.silent(true)
       }
     }
 
@@ -242,9 +301,16 @@ class LogChain extends ChainedMapExtendable {
 
   log(data) {
     this._filterByTag()
-    if (!data) data = this.get('data')
+    if (!data) data = this.get('_data')
+    if (data === false) {
+      this.reset()
+      return this
+    }
 
-    if (this.get('silent')) return
+    if (this.get('silent')) {
+      this.reset()
+      return this
+    }
 
     // so we can have them on 1 line
     const text = this.logText()
@@ -260,17 +326,26 @@ class LogChain extends ChainedMapExtendable {
     return this
   }
 
-  error() {
-    for (let arg of arguments) this.new().verbose().data(arg).echo()
-    this.new().preset('error').verbose().data(new Error('log.exit.trace')).echo()
+  trace() {
+    this.new().preset('error').verbose().data(new Error('log.trace')).echo()
     return this
+  }
+  error() {
+    for (const arg of arguments) this.new().preset('error').verbose().data(arg).echo()
+    return this
+  }
+  quick() {
+    this.data(arguments).verbose().exit()
   }
   exit(log = false) {
     this.echo()
+    this.reset()
     if (log) console.log('🛑  exit')
-    process.exit(1)
+    process.exit()
   }
-
+  catch() {
+    this.error(arguments).exit(1)
+  }
 
   reset() {
     // persist the time logging
@@ -286,6 +361,8 @@ class LogChain extends ChainedMapExtendable {
     this.verbose(false)
     this.space(false)
     this.silent(false)
+    this._data(OFF)
+    this._tags([])
     return this
   }
   clear() {
@@ -301,8 +378,8 @@ class LogChain extends ChainedMapExtendable {
     return text
   }
   logData() {
-    let data = this.get('data')
-    if (!data) return OFF
+    let data = this.get('_data')
+    if (data === OFF) return OFF
 
     data = this.getToSource(data)
     data = this.getVerbose(data)
@@ -323,15 +400,13 @@ class LogChain extends ChainedMapExtendable {
   }
   getLogWrapFn() {
     let logWrapFn = chalk
-    let color = this.get('color')
+    const color = this.get('color')
 
     // maybe we colored with something not in chalk, like xterm
     if (typeof color === 'function') logWrapFn = color
-    else if (color === false) logWrapFn = msg => msg
-    else if (color.includes('.'))
-      color.split('.').forEach(clr => logWrapFn = logWrapFn[clr])
-    else if (combinations.includes(color))
-      logWrapFn = logWrapFn[color]
+    else if (color === false) logWrapFn = (msg) => msg
+    else if (color.includes('.')) color.split('.').forEach((clr) => logWrapFn = logWrapFn[clr])
+    else if (combinations.includes(color)) logWrapFn = logWrapFn[color]
     else if (logWrapFn[color]) logWrapFn = logWrapFn[color]
     return logWrapFn
   }
@@ -343,20 +418,16 @@ class LogChain extends ChainedMapExtendable {
       const txt = colorArr.shift()
       const bg = colorArr.pop()
       color = clc.xterm(txt).bgXterm(bg)
-    }
-    else if (color && bgColor)
-      color = clc.xterm(color).bgXterm(bgColor)
-    else if (Number.isInteger(color))
-      color = clc.xterm(color)
-    else
-      color = clc.xterm(202).bgXterm(236)
+    }    else if (color && bgColor) color = clc.xterm(color).bgXterm(bgColor)
+    else if (Number.isInteger(color)) color = clc.xterm(color)
+    else color = clc.xterm(202).bgXterm(236)
 
     return this.color(color)
   }
 
   getTime(msg) {
     if (this.get('time')) {
-      let data = new Date()
+      const data = new Date()
       let hour = data.getHours()
       let min = data.getMinutes()
       let sec = data.getSeconds()
@@ -380,12 +451,12 @@ class LogChain extends ChainedMapExtendable {
   }
 
   getVerbose(msg) {
-    if (typeof msg != 'string' && this.get('verbose')) {
+    if (typeof msg !== 'string' && this.get('verbose')) {
       const PrettyError = require('pretty-error')
-      let err = false
+      let error = false
       if (msg && msg.stack) {
         const pe = new PrettyError()
-        err = console.log(pe.render(msg))
+        error = console.log(pe.render(msg))
         delete msg.stack
         msg.message = msg.message.split('\n')
       }
@@ -420,8 +491,8 @@ log.addPreset('important', presetImportant)
 
 
 // statics
-function underline(str) {return '\x1B[4m' + str + '\x1B[24m'}
-function bold(str) {return '\x1B[1m' + str + '\x1B[22m'}
+function underline(str) { return `\x1B[4m${str}\x1B[24m` }
+function bold(str) { return `\x1B[1m${str}\x1B[22m` }
 log.underline = underline
 log.bold = bold
 

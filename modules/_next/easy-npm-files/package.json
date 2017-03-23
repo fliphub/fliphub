@@ -1,3 +1,17 @@
 {
-  
+  "name": "easy-npm-files",
+  "version": "0.0.1",
+  "dependencies": {
+    "glob-fs": "^0.1.6",
+    "trash": "^4.0.1"
+  },
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
 }

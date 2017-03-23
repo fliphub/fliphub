@@ -3,8 +3,11 @@ module.exports = function toArr(data, opts = {includeEmpty: false, split: ','}) 
 
   if (!data && !includeEmpty) return []
   if (Array.isArray(data)) return data
-  if (typeof data === 'string' && typeof split === 'string')
+  if (typeof data === 'string' &&
+    typeof split === 'string' &&
+    data.includes(split)) {
     return data.split(split)
+  }
   else return [data]
 }
 

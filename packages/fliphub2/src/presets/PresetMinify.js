@@ -19,6 +19,36 @@ module.exports = class PresetMinify {
       'removeUndefined': false,
       'undefinedToVoid': true,
     }
+
+    this.babelArgs = {
+      'presets': [
+        ['env', {
+          'targets': {
+            'uglify': true,
+          },
+          'modules': false,
+        }],
+      ],
+      'plugins': [
+        'external-helpers',
+        ['babili', {
+          'unsafe': false,
+          'evaluate': true,
+          'deadcode': true,
+          'infinity': true,
+          'mangle': true,
+          'numericLiterals': true,
+          'replace': true,
+          'mergeVars': true,
+          'booleans': true,
+          'regexpConstructors': true,
+          'removeConsole': false,
+          'removeDebbugger': false,
+          'removeUndefined': false,
+          'undefinedToVoid': true,
+        }],
+      ],
+    }
   }
   setArgs(args) {
     if (args) this.args = args
@@ -39,13 +69,15 @@ module.exports = class PresetMinify {
       plugins: [babili(this.args), filesize()],
     }
   }
-  toFuseBox() {
+
+  // https://github.com/fuse-box/fuse-box/issues/423
+  toFuseBox(config) {
     const {BabelPlugin} = require('fsbx')
     const {UglifyJSPlugin} = require('fuse-box')
 
     return {
-      pluginIndex: -100,
-      plugins: [[BabelPlugin(), UglifyJSPlugin()]],
+      pluginIndex: 100,
+      plugins: [[BabelPlugin({config: this.babelArgs}), UglifyJSPlugin()]],
       // plugins: [BabelPlugin()],
     }
   }

@@ -56,8 +56,8 @@ function isPlainObject(value) {
 }
 
 function webpackCli() {
-  const flags = require('./flags')
-  return flags('bin/webpack', {type: 'bool'})
+  // const flags = require('flipflags')
+  // return flags('bin/webpack', {type: 'bool'})
 }
 
 const is = Object.assign({
@@ -66,6 +66,7 @@ const is = Object.assign({
   real: (val) => !isNotSet(val),
   notSet: isNotSet,
   emptyStr: (val) => val === '',
+  emptyObj: (val) => isObjectLike(val) && Object.keys(val).length,
   str: (value) => typeof value === 'string',
   string: (value) => typeof value === 'string',
 
@@ -81,6 +82,7 @@ const is = Object.assign({
 
   isObject,
   obj: isObject,
+  isObjectLike,
   isObjLike: isObjectLike,
   plainObject: isPlainObject,
   plainObj: isPlainObject,

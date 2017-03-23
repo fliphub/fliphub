@@ -1,5 +1,82 @@
 # 🔈 changelog 🔈
 
+# part 49 - mar 23 17
+- adding neutrino-preset-copy
+- adding neutrino-preset-clean
+- adding PresetEslint to built ins out of `next`
+- adding eslint example
+- start emoji-by-name module
+- add .catch to fliplog
+- making fliplog a callable function with fn prototype
+- adding PresetResolveAll
+- fixing deep-replace which used console.verbose
+- missing return typo in resolver -.-
+- configuring preseteslint example with fliphub, working
+- fixing flags with flipto needs to merge not replace
+- update more eslint rules
+- add eol resource links in docs
+- starting to fix filtering for logs - issue was not resetting if silent
+- added silent option to silent all
+- add basic assert tests for filtering
+- reduce complexity in presetter
+- move `ops` out of box
+- start workflow
+- going to refactor, committing
+
+# part 48 - mar 22 17
+- starting /examples folder
+- used faker to generate out the data set
+- add fusebox chain to next - extracted from fliphub-chain early iteration
+- move fliphub-chain and fliphub-bundles to `modules/next`
+- setup lerna for the examples
+- fix missing alias dep
+- start preset-eslint
+- move `deps` from next into `depflip` module
+- add babel-loader-builder to modules-sub
+- update env in babel-loader-builder
+- add z.js to build fliphub with a clean minimal config
+- update todos
+- fix exit on node preset
+- add missing deps when bundling (webpack analyze and rollup file size)
+- start PresetInferno
+- fixing `fliplog` bug where it checks if it has data, but undefined means it falsely thinks it does not
+- fix typo in presetter for passing in args
+- alias require preset example working
+- issues with the monorepo requiring, researching, adding to docs
+- made an awesome solution, monono, to use monorepos without require issues, and without monorepo issues
+- make example for monono
+- rename it mahna
+- update the resolving for require.main
+- fix typo on aliases -> alias
+- add modulesDirectories to examples and modulesDirectories to env from mahna
+- fix horrible typo on alias requiring -.-
+- added boxInit to presets, used with flags, fixed flipto from flags
+- minor logging tidy
+- adding support to aliasResolve for fusebox
+- add read.json to flipfile
+- updating todos
+- play with alpha publishing...
+- update eslint rules
+- some cleanup
+- expanding eas-npm-files
+- part 2 PresetEslint with toRollup, toWebpack, toFuseBox
+- simple bash file to publish
+- adding inserting file ls to pkg files in PkgExposer
+- resolving dependency installation issues across all modules
+- adding neutrino-middleware-progress
+- publishing in beta
+
+# part 47 - mar 22 17
+- clean artifact of eslint
+- clean artifact in presetflags
+- adding flips using flags
+- find `clean-obj` lib, use it to simplify
+- part 3 on PresetAliasResolve
+- part 3 on PresetAliasRequire
+- move alias out of helpers into fliphub-alias module
+- update todos
+- update fliplog's readme
+
 # part 46 - mar 21 17
 - renaming modules2 into modules-sub, reordering some into `_next`
 - adding aretecode-eslint-config to modules-sub

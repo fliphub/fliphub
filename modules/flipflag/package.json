@@ -1,6 +1,6 @@
 {
   "name": "flipflag",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "main": "index.js",
   "scripts": {
     "test": "node examples.js --env"

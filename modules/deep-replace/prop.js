@@ -4,10 +4,10 @@
 // using var to keep easy scope
 function deepReplaceProp(obj, property, val) {
   // https://github.com/aretecode/eslint-plugin-no-for-each
-  var propKeys = Object.keys(obj)
-  for (var i = 0, len = propKeys.length; i < len; i++) {
-    var prop = propKeys[i]
-    var child = obj[prop]
+  const propKeys = Object.keys(obj)
+  for (let i = 0, len = propKeys.length; i < len; i++) {
+    const prop = propKeys[i]
+    const child = obj[prop]
 
     // if child is an object and has the prop
     if (child && typeof child === 'object') {

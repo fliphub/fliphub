@@ -1,6 +1,6 @@
 {
   "name": "fliptime",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
   "description": "chained timer + laps",
   "keywords": [

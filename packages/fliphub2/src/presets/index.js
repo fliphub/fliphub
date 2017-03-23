@@ -5,9 +5,8 @@ const PresetDefaultsFuseBox = require('./DefaultsFuseBox')
 const PresetDefineEnv = require('./PresetDefineEnv')
 
 const PresetLibrary = require('./PresetLibrary')
-
-const PresetSourceMap = require('./PresetSourceMap')
 const PresetTarget = require('./PresetTarget')
+const PresetSourceMap = require('./PresetSourceMap')
 const PresetUglify = require('./PresetUglify')
 const PresetMinify = require('./PresetMinify')
 
@@ -17,6 +16,11 @@ const PresetReplace = require('./PresetReplace')
 const PresetBabel = require('./PresetBabel')
 const PresetTypeScript = require('./PresetTypeScript')
 const PresetFlags = require('./PresetFlags')
+
+const PresetAliasRequire = require('./PresetAliasRequire')
+const PresetAliasResolve = require('./PresetAliasResolve')
+const PresetEslint = require('./PresetEslint')
+const PresetResolveAll = require('./PresetResolveAll')
 
 module.exports = {
   DefaultsEnv,
@@ -35,4 +39,8 @@ module.exports = {
   PresetBabel,
   PresetTypeScript,
   PresetFlags,
+  PresetAliasRequire,
+  PresetAliasResolve,
+  PresetEslint,
+  PresetResolveAll,
 }

@@ -33,12 +33,9 @@ function insertArrAt(arr, index, val) {
 module.exports = class Config extends ChainedMapExtendable {
   toConfig() {
     const config = this.entries()
-    // log.data(config).exit()
 
     if (!config.plugins) config.plugins = []
-    config.plugins = config.plugins.filter(real => real)
-    // log.verbose().data(config).text('plugins').echo()
-    // console.log(config, 'toconfig...')
+    config.plugins = config.plugins.filter((real) => real)
     return config
   }
 
@@ -48,7 +45,7 @@ module.exports = class Config extends ChainedMapExtendable {
 
     Object
     .keys(obj)
-    .forEach(key => {
+    .forEach((key) => {
       const value = obj[key]
       switch (key) {
         case 'plugins': {

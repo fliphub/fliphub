@@ -2,12 +2,12 @@ const {join, isAbsolute} = require('path')
 const {EventEmitter} = require('events')
 const DevServer = require('webpack-dev-server')
 const webpack = require('webpack')
-const Config = require('webpack-chain')
+const Config = require('flip-webpack-chain')
 const ora = require('ora')
 const merge = require('deepmerge')
 const {defaultTo} = require('ramda')
-const requireMiddleware = require('./utils/requirePreset')
 const timer = require('fliptime')
+const requireMiddleware = require('./utils/requirePreset')
 const normalizePath = (path, root) => (isAbsolute(path) ? path : join(root, path))
 
 class Neutrino extends EventEmitter {
@@ -31,7 +31,7 @@ class Neutrino extends EventEmitter {
   }
 
   import(middleware) {
-    this.require(middleware).forEach(middleware => this.use(middleware))
+    this.require(middleware).forEach((middleware) => this.use(middleware))
   }
 
   require(middleware) {
@@ -52,7 +52,7 @@ class Neutrino extends EventEmitter {
     const jsonStats = stats.toJson()
 
     if (jsonStats.errors.length) {
-      jsonStats.errors.map(err => console.error(err))
+      jsonStats.errors.map((err) => console.error(err))
       return true
     }
 
@@ -60,14 +60,17 @@ class Neutrino extends EventEmitter {
   }
 
   getWebpackOptions() {
-    return this.config.toConfig()
+    const config = this.config.toConfig()
+    // delete config.resolve.modules
+    return config
   }
 
   emitForAll(eventName, payload) {
-    return Promise.all(this.listeners(eventName).map(fn => fn(payload)))
+    return Promise.all(this.listeners(eventName).map((fn) => fn(payload)))
   }
 
   build(args) {
+    return this.builder()
     return this.runCommand('build', args, () => this.builder())
   }
 
@@ -135,6 +138,11 @@ class Neutrino extends EventEmitter {
   builder() {
     return new Promise((resolve, reject) => {
       const config = this.getWebpackOptions()
+      // delete config.module
+      // delete config.resolve.modules
+
+      console.log('GOT TO BUILDER')
+
       // delete config.entry.index
       // delete config.context
       timer.start('webpack')
@@ -144,7 +152,7 @@ class Neutrino extends EventEmitter {
       compiler.run((err, stats) => {
         const failed = this.handleErrors(err, stats)
 
-        if (failed) return reject()
+        if (failed) return reject(err)
 
         // eslint-disable-next-line no-console
         console.log(stats.toString({

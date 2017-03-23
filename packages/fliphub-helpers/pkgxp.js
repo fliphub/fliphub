@@ -3,17 +3,23 @@
 // const copy = require('copy')
 const fs = require('fs')
 const path = require('path')
-const globfs = require('glob-fs')()
+const {execSync} = require('child_process')
 const trash = require('trash')
+const flipfile = require('flipfile')
+const globfs = require('glob-fs')()
+const argv = require('minimist')(process.argv.slice(2))
+const pkg = require('./package.json')
 const absSrc = path.resolve(__dirname, 'src')
+
 
 // https://github.com/akre54/glob-copy/blob/master/index.js
 function copyDir(srcDir, dstDir) {
-  var results = []
-  var list = fs.readdirSync(srcDir)
-  var src, dst
+  let results = []
+  let list = fs.readdirSync(srcDir)
+  let src
+  let dst
 
-  list = list.filter(file => {
+  list = list.filter((file) => {
     // console.log(file === absSrc)
     // console.log(/node_modules/.test(file))
     // console.log(file.includes('package.json'))
@@ -27,20 +33,20 @@ function copyDir(srcDir, dstDir) {
     if (file.includes('.DS_Store')) return false
     return file
   })
-  .forEach(function(file) {
+  .forEach((file) => {
     console.log(file)
-    src = srcDir + '/' + file
-    dst = dstDir + '/' + file
+    src = `${srcDir}/${file}`
+    dst = `${dstDir}/${file}`
     // console.log(src)
     // return
 		// console.log(src);
-    var stat = fs.statSync(src)
+    const stat = fs.statSync(src)
     if (stat && stat.isDirectory()) {
       try {
-        console.log('creating dir: ' + dst)
+        console.log(`creating dir: ${dst}`)
         fs.mkdirSync(dst)
       } catch (e) {
-        console.log('directory already exists: ' + dst)
+        console.log(`directory already exists: ${dst}`)
       }
       results = results.concat(copyDir(src, dst))
     } else {
@@ -49,7 +55,7 @@ function copyDir(srcDir, dstDir) {
           console.log(dst, 'already existed')
           return
         }
-        console.log('copying file: ' + dst)
+        console.log(`copying file: ${dst}`)
 				// fs.createReadStream(src).pipe(fs.createWriteStream(dst));
         fs.writeFileSync(dst, fs.readFileSync(src))
       } catch (e) {
@@ -62,7 +68,7 @@ function copyDir(srcDir, dstDir) {
 }
 
 function copy(files, destFolder) {
-  for (let i in files) {
+  for (const i in files) {
     try {
       const filename = files[i]
       copyDir(filename, destFolder)
@@ -91,10 +97,10 @@ class PkgExposer {
     return file
   }
   del() {
-    const ignore = this.delFilter
-    const copiedStuff = globfs.use(ignore).readdirSync('*', {})
+    const {delFilter} = this
+    const copiedStuff = globfs.use(delFilter).readdirSync('*', {})
     console.log(copiedStuff)
-    trash(copiedStuff).then(() => {console.log('done')})
+    trash(copiedStuff).then(() => { console.log('done') })
   }
   copy(copyFrom = '**/** !node_modules', copyFromFile = 'src/*.js') {
     const ignore = this.copyFilter
@@ -109,7 +115,17 @@ class PkgExposer {
 }
 
 const pkgExp = new PkgExposer()
-const argv = require('minimist')(process.argv.slice(2))
+if (argv.copy) {
+  pkgExp.copy()
+  const ignores = ['node_modules', 'TODO', 'package.json', '.gitignore', '']
+  const ls = execSync('ls')
+    .toString()
+    .split('\n')
+    .filter((l) => !ignores.includes(l))
 
-if (argv.copy) pkgExp.copy()
-else if (argv.del) pkgExp.del()
+  pkg.files = ls
+  const pkgStr = JSON.stringify(pkg, null, '  ')
+  flipfile.write('./package.json', pkgStr)
+} else if (argv.del) {
+  pkgExp.del()
+}

@@ -2,14 +2,75 @@
 ------------------------ p0 ------------------------
 ====================================================
 
+move ops to another class
+  - should fix toConfig part
+add workflow
+remove `debugFor` and use the log filter
+
+
+
+
+
+
+
+
+
+
+
+
+- [ ] fix needing to call `toConfig` before building
+- [x] flags needs to be added earlier than calling whicg fglip..
+
+- [ ] have an easy cli as easy as using babel and browserify
+
+- [ ] could have some kind of flat mono config
+```
+  workflow
+    - app
+      - context
+      - config
+    - box
+      - context
+      - config
+    - bundler
+      - api
+      - config
+```
+
+- [ ] defaults preset to reuse config at root to children unless not inheriting
+
+- [ ] should finish other ops, clean up todos
+
 # built in presets
 !!!
 - [x] flags preset
 - [x] make presets work per app
 - [ ] ensure presets do not conflict or merge or bleed across apps
+  - [x] with buildFast they never do...
 - [ ] + arithmetics for presets
-- [ ] see about using `fusebox` task runner to run them sync-or-async?
+- [x] see about using `fusebox` task runner to run them sync-or-async?
+  - [x] too slow, not as good as buildFast
 - [ ] think more about the presets-as-collections-of-plugins, adding a third type, decorators/middleware/core to do the more application logic
+- [ ] could have another option when merging to `mergeReplace` if using conflicting settings
+- [ ] could use observables to allow listening to changes so plugin order is less important...
+
+- [ ] example with eslint loader
+- [ ] es5/6 configs
+- [ ] a good temporary file module
+  - [ ] write a file to a location (example, tmp file backup, babelrc)
+  - [ ] restore the file, or delete it
+
+- [ ] try seeing what happens with more advanced configs - say taking a large config in webpack porting to fusebox or rollup
+  - [ ] in configExtractor, should just take some props out, put them as preset args :-)
+
+- [x] add the yuge example in without adding thousands of lines of code - just generate out the json
+
+- [ ] instead of rollup loader with ts, consider adding running tsc first...
+- [ ] run npm scripts, with the flags, and as config option, would solve the tsc part
+
+- [x] build fliphub to include the dependencies...
+- [ ] let `to` support an array of bundlers to bundle with all 3
+
 !!!
 
 
@@ -27,19 +88,20 @@
 
 # presets
 - [x] plugin indexes
+- [ ] require.resolve the presets, only require when they are used
 - [ ] aliasing for preset names
-- [ ] `cars` breaks rollup
-  - [ ] so ensure commonjs and node resolve are setup correctly
+- [x] `cars` breaks rollup
+  - [x] so ensure commonjs and node resolve are setup correctly
 
-- [ ] fix args
-  - [ ] should names be in https://lodash.com/docs/4.17.4#camelCase or https://lodash.com/docs/4.17.4#kebabCase https://lodash.com/docs/4.17.4#snakeCase?
+- [x] fix args
+  - [x] should names be in https://lodash.com/docs/4.17.4#camelCase or https://lodash.com/docs/4.17.4#kebabCase https://lodash.com/docs/4.17.4#snakeCase?
 
-- [ ] plugin presets for fusebox such as babel
+- [x] plugin presets for fusebox such as babel
 
 - [ ] try with packages/ts
 
-- [ ] `env` should properly use env
-  - [ ] which means detect current env
+- [x] `env` should properly use env
+  - [x] which means detect current env
   - [ ] also means using flag preset to set the env first
 
 ====================================================
@@ -50,12 +112,12 @@
 - [ ] do a cleanup on flags,
 - [ ] split into a class,
 - [ ] make it safer,
+- [ ] find-and-remove option
 - [ ] better options,
 - [ ] chainable
 - [ ] support for ` -- ` handling (see how libs handle this)
 - [ ] manage resetting argv so it is ignored if conflicting arguments...
 // log.data(process.argv).text('argv').verbose().exit()
-
 
 # presets
 - [ ] https://github.com/fliphub/fliphub/issues/35 shim preset
@@ -81,6 +143,7 @@
 ------------------------ p3 ------------------------
 ====================================================
 
+- [ ] shorten `PresetAliasRequire` + PresetAliasRequire -> PresetAlias
 
 # simplification
 - use module alias?

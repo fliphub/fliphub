@@ -1,6 +1,6 @@
-const AbstractHub = require('./AbstractHub')
 const flags = require('flipflag')
 const {inspectorGadget} = require('inspector-gadget')
+const AbstractHub = require('./AbstractHub')
 
 class Filter extends AbstractHub {
   constructor(box) {

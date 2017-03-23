@@ -1,0 +1,16 @@
+{
+  "name": "mononos",
+  "version": "2.0.0",
+  "description": "mononos",
+  "keywords": [
+    "monorepo"
+  ],
+  "repository": "https://github.com/aretecode/mononos",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "cd packages && cd eh && npm i && cd ../canada && npm i"
+  },
+  "dependencies": {
+    "monono": "0.0.6"
+  }
+}

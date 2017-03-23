@@ -1,0 +1,11 @@
+{
+  "name": "eh",
+  "version": "2.0.0",
+  "main": "index.js",
+  "description": "mononos",
+  "repository": "https://github.com/aretecode/mononos",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "*"
+  }
+}

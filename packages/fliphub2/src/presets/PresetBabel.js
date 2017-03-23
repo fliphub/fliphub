@@ -1,3 +1,6 @@
+const exists = require('flipfile/exists')
+const read = require('flipfile/read')
+
 // https://github.com/rollup/rollup/issues/844
 module.exports = class PresetBabel {
   init() {}
@@ -19,13 +22,16 @@ module.exports = class PresetBabel {
   }
 
   // @TODO: have to deal with using babili...
-  // toFuseBox() {
-  //   const {BabelPlugin} = require('fsbx')
-  //   const {UglifyJSPlugin} = require('fuse-box')
-  //
-  //   return {
-  //     pluginIndex: -100,
-  //     plugins: [BabelPlugin()],
-  //   }
-  // }
+  toFuseBox(config) {
+    const {BabelPlugin} = require('fsbx')
+    // const {UglifyJSPlugin} = require('fuse-box')
+    //
+    const babelrcPath = config.context.root + '/.babelrc'
+    let babelrc
+    if (exists(babelrcPath)) babelrc = {config: read.json(babelrcPath)}
+    return {
+      pluginIndex: -100,
+      plugins: [BabelPlugin(babelrc)],
+    }
+  }
 }

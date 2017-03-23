@@ -11,7 +11,7 @@ const arrToObj = require('./arrToObj')
 const toArr = require('./toArr')
 // const arr = require('./arr')
 // const obj = require('./obj')
-require('./err')
+// const err = require('./err')
 
 module.exports = {
   toArr,

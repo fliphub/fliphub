@@ -1,23 +1,18 @@
-const evts = require('./Events')
-const Filter = require('../hubs/FilterHub')
-const AppsContext = require('./AppsContext')
-const Hubs = require('../hubs/LifeCycleHub')
-const FlipConfig = require('../hubs/ConfigHub/FlipConfig')
-
-const helpers = require('fliphub-helpers')
 const resolve = require('fliphub-resolve')
 const timer = require('fliptime')
 const log = require('fliplog')
 const flipflag = require('flipflag')
-
 const {debugForFlags} = require('fliplog/debugFor')
 const {inspectorGadget} = require('inspector-gadget')
-
 const ChainedMapExtendable = require('flipchain/ChainedMapExtendable')
-const is = require('izz')
-
-const execa = require('execa')
-const tinyPromiseMap = require('tiny-promise-map')
+const Filter = require('../hubs/FilterHub')
+const FlipConfig = require('../hubs/ConfigHub/FlipConfig')
+const evts = require('./Events')
+const AppsContext = require('./AppsContext')
+const Workflow = require('./Workflow')
+const Ops = require('./Ops')
+// Promise = require('bluebird')
+// Promise.config({longStackTraces: true})
 
 module.exports = class FlipBox extends ChainedMapExtendable {
   static init(config) {
@@ -26,63 +21,37 @@ module.exports = class FlipBox extends ChainedMapExtendable {
 
   constructor(config) {
     super(config)
+
+    // setup for benchmarking with buildFast
     if (!flipflag('apps')) timer.start('totals')
-
-    this.inspect = inspectorGadget(this, ['hubs', 'filterer', 'parent'])
-
     timer.start('flip')
     timer.start('setup')
 
-    resolve.setRoot(config.root)
-    this.root = config.root = resolve.root
+    // logging
+    this.inspect = inspectorGadget(this, ['hubs', 'filterer', 'parent'])
+    log.filter(config.debug)
+    delete config.debug
 
+    // --- configs ---
+
+    resolve.setRoot(config.root)
+    config.root = String(resolve.root)
     this.flipConfig = new FlipConfig(this)
     if (config) this.flipConfig.merge(config)
 
-    this.helpers = helpers
-    this.debugFor = debugForFlags('*') // @TODO: config
+    this.workflow = new Workflow(this)
+    this.ops = new Ops(this.workflow)
+    // log.quick(this.workflow)
+
+    // --- setup ---
+
+    // @TODO: config
+    this.debugFor = debugForFlags('*')
     this.setupEvents()
     this.preSetup(config)
 
-    this.ops = {
-      build: () => {
-        const results = []
-        for (let name in this.built) {
-          const context = this.built[name]
-          results.push(context.api.build())
-        }
-        // if (is.arrOf(results, is.promise)) {
-        //   Promise.all(results).then(() => timer.stop('totals').log('totals'))
-        // }
-        return results
-      },
-      buildSync: () => {
-        return tinyPromiseMap(this.built, name => {
-          const context = this.built[name]
-          return context.api.build()
-        })
-      },
-    }
+    // --- ops ---
 
-    // @TODO: flag the other builds, preset for flagging which op to call
-    const buildFast = () => {
-      if (!flipflag('apps')) {
-        let closed = 0
-        const main = require.main.filename
-        const timed = () => {
-          if (2 === closed++) timer.stop('totals').log('totals')
-        }
-
-        for (let name in this.built) {
-          const cliFlags = [main, '--apps=' + name]
-          execa('node', cliFlags, {stdio: 'inherit'}).then(timed)
-        }
-      } else {
-        return this.ops.build()
-      }
-    }
-
-    this.ops.buildFast = buildFast
 
     // build builds the config setup...
     // need to expose other methods
@@ -100,7 +69,8 @@ module.exports = class FlipBox extends ChainedMapExtendable {
       timer.stop('build').log('build')
       timer.stop('flip').log('flip')
 
-      return this.built
+      // return this.built
+      return this
     }
     this.mediator = () => this.built
     timer.stop('setup').log('setup')
@@ -109,7 +79,7 @@ module.exports = class FlipBox extends ChainedMapExtendable {
   toConfig() {
     return Object
       .keys(this.built)
-      .map(built => this.built[built].toConfig())
+      .map((built) => this.built[built].toConfig())
   }
   presets() {
     return this.flipConfig.presets
@@ -122,10 +92,6 @@ module.exports = class FlipBox extends ChainedMapExtendable {
   //
   // so we could do dry runs and such as needed
   preSetup(config) {
-    log.filter(config.debug)
-    delete config.debug
-
-    this.hubs = new Hubs(this)
     this.apps = new AppsContext(config.apps, this)
 
     // if this filters auto and it is before apps are decorated
@@ -141,16 +107,15 @@ module.exports = class FlipBox extends ChainedMapExtendable {
   setupFilter() {
     // if the client already filtered, ignore
     if (!this.filtered) this.filtered = this.filterer.filterAuto().filteredNames
-    if (this.filtered.length === 0)
-      log.text(`🕳  had no apps, all empty eh.`).color('bold').echo()
-    else this.apps.setup()
+    if (this.filtered.length === 0) log.text(`🕳  had no apps, all empty eh.`).color('bold').echo()
+    else this.apps.setup(this.filtered)
   }
 
   // should really be on `AppsContext` ?
   setupEvents() {
     this.evts = evts
     this.emit = (a1, a2, a3, a4, a5) => this.evts.emit(a1, a2, a3, a4, a5)
-    this.evts.onAny(function(event, value) {
+    this.evts.onAny((event, value) => {
       // if (event == 'removeListener') return
       // console._text('FLIPBOX: ' + event)
     })

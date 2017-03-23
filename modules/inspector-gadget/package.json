@@ -1,9 +1,11 @@
 {
   "name": "inspector-gadget",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "main": "index.js",
   "files": [
-    "index.js", "inspector.js", "inspector-gadget.js"
+    "index.js",
+    "inspector.js",
+    "inspector-gadget.js"
   ],
   "dependencies": {
     "javascript-stringify": "^1.6.0"

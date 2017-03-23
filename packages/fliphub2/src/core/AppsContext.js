@@ -1,5 +1,5 @@
-const AppContext = require('./AppContext')
 const {inspectorGadget} = require('inspector-gadget')
+const AppContext = require('./AppContext')
 
 class AppsContext {
   constructor(apps, box) {

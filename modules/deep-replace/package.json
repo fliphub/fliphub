@@ -1,6 +1,6 @@
 {
   "name": "deep-replace",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "main": "index.js",
   "description": "deep replace js objects as far down as you like by property string or regex or fn match",
   "script": {

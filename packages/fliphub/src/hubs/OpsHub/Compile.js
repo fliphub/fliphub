@@ -1,5 +1,0 @@
-class AbstractCompiler {
-  constructor(appsContext) {
-
-  }
-}

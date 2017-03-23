@@ -1,6 +1,6 @@
 {
   "name": "izz",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "description": "is type shorthands for fliphub",
   "scripts": {

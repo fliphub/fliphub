@@ -31,14 +31,15 @@ module.exports = class PresetLibrary {
   }
 
   setArgs(arg) {
+    if (!this.args) this.init()
     if (!is.real(arg)) return
     if (is.obj(arg)) {
       // if (arg.options) this.options = Object.assign(this.options, arg.options)
-
+      const valid = {}
       // console.log(this.schema)
-      const valid = Joi.validate(arg, this.schema)
+      // const valid = Joi.validate(arg, this.schema)
       if (!valid.error) this.args = Object.assign(this.args, arg)
-      else throw valid.error
+      // else console.log(valid.error)
     }
     else if (is.str(arg)) {
       this.options.library = arg

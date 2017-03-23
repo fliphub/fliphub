@@ -6,41 +6,11 @@
 
 const flipflag = require('flipflag')
 const log = require('fliplog')
-
-// https://github.com/rollup/rollup/issues/844
-module.exports = class PresetBabel {
-  init() {}
-  setArgs(args) {
-    if (args) this.args = args
-    return this
-  }
-
-  toWebpack() {
-    const compile = require('neutrino-middleware-compile-loader')
-    return (neutrino) => neutrino.use(compile)
-  }
-  toRollup() {
-    const babel = require('rollup-plugin-babel')
-    return {
-      pluginIndex: 95,
-      plugins: [babel()],
-    }
-  }
-
-  // @TODO: have to deal with using babili...
-  // toFuseBox() {
-  //   const {BabelPlugin} = require('fsbx')
-  //   const {UglifyJSPlugin} = require('fuse-box')
-  //
-  //   return {
-  //     pluginIndex: -100,
-  //     plugins: [BabelPlugin()],
-  //   }
-  // }
-}
+const cleanObj = require('clean-obj')
 
 module.exports = class PresetFlags {
-  init(app, bundlerConfig) {
+  boxInit(box, context) {
+    const config = context.config
     const names = [
       'opts',
       'cache',
@@ -51,13 +21,10 @@ module.exports = class PresetFlags {
       'dry', 'compile', 'exec', 'run', 'test',
 
       'to', 'from',
-      'fromfusebox', 'fromwebpack', 'fromrollup',
-      'tofusebox', 'towebpack', 'torollup',
-
       'NODE_ENV', 'env',
     ]
 
-    let flags = [{
+    const flags = [{
       names,
       cb: ({
         opts,
@@ -67,9 +34,6 @@ module.exports = class PresetFlags {
         dry, compile, exec, run, test,
 
         to, from,
-        fromfusebox, fromwebpack, fromrollup,
-        tofusebox, towebpack, torollup,
-
         NODE_ENV, env,
       }) => {
         // log.data(flipflag.aliased).verbose().text('aliased').echo()
@@ -78,17 +42,25 @@ module.exports = class PresetFlags {
           cache,
 
           ops,
-          dry, compile, exec, run, test,
+          dry,
+          compile,
+          exec,
+          run,
+          test,
 
-          to, from,
-          fromfusebox, fromwebpack, fromrollup,
-          tofusebox, towebpack, torollup,
+          to,
+          from,
+          NODE_ENV,
+          env,
+        }).text('flags:').color('blue').verbose().echo()
 
-          NODE_ENV, env,
-        }).text('args').verbose().echo()
+        const flips = {}
+        if (to) flips.to = to
+        if (from) flips.from = from
+        if (to || from) context.merge({flips})
 
         if (dry === true) {
-          app.ops
+          context.ops
             .cache(false)
             .exec(false)
             .run(false)
@@ -105,7 +77,6 @@ module.exports = class PresetFlags {
     flipflag.findAll(flags)
   }
 }
-
 
 
 // -----------

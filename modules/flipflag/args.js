@@ -2,9 +2,9 @@
 
 // https://www.npmjs.com/package/minimist
 // https://npmcompare.com/compare/commander,minimist,nomnom,optimist,yargs
-const nodeFlags = require('./node-flags')
 const timer = require('fliptime')
 const argv = require('minimist')(process.argv.slice(2))
+const nodeFlags = require('./node-flags')
 const cache = Object.assign({}, {}, argv)
 const IS = require('izz')
 // const yargs = require('yargs')
@@ -14,7 +14,7 @@ const aliased = {
 }
 function aliasFor(flag) {
   if (flag.includes(',')) flag = flag.split(',').pop()
-  let alias = false
+  const alias = false
   for (const key in aliased) {
     const aliasValues = aliased[key]
     if (aliasValues.includes(flag)) return key
@@ -41,9 +41,7 @@ function parseAliases(aliases) {
     addAliases({
       [alias]: aliases,
     })
-    return
   }
-  return
 }
 
 function searchAll(nEeDlE, options) {
@@ -56,8 +54,8 @@ function searchAll(nEeDlE, options) {
 
   if (aliased[nEeDlE]) {
     const result = aliased[nEeDlE]
-       .map(alias => _searchAll(alias, options))
-       .filter(value => value)
+       .map((alias) => _searchAll(alias, options))
+       .filter((value) => value)
        .pop()
 
     if (result) return result
@@ -77,8 +75,8 @@ function _searchAll(nEeDlE, options) {
   // console.log({aliased, nEeDlE, alias: aliased[nEeDlE]})
   // console.log('\n\n')
 
-  let NEEDLE = nEeDlE.toUpperCase()
-  let needle = nEeDlE.toLowerCase()
+  const NEEDLE = nEeDlE.toUpperCase()
+  const needle = nEeDlE.toLowerCase()
   options.needle = needle
 
 
@@ -108,8 +106,8 @@ function _searchAll(nEeDlE, options) {
 
   // log('6', {level: 'fallback argv'})
   if (process.argv.includes(needle)) return true
-  if (process.argv.includes('--' + needle)) return true
-  if (process.argv.includes('.env' + needle)) return true
+  if (process.argv.includes(`--${needle}`)) return true
+  if (process.argv.includes(`.env${needle}`)) return true
 
   // log('6', {level: 'fallback default'})
   if (options && options.default) return options.default
@@ -122,14 +120,14 @@ let flagger = searchAll
 // check if it matches what we are searching for
 // string or array later
 function get(needle, options) {
-  var defaults = {
+  const defaults = {
     includeSlash: false,
   }
   options = Object.assign(defaults, options)
-  var haystack = process.argv
+  const haystack = process.argv
 
   // console.log('SEARCH:', needle)
-  for (var i = 0; i < haystack.length; i++) {
+  for (let i = 0; i < haystack.length; i++) {
     const arg = haystack[i]
     if (!arg || !arg.includes) continue
 
@@ -148,8 +146,7 @@ function get(needle, options) {
       if (argStripped.includes(needle) || needle.includes(argStripped)) {
         let argResult = argStripped
         // take value after `=`
-        if (argStripped.includes && argStripped.includes('='))
-          argResult = argStripped.split('=').pop()
+        if (argStripped.includes && argStripped.includes('=')) argResult = argStripped.split('=').pop()
 
         // if it is an empty string
         // that is evaluated to false in a condition
@@ -157,15 +154,14 @@ function get(needle, options) {
         // return argStripped
 
         // use result
-        if ('' === argResult) return true
+        if (argResult === '') return true
         return argResult
       }
     }
   }
 
   // because webpack2 does not allow custom cli args
-  if (!needle.includes('env'))
-    return get('env.' + needle, haystack, options)
+  if (!needle.includes('env')) return get(`env.${needle}`, haystack, options)
 
   return false
 }
@@ -180,7 +176,7 @@ function get(needle, options) {
 // -> ./demo/index.html
 //
 function val(search, options) {
-  var arg = get(search, options)
+  const arg = get(search, options)
   if (arg === true) return true
   if (!arg) return false
   return arg
@@ -207,7 +203,7 @@ function findAll(flags, cb = false) {
     flags = {}
     flags.names = names
   } else if (allObj) {
-    return flags.forEach(flag => findAll(flag, flag.cb || cb))
+    return flags.forEach((flag) => findAll(flag, flag.cb || cb))
   }
 
   // names: [{flag: ['run'], type: 'bool', default: false}]
@@ -238,7 +234,7 @@ function findAll(flags, cb = false) {
     }
     // flag: ['run'], type: 'bool', default: false
     if (IS.arr(names)) {
-      names.forEach(sub => {
+      names.forEach((sub) => {
         // use alias key if it exists
         const alias = aliasFor(sub)
         if (alias) sub = alias
@@ -267,7 +263,7 @@ function findAll(flags, cb = false) {
 function _realValue(value, options) {
   // console.log({value, options})
   if (options && options.type) {
-    var type = options.type
+    const type = options.type
     timer.stop('flagger')
 
     if (type === 'bool' || type === 'boolean') {
@@ -280,7 +276,7 @@ function _realValue(value, options) {
       if (value == 'true') return true
       if (value == 'false') return false
 
-      return !!value
+      return Boolean(value)
     }
 
       // be more specific

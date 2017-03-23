@@ -31,13 +31,14 @@ class PresetDefineEnv {
   toWebpack() {
     const {EnvironmentPlugin, DefinePlugin} = require('webpack')
     return (neutrino, envs = [process.env.NODE_ENV || 'development']) => {
+      const env = (Array.isArray(envs) ? envs : [])
       neutrino.config
       .plugin('env')
-      .use(EnvironmentPlugin, ['NODE_ENV', ...(Array.isArray(envs) ? envs : [])])
+      .use(EnvironmentPlugin, ['NODE_ENV', ...env])
 
       return neutrino.config
       .plugin('define')
-      .use(DefinePlugin, ['process.env.NODE_ENV', ...(Array.isArray(envs) ? envs : [])])
+      .use(DefinePlugin, ['process.env.NODE_ENV', ...env])
     }
   }
 

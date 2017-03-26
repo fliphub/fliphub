@@ -1,0 +1,25 @@
+{
+  "name": "remap-by",
+  "version": "0.0.1",
+  "main": "index.js",
+  "browser": "index.js",
+  "description": "remap object or array by a property",
+  "dependencies": {
+    "arr-to-obj": "*"
+  },
+  "keywords": [
+    "remap",
+    "prop",
+    "fliphub",
+    "flipbox"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

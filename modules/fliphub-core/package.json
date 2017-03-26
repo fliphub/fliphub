@@ -1,0 +1,19 @@
+{
+  "name": "fliphub-core",
+  "version": "0.0.1",
+  "dependencies": {
+    "eventemitter2": "^3.0.1",
+    "fliplog": "*",
+    "inspector-gadget": "*",
+    "flipchain": "*",
+    "remap-by": "*",
+    "arr-to-obj": "*",
+    "deepmerge": "^1.3.2",
+    "deep-replace": "*",
+    "lodash.camelcase": "^4.3.0",
+    "izz": "*",
+    "flipflag": "*",
+    "fliphub-resolve": "*",
+    "lodash.forown": "^4.4.0"
+  }
+}

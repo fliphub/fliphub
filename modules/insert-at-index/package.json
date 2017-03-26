@@ -1,0 +1,21 @@
+{
+  "name": "insert-at-index",
+  "version": "0.0.1",
+  "main": "index.js",
+  "description": "insert a value, or an array, into an array at an index",
+  "keywords": [
+    "array",
+    "insert",
+    "index",
+    "fliphub"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

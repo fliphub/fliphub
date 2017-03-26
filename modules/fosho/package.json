@@ -1,0 +1,32 @@
+{
+  "name": "fosho",
+  "version": "0.0.8",
+  "main": "index.js",
+  "description": "extends izz, fuse-box-test-runner, chai assert & should... not just sure... fosho. throws if not",
+  "dependencies": {
+    "izz": "*",
+    "fliplog": "*",
+    "to-arr": "*",
+    "flipfile": "*",
+    "chai": "*",
+    "lodash.isequal": "*",
+    "lodash.assigninwith": "*"
+  },
+  "keywords": [
+    "test",
+    "assert",
+    "should",
+    "fliphub",
+    "flipbox",
+    "is"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

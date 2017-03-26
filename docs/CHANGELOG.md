@@ -21,6 +21,7 @@
 - add isAbs to flipfile...
 - fix resolving when trying to go closer if it fails when it is as a monorepo package
 - add shush to fliplog
+- more eslint
 - pushing to github
 
 # part 52 - mar 25 17
@@ -42,7 +43,7 @@
     - extend assert
       - bind first arg to have nice shorthands
     - extend should
-    - extend `izz`
+    - extend izz
       - make non-fns -> fns
       - bind first arg to have nice shorthands
 - add izz.all
@@ -57,7 +58,7 @@
 - export log and fosho and assert and should in fosho
 - add passing in ava.t to fosho for assertion planning
 - add test using it
-- exposing `on` on core from workflow
+- exposing on on core from workflow
 - basic docs to fosho
 - basic docs to izz
 - testing events on fliphub
@@ -85,7 +86,7 @@
 # part 51 - mar 24 17
 - start arithmetic filtering for fliplog for better debugging
 - get event emitting lifecycle up for hubs
-- add `is.ci`
+- add is.ci
 - setup is running, preset hubs connect properly, such a major clean
 - updating eslint rules - no-undef
 - fix silly typos
@@ -111,8 +112,8 @@
 - add capturing to fliplog
 - fliplog progress bar
 - adding more to spiner in fliplog
-- start `from` for fromObj in fliplog
-- adding `from` to flipchain
+- start from for fromObj in fliplog
+- adding from to flipchain
 - conver spinner to ts for fusebox
 
 # part 50 - mar 23 17

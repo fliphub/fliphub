@@ -2,24 +2,34 @@
 ------------------------ p0 ------------------------
 ====================================================
 
+- [ ] finish html preset
+- [ ] test all 3 bundlers
+- [ ] make tests satisfactory
+- [ ] finish examples
+- [ ] tests on travis to ensure deps are setup correctly
+
+- [ ] add back flag cbs (flag hub decorate core)
+- [ ] finish webpack-chain pr
+- [ ] clean
+
+====================================================
+
+
 - [x] start tests
 - [x] add reset
 
 - [x] should extend `t` assertion on the fly for the best asserting
-- [ ] add `silenceAll` to flipLog alongside
+- [x] add `silenceAll` to flipLog alongside
       `silence` to toggle it easier than capturing,
       capture auto if in this mode but do not capture stdout
 
-====================================================
 
 - [x] move ops to another class
   - [x] should fix toConfig part
 - [x] add workflow
 - [x] remove `debugFor` and use the log filter (pt1)
 
-- [ ] add back flag cbs (flag hub decorate core)
-
-
+- [ ] have an easy cli as easy as using babel and browserify
 - [ ] fork eventemitter add travis is someone doesnt
 
 
@@ -29,7 +39,6 @@
 - [x] fix needing to call `toConfig` before building
 - [x] flags needs to be added earlier than calling whicg fglip..
 
-- [ ] have an easy cli as easy as using babel and browserify
 
 - [x] should have some kind of flat mono config
 ```
@@ -58,9 +67,6 @@
 - [ ] + arithmetics for presets
 - [x] see about using `fusebox` task runner to run them sync-or-async?
   - [x] too slow, not as good as buildFast
-- [ ] think more about the presets-as-collections-of-plugins, adding a third type, decorators/middleware/core to do the more application logic
-- [ ] could have another option when merging to `mergeReplace` if using conflicting settings
-- [ ] could use observables to allow listening to changes so plugin order is less important...
 
 - [ ] example with eslint loader
 - [ ] es5/6 configs
@@ -140,8 +146,7 @@
   - [ ] improve pkg tool
 
 # tests
-- [ ] add tests - assert based on the `.toConfig`
-- [ ] run on travis to ensure deps are setup correctly
+- [x] add tests - assert based on the `.toConfig`
 
 # docs & external
 - [ ] pr neutrino-preset-happypack
@@ -152,15 +157,18 @@
 ====================================================
 
 - [ ] shorten `PresetAliasRequire` + PresetAliasRequire -> PresetAlias
+- [ ] think more about the presets-as-collections-of-plugins, adding a third type, decorators/middleware/core to do the more application logic
+- [ ] could have another option when merging to `mergeReplace` if using conflicting settings
+- [ ] could use observables to allow listening to changes so plugin order is less important...
 
 # simplification
 - use module alias?
 
 # flatten & clean
 - [x] move index files to play folders
-- [ ] flatten `hubs` and `core` more nicely with
-  - [ ] `core`
-  - [ ] bundlers
-  - [ ] config
+- [x] flatten `hubs` and `core` more nicely with
+  - [x] `core`
+  - [x] bundlers
+  - [x] config
   - [ ] builtin ?
-- [ ] clean presets/todo & presets/next
+- [x] clean presets/todo & presets/next pt 2

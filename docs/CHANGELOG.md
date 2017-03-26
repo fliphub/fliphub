@@ -2,6 +2,7 @@
 
 # part 54 - mar 26 17
 - going to add tests for bundling, make sure it all works, then good to go :-)
+- remove generated mocks woops
 
 ---
 

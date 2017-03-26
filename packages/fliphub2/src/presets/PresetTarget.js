@@ -1,11 +1,12 @@
-// https:// github.com/rollup/rollup-plugin-multi-entry
+// https://github.com/rollup/rollup-plugin-multi-entry
+const log = require('fliplog')
 
 module.exports = class PresetTarget {
   init() {
     this.target = 'node'
   }
 
-  toRollup(bundler) {
+  toRollup() {
     const nodeResolve = require('rollup-plugin-node-resolve')
     return {
       pluginIndex: 10,
@@ -15,5 +16,16 @@ module.exports = class PresetTarget {
         // skip: external,
       })],
     }
+  }
+
+  toFuseBox() {
+    log
+      .preset('warn')
+      .text('FuseBox has not implemented target yet')
+      .echo()
+  }
+
+  toWebPack() {
+    return {target: this.target}
   }
 }

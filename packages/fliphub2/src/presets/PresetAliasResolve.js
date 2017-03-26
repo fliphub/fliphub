@@ -8,7 +8,7 @@ module.exports = class PresetRequireAlias {
 
   toWebpack(config) {
     const {alias} = config
-    if (!alias) return
+    if (!alias) return null
     return resolve.obj(alias)
   }
 
@@ -16,17 +16,17 @@ module.exports = class PresetRequireAlias {
   toFuseBox(config, context) {
     const entries = config.toConfig()
     const alias = entries.alias || entries.resolve.alias
-    if (!alias) return
+    if (!alias) return null
 
     // go from absolute to relative
     // https://nodejs.org/api/path.html#path_path_resolve_path
     // https://webpack.github.io/docs/resolving.html
     // var arithmetic = helpers.path.relative(app.homeDir, aliasPath)
     const arithmetics = {}
-    Object.keys(alias).forEach(name => {
+    Object.keys(alias).forEach((name) => {
       const aliasPath = alias[name]
-      arithmetics[name] = '~/'
-        + aliasPath
+      arithmetics[name] = '~/' +
+        aliasPath
         .split(context.get('root'))
         .pop()
         .replace('.js', '')
@@ -38,6 +38,7 @@ module.exports = class PresetRequireAlias {
       .tags('fusebox,alias,resolve,preset')
       .verbose()
       .echo()
+
     // config.set('alias', arithmetics)
     return {alias: arithmetics}
   }

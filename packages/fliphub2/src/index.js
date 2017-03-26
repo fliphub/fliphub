@@ -1,7 +1,11 @@
 // require('babel-core/register')
 // require('babel/dist/external-helpers')
+const core = require('fliphub-core')
+let FlipHub = require('./core/FlipBox')
 
-const FlipBox = require('./core/FlipBox')
+FlipHub.FlipHub = FlipHub
+FlipHub = Object.assign(FlipHub, core)
+
 // const cli = require('./hubs/CliHub')
 // const paths = require('./paths')
 // const es5exports = require('es5exports')
@@ -13,4 +17,4 @@ const FlipBox = require('./core/FlipBox')
 // exports['default'] = FlipBox
 //
 // module.exports = es5exports(exports['default'], exports)
-module.exports = FlipBox
+module.exports = FlipHub

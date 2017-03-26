@@ -1,7 +1,7 @@
 const ChainedMapExtendable = require('flipchain/ChainedMapExtendable')
 const timer = require('fliptime')
-const Config = require('./Config')
 const log = require('fliplog')
+const Config = require('./Config')
 
 module.exports = class FuseBoxBundler extends ChainedMapExtendable {
   constructor(parent, context) {
@@ -27,6 +27,7 @@ module.exports = class FuseBoxBundler extends ChainedMapExtendable {
     // config.cache = false
 
     log
+      .emoji('fusebox')
       .tags('fusebox,config,build,ops')
       .text('fusebox config')
       .color('bold')
@@ -39,7 +40,7 @@ module.exports = class FuseBoxBundler extends ChainedMapExtendable {
     fuse.bundle(name)
       // .sourceMaps(true)
       // .watch('server/**') // watch only server related code.. bugs up atm
-      .instructions(`> [${entry}]`)
+      .instructions(`> ${entry}`)
       // .instructions(`*.js`)
       // Execute process right after bundling is completed
       // launch and restart express

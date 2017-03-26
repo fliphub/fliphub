@@ -21,9 +21,16 @@ module.exports = {
     'prefer-reflect': 0,
     'no-continue': 0,
     'nonblock-statement-body-position': 0,
-    'prefer-destructuring': 1,
+    'prefer-destructuring': 0,
     'brace-style': 0,
     'prefer-template': 0,
     'global-require': 0,
+    "flowtype/require-parameter-type": 0,
+    'prefer-const': 0,
+    'no-undefined': 0,
+    'prefer-spread': 0,
+    'no-implicit-coercion': 0,
+    'arrow-body-style': 0,
+    'arrow-parens': 0,
   }
 }

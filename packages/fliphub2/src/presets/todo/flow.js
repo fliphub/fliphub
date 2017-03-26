@@ -1,1 +1,1 @@
-https://github.com/flowtype/flow-remove-types
+// https://github.com/flowtype/flow-remove-types

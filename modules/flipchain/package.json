@@ -1,6 +1,6 @@
 {
   "name": "flipchain",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "chains for the builder of builders - from webpack chain",
   "main": "index.js",
   "scripts": {

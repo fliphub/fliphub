@@ -9,7 +9,7 @@ const log = require('fliplog')
 const cleanObj = require('clean-obj')
 
 module.exports = class PresetFlags {
-  boxInit(box, context) {
+  coreInit(box, context) {
     const config = context.config
     const names = [
       'opts',
@@ -37,7 +37,8 @@ module.exports = class PresetFlags {
         NODE_ENV, env,
       }) => {
         // log.data(flipflag.aliased).verbose().text('aliased').echo()
-        log.data({
+        log
+        .data({
           opts,
           cache,
 
@@ -52,7 +53,13 @@ module.exports = class PresetFlags {
           from,
           NODE_ENV,
           env,
-        }).text('flags:').color('blue').verbose().echo()
+        })
+        .emoji('flag')
+        .tags('flags,flag')
+        .text('flags:')
+        .color('blue')
+        .verbose()
+        .reset(false)
 
         const flips = {}
         if (to) flips.to = to

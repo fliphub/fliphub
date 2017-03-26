@@ -1,6 +1,6 @@
 {
   "name": "fliptime",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "description": "chained timer + laps",
   "keywords": [
@@ -10,7 +10,7 @@
     "stopwatch",
     "benchmark",
     "profile",
-    "flipbox"
+    "fliphub"
   ],
   "author": "James <aretecode@gmail.com>",
   "homepage": "https://github.com/fliphub/fliphub#readme",

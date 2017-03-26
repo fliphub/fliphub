@@ -3,8 +3,8 @@ const {inspectorGadget} = require('inspector-gadget')
 class Chainable {
   constructor(parent) {
     this.parent = parent
-    this.inspect = inspectorGadget(this, ['parent'])
-    if (this.init) this.init(parent)
+    this.inspect = inspectorGadget(this, ['parent', 'workflow'])
+    if (this.onConstructor) this.onConstructor(parent)
   }
   end() {
     return this.parent

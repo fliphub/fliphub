@@ -18,23 +18,8 @@ module.exports = class PresetDefaultsFuseBox {
     if (args) this.args = args
     return this
   }
-  // this would also need to check if it has already been added...
-  decorate(context, {config}) {
-    // config.plugins = config.plugins ? config.plugins : []
-
-    // @TODO: html, json, default?
-
-    // context
-    // .presets
-    // .addAll({
-    //   'presetTarget': new PresetTarget,
-    //   'presetLibrary': new PresetLibrary,
-    //   'presetProgress': new PresetProgress,
-    // })
-    // .useAll({
-    //   'presetTarget': null,
-    //   'presetLibrary': null,
-    //   'presetProgress': null,
-    // })
+  init() {
+    const {HTMLPlugin, JSONPlugin} = require('fsbx')
+    return {plugins: [HTMLPlugin({default: true}), JSONPlugin()]}
   }
 }

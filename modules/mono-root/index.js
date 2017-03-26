@@ -50,12 +50,45 @@ function rootable(args = {depth: 4, asObj: false}) {
 
   paths.nearest = paths.farthest = require('app-root-path').toString()
   paths.farthest = paths.nearest
+
+  if (args && args.depth !== 4 && paths.nearest.includes('mono-root')) {
+    paths.nearest = process.cwd()
+    paths.farthest = process.cwd()
+    args.depth = 10
+    paths.selved = true
+  }
   if (args.depth > 1) {
     paths.attempt = paths.farthest
     paths.found = paths.found
+    paths.closest = false
+
+    // start here if failed
+    if (hasPkg(paths.attempt)) {
+      if (!paths.closest &&
+          paths.selved &&
+          paths.attempt &&
+          !paths.attempt.includes('node_modules')) {
+        paths.closest = paths.attempt
+        paths.farthest = paths.attempt
+        args.depth = 0 // do not loop
+      }
+      paths.found = paths.attempt
+    }
+
     for (let i = 0; i < args.depth; i++) {
       paths.attempt = upDir(paths.attempt)
-      if (hasPkg(paths.attempt)) paths.found = paths.attempt
+      if (hasPkg(paths.attempt)) {
+        // if we have not set closed, and we failed
+        if (!paths.closest &&
+            paths.selved &&
+            paths.attempt &&
+            !paths.attempt.includes('node_modules')) {
+          paths.found = paths.attempt
+          break
+        } else {
+          paths.found = paths.attempt
+        }
+      }
     }
     if (paths.found) paths.farthest = paths.found
   }

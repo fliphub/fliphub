@@ -1,124 +1,137 @@
-const resolve = require('fliphub-resolve')
 const timer = require('fliptime')
 const log = require('fliplog')
 const flipflag = require('flipflag')
-const {debugForFlags} = require('fliplog/debugFor')
-const {inspectorGadget} = require('inspector-gadget')
-const ChainedMapExtendable = require('flipchain/ChainedMapExtendable')
-const Filter = require('../hubs/FilterHub')
-const FlipConfig = require('../hubs/ConfigHub/FlipConfig')
-const evts = require('./Events')
-const AppsContext = require('./AppsContext')
+const {Core, resolve} = require('fliphub-core')
+const Hubs = require('../hubs')
 const Workflow = require('./Workflow')
 const Ops = require('./Ops')
-// Promise = require('bluebird')
-// Promise.config({longStackTraces: true})
 
-module.exports = class FlipBox extends ChainedMapExtendable {
+/**
+ * @classdesc
+ *
+ * each step will call the previous step
+ * if you opt to not call it yourself for finer grain control
+ *
+ * order:
+ * 1. create
+ * 2. init
+ * 3. setup
+ */
+module.exports = class FlipBox extends Core {
   static init(config) {
     return new FlipBox(config)
   }
 
-  constructor(config) {
-    super(config)
-
+  setupDebug(config) {
     // setup for benchmarking with buildFast
     if (!flipflag('apps')) timer.start('totals')
     timer.start('flip')
     timer.start('setup')
-
-    // logging
-    this.inspect = inspectorGadget(this, ['hubs', 'filterer', 'parent'])
     log.filter(config.debug)
-    delete config.debug
-
-    // --- configs ---
-
+    log.filter([
+      '!toconfig',
+      '!initConfig',
+      '!adding',
+      '!flag',
+      '!flags',
+      '!events',
+      '!time',
+      // '!core&create',
+    ])
+    return this
+  }
+  setupRoot(config) {
     resolve.setRoot(config.root)
-    config.root = String(resolve.root)
-    this.flipConfig = new FlipConfig(this)
-    if (config) this.flipConfig.merge(config)
+    config.root = resolve.root
+    return this
+  }
 
-    this.workflow = new Workflow(this)
-    this.ops = new Ops(this.workflow)
-    // log.quick(this.workflow)
-
-    // --- setup ---
-
-    // @TODO: config
-    this.debugFor = debugForFlags('*')
-    this.setupEvents()
-    this.preSetup(config)
-
-    // --- ops ---
-
-
-    // build builds the config setup...
-    // need to expose other methods
-    // such as presets... apps... flip...
-    // how to best manage operations...
-    //
-    // if they want to call `.devServer`, or `execute`...
-    // or all of them are presets, and only core configs are here...
-    this.setup = () => {
-      this.setupFilter()
-      if (this.filtered.length === 0) return
-
-      timer.start('build')
-      this.built = this.apps.build()
-      timer.stop('build').log('build')
-      timer.stop('flip').log('flip')
-
-      // return this.built
-      return this
+  constructor(config) {
+    super(config)
+      .setupDebug(config)
+      .setupRoot(config)
+    this.config = config
+    this.state = {
+      created: false,
+      initted: false,
+      setup: false,
     }
-    this.mediator = () => this.built
-    timer.stop('setup').log('setup')
   }
 
-  toConfig() {
-    return Object
-      .keys(this.built)
-      .map((built) => this.built[built].toConfig())
-  }
-  presets() {
-    return this.flipConfig.presets
-  }
+  /**
+   * @since 0.1.0
+   * @see @next this.init
+   * @return {Core}
+   */
+  create() {
+    this.state.created = true
 
-  // @TODO:
-  // make this happen after instantiate
-  // such as in `build`
-  // or add another lifecycle event, `instantiate` instead of `setup`
-  //
-  // so we could do dry runs and such as needed
-  preSetup(config) {
-    this.apps = new AppsContext(config.apps, this)
+    // instantiate
+    this.workflow = new Workflow(this, this.config)
+    this.ops = new Ops(this.workflow)
 
-    // if this filters auto and it is before apps are decorated
-    // then it will only do `defaultApps`, `--apps`, and passed in filters
-    this.filterer = new Filter(this)
-    this.filterer.onBoxSetup({apps: this.apps, box: this})
-  }
+    // was coreStart
+    log
+      .text('fliphub-core-create')
+      .tags('core,init,create')
+      .data(this.workflow)
+      .verbose(3)
+      .echo()
 
-  filter(filter) {
-    this.filtered = this.filterer.filter(filter).filteredNames
-  }
+    // emit
+    this.workflow.coreCreate()
 
-  setupFilter() {
-    // if the client already filtered, ignore
-    if (!this.filtered) this.filtered = this.filterer.filterAuto().filteredNames
-    if (this.filtered.length === 0) log.text(`🕳  had no apps, all empty eh.`).color('bold').echo()
-    else this.apps.setup(this.filtered)
+    // add hubs when we create
+    Hubs.forEach((Huba) =>
+      this.hub(new Huba(this.workflow)))
+
+    return this
   }
 
-  // should really be on `AppsContext` ?
-  setupEvents() {
-    this.evts = evts
-    this.emit = (a1, a2, a3, a4, a5) => this.evts.emit(a1, a2, a3, a4, a5)
-    this.evts.onAny((event, value) => {
-      // if (event == 'removeListener') return
-      // console._text('FLIPBOX: ' + event)
-    })
-    this.on = (name, handler) => this.evts.on(name, handler)
+  /**
+   * @since 0.1.0
+   * @see @prev this.create
+   * @see @next this.setup
+   * @return {Core}
+   */
+  init() {
+    if (!this.state.created) this.create()
+    this.state.initted = true
+    this.workflow.coreInit()
+    return this
+  }
+
+  /**
+   * @since 0.1.0
+   * @see @prev this.init
+   *
+   * @fires context.*.merge.pre
+   * @fires context.*.init.pre
+   * @fires context.*.init
+   * @fires context.*.init.post
+   * @fires context.*.merge.post
+   *
+   * @return {Core}
+   */
+  setup() {
+    if (!this.state.initted) this.init()
+    this.state.setup = true
+    const {config, workflow} = this
+
+    workflow.coreConfig.merge(config)
+    workflow.log
+      .tags('setup,apps')
+      .text('👨‍🔧  ⌛  setting up: ')
+      .xterm('yellow')
+      .echo()
+
+    workflow.contextsFrom(config.apps)
+    workflow.emitForContexts('merge.pre')
+    workflow.emitForContexts('init.pre')
+    workflow.emitForContexts('init')
+    workflow.emitForContexts('init.post')
+    workflow.emitForContexts('merge.post')
+
+    return this
   }
 }

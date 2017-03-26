@@ -1,7 +1,7 @@
 const ChainedMapExtendable = require('flipchain/ChainedMapExtendable')
-const Config = require('./Config')
 const timer = require('fliptime')
 const log = require('fliplog')
+const Config = require('./Config')
 
 // https://github.com/rollup/rollup-plugin-commonjs/issues/137
 // https://github.com/thgh/rollup-plugin-serve

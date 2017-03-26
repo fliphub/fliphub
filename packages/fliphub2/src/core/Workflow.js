@@ -1,33 +1,13 @@
-// this contains the flipconfig, appconfigs, bundler, bundler configs...
-// - [ ] could have some kind of flat mono config
-// ```
-//   workflow
-//     - app
-//       - context
-//       - config
-//     - box
-//       - context
-//       - config
-//     - bundler
-//       - api
-//       - config
-// ```
+const is = require('izz')
+const {AbstractWorkflow} = require('fliphub-core')
+const Context = require('./Context')
+const CoreConfig = require('./configs/Core')
 
-module.exports = class Workflow {
-  constructor(box) {
-    this.root = box.root
-    this.apps = {
-      names: [],
-      list: {},
-      original: {},
-    }
-    this.bundler = {
-      api: {},
-      config: {},
-    }
-    this.box = {
-      context: box,
-      config: box.flipConfig,
-    }
+module.exports = class Workflow extends AbstractWorkflow {
+  constructor(core, config) {
+    const coreConfig = new CoreConfig(core)
+    super(core, coreConfig)
+    this.root = coreConfig.root
+    this.contextsFrom = this.contextsFrom.bind(this, Context)
   }
 }

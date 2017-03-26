@@ -5,4 +5,4 @@
 // globals: Object.assign({moduleGlobal: rollupConfig.moduleGlobal}, rollupConfig.moduleGlobals),
 
 
-return helpers.injectPlugins(app, new webpack.ProvidePlugin(app.provide))
+// return helpers.injectPlugins(app, new webpack.ProvidePlugin(app.provide))

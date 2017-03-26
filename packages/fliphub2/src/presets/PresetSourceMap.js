@@ -26,6 +26,7 @@ class PresetSourceMap {
     log
       .preset('info')
       .addText('sourceMap is default enabled with rollup :-)').echo()
+    return null
   }
   toFuseBox() {
     if (this.devtool === false) return {}

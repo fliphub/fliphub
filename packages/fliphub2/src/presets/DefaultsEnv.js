@@ -6,8 +6,7 @@ module.exports = class PresetDefaultsEnv {
     if (args) this.args = args
     return this
   }
-  // this would also need to check if it has already been added...
-  decorate(context, config) {
+  decorate(context, workflow) {
     if (process.env.NODE_ENV === 'production') {
       context
       .presets

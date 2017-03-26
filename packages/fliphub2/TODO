@@ -2,28 +2,36 @@
 ------------------------ p0 ------------------------
 ====================================================
 
-move ops to another class
-  - should fix toConfig part
-add workflow
-remove `debugFor` and use the log filter
+- [x] start tests
+- [x] add reset
+
+- [x] should extend `t` assertion on the fly for the best asserting
+- [ ] add `silenceAll` to flipLog alongside
+      `silence` to toggle it easier than capturing,
+      capture auto if in this mode but do not capture stdout
+
+====================================================
+
+- [x] move ops to another class
+  - [x] should fix toConfig part
+- [x] add workflow
+- [x] remove `debugFor` and use the log filter (pt1)
+
+- [ ] add back flag cbs (flag hub decorate core)
+
+
+- [ ] fork eventemitter add travis is someone doesnt
 
 
 
+- [ ] add real proper help to all presets and all methods
 
-
-
-
-
-
-
-
-
-- [ ] fix needing to call `toConfig` before building
+- [x] fix needing to call `toConfig` before building
 - [x] flags needs to be added earlier than calling whicg fglip..
 
 - [ ] have an easy cli as easy as using babel and browserify
 
-- [ ] could have some kind of flat mono config
+- [x] should have some kind of flat mono config
 ```
   workflow
     - app
@@ -37,8 +45,8 @@ remove `debugFor` and use the log filter
       - config
 ```
 
-- [ ] defaults preset to reuse config at root to children unless not inheriting
-
+- [x] defaults preset to reuse config at root to children unless not inheriting
+- [ ] make bundlers more dynamic again, add support for chaining bundlers, like gulpConfig, babel, webpack...
 - [ ] should finish other ops, clean up todos
 
 # built in presets

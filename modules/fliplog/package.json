@@ -1,8 +1,27 @@
 {
   "name": "fliplog",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "main": "index.js",
-  "description": "chained logging with verbose insight, colors, & presets",
+  "description": "fluent logging with deep insight & diffs, emoji, stacks, spinners & progress bars, filtering, colors, tables, capturing, presets",
+  "keywords": [
+    "fluent",
+    "debug",
+    "logging",
+    "deep-diff",
+    "deep",
+    "emoji",
+    "stack-trace",
+    "spinner",
+    "progress-bars",
+    "filter",
+    "tags",
+    "colors",
+    "tables",
+    "capture",
+    "output",
+    "presets",
+    "arithmetics"
+  ],
   "files": [
     "index.js",
     "examples.js",
@@ -12,7 +31,7 @@
     "test": "node examples && node test"
   },
   "engines": {
-    "node": ">= 7.7.2",
+    "node": ">= 7.7.3",
     "npm": ">= 4.1.2"
   },
   "dependencies": {
@@ -25,7 +44,12 @@
     "tosource": "^1.0.0",
     "lodash.clonedeep": "4.5.0",
     "deep-diff": "0.3.4",
-    "cli-table2": "^0.2.0"
+    "cli-table2": "^0.2.0",
+    "cli-spinner": "0.2.6",
+    "lodash.padend": "4.6.1",
+    "progress": "1.1.8",
+    "javascript-stringify": "^1.6.0",
+    "prettyjson": "1.2.1"
   },
   "author": "James <aretecode@gmail.com>",
   "homepage": "https://github.com/flip-box/fliphub#readme",

@@ -1,11 +1,13 @@
-const inspector = (msg) => {
+const inspector = (msg, depth = 30) => {
+  // allow taking in different depths
+  if (!Number.isInteger(depth)) depth = 10
   const util = require('util')
   try {
     const inspected = util.inspect(msg, {
+      depth,
+      maxArrayLength: depth,
       showHidden: true,
-      depth: 30,
       showProxy: true,
-      maxArrayLength: 100,
       colors: true,
     })
     return inspected
@@ -15,7 +17,7 @@ const inspector = (msg) => {
       const stringify = require('javascript-stringify')
       const stringified = stringify(msg, null, '  ')
       return stringified
-    } catch (e) {
+    } catch (error) {
       return msg
     }
   }

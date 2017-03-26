@@ -1,17 +1,25 @@
 {
   "name": "deep-replace",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "index.js",
   "description": "deep replace js objects as far down as you like by property string or regex or fn match",
   "script": {
     "test": "true"
   },
+  "files": [
+    "del.js",
+    "index.js",
+    "match.js",
+    "prop.js"
+  ],
   "keywords": [
     "deep",
     "replace",
     "object",
     "obj",
-    "fliphub"
+    "fliphub",
+    "delete-recursive",
+    "delete-reference"
   ],
   "author": "James <aretecode@gmail.com>",
   "homepage": "https://github.com/fliphub/fliphub#readme",

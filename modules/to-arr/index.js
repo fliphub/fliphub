@@ -1,6 +1,5 @@
-module.exports = function toArr(data, opts = {includeEmpty: false, split: ','}) {
-  const {includeEmpty, split} = opts
-
+module.exports = function toArr(data, opts = {includeEmpty: false, keys: false, split: ','}) {
+  const {includeEmpty, split, keys} = opts
   if (!data && !includeEmpty) return []
   if (Array.isArray(data)) return data
   if (typeof data === 'string' &&
@@ -8,6 +7,10 @@ module.exports = function toArr(data, opts = {includeEmpty: false, split: ','}) 
     data.includes(split)) {
     return data.split(split)
   }
+  if (data && keys && typeof data === 'object') {
+    return Object.keys(data)
+  }
+
   else return [data]
 }
 

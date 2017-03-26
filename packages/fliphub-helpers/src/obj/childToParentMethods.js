@@ -19,7 +19,9 @@ module.exports = function({child, parent, thisArg}) {
       //
       // manually spreading them, es5 yo, by ref
       parent[method] = (a, b, c, d, e, f, g, h, i, j, k, l, m, n) =>
-        child[method].apply(thisArg, [a, b, c, d, e, f, g, h, i, j, k, l, m, n])
+        child[method]
+          .bind(thisArg)
+          .apply(thisArg, [a, b, c, d, e, f, g, h, i, j, k, l, m, n])
     }
   } catch (e) {
     console._error(e)

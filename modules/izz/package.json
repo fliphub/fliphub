@@ -1,13 +1,14 @@
 {
   "name": "izz",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "main": "index.js",
   "description": "is type shorthands for fliphub",
   "scripts": {
     "test": "node .test.js"
   },
   "dependencies": {
-    "is": "^3.2.1"
+    "is": "^3.2.1",
+    "lodash.isplainobject": "4.0.6"
   },
   "keywords": [
     "helpers",

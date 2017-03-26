@@ -1,10 +1,11 @@
-const Chainable = require('./Chainable')
 const deepmerge = require('deepmerge')
+const Chainable = require('./Chainable')
 
 class ChainedMap extends Chainable {
   constructor(parent) {
     super(parent)
     this.shorthands = []
+    this.chainableMethods = []
     this.store = new Map()
   }
 
@@ -21,7 +22,26 @@ class ChainedMap extends Chainable {
     return this.merge(obj).parent
   }
 
+  /**
+   * checks each property of the object
+   * calls the chains accordingly
+   *
+   * @param {Object} obj
+   * @return {Chainable}
+   */
   from(obj) {
+    Object.keys(obj).forEach((key) => {
+      const fn = this[key]
+      const value = obj[key]
+      if (typeof fn === 'function' && fn.toString().includes('return this')) {
+        this[key](value)
+      }
+    })
+    return this
+  }
+
+  // remove...
+  fromAnd(obj) {
     let p = this.merge(obj).parent
     while (p.parent) {
       p = p.parent
@@ -38,6 +58,10 @@ class ChainedMap extends Chainable {
 
   clear() {
     this.store.clear()
+    Object.keys(this).forEach((key) => {
+      if (this[key] instanceof Chainable) this[key].clear()
+      if (this[key] instanceof Map) this[key].clear()
+    })
     return this
   }
 
@@ -90,6 +114,23 @@ class ChainedMap extends Chainable {
   }
 
   merge(obj) {
+    if (obj.toConfig) {
+      const msg = 'when merging two chains, first call .toConfig'
+      const validation = new Error(msg)
+
+      let log
+      try {
+        log = require('fliplog')
+          .verbose(2)
+          .data(validation)
+          .preset('error')
+      } catch (e) {
+        log = console
+      }
+      log.log(validation)
+      throw validation
+      return this
+    }
     Object
     .keys(obj)
     .forEach((key) => {

@@ -11,7 +11,7 @@ module.exports = class PresetNeutrino {
   // @TODO: IMPROVE!!!
   // this would also need to check if it has already been added...
   // init(config, context)
-  decorate(context, {config}) {
+  decorate(context, workflow) {
     const presets = context.presets
     const used = presets.used.entries()
     if (!used) return

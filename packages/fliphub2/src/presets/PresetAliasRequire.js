@@ -26,7 +26,8 @@ module.exports = class PresetRequireAlias {
   // @TODO:
   // only resolve if we have resolve preset...
   // which means this goes before the resolve preset
-  decorate(context, {config}) {
+  decorate(context, workflow) {
+    const config = context.bundler.config
     let aliases
     const hasResolve = context.presets.hasUsed('resolveAlias')
     this.aliaser = new Aliaser(context.get('root'), this.args.dir)

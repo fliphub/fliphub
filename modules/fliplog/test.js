@@ -1,5 +1,11 @@
 const log = require('./')
 
+// log.capture()
+// console.log('eh out')
+// log.stopCapturing()
+// console.assert(log.savedLog.length > 0, 'has saved logs')
+// process.exit()
+
 log.filter('!args,has,!alien')
 
 const arg1 = log

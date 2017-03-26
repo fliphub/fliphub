@@ -141,8 +141,6 @@ class Neutrino extends EventEmitter {
       // delete config.module
       // delete config.resolve.modules
 
-      console.log('GOT TO BUILDER')
-
       // delete config.entry.index
       // delete config.context
       timer.start('webpack')

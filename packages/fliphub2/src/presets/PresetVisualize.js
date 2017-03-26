@@ -8,7 +8,9 @@ module.exports = class PresetVisualize {
     this.sourceMap = true
   }
 
-  setArgs(args) {}
+  setArgs(args) {
+    if (args) this.args = args
+  }
 
   toRollup() {
     const Visualizer = require('rollup-plugin-visualizer')
@@ -18,6 +20,14 @@ module.exports = class PresetVisualize {
       ],
     }
   }
+
+  toFuseBox() {
+    log
+      .preset('warn')
+      .text('FuseBox has not implemented target yet')
+      .echo()
+  }
+
   toWebpack() {
     const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
     return {plugins: [new BundleAnalyzerPlugin()]}

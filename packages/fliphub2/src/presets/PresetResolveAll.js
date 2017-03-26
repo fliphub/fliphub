@@ -6,10 +6,9 @@ module.exports = class PresetResolveAll {
     this.args = []
   }
 
-  toWebpack(bundler) {
+  toWebpack(config) {
     // make it an object, resolve it, return to merge it back in
-    const toConfig = bundler.config.toConfig()
-    const resolved = resolve.obj(toConfig)
+    const resolved = resolve.obj(config.toConfig())
     return resolved
   }
 }

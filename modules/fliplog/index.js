@@ -2,24 +2,35 @@
 // - [x] add debugFor filters here
 // - [ ] more formatting
 //  - [ ] easy table
-//  - [ ] json
+//  - [x] json
 // - [ ] storyline
 // - [ ] docs
-// - [ ] emoji by name - checkout existing ones
+// - [x] emoji by name - checkout existing ones
 // - [ ] integrate an existing validator
 // - [ ] https://github.com/sindresorhus/boxen
 
+// http://stackoverflow.com/questions/26675055/nodejs-parse-process-stdout-to-a-variable
+// https://github.com/ariya/phantomjs/issues/10980
+// https://nodejs.org/api/process.html#process_process_stdout
 // https://developer.mozilla.org/en-US/docs/Web/API/Console/table
 // https://github.com/Automattic/cli-table
 // const ansi = require('ansi')
 // const cursor = ansi(process.stdout)
+const path = require('path')
 const chalk = require('chalk')
 const clc = require('cli-color')
 const {inspector} = require('inspector-gadget')
 const ChainedMapExtendable = require('flipchain/ChainedMapExtendable.js')
 const Chainable = require('flipchain/Chainable.js')
 const toarr = require('to-arr')
+// const {Spinner} = require('cli-spinner')
+const Spinner = require('./Spinner')
 const emojiByName = require('./emoji-by-name')
+
+// Stack trace format :
+// https://github.com/v8/v8/wiki/Stack%20Trace%20API
+let stackReg = /at\s+(.*)\s+\((.*):(\d*):(\d*)\)/i
+let stackReg2 = /at\s+()(.*):(\d*):(\d*)/i
 
 // https://github.com/npm/npmlog
 // http://tostring.it/2014/06/23/advanced-logging-with-nodejs/
@@ -44,16 +55,18 @@ const xtermByName = {
   },
 }
 const combinations = clrs.concat(bgColors).concat(em)
+let shh = false
+let shushed = {}
 
 // https://www.youtube.com/watch?v=SwSle66O5sU
 const OFF = `${~315 >>> 3}@@`
 
 // presets
 function presetError(chain) {
-  return chain.text('error').color('bgRed.black').verbose()
+  return chain.text('error').color('bgRed.black').verbose(10)
 }
 function presetWarning(chain) {
-  return chain.text('⚠  warning:').color('bgYellow.black').verbose()
+  return chain.text('⚠  warning:').color('bgYellow.black').verbose(10)
 }
 function presetInfo(chain) {
   return chain.text('ℹ️️  info:').color('blue')
@@ -77,7 +90,7 @@ class LogChain extends ChainedMapExtendable {
     function logfn(arg) {
       if (arg === OFF) return logChain
       console.log('calling as fn?', arg)
-      return logChain.data(arg).verbose().echo()
+      return logChain.data(arg).verbose(10).echo()
     }
 
     logfn.__proto__ = LogChain.prototype
@@ -94,11 +107,13 @@ class LogChain extends ChainedMapExtendable {
   constructor(parent) {
     super(parent)
     this.extend([
+      'stacks',
       'color',
       '_tags',
       '_data',
       '_xterm',
       '_text',
+      '_shushed',
       'title',
       'diffs',
       'filters',
@@ -129,6 +144,38 @@ class LogChain extends ChainedMapExtendable {
     const {presets} = parent
     if (presets) this.presets = presets
     if (filters) this.filters(filters)
+  }
+
+  saveLog(data, fileDescriptor) {
+    this.fileDescriptor = fileDescriptor
+    this.savedLog.push(data)
+    return this
+  }
+
+  shush() {
+    shh = true
+    return this
+  }
+  unshush() {
+    shh = false
+    return this
+  }
+
+
+  // https://gist.github.com/pguillory/729616#gistcomment-332391
+  capture() {
+    this.savedLog = []
+    const saveLog = this.saveLog.bind(this)
+    this.stdoutWriteRef = process.stdout.write
+    process.stdout.write = (function(write) {
+      return function(string, encoding, fileDescriptor) {
+        saveLog(string, fileDescriptor)
+        write.apply(process.stdout, arguments)
+      }
+    })(process.stdout.write)
+  }
+  stopCapturing() {
+    process.stdout.write = this.stdoutWriteRef
   }
 
   // table() {
@@ -180,6 +227,22 @@ class LogChain extends ChainedMapExtendable {
     return this
   }
 
+  json(data, opts = {pretty: true, js: false}) {
+    let prettified
+    if (opts.js === true) {
+      const stringify = require('javascript-stringify')
+      prettified = stringify(data)
+    } else {
+      const prettyjson = require('prettyjson')
+      prettified = prettyjson.render(data, {
+        keysColor: 'blue',
+        dashColor: 'yellow',
+        stringColor: 'red',
+        numberColor: 'green',
+      })
+    }
+    return this.data(prettified)
+  }
 
   returnVals() {
     const text = this.logText()
@@ -204,8 +267,32 @@ class LogChain extends ChainedMapExtendable {
     }
     return this._data(arguments)
   }
+
+  stack() {
+    if (!this.get('stacks')) return this
+    this.trace()
+
+    // get call stack, and analyze it
+    // get all file,method and line number
+    let stacklist = (new Error()).stack.split('\n').slice(4)
+    let s = stacklist[0]
+    let data = {}
+    let sp = stackReg.exec(s) || stackReg2.exec(s)
+    if (sp && sp.length === 5) {
+      data.method = sp[1]
+      data.path = sp[2]
+      data.line = sp[3]
+      data.pos = sp[4]
+      data.file = path.basename(data.path)
+      // data.stack = stacklist.join('\n')
+    }
+
+    console.log(inspector(data))
+    return this
+  }
+
   text(text) {
-    const title = this.get('title') ? `${this.get('title')} ` : ''
+    const title = this.get('title') ? `${this.get('title')}` : ''
     this._text(title + text)
     return this
   }
@@ -272,13 +359,24 @@ class LogChain extends ChainedMapExtendable {
     if (filters.includes('*')) return this
 
     // silence all
-    if (filters.includes('silent')) return this.silent()
+    if (filters.includes('silent')) return this.silent(true)
 
     for (let i = 0; i < filters.length; i++) {
       const filter = filters[i]
       let not = false
-      if (filter.includes('!')) not = true
-      // console.log({filter, i, not})
+      if (filter.includes('!')) {
+        not = true
+      }
+
+      if (filter.includes('&')) {
+        const silent = filter
+          .split('&')
+          .map((tag) => this._filterTagsByFilter(filter, not))
+          .filter((tag) => tag === false)
+          .length === filter.split('&').length
+
+        if (silent) return this.silent(true)
+      }
 
       const result = this._filterTagsByFilter(filter, not)
       if (result === false) {
@@ -295,11 +393,12 @@ class LogChain extends ChainedMapExtendable {
   just(data) {
     if (typeof data === 'string') this.text(data)
     else this.data(data)
-    this.verbose(true)
+    this.verbose(5)
     return this.log()
   }
 
   log(data) {
+    this.stack()
     this._filterByTag()
     if (!data) data = this.get('_data')
     if (data === false) {
@@ -307,6 +406,15 @@ class LogChain extends ChainedMapExtendable {
       return this
     }
 
+    if (shh === true) {
+      // so we can have them on 1 line
+      const text = this.logText()
+      const datas = this.logData()
+      shushed[Date.now] = {text, datas}
+      this.shushed = shushed
+      this.reset()
+      return this
+    }
     if (this.get('silent')) {
       this.reset()
       return this
@@ -327,17 +435,38 @@ class LogChain extends ChainedMapExtendable {
   }
 
   trace() {
-    this.new().preset('error').verbose().data(new Error('log.trace')).echo()
+    const e = new Error('log.trace')
+    let stacklist = e.stack.split('\n').slice(2)
+    let s = stacklist[0]
+    let data = {}
+    let sp = stackReg.exec(s) || stackReg2.exec(s)
+    if (sp && sp.length === 5) {
+      data.method = sp[1]
+      data.path = sp[2]
+      data.line = sp[3]
+      data.pos = sp[4]
+      data.file = path.basename(data.path)
+      data.stack = stacklist.join('\n')
+      e.stack = data.stack
+    }
+
+    this.new().preset('error').verbose(10).data(e).echo()
     return this
   }
   error() {
-    for (const arg of arguments) this.new().preset('error').verbose().data(arg).echo()
+    for (const arg of arguments) this.new().preset('error').verbose(5).data(arg).echo()
     return this
   }
   quick() {
-    this.data(arguments).verbose().exit()
+    this.reset()
+    return this.data(arguments).verbose().exit()
+    this.data(arguments)
+    if (!this.get('verbose')) this.verbose(10)
+    this.exit()
+    return this
   }
-  exit(log = false) {
+  exit(log = true) {
+    // this.trace()
     this.echo()
     this.reset()
     if (log) console.log('🛑  exit')
@@ -349,7 +478,10 @@ class LogChain extends ChainedMapExtendable {
 
   reset() {
     // persist the time logging
-    if (this.get('time')) this.time(true)
+    if (this.get('time')) {
+      this.time(true)
+    }
+    this.time(false)
 
     this.diffs([])
     this.color('magenta')
@@ -358,7 +490,7 @@ class LogChain extends ChainedMapExtendable {
     this.data(null)
     this.table(false)
     this.tosource(false)
-    this.verbose(false)
+    this.verbose(10)
     this.space(false)
     this.silent(false)
     this._data(OFF)
@@ -390,6 +522,7 @@ class LogChain extends ChainedMapExtendable {
     const space = this.get('space')
     if (Number.isInteger(space)) console.log('\n'.repeat(space))
     if (space === true) console.log('\n\n\n')
+    // else if (space !== undefined) console.log('\n')
     return msg
   }
 
@@ -450,8 +583,32 @@ class LogChain extends ChainedMapExtendable {
     return msg
   }
 
+  // @TODO: pr it to update examples...
+  // https://www.npmjs.com/package/cli-spinner#demo
+  // '<^>v'
+  // '|/-\\'
+  spinner(message = 'flipping...', opts = {builtIn: 18}) {
+    this.Spinner = new Spinner(' %s ' + message)
+    this.Spinner.start()
+
+    // this.Spinner.setSpinnerString('<^>v')
+    // this.Spinner = new Spinner(message + ' %s')
+    // this.Spinner.setSpinnerString('|/-\\')
+    // this.Spinner.start()
+
+    // to go back to chaining
+    // this.Spinner.fliplog = () => this
+    return this
+  }
+  stopSpinner(clear = false) {
+    this.Spinner.stop(clear)
+    delete this.Spinner
+    return this
+  }
+
   getVerbose(msg) {
-    if (typeof msg !== 'string' && this.get('verbose')) {
+    const verbose = this.get('verbose')
+    if (typeof msg !== 'string' && verbose) {
       const PrettyError = require('pretty-error')
       let error = false
       if (msg && msg.stack) {
@@ -461,7 +618,7 @@ class LogChain extends ChainedMapExtendable {
         msg.message = msg.message.split('\n')
       }
 
-      msg = inspector(msg)
+      msg = inspector(msg, verbose)
     }
     return msg
   }

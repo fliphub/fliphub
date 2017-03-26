@@ -1,3 +1,4 @@
+const path = require('path')
 const mkdirp = require('mkdirp')
 const getFileAndPath = require('./getFileAndPath')
 const getDirectories = require('./getDirectories')
@@ -23,5 +24,7 @@ module.exports = {
   exists,
   fileName,
   isFileOrDir,
+  isAbs: path.isAbsolute,
   mkdirp,
+  path,
 }

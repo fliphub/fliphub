@@ -1,5 +1,134 @@
 # 🔈 changelog 🔈
 
+# part 54 - mar 26 17
+- going to add tests for bundling, make sure it all works, then good to go :-)
+
+---
+
+# part 53 - mar 26 17
+- add .properties/hasProps to fosho
+- add exports property test to ensure fliphub exports everything it should
+- add to-arr dep to fosho
+- add flipfile to fosho for the izzes there
+- fix delete on obj.pluginIndex if merging undefined
+- start validator hub
+- a little docs on flipfile
+- make spinner stop when building resolves
+- add opt to to-arr to allow returning keys
+- make fliphub-resolve auto resolve objects and arrays in the fn
+- add fosho.aintHasString
+- added scoping to resolver for multi resolve
+- add isAbs to flipfile...
+- fix resolving when trying to go closer if it fails when it is as a monorepo package
+- add shush to fliplog
+- pushing to github
+
+# part 52 - mar 25 17
+- https://github.com/fuse-box/fuse-box/pull/434 to move fuse-box OptimizeJsPlugin out of FlipHub
+- add html and json as defaults for fuse-box
+- add keywords and better description to fliplog
+- filter out some deps on depflip
+- ⛓ add chainedchain to flipchain for later, abstract of what is used in workflow
+- 🚮 clean out presets/todo/Config used in ^
+- more emoji to emoji-commits
+- more test todos
+- preset html part 2 - fair bit to go
+- pt 2 on PresetTarget
+- pt 2 on PresetLibrary
+- add schema md to docs
+- move resource docs into docs/resources
+- made fosho module
+  - extend chai
+    - extend assert
+      - bind first arg to have nice shorthands
+    - extend should
+    - extend `izz`
+      - make non-fns -> fns
+      - bind first arg to have nice shorthands
+- add izz.all
+  - apply first arg as .call if it is array, if fn supports!
+- ava test hub
+- add fusebox should to fosho
+- improve fosho, do cloning, add aint, more tests
+- add getOwn to fliphub helpers
+- cleaning fosho
+- add log mode to fosho
+- more tests, working nicely
+- export log and fosho and assert and should in fosho
+- add passing in ava.t to fosho for assertion planning
+- add test using it
+- exposing `on` on core from workflow
+- basic docs to fosho
+- basic docs to izz
+- testing events on fliphub
+- adding lodash.isplainobject to izz
+- better api for registering presets
+- making events default to * if there is no current context
+- fix useAll and addAll typo
+- was returning too early when merging children presets!!!
+- test working for event and adding presets and passing down args
+- starting to configure logger for only on workflow
+- simplify ops by removing built fn as now workflow has all contexts
+- moving hubs to be registered internally now that there are tests to register client-side
+- add some docs
+- export fliphub-core with fliphub
+- add test fixtures
+- add deep-replace/del
+- use deep-replace/del in added workflow reset
+- add reset test
+- add fosho eq equals preMuch deepEquals
+- add back temp moved tests
+- adding lifecycle method tests for hub
+- add .each to fosho
+- test for core lifecycle methods calling previous
+
+# part 51 - mar 24 17
+- start arithmetic filtering for fliplog for better debugging
+- get event emitting lifecycle up for hubs
+- add `is.ci`
+- setup is running, preset hubs connect properly, such a major clean
+- updating eslint rules - no-undef
+- fix silly typos
+- change flipchain from calling init on construct
+- fix another typo with the config and contexts
+- make hub extend chainable
+- adding depth to fliplog for less verbose debugging
+- adding .lines in fliplog to find where you logged
+- add validation to chainable when merging another chain without calling toConfig
+- running fliphub works without using .toConfig
+- move config to rollup config so the parent BundlerConfig is no longer used for anything more than its original values...
+- trying sparky
+- adding simple babel compile - wondering why everyone doesn't build with babel and then bundle with webpack...
+- commenting out invalid syntax in preset todos
+- pt2 optimizejs preset
+- updating todos
+- make optimizejs plugin for fusebox
+- add a bunch of emoji to fliplog
+- adding spinner to fliplog
+- start tests
+- add validation error throwing for izz
+- start flipglobs - fluent-globs
+- add capturing to fliplog
+- fliplog progress bar
+- adding more to spiner in fliplog
+- start `from` for fromObj in fliplog
+- adding `from` to flipchain
+- conver spinner to ts for fusebox
+
+# part 50 - mar 23 17
+- make insert-at-index module
+- start fliphub-core for the api for hubs
+- make remap-by module
+- make fliphub-core into a module
+- start making filterhub compatible
+- getFlips into context
+- big refactor of simplicity...
+- adding name from constructor name to hubs
+- it is running
+- using lodash.own
+
+---
+
 # part 49 - mar 23 17
 - adding neutrino-preset-copy
 - adding neutrino-preset-clean

@@ -51,6 +51,7 @@ https://github.com/mozilla-neutrino/neutrino-dev/issues/151
 - fix some screenshots
 - publish the modules
 - push to github
+- 🚮 delete fake it generated src
 
 # part 55 - mar 27 17
 - move .each and .all to izz from fosho

@@ -7,6 +7,7 @@ class ChainedMap extends Chainable {
     this.shorthands = []
     this.chainableMethods = []
     this.store = new Map()
+    this.name = this.constructor.name
   }
 
   new(parent) {
@@ -33,9 +34,10 @@ class ChainedMap extends Chainable {
     Object.keys(obj).forEach((key) => {
       const fn = this[key]
       const value = obj[key]
-      if (typeof fn === 'function' && fn.toString().includes('return this')) {
-        this[key](value)
-      }
+
+      // const fnStr = typeof fn === 'function' ? fn.toString() : ''
+      // if (fnStr.includes('return this') || fnStr.includes('=> this')) {
+      return this[key](value)
     })
     return this
   }
@@ -108,6 +110,32 @@ class ChainedMap extends Chainable {
       if (this.shorthands.includes(key)) {
         return this[key](value)
       }
+      return this.set(key, value)
+    })
+    return this
+  }
+
+  // @TODO: abstract
+  mergeReal(obj) {
+    Object
+    .keys(obj)
+    .filter(key => obj[key])
+    .forEach((key) => {
+      const value = obj[key]
+      if (!value) return this
+
+      if (this[key] && this[key] instanceof Chainable)
+        return this[key].merge(value)
+      if (this.shorthands.includes(key)) {
+        const existing = this.get(key)
+        if (existing) {
+          const merged = deepmerge(existing, value)
+          return this[key](merged)
+        }
+
+        return this[key](value)
+      }
+      // if (this[key])
       return this.set(key, value)
     })
     return this

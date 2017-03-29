@@ -1,8 +1,12 @@
 const isRel = require('flipfile/isRel')
 const {match} = require('deep-replace')
 
+// const isRelish = (file) => isRel('./' + file)
+
 module.exports = function resolveDeep(resolve, object, blacklist = ['not-this-file']) {
-  const test = (file) => isRel(file) && !blacklist.includes(file)
+  let test = (file) =>
+    (isRel(file) && !blacklist.includes(file)) // || isRelish(file)
+
   const decorator = ({val, obj, prop}) => {
     obj[prop] = resolve(val)
   }

@@ -1,6 +1,15 @@
 {
   "name": "fliphub-core",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "main": "index.js",
+  "description": "the core of fliphub, an extensible hub api",
+  "keywords": [
+    "core",
+    "api",
+    "hubs",
+    "fliphub",
+    "flipbox"
+  ],
   "dependencies": {
     "eventemitter2": "^3.0.1",
     "fliplog": "*",
@@ -15,5 +24,14 @@
     "flipflag": "*",
     "fliphub-resolve": "*",
     "lodash.forown": "^4.4.0"
+  },
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
   }
 }

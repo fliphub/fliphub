@@ -1,11 +1,12 @@
 {
   "lerna": "2.0.0-beta.38",
   "packages": [
+    "examples/monorepo/packages/*",
     "examples/*",
     "modules/*",
     "modules-sub/*",
     "packages/*"
   ],
-  "npmClient": "yarn",
+  "npmClient": "npm",
   "version": "independent"
 }

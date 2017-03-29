@@ -1,16 +1,18 @@
 {
   "name": "fosho",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "main": "index.js",
-  "description": "extends izz, fuse-box-test-runner, chai assert & should... not just sure... fosho. throws if not",
+  "description": "extends power-assert, izz, fuse-box-test-runner, chai assert & should... not just sure... fosho. throws if not",
   "dependencies": {
     "izz": "*",
     "fliplog": "*",
     "to-arr": "*",
     "flipfile": "*",
     "chai": "*",
+    "expose-hidden": "*",
     "lodash.isequal": "*",
-    "lodash.assigninwith": "*"
+    "lodash.assigninwith": "*",
+    "power-assert": "1.4.2"
   },
   "keywords": [
     "test",

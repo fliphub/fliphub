@@ -1,0 +1,43 @@
+{
+  "name": "flip-neutrino",
+  "version": "4.0.2",
+  "description": "Create and build JS applications with managed configurations - flipped",
+  "main": "src/index.js",
+  "keywords": [
+    "neutrino",
+    "webpack",
+    "babel",
+    "neutrino-cli",
+    "neutrino-api"
+  ],
+  "author": "Eli Perelman <eli@eliperelman.com>",
+  "license": "MPL-2.0",
+  "repository": "https://github.com/mozilla-neutrino/neutrino-dev/tree/master/packages/neutrino",
+  "homepage": "https://neutrino.js.org",
+  "bugs": "https://github.com/mozilla-neutrino/neutrino-dev/issues",
+  "scripts": {
+    "test": "ava test"
+  },
+  "dependencies": {
+    "deep-sort-object": "^1.0.1",
+    "deepmerge": "^1.3.2",
+    "fluture": "^5.0.0",
+    "javascript-stringify": "^1.6.0",
+    "mitt": "^1.1.0",
+    "optional": "^0.1.3",
+    "ora": "^1.2.0",
+    "ramda": "^0.23.0",
+    "ramda-fantasy": "^0.7.0",
+    "webpack": "^2.3.1",
+    "webpack-chain": "^3.0.0",
+    "webpack-dev-server": "^2.4.2",
+    "flip-webpack-chain": "*",
+    "yargs": "^7.0.2",
+    "fliptime": "*",
+    "fliplog": "*"
+  },
+  "devDependencies": {
+    "fs-extra": "^2.1.2",
+    "pify": "^2.3.0"
+  }
+}

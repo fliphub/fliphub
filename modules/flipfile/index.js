@@ -1,3 +1,4 @@
+const fs = require('fs')
 const path = require('path')
 const mkdirp = require('mkdirp')
 const getFileAndPath = require('./getFileAndPath')
@@ -11,6 +12,7 @@ const write = require('./write')
 const exists = require('./exists')
 const fileName = require('./fileName')
 const isFileOrDir = require('./isFileOrDir')
+const del = require('./del')
 
 module.exports = {
   getFileAndPath,
@@ -27,4 +29,6 @@ module.exports = {
   isAbs: path.isAbsolute,
   mkdirp,
   path,
+  fs,
+  del,
 }

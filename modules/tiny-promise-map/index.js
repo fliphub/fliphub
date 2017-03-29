@@ -18,9 +18,11 @@ function PromiseMap(arr, cb) {
 
   // go through each
   // chain them on the chain of promises
-  return arr.forEach(name => {
-    chain = chain.then(resolved => cb(name))
+  const chained = arr.forEach((name, i) => {
+    // chain, then let it know if it is the last one
+    chain = chain.then(resolved => cb(name, (i === arr.length - 1), i))
   })
+  return chain
 }
 PromiseMap.obj = Obj
 

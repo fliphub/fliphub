@@ -1,0 +1,42 @@
+{
+  "name": "fliphub-examples-2",
+  "version": "0.0.1",
+  "description": "fliphub examples",
+  "main": "src/index.js",
+  "dependencies": {
+    "faker": "^4.1.0",
+    "fliphub": "0.1.0-beta.7",
+    "fliphub-alias": "*",
+    "flipchain": "*",
+    "flipfile": "*",
+    "fliphub-resolve": "*",
+    "fliplog": "*",
+    "fliptime": "*",
+    "flipflag": "*",
+    "mono-root": "*",
+    "izz": "*",
+    "depflip": "*",
+    "neutrino-preset-happypack": "*"
+  },
+  "engines": {
+    "node": ">= 7.7.2",
+    "npm": ">= 4.1.2"
+  },
+  "keywords": [
+    "examples",
+    "fliphub",
+    "flipbox"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  },
+  "devDependencies": {
+    "glob-fs": "^0.1.6"
+  }
+}

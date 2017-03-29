@@ -1,0 +1,22 @@
+{
+  "name": "fliphub-preset-html",
+  "version": "0.0.1",
+  "main": "index.js",
+  "description": "html plugins for webpack, rollup, fusebox",
+  "keywords": [
+    "webpack",
+    "rollup",
+    "fusebox",
+    "fliphub"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+
+}

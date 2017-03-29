@@ -9,13 +9,13 @@
 - [x] extends [chai assert](http://chaijs.com/api/assert/)
 - [x] extends [chai should](http://chaijs.com/guide/styles/#should)
 - [x] extends [fuse-box-test-runner](https://github.com/fuse-box/fuse-test-runner)
-- [x] supports optional second arg for [power-assert](https://github.com/power-assert-js/power-assert)
 
 ### foshizzle
 - [x] has fluent chaining
 - [x] supports avajs assertion planning
 - [x] has shortest assertions, and the longest `.isStr()` or `.str()`
 - [x] it's not not... it aint: `.aintReal()`
+- [x] uses [power-assert](https://github.com/power-assert-js/power-assert)
 
 
 # example (avajs)

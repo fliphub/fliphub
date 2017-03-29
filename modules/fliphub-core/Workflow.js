@@ -68,7 +68,23 @@ class Workflow {
    * @return {Array<String>}
    */
   contextNames() {
-    return Object.keys(this.getContexts())
+    let keys = Object.keys(this.contexts)
+    if (!keys.length) keys = this.core.config.apps.map(app => app.name)
+    return keys
+  }
+
+  /**
+   * filter the contexts
+   * @param {Array<string>} names
+   * @return {Workflow}
+   */
+  filterContexts(names) {
+    this.core.config.apps = this
+      .core
+      .config
+      .apps
+      .filter(app => names.includes(app.name))
+    return this
   }
 
   /**

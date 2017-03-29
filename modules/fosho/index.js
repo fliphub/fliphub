@@ -1,42 +1,19 @@
 const log = require('fliplog')
-const izz = require('./izz')
-const lcFirst = (string) => string.charAt(0).toLowerCase() + string.slice(1)
-
-const chai = require('chai')
+const power = require('power-assert')
 const extend = require('lodash.assigninwith')
+const exposeHidden = require('expose-hidden')
+const {assert, should, assert2, should2} = require('./chai')
+const {lcFirst, ucFirst} = require('./helpers')
+const powers = require('./power')
+const izz = require('./izz')
 
-const assert = chai.assert
-const should = chai.should
-
-delete require.cache[require.resolve('chai')]
-const chai2 = require('chai')
-const assert2 = chai2.assert
-const should2 = chai2.should
-
-const fuse = require('./fuse')
-
+// https://github.com/avajs/ava/blob/2a206311d708361b294a21aa4c5bd199936d0824/lib/enhance-assert.js
 let Fosho = {}
 let debugMode = false
 let logMode = false
 
-function assignMissing(obj, thisArg) {
-  if (!thisArg) thisArg = obj
-  const keys = Object.keys(obj)
-  Object
-    .getOwnPropertyNames(
-      Object
-        .getPrototypeOf(obj))
-        .filter((key) => typeof obj[key] === 'function')
-        .forEach((key) => {
-          if (!keys.includes(key)) {
-            if (typeof obj[key].bind === 'function') {
-              obj[key] = obj[key].bind(thisArg)
-            } else {
-              obj[key] = obj[key]
-            }
-          }
-        })
-}
+// compatibility
+power.true = power
 
 // log if good to go
 function gtg(key, args) {
@@ -47,66 +24,48 @@ function gtg(key, args) {
     .echo()
 }
 
-const foshizzle = (arg, t = false) => {
+// https://github.com/avajs/ava#assertions
+const foshizzle = (arg, t) => {
+  if (!t) t = power
   Fosho = {}
 
-  const fused = fuse(arg)
   const shoulds = should(arg)
 
   // take hidden properties, expose them
-  assignMissing(fused)
-  assignMissing(shoulds)
-  assignMissing(assert)
+  exposeHidden(shoulds)
+  exposeHidden(assert)
+
+  // extend power-assert
+  // extend(Fosho, t, (v, fn, key, o, src) => (fnArg) => {
+  //   t(arg, fnArg)
+  //   return Fosho
+  // })
+
+  // does not return true just throws
+  extend(Fosho, assert, (v, fn, key, o, src) => {
+    o[key] = (fnArg, msg) => {
+      // log.data({key, arg, fnArg, assertion: assert[key](arg, fnArg, msg)}).echo()
+      t.true(assert[key](arg, fnArg, msg)  !== false)
+
+      gtg(key)
+      return Fosho
+    }
+    return o[key]
+  })
 
   // objValue, srcValue, key, object, source
-  extend(Fosho, fused, (o, fn, key) => (fnArg) => {
-    const assertion = !!fn(fnArg)
-    if (t) t.true(assertion)
-    return Fosho
-  })
-
   // does not return true just throws
-  extend(Fosho, shoulds, (v, fn, key, o) => {
+  extend(Fosho, shoulds, (v, fn, key, o, src) => {
     o[key] = (fnArg) => {
-      const assertion = should2(arg)[key](fnArg)
+      t.true(should2(arg)[key](fnArg) !== false)
       gtg(key)
-      if (t) t.true(assertion)
-      return Fosho
-    }
-    return o[key]
-  })
-  // does not return true just throws
-  extend(Fosho, assert, (v, fn, key, o) => {
-    o[key] = (fnArg, msg) => {
-      const assertion = assert2[key](arg, fnArg, msg)
-      gtg(key)
-      if (t) t.true(true)
-      return Fosho
-    }
-    return o[key]
-  })
-  extend(Fosho, fused, (v, fn, key, o) => {
-    o[key] = (fnArg) => {
-      const assertion = fn(fnArg)
-      if (assertion) {
-        // if we decorate with `not`, or `is*`
-        // then we want to not assert twice
-        if (o[key].aint !== true) {
-          gtg(key)
-          if (t) t.true(true)
-
-          return Fosho
-        }
-      }
-      else {
-        console.log('should throw, fused', key)
-      }
       return Fosho
     }
     return o[key]
   })
 
-  extend(Fosho, izz, (v, func, key, o) => {
+  extend(Fosho, izz, (v, fn, key, o, src) => {
+    // log.color('bold').text(key).echo()
     o[key] = (fnArg) => {
       const assertion = izz[key](arg, fnArg)
       if (assertion) {
@@ -114,31 +73,41 @@ const foshizzle = (arg, t = false) => {
         // then we want to not assert twice
         if (o[key].aint !== true) {
           gtg(key)
-          if (t) t.true(assertion)
+          t.true(izz[key](arg, fnArg) !== false)
           return Fosho
         }
 
         return Fosho
       }
       else {
-        const msg = 'was not fosho ' + key
-        const validation = new Error(msg)
-        validation.youUsed = arg
-        if (t) t.true(assertion)
+        t.true(izz[key](arg, fnArg) !== false)
 
         if (debugMode) {
+          const msg = 'was not fosho ' + key
+          const validation = new Error(msg)
+          validation.youUsed = arg
+
           log
             .trace()
             .verbose(2)
             .data(validation)
             .preset('error')
             .echo()
+
+          throw validation
         }
-        throw validation
       }
       return Fosho
     }
     return o[key]
+  })
+
+  const ass = powers(arg, t)
+  extend(Fosho, ass, (v, fn, key, o, src) => (fnArg) => {
+    ass[key](fnArg)
+    // else log.quick({v, fn, key, o, src})
+    // else if (o[key])
+    return Fosho
   })
 
   Object.keys(Fosho).forEach((key) => {

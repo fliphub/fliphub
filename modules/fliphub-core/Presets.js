@@ -34,7 +34,8 @@ module.exports = class Presets extends Hub {
    * @event context.*.create
    */
   onConfig(workflow) {
-    workflow.current.config.presets = new Presets(workflow)
+    workflow.current.presets = new Presets(workflow)
+    workflow.current.config.presets = workflow.current.presets
   }
 
   // --- single ---
@@ -175,11 +176,44 @@ module.exports = class Presets extends Hub {
         log.doDiff()
       }
 
-      for (const preset in presets) {
-        if (!preset) continue
-        context.presets.use(preset,
-          presets[preset] === preset ? undefined : presets[preset])
-      }
+      forOwn(presets, (preset, name) => {
+        if (!name) return
+        if (!context.presets.list.has(name)) {
+          context.presets.add(name, preset)
+        }
+
+        let args = preset
+        const has = context.presets.used.has(name)
+        const used = context.presets.used.get(name)
+
+        if (!has) {
+          // console.log('is not used...', name)
+          context.presets.use(name, args)
+          return
+        }
+        if (used) {
+          // console.log('is used...', name, used, args)
+          if (typeof used === 'object' && args && args instanceof used)
+            args = undefined
+          else if (args)
+            deepmerge(used, args)
+          context.presets.use(name, args)
+          return
+        }
+
+        // is not used,
+        // and does not have it,
+        // so that means it is used with empty args
+        context.presets.use(name, args)
+      })
+
+      // for (const preset in presets) {
+      //   if (!context.presets.has(preset)) {
+      //     context.presets.add(preset, presets[preset])
+      //   }
+      //   context.presets.use(preset,
+      //     presets[preset] === preset ? undefined : presets[preset])
+      // }
     }
   }
 }

@@ -1,11 +1,13 @@
 const path = require('path')
 const rooter = require('mono-root')
 const timer = require('fliptime')
+const {exists} = require('flipfile')
 const is = require('izz')
 const resolveObj = require('./resolveObj')
 const resolveProps = require('./resolveProps')
 const resolveArr = require('./resolveArr')
 
+let current = ''
 let instances = {}
 let instance
 class Resolver {
@@ -41,9 +43,17 @@ class Resolver {
     else if (root) this.root = root
     if (!this.root) this.root = rooter()
     // log.data(root, this.root, is.obj(root), is.num(root)).echo()
-
+    if (instances[current]) {
+      instances[current].root = this.root
+      return instances[current]
+    }
     instance.root = this.root
     return this
+  }
+
+  static unscope() {
+    current = false
+    return instance
   }
 
   static scoped(named, root) {
@@ -51,20 +61,36 @@ class Resolver {
     instances[named].named = named
     instances[named] = instances[named]
     instances[named].scoped = Resolver.scoped
+    current = named
     return instances[named]
   }
 
   fn(named = false) {
-    let self = instance
-    if (named !== false && instances[named]) {
-      self = instances[named]
-    }
-
     // create
     const resolve = (paths) => {
+      // scope
+      let self = instance || this
+      if (named !== false && instances[named]) {
+        self = instances[named]
+      }
+      if (!self) self = {}
+
       // handle root resolving only if needed
       // as it is expensive
-      if (!self.root) self.root = rooter()
+      if (!self.root) {
+        // console.log('had no root...', self, name)
+        self.root = rooter()
+      }
+
+      // @TODO: think more... maybe an optional?
+      // take non relative paths, make them relative?
+      if (!paths.includes('./')) {
+        if (exists(path.resolve(self.root, paths))) {
+          return path.resolve(self.root, paths)
+        }
+        return path.resolve(self.root, paths)
+      }
+
       return path.resolve(self.root, paths)
     }
     const resolver = (paths) => {
@@ -89,6 +115,7 @@ class Resolver {
     resolver.forProps = resolver.forKeys
     resolver.debug = this.debug
     resolver.setRoot = this.setRoot
+    resolver.rooter = rooter
     return resolver
   }
 }

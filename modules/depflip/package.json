@@ -10,6 +10,11 @@
   "scripts": {
     "test": "node test.js"
   },
+  "dependencies": {
+    "glob-fs": "*",
+    "flipfile": "*",
+    "fliptime": "*"
+  },
   "homepage": "https://github.com/flip-box/fliphub#readme",
   "repository": {
     "type": "git",

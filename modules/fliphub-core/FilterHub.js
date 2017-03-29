@@ -25,7 +25,10 @@ module.exports = class FilterHub extends Hub {
    * @return {FilterHub}
    */
   coreInit(workflow) {
+    this.filter()
+    workflow.filterContexts(this.list)
     workflow.core.filter = this.filter.bind(this)
+    // log.data(workflow).color(1'bold').verbose(5).text('filtered...').echo()
     return this
   }
 

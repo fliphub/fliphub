@@ -6,7 +6,7 @@
   "scripts": {
     "tsc": "tsc",
     "gulp": "gulp",
-    "test": "true",
+    "test": "cd packages/fliphub2 && npm run test",
     "clean": "rm -rf node_modules && lerna exec -- rm -rf node_modules",
     "changelog": "changelog mozilla-neutrino/neutrino-dev all --markdown > CHANGELOG.md",
     "bootstrapl": "lerna bootstrap",

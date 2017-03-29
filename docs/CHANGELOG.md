@@ -1,9 +1,95 @@
 # 🔈 changelog 🔈
 
+# part 57 - mar 29 17
+
+---
+
+# part 56 - mar 28 17
+https://github.com/mozilla-neutrino/neutrino-dev/issues/151
+- painfully debug typo in webpack-chain https://github.com/mozilla-neutrino/webpack-chain/pull/21
+- update webpack-chain pr https://github.com/mozilla-neutrino/webpack-chain/pull/19
+- updating foldername to fliphub from fliphub2
+- example/temps working
+- set rollupdefaults to preset defaults
+- handle replacing things in rollup that are webpack and fusebox only with entry points
+- adding resolveall to rollup
+- update webpack-chain pr again
+- update presets to use fuse-box instead of fsbx
+- better resolving with prettier relative paths
+- splitting and updating node example
+- splitting and updating canadas example
+- add .name to chained by default
+- add outputToString method on bundler config for support from webpack to fusebox and rollup
+- fix double slash in alias to fusebox
+- add PresetWeb to move react/inferno/web out of PresetBabel
+- change .resolve.alias to .alias for fusebox and rollup
+- add rollup-plugin-alias
+- updating empty example
+- update rollup defaults to resolve output paths from webpack...
+- html preset part 3
+- pr updating fuse-box spinner https://github.com/fuse-box/fuse-box/pull/442
+- decorating fliplog with .color(text) shorthands
+- making fliplog implement PSR-3
+- making fliplog callable as a fn
+- make extend-hidden object
+- fix extra : used in fliplog if no text or title
+- make does-include module with {any, all}
+- update fliphub-core pkg json
+- update flipfile pkgjson
+- cleaning some folders like yuge into playground
+- cleaning old flipchain from modules/next
+- adding missing pkjsons for lerna
+- pkgjson for emoji-by-name
+- updating fosho to use extend-hidden
+- rename extend-hidden to expose-hidden
+- update inspector-gadget docs
+- publish packages
+- make repo for fliplog
+- update readme badge url for codestyle
+- update gitter room
+- update gitter badge
+- fix some screenshots
+- publish the modules
+- push to github
+
+# part 55 - mar 27 17
+- move .each and .all to izz from fosho
+- testing other bundlers to ensure output for all :-)
+- make fusebox default set flipto
+- make bundlerflipper re-init and re-merge if to is changed
+- add del to flipfile
+- add log to fliphub exports
+- clean neutrino-preset
+- update neutrino preset toWebpack fn as workflow changes where the config and bundler api are
+- continue on examples
+- fix toConfig for contexts -> have them use bundler.api.config if available
+- neutrino with newest version breaking with immutables, revert some changes, make issue
+
 # part 54 - mar 26 17
 - going to add tests for bundling, make sure it all works, then good to go :-)
 - remove generated mocks woops
 - update todos, remove dist
+- add isRizzle, add power assert, convert all fuse tests to 10x smaller scoped
+- test preset inheritence
+- test multiple apps
+- test default to webpack
+- test flipto rollup
+- verbose reporting for fosho logging diffs and failures
+- build tests
+  - fix calling .build on context on buildSync op
+  - adding buildSync test
+  - adding buildFast test
+  - adding build output exists test
+  - adding auto calling setup in ops if it was not explicitly called
+- add safety to stop the spinner in fliplog
+- starting defaults
+  - adding defaults prop to configs
+  - adding to configDefaulter
+  - adding monorepo mode for resolving easier
+- fixing alias resolve
+- fixing preset merging when args exist and they are undefined which triggered falsy condition and did not set them over
+- extending fusebox default preset
+- fix regression in merging configs in bundler flipper
 
 ---
 

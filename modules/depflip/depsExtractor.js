@@ -1,21 +1,23 @@
-const read = require('../file/read')
-const timer = require('../timer')
+const flipfile = require('flipfile')
+const timer = require('fliptime')
+const read = flipfile.read
+const isRel = flipfile.isRel
 
 function makeReqStr(matches) {
-  var str = ``
-  + (`(?:\\s*require\\(['|"]*)`)
+  let str = `` +
+  (`(?:\\s*require\\(['|"]*)`) +
   // + esc(`(?:\s+require\([\'|\"])(`)
-  + `(${matches})`
+  `(${matches})` +
   // + esc(`)(?:[\'|\"]\);?))`)
-  + (`(?:['|"]\\)?)`)
+  (`(?:['|"]\\)?)`)
   return str
 }
 
 function makeImpStr(matches) {
-  var impStr = ``
-  + (`(?:import[a-z0-1A-Z\\s]*from\\s*['|"])`)
-  + `(${matches})`
-  + (`(?:['|"];?)`)
+  let impStr = `` +
+  (`(?:import[a-z0-1A-Z\\s]*from\\s*['|"])`) +
+  `(${matches})` +
+  (`(?:['|"];?)`)
   return impStr
 }
 
@@ -79,7 +81,6 @@ class DepsExtractor {
   }
 
   onlyInternal() {
-    const isRel = require('../file/isRel')
     return this.deps.filter(isRel)
   }
   onlyExternal() {

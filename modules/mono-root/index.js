@@ -51,7 +51,13 @@ function rootable(args = {depth: 4, asObj: false}) {
   paths.nearest = paths.farthest = require('app-root-path').toString()
   paths.farthest = paths.nearest
 
-  if (args && args.depth !== 4 && paths.nearest.includes('mono-root')) {
+  const hasSelf = paths.nearest.includes('mono-root')
+  const depthIs01 = args && (args.depth === 0 || args.depth === 1)
+  const depthAint4 = args && args.depth !== 4
+
+  // console.log({args, hasSelf, depthIs01, depthAint4}, '-.-')
+
+  if (depthAint4 && (hasSelf || depthIs01)) {
     paths.nearest = process.cwd()
     paths.farthest = process.cwd()
     args.depth = 10

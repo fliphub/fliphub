@@ -1,0 +1,10 @@
+https://github.com/avajs/ava#t
+https://github.com/avajs/ava
+https://github.com/moll/js-must
+https://github.com/power-assert-js/power-assert
+https://medium.com/javascript-scene/why-i-use-tape-instead-of-mocha-so-should-you-6aa105d8eaf4#.hsf42d80e
+https://github.com/ericelliott/essential-javascript-links#essential-javascript-links
+https://github.com/kriskowal/uncommonjs/blob/master/tests/specification.md
+https://shouldjs.github.io/
+https://github.com/dareid/chakram/
+https://github.com/visionmedia/supertest

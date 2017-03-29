@@ -1,6 +1,6 @@
 # 🏗🏗 fliphub
 [![Build Status](https://travis-ci.org/fliphub/fliphub.svg?branch=master)](https://travis-ci.org/fliphub/fliphub)
-[![fliphub](https://img.shields.io/badge/gitter-join%20chat%20%E2%86%92-brightgreen.svg)](https://gitter.im/fliphub/Lobby)
+[![fliphub][gitter-badge]][gitter-url]
 [![NPM version][npm-image]][npm-url]
 [![Dependencies][david-deps-img]][david-deps-url]
 [![Standard JS Style][standard-image]][standard-url]
@@ -751,7 +751,7 @@ used for finding available ports if preferred ones are not available
 [node-flag]: https://www.npmjs.com/package/node-flag
 
 [standard-image]: https://img.shields.io/badge/code%20style-standard%2Bes6+-brightgreen.svg
-[standard-url]: https://github.com/crocodilejs/eslint-config-aretecode
+[standard-url]: https://github.com/aretecode/eslint-config-aretecode
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-url]: https://spdx.org/licenses/MIT
 
@@ -760,3 +760,5 @@ used for finding available ports if preferred ones are not available
 
 [com-avoid-symlinks]: @TODO
 [com-massive-package-sizes]: @TODO
+[gitter-badge]: https://img.shields.io/gitter/room/fliphub/pink.svg
+[gitter-url]: https://gitter.im/fliphub/Lobby

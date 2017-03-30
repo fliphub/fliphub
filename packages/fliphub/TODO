@@ -2,27 +2,96 @@
 ------------------------ p0 ------------------------
 ====================================================
 
+- [ ] fix memory leak in event listeners
+
+- [ ] interactive babel config generator could be super cool
+- [ ] simply expose the `.on` for events? alongside flags :o?
+
+- [ ] finish examples
+  - [xxx] empty
+    - [x] part 1
+    - [x] part 2
+    - [x] part 3
+  - [ ] minify + sourcemaps
+  - [ ] ts
+    - [x] part 1
+    - [ ] part 2
+  - [ ] compat
+  - [ ] lint
+    - [x] part 1
+    - [x] part 2
+    - [ ] part 3
+  - [ ] babel happypack
+  - [ ] es6 -ts config
+  - [ ] flags
+  - [ ] alias
+  - [ ] mediator~
+  - [ ] monorepo
+    - [ ] verbose
+    - [ ] fake it
+      - [x] part 1
+      - [x] part 2
+      - [ ] part 3
+  - [ ] node
+    - [x] part 1
+    - [x] part 2
+    - [ ] part 3
+  - [ ] react
+    - [x] part 1
+    - [x] part 2
+    - [ ] part 3
+    - [ ] inferno
+  - [ ] canadas
+    - [x] part 1
+    - [x] part 2
+    - [ ] part 3
+  - [ ] custom hubs & presets (from tests)
+  - [ ] webworker
+    - [x] part 1
+    - [ ] part 2
+  - [ ] splitting and chunking
+  - [ ] ops
+
+- [ ] finish docs ***
+
+- [x] build an array of bundlers
+  - [ ] alter output paths for each to ensure they all build...
+        some hashing cb works... or a method on the chain.
+- [ ] flags
+  - [ ] .on
+  - [ ]
+
+- [ ] clean
+- [ ] tests on travis to ensure deps are setup correctly
+
+- [ ] could split out the flipflags
+      so it could be used as a webpack plugin,
+      internally doing webpack merge o.o
+- [ ] split out each module to a package
+  - [ ] add readmes and docs and examples
+  - [ ] cli (from inferno, improve on commander)
+
+
 - [ ] finish html preset
 - [x] test all 3 bundlers pt 1
 - [ ] make tests satisfactory
-- [ ] finish examples
-- [ ] finish docs ***
 - [x] test preset inheritence
 - [x] multiple apps
 - [x] set tests to run on travis
-- [ ] tests on travis to ensure deps are setup correctly
-- [ ] set trace call for asserting
 - [ ] setup defaults with resolving and add `defaults`...
 - [ ] add `toFlipConfig` to allow caching the setup!
-- [ ] adding docs/resources/testing.md
+- [x] adding docs/resources/testing.md
 - [ ] find issue with mutating config and then values getting merged from elsewhere, such as with rollup and target...
 
 - [ ] add back flag cbs (flag hub decorate core)
-- [ ] finish webpack-chain pr
-- [ ] clean
+- [x] finish webpack-chain pr
 - [ ] see config defaulter todos
+// https://github.com/facebookincubator/create-react-app/pull/1742
 
 ====================================================
+
+- [ ] set trace call when asserting in fosho
+
 
 
 - [x] start tests

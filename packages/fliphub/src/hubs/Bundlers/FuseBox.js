@@ -27,9 +27,11 @@ module.exports = class FuseBoxBundler extends ChainedMapExtendable {
     config.log = config.debug = true
     config.homeDir = root
     // config.cache = false
+    // log.quick(config)
+
     log
       .emoji('fusebox')
-      // .tags('fusebox,config,build,ops')
+      .tags('fusebox,config,build,ops')
       .text('fusebox config')
       .color('bold')
       .data({config, name, entry})
@@ -37,7 +39,7 @@ module.exports = class FuseBoxBundler extends ChainedMapExtendable {
       .reset()
 
     const fuse = FuseBox.init(config)
-    fuse.bundle(name)
+    fuse.bundle(name + '.js')
       .instructions(`${entry}`)
     const run = fuse.run()
 

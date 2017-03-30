@@ -1,6 +1,58 @@
 # 🔈 changelog 🔈
 
 # part 57 - mar 29 17
+- update todos
+- moving out uvxyz
+- json plugin into rollup for now
+- more splitting up the examples
+- starting on an array of flips.to
+- got array of flips.to working first round, sweet
+- starting multiple apps with flip.to arrays
+- fixed typo on fliplog filters with conditional _filters_ reset
+- 9 bundles at once works :success: but memory leak with eventemitter2
+- updating linting-example
+- updating typescript example
+- adding eslintrc with airbnb
+- move out old examples
+- add in empty minify-examples to start
+- start webworker example
+- move out old example/z into random
+- move out old example/es6+ts into es6-ts-cconfig-example
+- move out old example/tests into tests
+- start updating readme
+- adding tap args for presets
+- added aliasing to web preset to require built in middleware as updating docs and examples
+- todo on with loader merge for inferno preset
+- adding the readme2
+- move more of pkgmngr topkgmngr
+- moving around cli
+- making flipscript
+- add flippack for flipping package json scripts
+- export appRootPath in mono-root
+- gulp doc list
+- finally move babelrc for minify out of fliphub src
+- add find to flipfile
+- make on-the-fly
+- making fluent flags
+- continuing flipscript
+- adding back accidentally deleted flipglob
+- having flipscript use fliphub-core
+- adding contextType to fliphub-core
+- adding extend increment
+- making the chainedmap return this on extension methods
+- adding extendType to flipchain
+- add izz.any
+- add izz.realNotEmpty
+- tostring the flags, nice and simple
+- update fliptime to use microtime
+- add fliptime to fliplog
+- clean up quick a bit for the arguments
+- format fliptime a little
+- start advice.md
+- expand flipglob a little
+- adding lots to flipscript, docblocks, full features
+- starting toString on flipscript
+- pushing to github, somehow committed but didn't push
 
 ---
 

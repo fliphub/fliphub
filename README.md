@@ -23,50 +23,53 @@ It allows you to create configs that would take hundreds or thousands of lines, 
 #### minimal
 ```js
 import FlipHub from 'fliphub'
-new FlipHub({entry: './src/index.js'}).fullAuto()
+new FlipHub({entry: './src/index.js'}).build()
 ```
 
 
 #### all the apps
-one app? two apps? 100 apps? nodejs server, inferno, react, fusebox, _and_ webpack? existing configs? happy and no happy pack? at the same time? no sweat.
+one app? two apps? 100 apps? fusebox, rollup, _and_ webpack? nodejs server, inferno, and react? existing configs? happy and no happy pack? at the same time? no sweat.
+
 ```js
 const FlipHub = require('fliphub')
 const apps = [
   {
     name: 'reacted',
     config: './webpack.config.js'
-    fusebox: true,
+    flips: {to: 'fusebox'},
   },
   {
     name: 'infernod',
     entry: './src/index.js',
     presets: ['inferno'],
     html: './src/index.html',
+    happypack: true,
   },
   {
     name: 'backend',
     entry: './backend/src',
     presets: ['node'],
-    happypack: false,
   },
 ]
-module.exports = new FlipHub({apps}).fullAuto()
+
+FlipHub.init({apps}).build()
 ```
 
 #### reusability?
 ```js
-const FlipHub = require('fliphub')
+const { FlipHub } = require('fliphub')
 const apps = [
   {
     name: 'reacted',
-    presets: ['react', 'entry'],
+    presets: ['react'],
   },
   {
     name: 'infernod',
-    presets: ['inferno', 'entry'],
+    presets: ['inferno'],
   },
 ]
-module.exports = new FlipHub({
+
+FlipHub.init({
   apps,
   presets: {
     front: {
@@ -75,17 +78,12 @@ module.exports = new FlipHub({
       fusebox: true,
     },
   },
-}).fullAuto()
+}).build()
 ```
 
-...oh and you can run those configs through webpack just like any other webpack config.
-which means you can also change the returned config in the same way.
-
 [they are configured for each environment by default](#-default settings)
-
 [and can be customized for any config you want](#-flags)
-
-[it can build itself with webpack or fusebox, with the flip of an env flag][src-pkg-json]
+[it can build itself with webpack, fusebox, or rollup, with the flip of an env flag][src-pkg-json]
 
 ## the problem
 - [build systems are notorious for their difficulty][medium-webpack-difficulty].
@@ -123,8 +121,6 @@ which means you can also change the returned config in the same way.
 - [examples](#-examples)
 - [terminology](#-terminology)
 - [🏭 behind the scenes / internal](#-behind-the-scenes)
-
-
 
 
 # examples
@@ -166,9 +162,6 @@ fliphub.addMiddlewares({
   },
 })
 ```
-
-#### ⚠
-- [todo-middleware][todo-middleware]
 
 
 ## 🐛 debugging
@@ -488,12 +481,7 @@ apps, and app operations can be filtered based on flags either per app, or for a
 ## 🖇 helpers
 
 ## 🐛 deep-debugging
-- 🎨 logs are styled with color & emoji for easy searchability & scannability
-- 👀 full source options, when you want to see deep inside the contents, you can
-  - [log.verbose](#log-verbose) for [node util inspected colored logs][node-util-format]
-  - [log.source](#log-source) for [tosource][nodejs-tosource] logs of the contents
-  - [log.color](#log-color) for [any supported color][chalkjs] as the [log level](#log-level)
-  - [log.text.color](#log-text) for any supported color for entire log
+inside of every workflow, there is [fliplog][fliplog-url]
 
 ### defaults
 ```js
@@ -521,38 +509,14 @@ debug: {
   testOutput: true,
 }
 ```
-### ⚠
-- [todo-helpers#log][todo-helpers]
-
 
 
 
 ## 📒 files
-- write
-- read(dir)
-  - synchronously reads a file as a string
-- isFile(file)
-  - returns boolean
-- getFileAndPath(file)
-  - splits up a path
-  - returns {file, path}
-- resolving
-  - root
-  - forKeys
-  - isAbsolute
-
-### ⚠
-- needs types
-
-
+[flipfile][flipfile-url]
 
 ## 🌐 port
 used for finding available ports if preferred ones are not available
-
-### ⚠
-- needs types
-- needs option to disable
-
 
 
 ## html
@@ -602,20 +566,6 @@ used for finding available ports if preferred ones are not available
 - provide
 
 
-## 🗝️⎁ terminology / key
-
-### home
-- [fusebox-homedir][fusebox-homedir]
-- [webpack-root][webpack-root]
-
-### ⚠
-- docs need work
-- code needs work
-- 💣🛅 fusebox compatible
-- 🕸🛅 webpack compatible
-
-
-
 
 ## 🏭 behind the scenes
   ## core
@@ -629,32 +579,20 @@ used for finding available ports if preferred ones are not available
     reference & context
 
 ## 📅 plans
-- [todo-architecture][todo-architecture]
-- [todo-later-soon-next][todo-later-soon-next]
-- [todo-perf][todo-perf]
-
-### ⚠
-- needs docs
-
-
-
-
+- [board](https://github.com/fliphub/fliphub/issues#boards?repos=82865013)
 
 # 🏗 build systems / builders
-- fusebox
-```js
-  app = {
-    fusebox: false,
-    fuseboxAlias: false,
-  }
-```
-- webpack - is default
+- [webpack][webpack-url]
+- [fusebox][fusebox-url]
+- [rollup][rollup-url]
+- [another bundler? request it][new-issue-url]
 
 
 
+[new-issue-url]: https://github.com/fliphub/fliplog/issues/new
+[fliplog-url]: https://www.npmjs.com/package/fliplog
+[flipfile-url]: https://www.npmjs.com/package/flipfile
 
-# 🎃 tips n tricks
-- 🚧 this is a wip, it has been in development for about a week and as such is not 100% stable, but is definitely worth trying
 
 [src-pkg-json]: https://github.com/fliphub/fliphub/tree/master/package.json
 [src-params]: https://github.com/fliphub/fliphub/tree/master/src/middleware/defaults.js

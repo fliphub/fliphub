@@ -14,6 +14,19 @@ module.exports = class PresetWeb {
   // preInit(workflow)
   decorate(context, bundler, workflow) {
     const {to} = context.config.getFlips()
+
+    // if it is an array, require the aliases and use if they exist
+    if (Array.isArray(this.args)) {
+      const aliases = require('./aliases')
+      const alias = {}
+      this.args.forEach(arg => {
+        if (aliases[arg]) Object.assign(alias, aliases[arg])
+        // context.presets.tapArgs('aliasRequire', this.args)
+      })
+      bundler.config.merge({alias})
+    }
+
+    // do not add preset neutrino unless it is webpack
     if (to !== 'webpack') return
 
     context

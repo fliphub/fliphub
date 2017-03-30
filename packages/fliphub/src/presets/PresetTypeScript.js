@@ -19,14 +19,43 @@
 
 // https://blog.mariusschulz.com/2016/06/27/bundling-es2015-modules-with-typescript-and-rollup
 module.exports = class PresetTypeScript {
+  setArgs(args) {
+    this.args = args
+  }
   toRollup() {
-    const ts = require('rollup-plugin-typescript2')
+    const rollupTypescript = require('rollup-plugin-typescript')
+    // const ts = require('rollup-plugin-typescript2')
     return {
       pluginIndex: 95,
       plugins: [
-        ts(),
+        // ts(this.args),
+        rollupTypescript(),
       ],
     }
   }
+  toFuseBox() {
+    console.log('fusebox has ts support built in :-)')
+  }
+  toWebpack(config, workflow) {
+    // workflow.log.quick(workflow.current.bundler.api.config)
+    const ts = require('awesome-typescript-loader')
+    console.log(config)
+    workflow.current.bundler.api.config.module
+      .rule('awesome-typescript-loader')
+      .test(/\.tsx?$/)
+      .use('awesome-typescript-loader')
+        .loader(require.resolve('awesome-typescript-loader'))
+    // workflow.log.quick(workflow.current.bundler.api.config)
 
+    // return {
+    //   module: {
+    //     rules: [
+    //       {
+    //         test: /\.tsx?$/,
+    //         use: ['awesome-typescript-loader'],
+    //       },
+    //     ],
+    //   },
+    // }
+  }
 }

@@ -32,6 +32,8 @@ module.exports = class BundlerFlipper extends Hub {
       // const neutrino = new Neutrino()
       neutrino.toConfig = neutrino.getWebpackOptions
       neutrino.config.merge(toConfiged)
+      // @TODO...
+      // workflow.current.bundler.config = neutrino.config
       // log.quick(neutrino.toConfig())
       // neutrino.config = config
       api = neutrino

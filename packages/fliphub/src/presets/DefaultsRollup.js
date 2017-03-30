@@ -41,6 +41,15 @@ module.exports = class PresetDefaultsRollup {
   }
 
   toRollup(config) {
+    // const json = require('rollup-plugin-json')
+
+    // json({
+    //   // All JSON files will be parsed by default,
+    //   // but you can also specifically include/exclude files
+    //   include: '**',  // Default: undefined
+    //   // exclude: ['node_modules/foo/**', 'node_modules/bar/**'],  // Default: undefined
+    // }),
+
     // log.quick(config)
   }
 }

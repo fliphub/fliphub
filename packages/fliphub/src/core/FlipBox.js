@@ -31,14 +31,16 @@ module.exports = class FlipBox extends Core {
     log.filter([
       '!toconfig',
       '!initConfig',
-      // '!adding',
+      '!adding',
       '!flag',
       '!flags',
       '!events',
       '!time',
-      // '!preset',
-      // '!call',
+      '!preset',
+      '!call',
       '!setup',
+      '!extract',
+      '!apps',
       // '!used',
       '!args',
       // '!core&create',
@@ -77,6 +79,7 @@ module.exports = class FlipBox extends Core {
   /**
    * @since 0.1.0
    * @see @next this.init
+   * @see fliphub-core/Workflow
    * @return {Core}
    */
   create() {
@@ -94,12 +97,12 @@ module.exports = class FlipBox extends Core {
       .verbose(3)
       .echo()
 
+    // add hubs before we create
+    Hubs.forEach((Hub) =>
+      this.hub(new Hub(this.workflow)))
+
     // emit
     this.workflow.coreCreate()
-
-    // add hubs when we create
-    Hubs.forEach((Huba) =>
-      this.hub(new Huba(this.workflow)))
 
     return this
   }

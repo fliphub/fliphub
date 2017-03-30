@@ -32,5 +32,6 @@ module.exports = {
     'no-implicit-coercion': 0,
     'arrow-body-style': 0,
     'arrow-parens': 0,
+    'no-bitwise': 0,
   }
 }

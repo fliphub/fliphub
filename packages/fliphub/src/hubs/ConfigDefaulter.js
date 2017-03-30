@@ -2,7 +2,7 @@
 // https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js#L35
 const {Hub} = require('fliphub-core')
 const log = require('fliplog')
-const is = require('izz')
+const clone = require('lodash.clonedeep')
 const {
   PresetDefaultsFuseBox,
   DefaultsEnv,
@@ -66,6 +66,47 @@ module.exports = class ConfigDefaulter extends Hub {
   }
 
   /**
+   * @since 0.1.7
+   * @description
+   *   extract out flips into multiple apps,
+   *   clone, insert, delete original
+   *
+   * @NOTE: might need to ensure we always pass an array of apps... use to-arr
+   *
+   * @event core.create
+   * @param {Workflow} workflow
+   */
+  coreCreate(workflow) {
+    // go through each app
+    workflow.core.config.apps.forEach((app, i) => {
+      // if it has an array of flips
+      if (app.flips && Array.isArray(app.flips.to)) {
+        // go through them
+        app.flips.to.forEach(bundler => {
+          // clone the apps, make a new name
+          const cloned = clone(app)
+          cloned.name = cloned.name + '-' + bundler
+          // use only this bundler
+          cloned.flips.to = bundler
+          // add it
+          workflow.core.config.apps.push(cloned)
+        })
+        // delete original since we cloned for each bundler
+        // workflow.core.config.apps = workflow.core.config.apps.slice([i], 1)
+        delete workflow.core.config.apps[i]
+      }
+    })
+
+    workflow.core.config.apps = workflow.core.config.apps.filter(a => a)
+
+    workflow.log
+    .tags('extract,default,apps,bundlers,flips')
+    .white('config extracted multiple apps')
+    .data(workflow.core.config)
+    .echo()
+  }
+
+  /**
    * @event core.init
    * @param {Workflow} workflow
    */
@@ -89,8 +130,23 @@ module.exports = class ConfigDefaulter extends Hub {
    * @param {Workflow} workflow
    */
   preInit(workflow) {
-    const config = workflow.current.config
+    const context = workflow.current
+    const config = context.config
+    const {name} = context
     const flips = config.get('flips')
+
+    // default the input and output
+    if (!config.get('output')) {
+      config.set('output', {
+        path: context.resolver('./dist/'),
+        filename: name,
+      })
+    }
+    if (!config.get('entry')) {
+      config.set('entry', {
+        [name]: context.resolver('./src/index.js'),
+      })
+    }
   }
 
   /**

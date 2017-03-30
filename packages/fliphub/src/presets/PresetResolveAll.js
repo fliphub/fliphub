@@ -35,7 +35,8 @@ module.exports = class PresetResolveAll {
     }
 
     // make it an object, resolve it, return to merge it back in
-    let resolved = resolver.forKeys(config.toConfig(), props)
+    // let resolved = resolver.forKeys(config.toConfig(), props)
+    let resolved = resolver.obj(config.toConfig(), props)
     // log.quick(resolved, resolver)
 
     return resolved

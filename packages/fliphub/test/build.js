@@ -120,7 +120,7 @@ test.failing('.buildSync outputs built file - with fusebox', (t) => {
   }))
 })
 
-
+// .only
 test('.buildSync outputs built file - with rollup', (t) => {
   // for some reason it does not count the ones in my promise?
   // t.plan(2)
@@ -149,7 +149,7 @@ test('.buildSync outputs built file - with rollup', (t) => {
   }))
 })
 
-test('.buildFast builds multiple apps', (t) => {
+test.failing('.buildFast builds multiple apps', (t) => {
   const flips = new FlipHub({
     apps: [
       {

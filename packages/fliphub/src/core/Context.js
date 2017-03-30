@@ -1,5 +1,5 @@
-const is = require('izz')
 const {AbstractContext} = require('fliphub-core')
+const resolver = require('fliphub-resolve')
 const BundlerConfig = require('./configs/Bundler')
 const Config = require('./configs/Context')
 
@@ -11,6 +11,7 @@ module.exports = class Context extends AbstractContext {
   constructor(workflow) {
     super(workflow)
     this.workflow = workflow
+    this.resolver = resolver.scoped(this.name).setRoot(1)
   }
 
   /**

@@ -15,6 +15,9 @@ scripty
 
   // doubleDash()
   .group(1)
+  .env('prod')
+  .envFlag('prod')
+
   .envs('prod,dev,')
   .scope('name', 'value', '*')
   .log('info')

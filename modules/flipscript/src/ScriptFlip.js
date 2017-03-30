@@ -33,13 +33,13 @@ class Flag extends Context {
   // @TODO:
   // - [ ] multiple prefixes later
   toString(prefix = false) {
-    let value = null
     let string = ''
 
     // if dash: --
     // if prefix: (monorepo) e.g. (inferno-compat, lodash.forown)
     if (this.dash) string = '--'
-    if (prefix) string += prefixer(prefix, this.names)
+    if (prefix) string += prefixer(prefix, this.name)
+    else string += this.name
 
     // if value & stringify: --name='val', name='val'
     // else if value:        name=val,
@@ -85,9 +85,10 @@ class Script extends ChainedMap {
     this
       // might also want to do other things here with node, py, etc
       .extend([
-        'binDir',
-        'bin', // str
-        'current', // instanceof flag
+        '_file', // ?str/path
+        '_binDir',
+        '_bin', // str
+        // 'current', // instanceof flag
         'prefix', // string
         'flagIndex',
         '_env',
@@ -96,17 +97,31 @@ class Script extends ChainedMap {
       //   'index', // num
       // ])
       .extendTrue([
-        'npm',
+        '_npm',
+        // 'npm',
         'sync',
       ])
 
       // .index()
 
+    this.file = (file) => this
+      .addToGroup('node')
+      .addToGroup(file)
+    this.npm = (npm) => this
+      .addToGroup('npm', 1)
+      .addToGroup('run')
+      .addToGroup(npm)
+      ._npm(npm)
+    this.bin = (bin) => this
+      .addToGroup(bin, 1)
+      ._bin(bin)
+
+
     // default
     this
       .flagIndex(OFF)
-      ._env(process.env)
-      .binDir('../../')
+      ._env({}) // process.env
+      ._binDir('../../')
 
     this.index = 0
     this.doubleDash = this.group.bind(this)
@@ -221,10 +236,12 @@ class Script extends ChainedMap {
    * @see this.arg
    * @param {string} name
    * @param {string} [value]
+   * @param {number} [index]
+   * @param {number} [group]
    * @return {Script}
    */
-  arg(name, value = OFF) {
-    this._addFlag()
+  arg(name, value = OFF, index = OFF, group = OFF) {
+    this._addFlag(index, group)
     this.current.name = name
     if (value !== OFF) this.current.value = value
     return this
@@ -279,7 +296,7 @@ class Script extends ChainedMap {
    * @return {Flag}
    */
   envArg(env) {
-    this.arg('NODE_ENV', env)
+    this.arg('NODE_ENV', env, 0, 0)
     return this
   }
 
@@ -325,6 +342,12 @@ class Script extends ChainedMap {
 
   /**
    * @TODO: add real presets eh
+   *
+   * @TODO: !!!!!!!!!!
+   * need to make the .binPath and such get used with node with lerna
+   * !!!!!!!!!!
+   *
+   *
    * @return {Script}
    */
   lerna() {
@@ -349,22 +372,42 @@ class Script extends ChainedMap {
   }
 
   /**
+   * for use in execa
+   * @return {Array<string>}
+   */
+  toArray() {
+    const {
+      bin, binDir, file, npm, _env,
+      prefix,
+      // sync, exec, fork
+    } = this.entries()
+    const flags = this.groups.map(group =>
+      group
+        .filter(g => g)
+        .map(flag => flag.toString(prefix) + ' ')
+        .join('') // .join(' -- ')
+    ).join('')
+
+    let script = []
+    if (file) script = script.concat(['node', file])
+    else if (bin) script.unshift(bin)
+    else if (npm) script = script.concat(['npm', 'run', npm])
+
+    script = script.concat(flags)
+    // this seems nasty
+    // script.env = _env
+
+    return script
+  }
+
+  /**
    * @since 0.0.3
    * @return {string}
    */
   toString() {
-    const {
-      bin, binDir,
-      current,
-      prefix,
-      _env,
-      npm,
-      sync,
-    } = this.entries()
-    const groups = this.groups
-    const groupStr = groups.map(group => group.toString() + ' ').join('')
-    console.log(this.entries(), groupStr)
-    return ''
+    const arr = this.toArray()
+    console.log(arr)
+    return '' // arr.join(' ')
   }
 
   // --- todos ---
@@ -407,6 +450,8 @@ class Scripts extends ChainedMap {
       .join('')
   }
 
+  // --- todo ---
+
   // also .addFlags for use outside of scripts?
   // add(name) {
   //   this.flags[name] = new Flag(this)
@@ -415,10 +460,8 @@ class Scripts extends ChainedMap {
   // }
 }
 
-// pipe, then (&&)
-
-
-// core
+// @core
+// @TODO: pipe, then (&&)
 // `${env} ${lerna} exec ${lernaLog} ${scoped} -- node ${binPath}`
 class ScriptFlip extends ChainedMap {
   constructor(parent) {
@@ -436,45 +479,63 @@ class ScriptFlip extends ChainedMap {
   cross_env(env) {
     return execa('cross-env', [`NODE_ENV=${env}`])
   }
-
-  // ops
-  run() {
-    // 'node ' + this.parent.scripty.nodeModuleFor('cross-env') +
-    // .forEach(env => {
-    //   console.log(env)
-    //   this.execWith({env, bin, localBin, scope})
-    // })
-
-    this.scripts = []
-    return this
+  toString() {
+    return this.scripts.toString()
   }
+
+  // --- todo ---
+  // ops
+  // run() {
+  //   // 'node ' + this.parent.scripty.nodeModuleFor('cross-env') +
+  //   // .forEach(env => {
+  //   //   console.log(env)
+  //   //   this.execWith({env, bin, localBin, scope})
+  //   // })
+  //
+  //   this.scripts = []
+  //   return this
+  // }
   // exec() {
   //   const todo = Script
   //   this.scripts.forEach(script => {
   //     execa(...todo)
   //   })
   // }
-  toString() {
-    return this.scripts.toString()
-  }
 }
 
 const scripts = new ScriptFlip()
 scripts
   .add()
-  .envDefine('prod')
-  .envArg('prod')
-  // .env('prod')
+  .env('prod')
   .lerna()
   .scope('app1,app2')
   .log('info')
   .concurrency(1)
   .group(2)
   .bin('tsc,rollup')
-  .parent
-  // .exec()
+scripts
+  .add()
+  .bin('karma')
+  .flag('only', 'me')
+  .env('dev')
+  .sync()
+scripts
+  .add()
+  .npm('script')
+  .env('magic')
 
 log.quick(scripts.toString())
+
+
+//   .envDefine('prod')
+//   .envArg('prod')
+
+  // .run('name')
+
+//   .parent
+// .exec()
+
+// log.quick(scripts.toString())
 // const data = log.json(log.stringify(scripts).returnVals()).echo()
 
 //
@@ -483,18 +544,6 @@ log.quick(scripts.toString())
 
 
 // log.quick(data)
-// flipscript
-//   .scripts()
-//   .bin('karma')
-//   .scope('name', 'value', '*')
-//   .flag()
-//   .sync()
-//
-// flipscript
-//   .npm('script')
-//   .flag()
-//   .flag()
-//   .run('name')
 
 
 // module.exports = LernaCli

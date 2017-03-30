@@ -4,6 +4,7 @@ const deepmerge = require('deepmerge')
 const arrToObj = require('arr-to-obj')
 const log = require('fliplog')
 const forOwn = require('lodash.forown')
+const izz = require('izz')
 const Hub = require('./Hub')
 
 module.exports = class Presets extends Hub {
@@ -95,6 +96,28 @@ module.exports = class Presets extends Hub {
     this.used.set(name, args)
     return this
   }
+
+  /**
+   * take existing args,
+   * deep merge if they exist,
+   *
+   * @see this.used
+   * @param {string} name
+   * @param {any} args
+   * @return {Presets}
+   */
+  tapArgs(name, args) {
+    if (!this.list.has(name)) return this
+    const merged = Presets.mergeReal(this.used.get(name), args)
+    this.used.set(name, merged)
+    return this
+  }
+
+  /**
+   * @param {string | Object} name | preset
+   * @param {Object} [preset]
+   * @return {Presets}
+   */
   add(name, preset) {
     if (!preset) {
       preset = name
@@ -162,19 +185,25 @@ module.exports = class Presets extends Hub {
     return this
   }
 
+  static mergeReal(arg1, arg2) {
+    const {real} = izz
+    if (real(arg1) && !real(arg2)) return arg1
+    if (!real(arg1) && real(arg2)) return arg2
+
+    // allows cloning, and then doing the diff
+    // since deep merge mutates
+    log.tags('diff,deepmerge,mergefor')
+    log.diff(arg1)
+    const result = deepmerge(arg1, arg2)
+    log.diff(arg2)
+    log.doDiff()
+    return result
+  }
+
   static mergeFor({presets, presetArgs, context}) {
     if (presets) {
       presets = arrToObj.valAsKey(presets)
-
-      if (presetArgs) {
-        // allows cloning, and then doing the diff
-        // since deep merge mutates
-        log.tags('diff,deepmerge,mergefor,presets,config')
-        log.diff(presets)
-        presets = deepmerge(presets, presetArgs)
-        log.diff(presets)
-        log.doDiff()
-      }
+      presets = Presets.mergeReal(presets, presetArgs)
 
       forOwn(presets, (preset, name) => {
         if (!name) return

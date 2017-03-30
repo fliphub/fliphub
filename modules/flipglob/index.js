@@ -16,16 +16,23 @@
 //
 // You can make glob treat dots as normal characters by setting dot:true in the options.
 const glob = require('glob')
+const toarr = require('to-arr')
+const ChainedMap = require('flipchain/ChainedMapExtendable')
 
 // @TODO: take the glonb filling I did in inferno-cli
-class Glob {
-  constructor() {
+class Glob extends ChainedMap {
+  static start(parent) {
+    return new Glob(parent)
+  }
+  constructor(parent) {
+    super(parent)
     this.extend([
       // log info, like how it does not go through symlinks
       'debug',
       'cache',
       'allPatterns',
     ])
+    this.str = ''
     // alias things here
   }
 
@@ -33,7 +40,14 @@ class Glob {
   anyWithExt() {}
 
   onlyOne() {}
-  any() {}
+
+  // '+(' + apps.join('|') + ')'
+  any(names) {
+    this.str += '+(' + toarr(names).join('|') + ')'
+    return this
+  }
+
+
   anyOne() {}
 
   // make multiple globs to
@@ -63,7 +77,7 @@ class Glob {
   help() {}
 
   toString() {
-
+    return this.str
   }
 }
 
@@ -72,3 +86,5 @@ class Glob {
 class Globs {
 
 }
+
+module.exports = Glob

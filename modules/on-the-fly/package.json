@@ -1,0 +1,20 @@
+{
+  "name": "on-the-fly",
+  "version": "0.0.2",
+  "description": "find and build es6 + typescript configs on the fly in memory.",
+  "bin": "bin/onthefly",
+  "main": "index.js",
+  "scripts": {
+    "test-bin": "node bin/onthefly test/config.js"
+  },
+  "files": [
+    "bin",
+    "index.js"
+  ],
+  "dependencies": {
+    "babel-preset-env": "^1.2.2",
+    "flipfile": "*",
+    "fuse-box": "^1.4.1-beta.17",
+    "mono-root": "0.0.6"
+  }
+}

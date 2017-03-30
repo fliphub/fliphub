@@ -1,3 +1,4 @@
+const log = require('fliplog')
 const ChainedMap = require('flipchain/ChainedMapExtendable')
 const resolve = require('fliphub-resolve')
 const Core = require('./Core')
@@ -8,6 +9,7 @@ const Presets = require('./Presets')
 
 // export as named, and as abstract for destructuring support
 module.exports = {
+  log,
   resolve,
 
   Core,

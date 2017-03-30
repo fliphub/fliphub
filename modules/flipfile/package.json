@@ -1,6 +1,6 @@
 {
   "name": "flipfile",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "main": "index.js",
   "description": "file helpers for reading, writing, and detecting existence or types.",
   "dependencies": {

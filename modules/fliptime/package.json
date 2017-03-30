@@ -1,8 +1,11 @@
 {
   "name": "fliptime",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "index.js",
   "description": "chained timer + laps",
+  "dependencies": {
+    "microtime": "2.1.2"
+  },
   "keywords": [
     "debugging",
     "logging",

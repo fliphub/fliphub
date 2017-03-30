@@ -1,0 +1,10 @@
+{
+  "name": "pixi-help",
+  "scripts": {
+    "pixi": "webpack"
+  },
+  "devDependencies": {
+    "pixi.js": "^4.3.5",
+    "webpack": "2.2.1"
+  }
+}

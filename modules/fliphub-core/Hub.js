@@ -1,7 +1,8 @@
-const {inspectorGadget} = require('inspector-gadget')
 const log = require('fliplog')
+const {inspectorGadget} = require('inspector-gadget')
 const ChainedMapExtendable = require('flipchain/ChainedMapExtendable')
 
+// hub is like middleware+
 module.exports = class Hub extends ChainedMapExtendable {
 
   /**

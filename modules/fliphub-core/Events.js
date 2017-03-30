@@ -127,6 +127,7 @@ class EventChain extends ChainedMapExtendable {
   /**
    * @see this.cb
    * @param {string} [name]
+   * @param {boolean} [once]
    * @return {EventChain}
    */
   logSub(name, once) {

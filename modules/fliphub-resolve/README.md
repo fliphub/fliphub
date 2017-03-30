@@ -1,0 +1,4 @@
+- resolving
+  - root
+  - forKeys
+  - isAbsolute

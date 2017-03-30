@@ -1,0 +1,7 @@
+{
+  "name": "mono-root",
+  "version": "0.0.1",
+  "dependencies": {
+    "app-root-path": "^2.0.1",
+  }
+}

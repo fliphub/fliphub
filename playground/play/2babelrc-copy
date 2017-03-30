@@ -1,0 +1,18 @@
+"plugins": [
+  ["babili", {
+    "unsafe": false,
+    "evaluate": true,
+    "deadcode": true,
+    "infinity": true,
+    "mangle": true,
+    "numericLiterals": true,
+    "replace": true,
+    "mergeVars": true,
+    "booleans": true,
+    "regexpConstructors": true,
+    "removeConsole": false,
+    "removeDebbugger": false,
+    "removeUndefined": false,
+    "undefinedToVoid": true
+  }]
+]

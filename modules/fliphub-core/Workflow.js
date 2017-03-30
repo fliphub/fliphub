@@ -24,6 +24,9 @@ class Workflow {
       filter: new FilterHub(this),
     }
 
+    // @TODO: flush this out
+    this.contextType = 'app'
+
     // or should we set a filter, and use that and do `getContexts` ?
     // unfiltered? if we want to filter some per app :s ?
     this.allContexts = {}
@@ -56,11 +59,7 @@ class Workflow {
     delete this.core.ops
     delete this.core.workflow
 
-    Object.keys(this).forEach((key) => {
-      delete this[key]
-    })
-
-    // del(this)
+    Object.keys(this).forEach((key) => delete this[key])
   }
 
   /**
@@ -75,31 +74,36 @@ class Workflow {
 
   /**
    * filter the contexts
+   * @see this.contextType
    * @param {Array<string>} names
    * @return {Workflow}
    */
   filterContexts(names) {
-    this.core.config.apps = this
+    this.core.config[this.contextType] = this
       .core
       .config
       .apps
-      .filter(app => names.includes(app.name))
+      .filter(type => names.includes(type.name))
     return this
   }
 
   /**
    * @param {Array<Context>} contexts
+   * @return {Workflow}
    */
   setContexts(contexts) {
     this.contexts = remapBy(contexts, 'name')
+    return this
   }
 
   /**
    * @param {string} name
+   * @return {Workflow}
    */
   setCurrentContext(name) {
     this.current = this.contexts[name]
     this.evt.name('current.set').context().emit(this)
+    return this
   }
 
   /**
@@ -115,6 +119,7 @@ class Workflow {
   /**
    * @event context.*.any
    * @param {string} eventName
+   * @return {Workflow}
    */
   emitForContexts(eventName) {
     this.mapContexts((context) => {
@@ -122,6 +127,7 @@ class Workflow {
       // emit event: context.[name].any
       this.evt.name(eventName).context().emit(this)
     })
+    return this
   }
 
   /**
@@ -141,11 +147,6 @@ class Workflow {
     this.evt.name('init').core().emit(this)
     return this
   }
-  // coreCreate2() {
-  //   this.evt
-  //     .name('config').core().emit(this)
-  //   return this
-  // }
 
   /**
    * @event contexts.create.start
@@ -162,7 +163,7 @@ class Workflow {
    * @factoryMethod
    * @param {Class} Context (bound by child workflow as first arg)
    * @param {Array<Object>} config
-   * @return {Context} config
+   * @return {Workflow}
    */
   contextsFrom(Context, configs) {
     this.evt
@@ -198,18 +199,24 @@ class Workflow {
     return this
   }
 
-  _toConfig() {
-    const chainedConfigs = this.chains.map((name) => {
-      const chain = this[name]
-      if (chain.toConfig) return chain.toConfig()
-      else throw new Error(`chain ${name} must implement toConfig`)
-    })
-
-    return this.clean(Object.assign(this.entries() || {}, {
-      plugins: this.plugins.toConfig(),
-    }))
-  }
 }
+
+// coreCreate2() {
+//   this.evt.name('config').core().emit(this)
+//   return this
+// }
+
+// _toConfig() {
+//   const chainedConfigs = this.chains.map((name) => {
+//     const chain = this[name]
+//     if (chain.toConfig) return chain.toConfig()
+//     else throw new Error(`chain ${name} must implement toConfig`)
+//   })
+//
+//   return this.clean(Object.assign(this.entries() || {}, {
+//     plugins: this.plugins.toConfig(),
+//   }))
+// }
 
 // const del = require('deep-replace/del')
 // const {match} = require('deep-replace')

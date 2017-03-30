@@ -1,4 +1,4 @@
-function tryCatch({cb, when, catchCb}) {
+module.exports = function tryCatch({cb, when, catchCb}) {
   if (when) {
     try {
       const result = cb()

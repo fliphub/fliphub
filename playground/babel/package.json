@@ -1,0 +1,14 @@
+{
+  "name": "fliphub-playground-babel",
+  "scripts": {
+    "babel": "babel src --out-dir lib"
+  },
+  "dependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-core": "^6.24.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-env": "^1.2.1",
+    "babel-register": "^6.24.0",
+    "fliphub-helpers": "^0.1.1"
+  }
+}

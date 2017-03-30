@@ -1,5 +1,5 @@
-const {execSyncStd} = require('./scripty')
-const Chainable = require('./chain/Chainable')
+const {execSyncStd} = require('flipscript')
+const Chainable = require('flipchain/Chainable')
 
 class Commanderer extends Chainable {
   allHelp() {

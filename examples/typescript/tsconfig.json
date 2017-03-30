@@ -23,6 +23,6 @@
     "preserveConstEnums": true,
     "suppressImplicitAnyIndexErrors": true
   },
-  "compileOnSave": true,
-  "buildOnSave": true
+  "compileOnSave": false,
+  "buildOnSave": false
 }

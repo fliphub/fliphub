@@ -35,9 +35,7 @@ module.exports = class Core {
     if (!this || !this.workflow) return
     const workflow = this.workflow
     workflow.reset()
-    
-    Object.keys(this).forEach((key) => {
-      delete this[key]
-    })
+
+    Object.keys(this).forEach((key) => delete this[key])
   }
 }

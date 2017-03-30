@@ -1,0 +1,2 @@
+- the better the problem is defined, the better the solution will be
+- 15 minute rule

@@ -1,0 +1,23 @@
+{
+  "name": "inspector-gadget",
+  "version": "0.1.2",
+  "main": "index.js",
+  "files": [
+    "index.js", "inspector.js", "inspector-gadget.js"
+  ],
+  "dependencies": {
+    "pretty-error": "^2.0.2"
+  },
+  "devDependencies": {
+    "javascript-stringify": "^1.6.0"
+  },
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/flip-box/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flip-box/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flip-box/fliphub/issues"
+  }
+}

@@ -15,6 +15,7 @@ const num = require('./num')
 const arrOf = require('./arrOf')
 const ci = require('./ci')
 const isPlainObject = require('./plainObj')
+const realNotEmpty = require('./realNotEmpty')
 
 // @TODO: add support for plurals
 // loop, give back string of them
@@ -44,6 +45,7 @@ const is = Object.assign({
   num,
   windows,
   real: (val) => !isNotSet(val),
+  realNotEmpty,
   notSet: isNotSet,
   emptyStr: (val) => val === '',
   emptyObj: (val) => isObjectLike(val) && Object.keys(val).length,
@@ -132,5 +134,20 @@ is.all = (args, fns = []) => fns.map((fn) => {
   }
   return fn(args)
 })
+
+/**
+ * @param  {any} args
+ * @param  {Array<?string>}  [fns=[]]
+ * @return {boolean} does the arg match any of the `izz`es
+ */
+is.any = (args, fns = []) => {
+  return !!fns.map((fn) => {
+    if (typeof fn === 'string') fn = is[fn]
+    if (fnParams(fn).length && Array.isArray(args)) {
+      return fn.apply(null, args)
+    }
+    return fn(args)
+  }).length
+}
 
 module.exports = is

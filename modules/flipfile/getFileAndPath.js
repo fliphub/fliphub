@@ -2,8 +2,8 @@ module.exports = function getFileAndPath(file) {
   const split = file.split('/')
   const fileAndPath = {
     file: split.pop(),
-    path: split.join('/'),
+    paths: split.join('/'),
   }
-  fileAndPath.dir = fileAndPath.path
+  fileAndPath.dir = fileAndPath.paths
   return fileAndPath
 }

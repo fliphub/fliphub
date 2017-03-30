@@ -8,6 +8,12 @@
 // http://krasimirtsonev.com/blog/article/Nodejs-managing-child-processes-starting-stopping-exec-spawn
 // https://www.npmjs.com/package/approot
 
+// https://github.com/sindresorhus/parent-module
+// https://github.com/sindresorhus/resolve-from
+// https://github.com/sindresorhus/generator-nm
+// https://github.com/h2non/nar
+// https://github.com/Unitech/pm2
+
 function splitSlashAndPop(str) {
   // split at every folder
   str = str.split('/')
@@ -42,13 +48,14 @@ function npmUp(currentPkgPath) {
     }).toString())
 }
 
+const appRootPath = require('app-root-path').toString()
 function rootable(args = {depth: 4, asObj: false}) {
   const paths = {
     farthest: false,
     nearest: false,
   }
 
-  paths.nearest = paths.farthest = require('app-root-path').toString()
+  paths.nearest = paths.farthest = appRootPath
   paths.farthest = paths.nearest
 
   const hasSelf = paths.nearest.includes('mono-root')
@@ -102,5 +109,7 @@ function rootable(args = {depth: 4, asObj: false}) {
   if (args.asObj) return paths
   return paths.farthest
 }
+
+rootable.appRootPath = appRootPath
 
 module.exports = rootable

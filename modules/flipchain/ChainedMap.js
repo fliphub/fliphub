@@ -56,6 +56,7 @@ class ChainedMap extends Chainable {
     methods.map((method) => {
       this[method] = (value) => this.set(method, value)
     })
+    return this
   }
 
   clear() {

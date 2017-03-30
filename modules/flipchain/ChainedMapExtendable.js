@@ -30,6 +30,7 @@ class ChainedMapExtendable extends ChainedMap {
   extendBool(methods, val, prefix = 'no') {
     this.extendWith(methods, val)
     this.extendWith(methods.map((method) => (0, addPrefix)(method, prefix)), !val, prefix)
+    return this
   }
 
   extendWith(methods, val, prefix) {
@@ -39,14 +40,50 @@ class ChainedMapExtendable extends ChainedMap {
     keys.forEach((method) => {
       this[method] = (value = objMethods[method]) => this.set((0, removePrefix)(method, 'no'), value)
     })
+    return this
   }
 
   extendFalse(methods) {
     this.extendWith(methods, false)
+    return this
   }
 
   extendTrue(methods) {
     this.extendWith(methods, true)
+    return this
+  }
+
+  // extend with string types of izz
+  // if it is that type, good, otherwise, nope.
+  extendType(methods, type, msg = null) {
+    const is = require('izz')
+    methods.forEach(method => {
+      this.shorthands.push(method)
+      this[method] = (value) => {
+        if (!is[type](value)) {
+          if (msg) console.log(msg)
+          return this
+        }
+
+        this.set(method, value)
+        return this
+      }
+    })
+    return this
+  }
+
+  extendIncrement(methods) {
+    // every time it is called, just increment
+    // add to this.shorthands
+    methods.forEach(method => {
+      this.shorthands.push(method)
+      this[method] = () => {
+        let value = (this.get(method) | 0) + 1
+        this.set(method, value)
+        return this
+      }
+    })
+    return this
   }
 
   extendDefault(methods) {

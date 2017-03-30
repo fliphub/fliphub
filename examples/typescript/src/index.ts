@@ -1,6 +1,6 @@
-import { Exception } from './Exception';
 import { utils } from 'realm-utils';
 
+const Exception = Error;
 
 export class ShouldInstance {
 

@@ -1,5 +1,9 @@
 # 🔈 changelog 🔈
 
+# part 58 - mar 30 17
+- filter out large file that prevented committing
+- started git.md
+
 # part 57 - mar 29 17
 - update todos
 - moving out uvxyz

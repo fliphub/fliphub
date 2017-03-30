@@ -1,4 +1,0 @@
-// PkgMnger
-class PackageManager {
-
-}

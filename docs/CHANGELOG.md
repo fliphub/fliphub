@@ -5,6 +5,7 @@
 - started git.md
 - typos on flags.name(s)
 - clean backup
+- fix docs links
 
 # part 57 - mar 29 17
 - update todos

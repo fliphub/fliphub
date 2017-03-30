@@ -8,8 +8,7 @@
 [![NSP Status](https://nodesecurity.io/orgs/fliphub/projects/d37f0cc6-02ea-4f05-a8aa-3b6c1e08bd21/badge)](https://nodesecurity.io/orgs/fliphub/projects/d37f0cc6-02ea-4f05-a8aa-3b6c1e08bd21)
 [![Slack][slack-image]][slack-url]
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[examples-badge]: https://img.shields.io/badge/%F0%9F%91%80-examples-8C8E93.svg?style=flat-square
-[examples-url]: https://github.com/fliphub/flipbox-examples
+![examples-badge](https://img.shields.io/badge/%F0%9F%91%80-examples-8C8E93.svg?style=flat-square)
 
 ## another refactor is in progress
 ### huge wins for simplicity, power, and stability

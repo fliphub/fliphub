@@ -23,6 +23,12 @@ const m = (arg1, arg2, msg) => {
   return txt + expected + json1 + got + json2
 }
 
+const d = (arg1, arg2, msg) => {
+  const diffs = log.diff(arg1).diff(arg2).doDiff().return().datas
+  const txt = log.text(msg + ':').color('bold').return().text + '\n\n'
+  return txt + diffs
+}
+
 asspow.true = asspow
 
 class Assert {
@@ -31,6 +37,10 @@ class Assert {
 
     this.aintHasString = (str) =>
       ass.true(!_obj.includes(str), m(_obj, str, 'not include string'))
+
+    this.occurrs = (str, count = 1) =>
+      ass.true((_obj.split(str).length - 1) === count, m(count, (_obj.split(str).length - 1), `does not have it times: ${count}`))
+    this.hasItTimes = this.occurrs
 
     this.aintGotString = this.aintHasString
     this.aintGotStr = this.aintHasString
@@ -46,7 +56,7 @@ class Assert {
 
     this.notEqual = (o) => ass.notDeepEqual(_obj, o)
 
-    this.deepEqual = (o) => ass.deepEqual(_obj, o)
+    this.deepEqual = (o) => ass.deepEqual(_obj, o, d(_obj, o, 'expected deep equal'))
     this.match = (exp) => ass.true(exp.test(_obj))
     this.notMatch = (exp) => ass.true(!exp.test(_obj), 'does not match')
     this.findString = (str) => ass.true(_obj.includes(str), 'finds string')

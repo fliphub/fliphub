@@ -1,0 +1,33 @@
+{
+  "name": "flipcache",
+  "version": "0.0.1",
+  "description": "temporary, safe, restorable, cacheable, chainable/fluent data",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "devDependencies": {
+    "ava": "*",
+    "fosho": "*"
+  },
+  "dependencies": {
+    "fliplog": "*",
+    "flipchain": "*",
+    "flipfile": "*",
+    "json-chain": "*",
+    "execa": "0.6.3",
+    "node-localstorage": "1.3.0"
+  },
+  "keywords": [
+    "cli",
+    "temp",
+    "cache",
+    "fliphub",
+    "safe",
+    "temporary",
+    "restore",
+    "fs"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "license": "MIT"
+}

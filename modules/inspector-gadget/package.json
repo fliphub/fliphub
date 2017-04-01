@@ -1,6 +1,7 @@
 {
   "name": "inspector-gadget",
-  "version": "0.1.7",
+  "description": "preconfigured nodejs util for inspecting, and customizing inspecting",
+  "version": "0.1.8",
   "main": "index.js",
   "files": [
     "index.js",

@@ -17,3 +17,8 @@ http://fredkschott.com/post/2014/06/require-and-the-module-system/
 https://www.bennadel.com/blog/2169-where-does-node-js-and-require-look-for-modules.htm
 https://nodejs.org/api/modules.html#loading_from_node_modules_Folders
 https://darrenderidder.github.io/talks/ModulePatterns/#/
+
+
+https://github.com/lerna/lerna
+https://github.com/guigrpa/oao/tree/master/src
+https://github.com/ziflex/gulp-tasks-monorepo

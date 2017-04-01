@@ -1,11 +1,165 @@
 # 🔈 changelog 🔈
 
+# part 60 - mar 32 17
+
+---
+
+# part 59 - mar 31 17
+- attempt to configure commonchunks for nodejs, not easy
+- docs
+  - add a few to splitting
+- json-chain
+  - create
+  - add toJSON, toString, has, del, val, parse, update
+  - add chainable functionality
+  - make pkgjson
+- flipcache
+  - flush out two examples
+  - chain it up
+  - use json-chain
+  - add deps
+  - split into individual files
+  - ran initial log test, looks good
+  - adding .create to the File, if it does not exist
+  - child-to-parent-methods from json to File
+  - returning File when calling update on json
+  - some cleaning and jsdocs
+  - adding .backup to Files
+- eslint
+  - allowing return assign
+- flipchain
+  - add aliasMethods
+- flipscript
+  - adding Binner
+  - move ava to devDependencies
+  - splitting into files
+  - testing stdout contents, working
+  - adding autostringify if using anything but letters, numbers, and more than 1 dash
+- onthefly
+  - add missing pkgjson metadata
+- make jsonchain
+  - move files there from flipcache
+- added some autoresolving, will be good to improve on
+- TODOs
+  - move TODO to docs
+  - updating
+- flippack
+  - cleaning old ScriptPermutator
+  - cleaning PackageFinder
+  - cleaning publisher a little, adding comments
+  - updating deps
+  - updating PackageManager to use flipcache
+- fliphub-core
+  - add link to workflow song
+- add .log.* to .gitignore
+- fliplog
+  - fix bug in echoing when echoing `false`
+- fliphub
+  - minor update to presets/todo/opshub/run
+  - clean some deps
+- html-plugin
+  - adding deps
+- docs
+  - adding some vorpal links to flipcache, cli, etc
+- minimal test
+  - added a simple ava example seed
+- fluent-cli
+  - create
+  - mock out an interface example
+  - setup pkgjson with deps
+- fliphub-cli
+  - clean up the files
+- inspector-gadget
+  - added missing pkgjson description
+  - added picture
+- easy-npm-files
+  - updating todos
+  - updating exposer
+  - using flipcache
+  - add description
+  - improving
+  - needs one last pass for dealing with paths, then should be good to go
+- izz
+  - added is.glob
+  - added todo
+- committing to github
+
 # part 58 - mar 30 17
 - filter out large file that prevented committing
 - started git.md
 - typos on flags.name(s)
 - clean backup
 - fix docs links
+- updated on-the-fly
+  - to run without a trace
+  - installation docs
+  - updated docs for without a trace
+  - published under onthefly as well as it uses that for the bin
+- flipscript
+  - hacking on it
+  - fixing prefixing
+  - adding toCmd
+  - fixing group index and order
+  - add ops.run
+  - adding tests
+    - test toString
+    - test toCmd on all scripts
+    - toCmd on one script
+    - lerna
+    - prefixes not duplicated
+    - prefixes respected
+    - npm adds doubledash
+    - npm deepEqual
+- inspector-gadget
+  - export util
+  - export disabling of custom inspection
+  - docs for custom
+  - readme picture
+- izz
+  - extend is_js
+  - add .includes
+  - add .glob
+- fliplog
+  - making echo default fn rather than log and aliasing echo
+  - adding diffs instead of dodiffs
+  - safety to diffs
+  - safety to stringify
+- fosho
+  - adding diff logging in equals
+  - adding occurrs/includesTimes
+- flipglob
+  - adding minimatch
+  - adding todo for iz.glob
+- flipfile
+  - add glob-fs
+  - expanding readme
+  - add fs-extra under /extra.js
+  - add all.js to export all
+  - added ava for testing
+  - added test for export
+  - examples to readme
+  - flat export of path in all
+- depflip
+  - move glob-fs out,
+  - fix dupe keys in pkg json
+- expose-hidden
+  - return object for convenience
+  - make second arg allow no binding
+  - update docs to reflect
+  - add .version to it, good practice
+- flipcache
+  - started
+  - added detached child experiment, success, cool
+  - planned a bit
+- fliphelp
+  - started
+  - experimented with tern
+  - added screenshots of result
+- docs
+  - add bench.md
+  - add more to monorepo
+
+---
 
 # part 57 - mar 29 17
 - update todos

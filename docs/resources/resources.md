@@ -16,3 +16,6 @@ https://github.com/knpwrs/webpack-to-memory
 https://github.com/shama/webpack-stream
 http://stackoverflow.com/questions/32874025/how-to-add-wildcard-mapping-in-entry-of-webpack
 http://git-awards.com/users/search?login=username
+
+
+https://www.npmjs.com/package/match-all

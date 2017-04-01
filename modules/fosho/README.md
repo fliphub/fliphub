@@ -80,3 +80,7 @@ test('plan fosho', (t) => {
     .isObj()
 })
 ```
+
+
+## resources
+- https://lingojam.com/IzzleTranslator

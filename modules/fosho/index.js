@@ -103,8 +103,8 @@ const foshizzle = (arg, t) => {
   })
 
   const ass = powers(arg, t)
-  extend(Fosho, ass, (v, fn, key, o, src) => (fnArg) => {
-    ass[key](fnArg)
+  extend(Fosho, ass, (v, fn, key, o, src) => (fnArg, fnArg2) => {
+    ass[key](fnArg, fnArg2)
     // else log.quick({v, fn, key, o, src})
     // else if (o[key])
     return Fosho
@@ -125,6 +125,11 @@ const foshizzle = (arg, t) => {
 
   return Fosho
 }
+
+// if previous assertions have passed,
+// this will be true,
+// otherwise they will return false
+Fosho.izzle = () => true
 
 // as static methods, simply wrap the fn call
 Object.keys(izz).forEach((key) => {

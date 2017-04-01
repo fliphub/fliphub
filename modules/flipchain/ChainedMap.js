@@ -53,7 +53,7 @@ class ChainedMap extends Chainable {
 
   extend(methods) {
     this.shorthands = methods
-    methods.map((method) => {
+    methods.forEach((method) => {
       this[method] = (value) => this.set(method, value)
     })
     return this
@@ -76,7 +76,7 @@ class ChainedMap extends Chainable {
   entries() {
     const entries = [...this.store]
     if (!entries.length) {
-      return
+      return null
     }
     return entries.reduce((acc, [key, value]) => {
       acc[key] = value

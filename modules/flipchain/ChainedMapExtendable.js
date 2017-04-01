@@ -16,6 +16,12 @@ class ChainedMapExtendable extends ChainedMap {
     })
   }
 
+  extendAlias(methods, name, thisArg = null) {
+    methods.forEach(method =>
+      this[method] = this[name].bind(thisArg || this))
+    return this
+  }
+
   addChain(name, Chain) {
     // making name available as a property on chainable
     if (typeof name !== 'string') Chain = name

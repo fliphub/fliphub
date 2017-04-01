@@ -16,6 +16,7 @@
 //
 // You can make glob treat dots as normal characters by setting dot:true in the options.
 const glob = require('glob')
+const minimatch = require('minimatch')
 const toarr = require('to-arr')
 const ChainedMap = require('flipchain/ChainedMapExtendable')
 
@@ -61,17 +62,24 @@ class Glob extends ChainedMap {
   // pattern() {}
   // patterns() {}
 
+  // valid() {
+  //   return izz.glob()
+  // }
+
   /**
    * @TODO:
-   * - [ ] use the existing globtester,
+   * - [x] use the existing globtester (minimatch)
    * - [ ] highlight in cli
+   * https://github.com/carrot/globtester/blob/master/assets/js/main.coffee
    *
    * @example
    * .doesItMatch(`tests/eh.js`)
    * .doesItMatch(`tests/folders/canada.js`)
    * .doesItMatch(`src/canada/-test.js`)
    */
-  doesItMatch() {}
+  doesItMatch(globs) {
+    return minimatch(globs)
+  }
 
   // could output like commander
   help() {}

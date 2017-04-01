@@ -1,0 +1,39 @@
+{
+  "name": "fluent-cli",
+  "description": "fluent-cli creation, minimal, powerful.",
+  "version": "0.1.8",
+  "main": "index.js",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "execa": "^0.6.1",
+    "inquirer": "^3.0.6",
+    "flipchain": "*",
+    "vorpal": "1.11.4",
+    "fliplog": "*",
+    "flipscript": "*",
+    "flipcache": "*"
+  },
+  "keywords": [
+    "cli",
+    "vorpal",
+    "fluent",
+    "chain",
+    "easy",
+    "creation",
+    "minimal",
+    "nodejs",
+    "fliphub",
+    "flipbox",
+    "webpack-chain",
+    "flipchain"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

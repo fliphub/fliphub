@@ -4,7 +4,16 @@
   "main": "index.js",
   "description": "file helpers for reading, writing, and detecting existence or types.",
   "dependencies": {
-    "mkdirp": "^0.5.1"
+    "expose-hidden": "*",
+    "mkdirp": "^0.5.1",
+    "glob-fs": "0.1.6",
+    "fs-extra": "2.1.2"
+  },
+  "devDependencies": {
+    "ava": "*"
+  },
+  "scripts": {
+    "test": "ava"
   },
   "keywords": [
     "file",

@@ -1,5 +1,7 @@
 const iss = require('is')
 const toarr = require('to-arr')
+const is_js = require('is_js')
+// const exposeHidden = require('expose-hidden')
 const isObject = require('./obj')
 const isPromise = require('./promise')
 const isBindable = require('./bindable')
@@ -16,6 +18,7 @@ const arrOf = require('./arrOf')
 const ci = require('./ci')
 const isPlainObject = require('./plainObj')
 const realNotEmpty = require('./realNotEmpty')
+const glob = require('./glob')
 
 // @TODO: add support for plurals
 // loop, give back string of them
@@ -41,7 +44,9 @@ function webpackCli() {
   // return flags('bin/webpack', {type: 'bool'})
 }
 
+// exposeHidden(iss)
 const is = Object.assign({
+  glob,
   num,
   windows,
   real: (val) => !isNotSet(val),
@@ -86,7 +91,7 @@ const is = Object.assign({
   instanceOf: function instanceOf(arg1, arg2) {
     return arg1 instanceof arg2
   },
-}, iss)
+}, iss, is_js)
 
 is.notReal = (val) => !is.real(val)
 
@@ -134,6 +139,10 @@ is.all = (args, fns = []) => fns.map((fn) => {
   }
   return fn(args)
 })
+
+is.includes = (haystack, needle) => {
+  return haystack.includes(needle)
+}
 
 /**
  * @param  {any} args

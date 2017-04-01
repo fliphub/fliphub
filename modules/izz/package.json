@@ -1,6 +1,6 @@
 {
   "name": "izz",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "index.js",
   "description": "is type shorthands for fliphub",
   "scripts": {
@@ -8,8 +8,10 @@
   },
   "dependencies": {
     "is": "^3.2.1",
+    "is_js": "0.9.0",
     "lodash.isplainobject": "4.0.6",
-    "to-arr": "*"
+    "to-arr": "*",
+    "is-glob": "3.1.0"
   },
   "keywords": [
     "helpers",

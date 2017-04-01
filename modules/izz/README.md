@@ -21,3 +21,6 @@
 - is.instanceOf
 - is.real/notReal
 - is.toType (returns string of type)
+
+## todo
+- update docs with full api

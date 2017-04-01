@@ -1,6 +1,6 @@
 {
   "name": "expose-hidden",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "expose everything from an object to itself",
   "main": "index.js",
   "author": "James <aretecode@gmail.com>",

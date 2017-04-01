@@ -7,5 +7,10 @@ class Eh {
   hidden2() {}
 }
 const eh = new Eh()
-exposeHidden(eh, /* optional second arg is `thisArg` to rebind as needed */)
+
+// @returns eh, it mutates so it does not need to return, but for convenience
+exposeHidden(eh, thisArgToBindWith)
+
+// using false will expose, but will not bind
+exposeHidden(eh, false)
 ```

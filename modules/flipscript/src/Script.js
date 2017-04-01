@@ -1,10 +1,10 @@
 const ChainedMap = require('flipchain/ChainedMapExtendable')
-const execa = require('execa')
 const flipGlob = require('flipglob')
 const insertAt = require('insert-at-index')
 const real = require('izz/realNotEmpty')
 const toarr = require('to-arr')
-const {Hub, Workflow, Context, Core, log} = require('fliphub-core')
+// const binner = require('./binner')
+const Flag = require('./Flag')
 
 // https://www.youtube.com/watch?v=SwSle66O5sU
 const OFF = `${~315 >>> 3}@@`
@@ -16,50 +16,13 @@ function prefixer(prefix, names) {
   })
 }
 
-class Flag extends Context {
-  constructor(parent) {
-    super(parent)
-    this.dash = false
-    this.stringify = false
-    this.name = String
-    this.value = undefined
-
-    // so we can have groups by `--`
-    // and index of flags
-    // this.index = 0
-    // this.group = 0
-  }
-
-  // @TODO:
-  // - [ ] multiple prefixes later
-  toString(prefix = false) {
-    let string = ''
-
-    // if dash: --
-    // if prefix: (monorepo) e.g. (inferno-compat, lodash.forown)
-    if (this.dash) string = '--'
-    if (prefix) string += prefixer(prefix, this.name)
-    else string += this.name
-
-    // if value & stringify: --name='val', name='val'
-    // else if value:        name=val,
-    // else:                 --name, name
-    if (real(this.value)) {
-      if (this.stringify) string += `="${this.value}"`
-      else string += `=${this.value}`
-    }
-
-    return string
-  }
-}
-
 /**
  * @config
  *
  * @TODO:
  * - [ ] needs some added index stuff such as adding raw commands
  *       example `exec`
- *
+ * - [ ] might need to make `groups` return a new Script?
  * ---
  * prefix app names, for monorepos
  *
@@ -78,53 +41,75 @@ class Flag extends Context {
  * globs, aliases, adding flags, getting the flags!
  * set envs, just don't pass them in if they are empty
  */
-class Script extends ChainedMap {
+module.exports = class Script extends ChainedMap {
   constructor(parent) {
     super(parent)
+    delete this.parent
 
     this
       // might also want to do other things here with node, py, etc
       .extend([
         '_file', // ?str/path
         '_binDir',
-        '_bin', // str
         // 'current', // instanceof flag
         'prefix', // string
         'flagIndex',
         '_env',
+        '_raw',
+
+        '_bin', // str
+        '_npm',
       ])
       // .extendIncrement([
       //   'index', // num
       // ])
       .extendTrue([
-        '_npm',
         // 'npm',
         'sync',
       ])
 
       // .index()
 
-    this.file = (file) => this
+    this.i = 0
+    this.file = (file, i = OFF) => this
       .addToGroup('node')
       .addToGroup(file)
-    this.npm = (npm) => this
+      ._file(file)
+    this.npm = (npm, i = OFF) => this
       .addToGroup('npm', 1)
-      .addToGroup('run')
+      .addToGroup('run-script')
       .addToGroup(npm)
       ._npm(npm)
-    this.bin = (bin) => this
-      .addToGroup(bin, 1)
+      .doubleDash('--')
+    this.bin = (bin, i = OFF) => this
+      .addToGroup(bin) // , 1
       ._bin(bin)
+    this.raw = (raw, i = OFF) => this
+      .addToGroup(raw) // , 1
+      ._raw(this.get('_raw').concat([raw]))
 
+    this.node = (harmony) => {
+      this
+      .addToGroup('node')
+      if (harmony) {
+        this
+        .flag('harmony')
+        .flag('max_old_space_size', 120000)
+      }
+    }
 
     // default
     this
       .flagIndex(OFF)
       ._env({}) // process.env
       ._binDir('../../')
+      ._raw([])
 
     this.index = 0
-    this.doubleDash = this.group.bind(this)
+    this.doubleDash = (arg) => {
+      this.addToGroup(arg)
+      return this.group(arg)
+    }
     this.groups = [
       /* 0:*/ [],
     ]
@@ -152,11 +137,12 @@ class Script extends ChainedMap {
   }
 
   /**
-   * @see this.groups
+   * @see this.groups, this.index
    * @return {Script}
    */
   group() {
     this.groups.push([])
+    this.index = this.groups.length - 1
     return this
   }
 
@@ -181,13 +167,16 @@ class Script extends ChainedMap {
       this.flagIndex(OFF)
     }
 
+    // if empty
+    this.groups[group] = this.groups[group] || []
+
     if (index === OFF) {
       this.groups[group].push(flag)
       return this
     }
 
     this.groups[group] = insertAt(this.groups[group], index, toarr(flag))
-    this.index = this.groups.length - 1
+    // this.index = group + 2
 
     return this
   }
@@ -296,7 +285,7 @@ class Script extends ChainedMap {
    * @return {Flag}
    */
   envArg(env) {
-    this.arg('NODE_ENV', env, 0, 0)
+    this.arg('NODE_ENV', env) // , 0, 0
     return this
   }
 
@@ -323,6 +312,15 @@ class Script extends ChainedMap {
    * @return {Flag}
    */
   env(env) {
+    return this
+      .envDefine(env)
+      // .envArg(env)
+  }
+
+  /**
+   * does both
+   */
+  envs(env) {
     return this
       .envDefine(env)
       .envArg(env)
@@ -362,6 +360,9 @@ class Script extends ChainedMap {
         .env(env)
     }
     this.scope = (scope) => {
+      const prefix = this.get('prefix')
+      if (prefix) scope = prefixer(prefix, scope)
+
       return this
         .globFlag('scope', scope, '--')
     }
@@ -373,31 +374,48 @@ class Script extends ChainedMap {
 
   /**
    * for use in execa
+   * @param {boolean} [reduce] return as joined (should move to toStr)
    * @return {Array<string>}
    */
-  toArray() {
+  toArray(reduce = false) {
     const {
-      bin, binDir, file, npm, _env,
+      _bin, binDir, file, npm, _env,
       prefix,
       // sync, exec, fork
     } = this.entries()
-    const flags = this.groups.map(group =>
-      group
+
+    // console.log(this.groups)
+    let flags = this.groups.map((group, i) => {
+      // console.log(group, i)
+      // group.forEach(g => log.verbose(5).data(g).bold('-----------=====').echo())
+      let mapped = toarr(group)
         .filter(g => g)
         .map(flag => flag.toString(prefix) + ' ')
-        .join('') // .join(' -- ')
-    ).join('')
+      // console.log({mapped})
+      if (reduce) mapped = mapped.join(' ')
+      return mapped
+    })
 
-    let script = []
-    if (file) script = script.concat(['node', file])
-    else if (bin) script.unshift(bin)
-    else if (npm) script = script.concat(['npm', 'run', npm])
+    // if (reduce) flags = flags.join(' -- ')
 
-    script = script.concat(flags)
-    // this seems nasty
-    // script.env = _env
+    // const last = flags.length - 1
+    // flags[last] = flags[last].replace(/\s\s/, ' ').slice(0, -3)
 
-    return script
+    return flags
+    // let script = []
+    // // if (file) script = script.concat(['node', file])
+    // // else if (bin) script.unshift(bin)
+    // // else if (npm) script = script.concat(['npm', 'run', npm])
+    //
+    // // script = script.concat(flags)
+    // script.push(flags)
+    //
+    // // console.log(script)
+    // // log.verbose(5).data(script).bold('-----------=====').echo()
+    // // this seems nasty
+    // // script.env = _env
+    //
+    // return script
   }
 
   /**
@@ -405,145 +423,40 @@ class Script extends ChainedMap {
    * @return {string}
    */
   toString() {
-    const arr = this.toArray()
-    console.log(arr)
-    return '' // arr.join(' ')
+    return this.toArray(true).join(' -- ').replace(/ {2}/, ' ').trim()
+      // .map(group => group.join('###'))
+      // .join(' -- ')
+      // .replace(/ {2}/, ' ').trim()
   }
 
-  // --- todos ---
-  // presets() { const nodeFlags = ' --harmony --max_old_space_size=8000' }
-  // doubleDash() {}
+  /**
+   * @since 0.0.3
+   * @return {string}
+   */
+  toCmd() {
+    const arr = this.toArray()
+
+    // take group out,
+    const group1 = arr.shift()
+    // take first of group 1 out,
+    const bin = group1.shift().trim()
+    // then put group 1 back in
+    arr.unshift(group1)
+
+    // flatten
+    const args = []
+    arr.forEach(arg => {
+      if (Array.isArray(arg)) return arg.forEach(a => args.push(a.trim()))
+      return args.push(arg.trim())
+    })
+
+
+    // {isBin: _bin} = this.entries()
+    return {bin, args, env: this.get('_env')}
+  }
+
   // ---
   // clone and extend an existing script
   // to do things like extend a script but another env... simplicity
   // extend() {}, inherit() {}
 }
-
-
-// @workflow
-class Scripts extends ChainedMap {
-  constructor(parent) {
-    super(parent)
-    this.index = -1
-    this.scripts = {}
-  }
-
-  /**
-   * @see this.scripts, Script
-   * @description start/add/name a script
-   * @param {string} [name]
-   * @return {Script}
-   */
-  add(name = null) {
-    this.index = this.index + 1
-    if (name === null) name = this.index
-
-    this.scripts[name] = new Script(this)
-    this.current = this.scripts[name]
-    return this.current
-  }
-
-  toString() {
-    return Object
-      .values(this.scripts)
-      .map(script => script.toString())
-      .join('')
-  }
-
-  // --- todo ---
-
-  // also .addFlags for use outside of scripts?
-  // add(name) {
-  //   this.flags[name] = new Flag(this)
-  //   this.index = this.index + 1
-  //   return this.flags[name]
-  // }
-}
-
-// @core
-// @TODO: pipe, then (&&)
-// `${env} ${lerna} exec ${lernaLog} ${scoped} -- node ${binPath}`
-class ScriptFlip extends ChainedMap {
-  constructor(parent) {
-    super(parent)
-    this.scripts = new Scripts(this)
-  }
-
-  /**
-   * @inherit Script.add
-   */
-  add(name) {
-    return this.scripts.add(name)
-  }
-
-  cross_env(env) {
-    return execa('cross-env', [`NODE_ENV=${env}`])
-  }
-  toString() {
-    return this.scripts.toString()
-  }
-
-  // --- todo ---
-  // ops
-  // run() {
-  //   // 'node ' + this.parent.scripty.nodeModuleFor('cross-env') +
-  //   // .forEach(env => {
-  //   //   console.log(env)
-  //   //   this.execWith({env, bin, localBin, scope})
-  //   // })
-  //
-  //   this.scripts = []
-  //   return this
-  // }
-  // exec() {
-  //   const todo = Script
-  //   this.scripts.forEach(script => {
-  //     execa(...todo)
-  //   })
-  // }
-}
-
-const scripts = new ScriptFlip()
-scripts
-  .add()
-  .env('prod')
-  .lerna()
-  .scope('app1,app2')
-  .log('info')
-  .concurrency(1)
-  .group(2)
-  .bin('tsc,rollup')
-scripts
-  .add()
-  .bin('karma')
-  .flag('only', 'me')
-  .env('dev')
-  .sync()
-scripts
-  .add()
-  .npm('script')
-  .env('magic')
-
-log.quick(scripts.toString())
-
-
-//   .envDefine('prod')
-//   .envArg('prod')
-
-  // .run('name')
-
-//   .parent
-// .exec()
-
-// log.quick(scripts.toString())
-// const data = log.json(log.stringify(scripts).returnVals()).echo()
-
-//
-// // .binPath('../../')
-// // .nodeBinPath('../../node_modules/.bin/') // not needed
-
-
-// log.quick(data)
-
-
-// module.exports = LernaCli

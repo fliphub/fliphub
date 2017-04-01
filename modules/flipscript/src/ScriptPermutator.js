@@ -1,13 +1,20 @@
-// from @challenger532
-class ScriptCreator {
-  constructor(mapper, ops = {
-    env: ['dev', 'prod'],
-    operations: [],
-    apps: [],
-    empty: [],
-  }) {
-    this.mapper = mapper
-    this.ops = ops
+function defaultMapFn(script) {
+  return script
+}
+
+// from @challenger532 https://github.com/challenger532
+class ScriptPermutator {
+  constructor(ops) {
+    const options = Object.assign({
+      mapFn: defaultMapFn,
+      env: ['dev', 'prod'],
+      operations: [],
+      apps: [],
+      empty: [],
+    }, ops)
+    this.mapper = options.mapFn
+    delete options.mapFn
+    this.ops = options
     this.keys = Object.keys(this.ops)
     this.handleOptions()
   }
@@ -19,12 +26,12 @@ class ScriptCreator {
       const add = 'add' + key.charAt(0).toUpperCase() + key.slice(1)
 
       this[add] = function(params) {
-        if (typeof params == 'object') {
+        if (typeof params === 'object') {
           this.ops[key] = this.ops[key].concat(params)
           return this
         }
-        if (typeof params == 'string') {
-          var temp = params.split(' ')
+        if (typeof params === 'string') {
+          let temp = params.split(' ')
           this.ops[key] = temp
           return this
         }
@@ -38,9 +45,9 @@ class ScriptCreator {
   }
 
   combination(script, arrays, result) {
-    if (arrays.length == 0) {
+    if (arrays.length === 0) {
       // l(script)
-      return
+      return null
     }
     const copy = arrays.slice()
     const first = copy.shift()
@@ -60,14 +67,9 @@ class ScriptCreator {
     this.keys.forEach(key => arrays.push(this.ops[key]))
 
     const scripts = this.combination('', arrays, {})
-    result['scripts'] = scripts
+    result.scripts = scripts
     return result
   }
 }
 
-const scriptCreator = new ScriptCreator(mapper)
-function mapper(script) {
-  return script
-}
-
-module.exports = ScriptCreator
+module.exports = ScriptPermutator

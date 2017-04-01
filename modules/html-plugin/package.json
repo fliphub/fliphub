@@ -9,6 +9,13 @@
     "fusebox",
     "fliphub"
   ],
+  "dependencies": {
+    "html-webpack-plugin": "*",
+    "gom": "*",
+    "fliplog": "*",
+    "flipfile": "*",
+    "fliphub-resolve": "*"
+  },
   "author": "James <aretecode@gmail.com>",
   "homepage": "https://github.com/fliphub/fliphub#readme",
   "repository": {
@@ -18,5 +25,4 @@
   "bugs": {
     "url": "https://github.com/fliphub/fliphub/issues"
   }
-
 }

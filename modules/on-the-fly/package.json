@@ -1,20 +1,48 @@
 {
   "name": "on-the-fly",
-  "version": "0.0.2",
-  "description": "find and build es6 + typescript configs on the fly in memory.",
+  "version": "0.1.0",
+  "description": "find, build, & run es6 + typescript configs on the fly, in-memory, without a trace.",
   "bin": "bin/onthefly",
   "main": "index.js",
   "scripts": {
-    "test-bin": "node bin/onthefly test/config.js"
+    "test-bin": "node bin/onthefly test/config.js",
+    "test-npm": "onthefly index"
   },
   "files": [
     "bin",
     "index.js"
   ],
+  "moduleDependencies": [
+    "babel-core",
+    "babel-preset-env",
+    "flipfile",
+    "fuse-box",
+    "mono-root"
+  ],
   "dependencies": {
+    "babel-core": "*",
     "babel-preset-env": "^1.2.2",
     "flipfile": "*",
-    "fuse-box": "^1.4.1-beta.17",
+    "fuse-box": "^1.4.1-beta.18",
     "mono-root": "0.0.6"
+  },
+  "_devDependencies": {
+    "onthefly": "0.0.9"
+  },
+  "__devDependencies": {
+    "on-the-fly": "0.0.9"
+  },
+  "___devDependencies": {
+    "onfly": "0.0.9"
+  },
+  "license": "MIT",
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
   }
 }

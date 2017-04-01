@@ -1,16 +1,17 @@
 const {resolve} = require('path')
 const find = require('flipfile/find')
-const flipResolve = require('mono-root')
+const del = require('flipfile/del')
 
-module.exports = function runtimeConfig(configPath, directory, output = 'config.js') {
+module.exports = function runtimeConfig(configPath, directory, output) {
   const {FuseBox, BabelPlugin, TypeScriptHelpers} = require('fuse-box')
-  console.log(configPath, directory)
 
-  if (!directory) directory = flipResolve({depth: 1})
+  if (!directory) directory = process.cwd()
   const {dir, file, abs} = find(configPath, directory)
-  const name = './.flip/' + (output || 'config.js')
+  const name = './' + (output || '.flipconfig.js')
   const nameAbs = resolve(dir, name)
   const outFile = resolve(dir, name)
+  // console.log({dir, name, nameAbs, outFile, configPath, file})
+
 
   let contents = null
   class ConfigPlugin {
@@ -27,6 +28,7 @@ module.exports = function runtimeConfig(configPath, directory, output = 'config.
     }
   }
 
+  // @TODO: may need more
   // bundle for js or ts
   let plugin = BabelPlugin({
     config: {
@@ -47,11 +49,12 @@ module.exports = function runtimeConfig(configPath, directory, output = 'config.
     homeDir: dir,
 
     // leave this out to use config plugin
-    output: './.flip',
+    output: outFile,
 
+    package: 'onthefly',
     // project: 'config',
     // globals: {'config': '*'},
-    globals: {'default': '*'},
+    globals: {'onthefly': '*'},
     plugins: [
       [
         plugin,
@@ -62,73 +65,42 @@ module.exports = function runtimeConfig(configPath, directory, output = 'config.
 
   const instructions = `> [${file}]`
   // console.log('...building config...', {instructions})
-  console.log({
-    debug: false,
-    cache: false,
-    log: false,
-    homeDir: dir,
+  // console.log({
+  //   debug: false,
+  //   cache: false,
+  //   log: false,
+  //   homeDir: dir,
+  //
+  //   // leave this out to use config plugin
+  //   output: outFile,
+  //
+  //   // project: 'config',
+  //   // globals: {'config': '*'},
+  //   globals: {'default': '*'},
+  //   plugins: [
+  //     [
+  //       plugin,
+  //       new ConfigPlugin(),
+  //     ],
+  //   ],
+  // })
 
-    // leave this out to use config plugin
-    output: './.flip',
+  fuse
+    .bundle(name)
+    .instructions(instructions)
+    .completed(proc => {
+      // console.log('...config built...', outFile)
+      // const config = eval(contents)
+      try {
+        const config = require(nameAbs)
+        if (!config)
+          return console.log('sorry, could not build eh', require(nameAbs))
+        del(nameAbs)
+        return Promise.resolve(config)
+      } catch (e) {
+        console.log(e)
+      }
+    })
 
-    // project: 'config',
-    // globals: {'config': '*'},
-    globals: {'default': '*'},
-    plugins: [
-      [
-        plugin,
-        new ConfigPlugin(),
-      ],
-    ],
-  })
-  console.log({
-    debug: false,
-    cache: false,
-    log: false,
-    homeDir: dir,
-
-    // leave this out to use config plugin
-    output: './.flip',
-
-    // project: 'config',
-    // globals: {'config': '*'},
-    globals: {'default': '*'},
-    plugins: [
-      [
-        plugin,
-        new ConfigPlugin(),
-      ],
-    ],
-  })
-  console.log({
-    debug: false,
-    cache: false,
-    log: false,
-    homeDir: dir,
-
-    // leave this out to use config plugin
-    output: './.flip',
-
-    // project: 'config',
-    // globals: {'config': '*'},
-    globals: {'default': '*'},
-    plugins: [
-      [
-        plugin,
-        new ConfigPlugin(),
-      ],
-    ],
-  })
-
-
-  fuse.bundle(name).instructions(instructions)
-  return fuse.run().then((args) => {
-    // console.log('...config built...', outFile)
-    // const config = eval(contents)
-
-    const config = require(name).default
-    if (!config) return console.log('sorry, could not build eh')
-
-    return Promise.resolve(config)
-  })
+  return fuse.run()
 }

@@ -1,6 +1,7 @@
 node_modules
 .idea
 npm-debug.log
+*.log.*
 dist
 .DS_Store
 .eslintcache
@@ -17,6 +18,6 @@ build
 
 #playground
 #!playground
-#playground
+playground
 yuge
 public

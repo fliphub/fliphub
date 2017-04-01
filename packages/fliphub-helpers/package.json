@@ -17,6 +17,8 @@
   "dependencies": {
     "arr-to-obj": "*",
     "deep-replace": "*",
+    "does-include": "*",
+    "flipcache": "*",
     "flipchain": "*",
     "flipfile": "*",
     "flipflag": "*",

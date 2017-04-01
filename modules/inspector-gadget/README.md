@@ -1,10 +1,10 @@
-# inspector-gadget
+# inspector-gadget 🕵🗜⚙
 
 ![https://github.com/fliphub/fliphub]( https://cloud.githubusercontent.com/assets/4022631/24534601/e748baf2-1583-11e7-897b-d9707e3bcf53.png)
 
 > preconfigured nodejs util for inspecting, and customizing inspecting
 
-## inspectorGadget
+## inspectorGadget 🗜
 configure what is exposed when inspecting
 
 ```js
@@ -16,7 +16,7 @@ class Eh {
 }
 ```
 
-## inspector
+## inspector 🕵
 ```js
 const {inspector} = require('inspector-gadget')
 const inspected = inspector({
@@ -37,7 +37,7 @@ const inspected = inspector({
 console.log(inspected)
 ```
 
-## custom
+## custom ⚙
 ```js
 const {custom} = require('inspector-gadget')
 

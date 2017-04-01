@@ -19,6 +19,7 @@ const glob = require('glob')
 const minimatch = require('minimatch')
 const toarr = require('to-arr')
 const ChainedMap = require('flipchain/ChainedMapExtendable')
+const isGlob = require('izz/glob')
 
 // @TODO: take the glonb filling I did in inferno-cli
 class Glob extends ChainedMap {
@@ -79,6 +80,10 @@ class Glob extends ChainedMap {
    */
   doesItMatch(globs) {
     return minimatch(globs)
+  }
+
+  isGlob(glob) {
+    return isGlob(glob)
   }
 
   // could output like commander

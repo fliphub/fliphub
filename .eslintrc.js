@@ -33,5 +33,6 @@ module.exports = {
     'arrow-body-style': 0,
     'arrow-parens': 0,
     'no-bitwise': 0,
+    'no-return-assign': 0,
   }
 }

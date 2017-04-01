@@ -8,5 +8,6 @@
     "packages/*"
   ],
   "npmClient": "npm",
-  "version": "independent"
+  "version": "independent",
+  "loglevel": "verbose"
 }

@@ -5,6 +5,7 @@ const Events = require('./Events')
 const FilterHub = require('./FilterHub')
 const PresetHub = require('./Presets')
 
+// https://soundcloud.com/ill-gates/workflowft-the-dropstarz
 class Workflow {
 
   /**

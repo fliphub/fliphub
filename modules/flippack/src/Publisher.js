@@ -1,18 +1,30 @@
-// use np here
+/**
+ * @description
+ * if release
+ * interactive lerna-type tagging
+ * if name has , then npmlush for each
+ *
+ * @see
+ * https://github.com/lerna/lerna/tree/master/src
+ *
+ * @TODO:
+ * - [ ] use flipcache here
+ *
+ */
 
-// if release
-// interactive lerna-type tagging
-// if name has , then npmlush for each
-const {spawnSync} = require('child_process')
-const paths = require('../../../paths')
 const path = require('path')
+const {spawnSync} = require('child_process')
+const npm = require('np')
 const file = require('flipfile')
-
-// https://github.com/lerna/lerna/tree/master/src
+const flipcache = require('flipcache')
 const lerna = require('lerna')
 const prompt = require('lerna/lib/PromptUtilities')
 const semver = require('semver')
 const inquirer = require('inquirer')
+
+// @TODO:
+const paths = require('../../../paths')
+
 
 const toGithub = {
   type: 'confirm',

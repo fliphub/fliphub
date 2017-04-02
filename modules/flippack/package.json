@@ -5,11 +5,22 @@
   "description": "flip the package json",
   "dependencies": {
     "semver": "^5.3.0",
-    "np": "*"
+    "np": "*",
+    "flipcache": "*",
+    "flipfile": "*",
+    "fliplog": "*",
+    "fliphub-alias": "*"
   },
   "keywords": [
-    "pkgflip",
+    "flip",
+    "fluent",
+    "chain",
+    "lerna",
+    "semver",
     "flipscript",
+    "flippack",
+    "flipcache",
+    "flipfile",
     "fliphub",
     "flipbox"
   ],

@@ -1,32 +1,27 @@
-function tryToRequire(file, helpers) {
-  // var file = dirname + '/' + filename
-  try {
-    // var json = require(file)
-    var json = helpers.file.read(file)
-    json = JSON.parse(json)
-    return json
-  } catch (e) {
-    // console.log('does not have file: ', {file}) // , e
-  }
-}
+// @TODO: note the lerna api provides this functionality,
+// @see ./Publisher
+const {resolve} = require('path')
+const {read, write, walk, glob} = require('flipfile/all')
+const FC = require('flipcache')
+const log = require('fliplog')
 
-function getRegistry(dirname, options, helpers) {
-  var files = helpers.walk(dirname, {recursive: true})
+function getRegistry(dirname, options) {
+  let files = walk(dirname, {recursive: true})
   // var files = getRegistryGlob(dirname)
-  var result = {}
+  let result = {}
   files.forEach(dir => {
-    dir = helpers.resolve.resolveTo(dir, __dirname)
+    dir = resolve(__dirname, dir)
     // console.log(dir)
     // console.log(dirname + '/' + dir, 'package.json')
-    var pkg = tryToRequire(dir, helpers)
+    let pkgjson = read.json(dir)
 
-    // console.log(pkg,dir)
-    if (pkg)  {
+    // console.log(pkgjson,dir)
+    if (pkgjson)  {
       // for testing diff
-      // if (pkg.version == '0.0.1') pkg.version = '0.0.2'
+      // if (pkgjson.version == '0.0.1') pkgjson.version = '0.0.2'
 
-      result[pkg.name] = {
-        version: pkg.version,
+      result[pkgjson.name] = {
+        version: pkgjson.version,
         dir,
       }
     }
@@ -35,7 +30,6 @@ function getRegistry(dirname, options, helpers) {
 }
 
 function getRegistryGlob(cwd) {
-  var glob = require('glob')
   // options is optional
   return glob.sync('../**/*.json', {
     ignore: '**/node_modules/**',
@@ -46,22 +40,22 @@ function getRegistryGlob(cwd) {
 function addScripts() {}
 function addDeps({name, dev, version}) {}
 function writePackage() {}
-function writeRegistry(registry, file, helpers) {
-  var stringified = JSON.stringify(registry, null, 2)
-  helpers.file.write(file, stringified)
+function writeRegistry(registry, file) {
+  let stringified = JSON.stringify(registry, null, 2)
+  write(file, stringified)
 }
 
 
 // if there is no written registry...
-function diffs(currentRegistry, prodRegistry, helpers) {
-  currentRegistry = tryToRequire(currentRegistry, helpers)
-  prodRegistry = tryToRequire(prodRegistry, helpers)
-  var diff = {}
+function diffs(currentRegistry, prodRegistry) {
+  currentRegistry = read.json(currentRegistry)
+  prodRegistry = read.json(prodRegistry)
+  let diff = {}
   Object.keys(currentRegistry).forEach(name => {
-    var curr = currentRegistry[name]
-    var prod = prodRegistry[name]
+    let curr = currentRegistry[name]
+    let prod = prodRegistry[name]
     if (curr.version != prod.version) {
-      helpers.log(curr, {level: 'has updates!'})
+      log(curr, {level: 'has updates!'})
       diff[curr.name] = curr
     }
   })
@@ -71,35 +65,36 @@ function diffs(currentRegistry, prodRegistry, helpers) {
 // write current registry to hydrate easier and production one?
 // registry location on apps?
 // if not there, default to where?
-function hydrateRegistry() {
-}
+function hydrateRegistry() {}
 
-function packages(app, options, helpers) {
-  if (!options.dir) options.dir = helpers.resolve('./')
-  var registry = getRegistry(options.dir, options, helpers)
+function packages(app, options) {
+  if (!options.dir) options.dir = resolve('./')
+  let registry = getRegistry(options.dir, options)
   return registry
 }
-function pkg(app, helpers) {
-  var options = {}
-  var upupup = '../../../'
-  if (!options.dir) options.dir = helpers.resolve(upupup + 'packages/')
-  helpers.log.text(options.dir)
+function pkg(app) {
+  let options = {}
+  let upupup = '../../../'
+  if (!options.dir) options.dir = resolve(upupup + 'packages/')
+  log.text(options.dir)
 
-  var registry = getRegistry(options.dir, options, helpers)
+  let registry = getRegistry(options.dir, options)
   // registry = getRegistryGlob()
 
   // @TODO: on `release` env change this
-  var prod = true
-  var output
-  var currentOutput = helpers.resolve('./build/generated/currentRegistry.json')
-  var prodOutput = helpers.resolve('./build/generated/currentRegistryProd.json')
+  let prod = true
+
+  const current = FC.to('currentRegistry.json')
+  const prod = FC.to('currentRegistryProd.json')
+
+  let currentOutput = resolve('./build/generated/currentRegistry.json')
+  let prodOutput = resolve('./build/generated/currentRegistryProd.json')
 
   output = currentOutput
   if (prod) output = prodOutput
-  // writeRegistry(registry, output, helpers)
+  // writeRegistry(registry, output)
 
-  var diffs = diffs(currentOutput, prodOutput, helpers)
-  app.diffs = diffs
+  app.diffs = diffs(currentOutput, prodOutput)
   return app
 }
 packages.addScripts = addScripts

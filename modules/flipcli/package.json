@@ -1,22 +1,38 @@
 {
-  "name": "fluent-cli",
-  "description": "fluent-cli creation, minimal, powerful.",
-  "version": "0.1.8",
+  "name": "flipcli",
+  "description": "flipcli creation, minimal, powerful.",
+  "version": "0.0.3",
   "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "optionalDependencies": {
+    "fuzzy": "*"
+  },
+  "devDependencies": {
+    "ava": "*",
+    "fosho": "*"
+  },
   "dependencies": {
     "commander": "^2.9.0",
     "execa": "^0.6.1",
     "inquirer": "^3.0.6",
     "flipchain": "*",
     "vorpal": "1.11.4",
+    "flipfile": "*",
+    "flipflag": "*",
     "fliplog": "*",
     "flipscript": "*",
-    "flipcache": "*"
+    "flipcache": "*",
+    "inquirer-autocomplete-prompt": "0.8.0",
+    "to-arr": "*",
+    "lodash.sortby": "^4.7.0"
   },
   "keywords": [
     "cli",
     "vorpal",
     "fluent",
+    "interactive",
     "chain",
     "easy",
     "creation",

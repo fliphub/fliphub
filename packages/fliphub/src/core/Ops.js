@@ -4,7 +4,7 @@ const tinyPromiseMap = require('tiny-promise-map')
 const timer = require('fliptime')
 const log = require('fliplog')
 const flipflag = require('flipflag')
-const childToParentMethods = require('fliphub-helpers/obj/childToParentMethods')
+const childToParentMethods = require('childparent')
 
 module.exports = class Ops {
   constructor(workflow) {

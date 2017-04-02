@@ -4,9 +4,6 @@
   "description": "finding, extracting, checking, installing deps",
   "main": "index.js",
   "author": "James <aretecode@gmail.com>",
-  "scripts": {
-    "test": "node test.js"
-  },
   "dependencies": {
     "depcheck": "*",
     "flipfile": "*",

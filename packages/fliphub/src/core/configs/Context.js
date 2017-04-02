@@ -1,9 +1,9 @@
 const cleanObj = require('clean-obj')
 const log = require('fliplog')
-const firstToUc = require('fliphub-helpers/str/firstToUpper')
 const {Presets, ChainedMap} = require('fliphub-core')
 const forOwn = require('lodash.forown')
 
+const firstToUc = str => str.charAt(0).toUpperCase() + str.slice(1)
 function ucWord(str) {
   if (str === 'fusebox') return 'FuseBox'
   return firstToUc(str)

@@ -1,4 +1,5 @@
-const sleepfor = require('./')
+const sleepfor = require('./index.js')
+
 const start = Date.now()
 sleepfor(1000)
 const end = Date.now() - start

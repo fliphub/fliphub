@@ -2,9 +2,6 @@
   "name": "regexes",
   "version": "0.0.1",
   "main": "index.js",
-  "scripts": {
-    "test": "index.js"
-  },
   "description": "a collection of regexes",
   "keywords": [
     "regexes",

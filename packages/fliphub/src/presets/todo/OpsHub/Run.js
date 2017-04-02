@@ -1,35 +1,36 @@
 // @TODO: this can use context outFile?
-function staticDevServer({config}) {
-  const {express, server, listen} = basicDevServer()
-  server.use('/', express.static(config.dist))
-}
 
 function basicDevServer() {
   const express = require('express')
   const server = express()
 
-  server.set('port', 4444)
-
-  function listen() {
-    server.listen(server.get('port'), function(error) {
-      var location = `http://localhost:${server.get('port')}/`
-      console.log(location)
+  function listen(port = 3333) {
+    server.listen(server.get('port') || port, (error) => {
+      if (error) console.log(error)
+      console.log(`http://localhost:${server.get('port')}/`)
     })
   }
 
-  return {express, server, listen}
+  const set = (name = 'port', port = 3454) => {
+    server.set(name, port)
+    return server
+  }
+
+  return {express, server, listen, set}
 }
+
+function staticDevServer(config) {
+  const {express, server, listen} = basicDevServer()
+  server.use('/', express.static(config.dist))
+  return server
+}
+
+staticDevServer({dist: 'outputhere'}).listen(3454)
 
 module.exports = {
   staticDevServer,
   basicDevServer,
 }
-
-
-
-
-
-
 
 
 // https://sungwoncho.io/run-multiple-apps-in-one-droplet/
@@ -93,11 +94,11 @@ class DevServer {
       helpers.log(context.name, {color: 'magenta'})
 
       // @TODO: time here
-      server.listen(server.get('port'), function(error) {
+      server.listen(server.get('port'), (error) => {
         if (error) console.exit(error)
 
-        var location = `http://localhost:${server.get('port')}/`
-        var msg = `${helpers.log.bold(context.name + '@')} `
+        let location = `http://localhost:${server.get('port')}/`
+        let msg = `${helpers.log.bold(context.name + '@')} `
         msg += helpers.log.underline(location)
         helpers.log('🏸  serving ' + msg, {text: true, color: 'green'})
       })

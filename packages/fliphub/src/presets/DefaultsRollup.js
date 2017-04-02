@@ -15,11 +15,11 @@ module.exports = class PresetDefaultsRollup {
     let output = context.bundler.config.get('output')
 
     // remove fusebox and webpack instructions
-    entry = entry
+    if (entry) entry = entry
       .replace(/\[/gmi, '')
       .replace(/\]/gmi, '')
       .replace(/>/gmi, '')
-    output = output
+    if (output) output = output
       .replace(/\[/gmi, '')
       .replace(/\]/gmi, '')
       .replace(/>/gmi, '')

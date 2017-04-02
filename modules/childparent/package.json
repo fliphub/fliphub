@@ -1,11 +1,13 @@
 {
-  "name": "tiny-promise-map",
-  "version": "0.0.1",
+  "name": "childparent",
+  "version": "0.0.2",
   "main": "index.js",
-  "description": "simple, minimal, tiny promise map",
+  "description": "👶 add child methods to parent, or parent methods to child, optionally binding thisArg.",
   "keywords": [
-    "promise",
-    "map",
+    "child",
+    "parent",
+    "methods",
+    "bind",
     "fliphub",
     "flipbox"
   ],

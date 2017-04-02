@@ -1,6 +1,8 @@
+const {resolve} = require('path')
 const ChainedMapExtendable = require('flipchain/ChainedMapExtendable')
 const timer = require('fliptime')
 const log = require('fliplog')
+// const isRel = require('flipfile')
 const Config = require('./Config')
 
 module.exports = class FuseBoxBundler extends ChainedMapExtendable {
@@ -29,14 +31,18 @@ module.exports = class FuseBoxBundler extends ChainedMapExtendable {
     // config.cache = false
     // log.quick(config)
 
+    const absOut = require('path').resolve(config.homeDir, config.output)
+    config.output = resolve(root, config.output)
+
     log
+      .reset()
       .emoji('fusebox')
-      .tags('fusebox,config,build,ops')
+      // .tags('fusebox,config,build,ops')
       .text('fusebox config')
       .color('bold')
       .data({config, name, entry})
       .verbose()
-      .reset()
+      .echo()
 
     const fuse = FuseBox.init(config)
     fuse.bundle(name + '.js')
@@ -63,7 +69,6 @@ module.exports = class FuseBoxBundler extends ChainedMapExtendable {
 
     return new Promise(resolve => {
       run.then(() => {
-        const absOut = require('path').resolve(config.homeDir, config.output)
         log
           .data(absOut, config.root, config.homeDir, config.output)
           .text('fuse config')

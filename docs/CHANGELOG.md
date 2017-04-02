@@ -12,9 +12,25 @@
   - updating package jsons
   - finding cycle in deps
 - misc minor updates in git commits
-- flipcli
+- minor package keyword changes, readme emoji and such
+- 🖥 flipcli
   - add shorthand choices, so nice
   - expanding shorthand with a shorthandFactory for all question options
+
+- ⚒💚🔬 🆕👶 🏗💠🔎📦⬆
+- 💚 travis working to install now
+- 🔬🚨 tests   
+  - 🏴 adding glob for exec on lerna.json
+  - ⚒ fixing flipcache, fliphelp,  tests
+  - 🛁 remove missing tests on depflip, tiny-promise-map, regexes, emoji-by-name
+  - 👣 update fliphub tests with fusebox with absolute paths
+  - 🔮🦄💍 use async instead of promises
+  - 💚 should be ready for travis
+- 👶 childparent
+  - 🆕 extracted child-to-parent-methods into childparent module  
+  - 📖 add basic example
+- 🏗💠 fliphub
+  - 🔎📦⬆ neutrino-middleware-progress
 
 
 # part 61 - apr 1 17

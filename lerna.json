@@ -9,5 +9,10 @@
   ],
   "npmClient": "npm",
   "version": "independent",
-  "loglevel": "verbose"
+  "loglevel": "verbose",
+  "commands": {
+    "exec": {
+      "ignore": "+(flip-gom-html-parser|babel-loader-builder|flip-webpack-chain|flip-neutrino)"
+    }
+  }
 }

@@ -28,6 +28,8 @@ module.exports = class File {
   constructor(path, parent) {
     this.parent = parent
     // this.files = parent
+    this.to = this.parent.to.bind(this.parent)
+    this.from = this.parent.from.bind(this.parent)
 
     this.absPath = autoResolve(path)
     if (!path) this.store(path)

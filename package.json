@@ -4,7 +4,7 @@
   "description": "the builder of builders",
   "main": "src/index.js",
   "scripts": {
-    "test": "cd packages/fliphub2 && npm run test",
+    "test": "lerna exec -- npm run test",
     "clean": "rm -rf node_modules && lerna exec -- rm -rf node_modules",
     "postinstall": "lerna bootstrap --concurrency=1 --loglevel=verbose"
   },

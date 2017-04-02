@@ -1,10 +1,10 @@
 {
   "name": "flipcache",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "temporary, safe, restorable, cacheable, chainable/fluent data",
   "main": "src/index.js",
   "scripts": {
-    "test": "ava"
+    "test": "ava --verbose"
   },
   "devDependencies": {
     "ava": "*",

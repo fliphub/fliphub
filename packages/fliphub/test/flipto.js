@@ -10,7 +10,7 @@ test('name is optional', (t) => {
 test('flips are default to webpack', (t) => {
   t.plan(1)
   const flips = new FlipHub({
-    apps: [{name: 'default-to-webpack'}],
+    apps: [{name: 'default-to-webpack', entry: './'}],
   })
   flips.setup()
   flips.workflow.mapContexts((context) => {
@@ -48,6 +48,7 @@ test('flipto rollup', (t) => {
   const flips = new FlipHub({
     apps: [{
       name: 'webpack - neutrino',
+      entry: './',
       flips: {
         to: 'rollup',
       },

@@ -1,9 +1,9 @@
 const test = require('ava')
-const fosho = require('fosho')
+const {fosho, log} = require('fosho')
 
 class Workflow {}
 
-test('fosho', (t) => {
+test.only('fosho', (t) => {
   fosho('eh')
     .isReal()
     .isStr()
@@ -34,8 +34,8 @@ test('fosho', (t) => {
     .typeOf('array')
 
   fosho(1)
-    .beAbove(0)
-    .beBelow(2)
+    // .beAbove(0)
+    // .beBelow(2)
     .isAbove(0)
     .isBelow(2)
     .above(-1)

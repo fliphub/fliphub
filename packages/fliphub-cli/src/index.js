@@ -1,14 +1,11 @@
-const cli = {
-  flip: (config, dir) => require('./CliFlip')(config, dir),
-  flipHandler: (flipHandler) => require('./CliFlipHandler')(flipHandler),
-  commander: {
-    extend: (args) => require('./Commander'),
-    run: (args) => {
-      const program = require('./Commander')
-      program.parse(args || process.argv)
-    },
-  },
-  interactive: (args) => require('./Interactive'),
-}
+const FlipScript = require('flipscript')
+const FlipPkg = require('flippkg')
+const FluentCLI = require('fluent-cli')
+const FlipFlag = require('flipflag')
+const FlipCache = require('flipcache')
+const log = require('fliplog')
 
-module.exports = cli
+// first, mock it out for how I will use it with fliphub
+// check the todos, reprioritize,
+// should finish the html-plugin
+// should finish fliphub tests and such

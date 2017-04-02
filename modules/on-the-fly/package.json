@@ -24,7 +24,8 @@
     "babel-preset-env": "^1.2.2",
     "flipfile": "*",
     "fuse-box": "^1.4.1-beta.18",
-    "mono-root": "0.0.6"
+    "mono-root": "0.0.6",
+    "flipcache": "*"
   },
   "_devDependencies": {
     "onthefly": "0.0.9"

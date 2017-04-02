@@ -1,9 +1,6 @@
 {
   "name": "depflip",
-  "version": "0.0.2",
-  "dependencies": {
-    "depcheck": "*"
-  },
+  "version": "0.0.3",
   "description": "finding, extracting, checking, installing deps",
   "main": "index.js",
   "author": "James <aretecode@gmail.com>",
@@ -11,7 +8,7 @@
     "test": "node test.js"
   },
   "dependencies": {
-    "glob-fs": "*",
+    "depcheck": "*",
     "flipfile": "*",
     "fliptime": "*"
   },

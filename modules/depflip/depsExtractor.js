@@ -48,7 +48,7 @@ class DepsExtractor {
 
   usingGlob(glob, excludes = [/node_modules/]) {
     timer.start('glob')
-    let globfs = require('glob-fs')()
+    let globfs = require('flipfile/glob')()
     function ignore(file) {
       for (let i in excludes)
         if (excludes[i].test(file.path)) file.exclude = true

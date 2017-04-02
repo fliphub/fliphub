@@ -13,14 +13,14 @@
     "test": "test"
   },
   "keywords": [
-    "cli",
-    "temp",
-    "cache",
-    "fliphub",
-    "safe",
-    "temporary",
-    "restore",
-    "fs"
+    "tern",
+    "auto",
+    "help",
+    "types",
+    "docs",
+    "ast",
+    "generated",
+    "fliphub"
   ],
   "author": "James <aretecode@gmail.com>",
   "license": "MIT"

@@ -1,4 +1,4 @@
-# on the fly
+# on the fly 🚁
 > use typescript or es6+ config (or any) file on the fly, built in-memory, required into memory, without a footprint.
 
 ## installation

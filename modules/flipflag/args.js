@@ -3,15 +3,15 @@
 // https://www.npmjs.com/package/minimist
 // https://npmcompare.com/compare/commander,minimist,nomnom,optimist,yargs
 const timer = require('fliptime')
-const argv = require('minimist')(process.argv.slice(2))
+const minimist = require('minimist')
 const nodeFlags = require('./node-flags')
-const cache = Object.assign({}, {}, argv)
 const IS = require('izz')
+
+const argv = minimist(process.argv.slice(2))
+const cache = Object.assign({}, {}, argv)
 // const yargs = require('yargs')
 
-const aliased = {
-
-}
+const aliased = {}
 function aliasFor(flag) {
   if (flag.includes(',')) flag = flag.split(',').pop()
   const alias = false
@@ -347,6 +347,7 @@ const flaggerObj = {
   val,
   get,
   argv,
+  minimist,
   // yargs,
 }
 

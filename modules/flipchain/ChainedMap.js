@@ -7,7 +7,9 @@ class ChainedMap extends Chainable {
     this.shorthands = []
     this.chainableMethods = []
     this.store = new Map()
-    this.name = this.constructor.name
+  
+    if (!this.name) this.name = this.constructor.name
+    this.className = this.constructor.name
   }
 
   new(parent) {
@@ -97,6 +99,15 @@ class ChainedMap extends Chainable {
 
   set(key, value) {
     this.store.set(key, value)
+    return this
+  }
+  concat(key, value) {
+    if (!Array.isArray(value)) value = [value]
+    this.store.set(key, this.store.get(value).concat(value))
+    return this
+  }
+  append(key, value) {
+    this.store.set(key, this.store.get(value) + value)
     return this
   }
 

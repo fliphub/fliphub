@@ -2,8 +2,11 @@
   "name": "to-arr",
   "version": "0.0.2",
   "main": "index.js",
-  "description": "convert anything to array if it is not already one",
+  "description": "convert anything to an array, (273 bytes)",
   "keywords": [
+    "tiny",
+    "lightweight",
+    "toArray",
     "utils",
     "array",
     "to-array",

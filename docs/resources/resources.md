@@ -19,3 +19,17 @@ http://git-awards.com/users/search?login=username
 
 
 https://www.npmjs.com/package/match-all
+
+https://www.npmjs.com/package/fly
+https://www.npmjs.com/package/cli-pie
+https://www.npmjs.com/package/cli-graph
+https://www.npmjs.com/package/cli-format
+https://www.npmjs.com/package/gitty
+
+https://www.npmjs.com/package/caporal
+https://www.npmjs.com/package/snack-cli
+https://www.npmjs.com/package/progress-string
+https://www.npmjs.com/package/commit-cli
+https://www.npmjs.com/package/gendiff-cli
+
+https://www.npmjs.com/package/fuzzy

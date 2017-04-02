@@ -1,6 +1,115 @@
 # 🔈 changelog 🔈
 
-# part 60 - mar 32 17
+# part 62 - apr 2 17
+- fliplog
+  - 📒🚚 move tests & examples to /test
+  - added progress bar
+  - adding docs for fun, sparkly, bar, beep, box, formatting, progress, highlight, bar, update doDiffs -> diff, emojis
+  - 📦⬆📦⬇ adjust deps
+- flipcli
+  - add shorthand choices, so nice
+  - expanding shorthand with a shorthandFactory for all question options
+- fliphub-monorepo
+  - update deps move some into optionalDependencies
+- examples
+  - updating package jsons
+  - finding cycle in deps
+
+
+# part 61 - apr 1 17
+- wrote commits using emoji again finally
+- remove flipglob from next as it is a module now
+
+- flipfam
+  - start
+  - add deps
+  - add missing deps
+  - add light
+  - publish for the name
+- docs
+  - add server.md
+  - add cli.md
+  - do some solid research for cli before expanding on fluent-cli to ensure best choice before investing
+- fliplog
+  - add boxen,
+  - add sparkly,
+  - add babar,
+  - add ora,
+  - add node-notifier,
+  - add beeper (with .inspect so it only beeps on echo)
+  - add test-fun to run it
+  - add cli-highlight, and strip out the annoying html tags
+  - add random shuffling to defaults on sparkly & babar
+- flipcache
+  - add configstore dep
+  - add store method
+  - default to store if no file path passed in
+  - add static .file method
+- flipscripts
+  - added tags
+  - added dargs
+  - moved test deps to devDependencies
+- flipchain
+  - add .append & .append as commonly it is being used to .get.concat.set or +=
+  - safety to setting .name
+- fliphub-cli
+  - clean up and use flipcli
+  - add todos
+- flipcli
+  - a lot of fiddling and thinking and reading to get a simple example
+    that does what is expected part 1
+  - first simple example is working, so nice and short!!!
+  - two steps + confirm, exactly how it should be.
+  - add Stepper with .run op
+  - add vorpal command integration
+  - add .actionPrompt
+  - add all main actions from vorpal to cli
+  - add log, vorpal, and inquirer to exports
+  - split into multiple files
+  - export all in index
+  - move Presets in as a todo
+  - add examples to readme
+- fliphtml
+  - expanding for chaining
+  - simplify the handling before it is working to avoid too much magic hard to debug
+  - simplified copying and setting up
+  - rename to fliphtml
+  - fork gom-html-parser since it had no main field
+
+# part 60 - mar 31 17
+- flipglob
+  - adding minimatch
+  - add izz
+  - add isGlob
+- fliplog
+  - making echo default fn rather than log and aliasing echo
+  - adding diffs instead of dodiffs
+  - safety to diffs
+  - safety to stringify
+- depflip
+  - move glob-fs out,
+  - fix dupe keys in pkg json
+- flippack
+  - cleaning old ScriptPermutator
+  - cleaning PackageFinder
+  - cleaning publisher a little, adding comments
+  - updating deps
+  - updating PackageManager to use flipcache
+  - adding README
+- fliphub-core
+  - add link to workflow song
+- add .log.* to .gitignore
+- fliplog
+  - fix bug in echoing when echoing `false`
+- html-plugin
+  - adding deps
+- fluent-cli
+  - create
+  - mock out an interface example
+  - setup pkgjson with deps
+- fliphub
+  - minor update to presets/todo/opshub/run
+  - clean some deps
 
 ---
 
@@ -43,30 +152,10 @@
 - TODOs
   - move TODO to docs
   - updating
-- flippack
-  - cleaning old ScriptPermutator
-  - cleaning PackageFinder
-  - cleaning publisher a little, adding comments
-  - updating deps
-  - updating PackageManager to use flipcache
-- fliphub-core
-  - add link to workflow song
-- add .log.* to .gitignore
-- fliplog
-  - fix bug in echoing when echoing `false`
-- fliphub
-  - minor update to presets/todo/opshub/run
-  - clean some deps
-- html-plugin
-  - adding deps
 - docs
   - adding some vorpal links to flipcache, cli, etc
 - minimal test
   - added a simple ava example seed
-- fluent-cli
-  - create
-  - mock out an interface example
-  - setup pkgjson with deps
 - fliphub-cli
   - clean up the files
 - inspector-gadget
@@ -90,11 +179,12 @@
 - typos on flags.name(s)
 - clean backup
 - fix docs links
-- updated on-the-fly
+- updated on-the-fly 📇
   - to run without a trace
   - installation docs
   - updated docs for without a trace
   - published under onthefly as well as it uses that for the bin
+  - 📦⬆💸 add flipcache for use later
 - flipscript
   - hacking on it
   - fixing prefixing
@@ -119,18 +209,11 @@
   - extend is_js
   - add .includes
   - add .glob
-- fliplog
-  - making echo default fn rather than log and aliasing echo
-  - adding diffs instead of dodiffs
-  - safety to diffs
-  - safety to stringify
 - fosho
   - adding diff logging in equals
   - adding occurrs/includesTimes
-- flipglob
-  - adding minimatch
-  - adding todo for iz.glob
-- flipfile
+  - multi-arg support for izz
+- 📒 flipfile
   - add glob-fs
   - expanding readme
   - add fs-extra under /extra.js
@@ -139,9 +222,6 @@
   - added test for export
   - examples to readme
   - flat export of path in all
-- depflip
-  - move glob-fs out,
-  - fix dupe keys in pkg json
 - expose-hidden
   - return object for convenience
   - make second arg allow no binding

@@ -1,0 +1,10 @@
+"tsc": "tsc",
+"gulp": "gulp",
+
+"changelog": "changelog mozilla-neutrino/neutrino-dev all --markdown > CHANGELOG.md",
+"bootstrapl": "lerna bootstrap",
+"bootstrap": "oao bootstrap",
+"deps:add": "oao add",
+"deps:remove": "oao remove",
+"deps:upgrade": "oao upgrade",
+"deps:clean": "oao clean",

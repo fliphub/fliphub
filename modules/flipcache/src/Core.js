@@ -2,7 +2,7 @@ const detachedParent = require('./detached/parent')
 const Files = require('./Files')
 
 // @core
-module.exports = class FlipCache {
+class FlipCache {
   static init(files = []) {
     return new FlipCache(files)
   }
@@ -11,6 +11,9 @@ module.exports = class FlipCache {
   }
   static from(name) {
     return new FlipCache().add(name).from(name)
+  }
+  static file(name) {
+    return FlipCache.init().file(name)
   }
 
   constructor(files = []) {
@@ -53,3 +56,5 @@ module.exports = class FlipCache {
   read(name, json = false) { return this._files[name].read() }
   write(name, contents, json = false) { return this._files[name].write() }
 }
+
+module.exports = FlipCache

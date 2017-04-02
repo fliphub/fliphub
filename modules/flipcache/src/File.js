@@ -1,8 +1,10 @@
 const {resolve, dirname} = require('path')
 const {read, write, exists, isAbs} = require('flipfile')
 const JSONChain = require('json-chain')
+const ConfigStore = require('configstore')
 
 function autoResolve(path) {
+  if (!path) return path
   // if (!isAbs(path)) return path
   const cwd = resolve(process.cwd(), path)
   const main = resolve(dirname(require.main.filename), path)
@@ -28,6 +30,7 @@ module.exports = class File {
     // this.files = parent
 
     this.absPath = autoResolve(path)
+    if (!path) this.store(path)
 
     this.contents = ''
 
@@ -38,6 +41,12 @@ module.exports = class File {
     // timestamps
     this.lastWritten = false
     this.lastRead = false
+  }
+
+  store(name) {
+    if (this.config) return this.config
+    this.config = new ConfigStore(name)
+    return this.config
   }
 
   json(bool = true) {

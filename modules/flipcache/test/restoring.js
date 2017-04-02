@@ -1,5 +1,7 @@
 // -----------
 
+const flipcache = require('../src')
+
 const mocha = flipcache
   .from('mochaOptsFile')
   .to('mochaOptsBackupFile')

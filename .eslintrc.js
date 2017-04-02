@@ -34,5 +34,6 @@ module.exports = {
     'arrow-parens': 0,
     'no-bitwise': 0,
     'no-return-assign': 0,
+    'no-var': 0,
   }
 }

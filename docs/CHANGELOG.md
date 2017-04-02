@@ -31,7 +31,13 @@
   - 📖 add basic example
 - 🏗💠 fliphub
   - 🔎📦⬆ neutrino-middleware-progress
-
+- ⛓ flipchain
+  - 📦⬇🖇 deps down using simpler prefix inline instead of the whole fliphub-helpers just for the prefix util
+- 🖇 fliphub-helpers
+  - remove some utils that have been moved to other modules (stringContainsAnyOf)
+  - improve str/prefix
+- 👕 allow var
+- 📝 for readme with dep checking
 
 # part 61 - apr 1 17
 - wrote commits using emoji again finally

@@ -2,6 +2,8 @@
 ------------------------ p0 ------------------------
 ====================================================
 
+https://www.bithound.io/github/jantimon/ in docs (live david deps)
+
 - [ ] need to make flipfam module with all fliphub modules
 
 - [ ] fix memory leak in event listeners

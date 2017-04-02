@@ -1,0 +1,29 @@
+{
+  "name": "fliphtml",
+  "version": "0.0.2",
+  "main": "index.js",
+  "description": "html plugins for webpack, rollup, fusebox",
+  "keywords": [
+    "webpack",
+    "rollup",
+    "fusebox",
+    "fliphub"
+  ],
+  "dependencies": {
+    "html-webpack-plugin": "2.28.0",
+    "fliplog": "*",
+    "flipfile": "*",
+    "fliphub-resolve": "*",
+    "gom": "0.1.14",
+    "flip-gom-html-parser": "0.0.5"
+  },
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

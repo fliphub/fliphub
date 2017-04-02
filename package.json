@@ -4,18 +4,9 @@
   "description": "the builder of builders",
   "main": "src/index.js",
   "scripts": {
-    "tsc": "tsc",
-    "gulp": "gulp",
     "test": "cd packages/fliphub2 && npm run test",
     "clean": "rm -rf node_modules && lerna exec -- rm -rf node_modules",
-    "changelog": "changelog mozilla-neutrino/neutrino-dev all --markdown > CHANGELOG.md",
-    "bootstrapl": "lerna bootstrap",
-    "bootstrap": "oao bootstrap",
-    "deps:add": "oao add",
-    "deps:remove": "oao remove",
-    "deps:upgrade": "oao upgrade",
-    "deps:clean": "oao clean",
-    "postinstall": "lerna bootstrap"
+    "postinstall": "lerna bootstrap --concurrency=1 --loglevel=verbose"
   },
   "directories": {
     "fliphub": "packages/fliphub",
@@ -36,28 +27,28 @@
     "docs"
   ],
   "engines": {
-    "node": ">= 7.7.2",
-    "npm": ">= 4.1.2"
+    "node": ">= 7.8.x",
+    "npm": ">= 4.2.0"
   },
   "optionalDependencies": {
     "@types/atom": "0.0.36",
     "@types/atom-keymap": "^5.1.29",
     "@types/node": "^7.0.8",
     "babel-core": "^6.24.0",
-    "babel-eslint": "^7.2.0",
     "babel-register": "^6.24.0",
     "tslint-eslint-rules": "^3.4.0",
     "typescript": "^2.2.1",
-    "typescript-eslint-parser": "^2.0.0"
+    "typescript-eslint-parser": "^2.0.0",
+    "inquirer": "3.0.6",
+    "oao": "^0.7.3"
   },
   "devDependencies": {
     "eslint": "^3.16.1",
+    "babel-eslint": "^7.2.0",
     "eslint-config-aretecode": "1.0.4-alpha.17585ee1",
     "flow-bin": "^0.42.0",
     "flowtype": "^2.0.0",
-    "inquirer": "3.0.6",
-    "lerna": "2.0.0-beta.38",
-    "oao": "^0.7.3"
+    "lerna": "2.0.0-beta.38"
   },
   "keywords": [
     "builder",

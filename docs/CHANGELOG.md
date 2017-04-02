@@ -6,14 +6,15 @@
   - added progress bar
   - adding docs for fun, sparkly, bar, beep, box, formatting, progress, highlight, bar, update doDiffs -> diff, emojis
   - 📦⬆📦⬇ adjust deps
-- flipcli
-  - add shorthand choices, so nice
-  - expanding shorthand with a shorthandFactory for all question options
 - fliphub-monorepo
   - update deps move some into optionalDependencies
 - examples
   - updating package jsons
   - finding cycle in deps
+- misc minor updates in git commits
+- flipcli
+  - add shorthand choices, so nice
+  - expanding shorthand with a shorthandFactory for all question options
 
 
 # part 61 - apr 1 17

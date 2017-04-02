@@ -16,6 +16,7 @@ lerna-debug.log
 yarn.lock
 build
 
+flip-gom-html-parser
 #playground
 #!playground
 playground

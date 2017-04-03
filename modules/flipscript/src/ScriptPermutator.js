@@ -1,3 +1,5 @@
+const toarr = require('to-arr')
+
 function defaultMapFn(script) {
   return script
 }
@@ -11,6 +13,8 @@ class ScriptPermutator {
       operations: [],
       apps: [],
       empty: [],
+      separator: ':',
+      delimiter: ' ',
     }, ops)
     this.mapper = options.mapFn
     delete options.mapFn
@@ -31,8 +35,10 @@ class ScriptPermutator {
           return this
         }
         if (typeof params === 'string') {
-          let temp = params.split(' ')
-          this.ops[key] = temp
+          // for compatibility
+          params = params.replace(/\s\S/, ',')
+
+          this.ops[key] = toarr(params)
           return this
         }
       }
@@ -53,7 +59,7 @@ class ScriptPermutator {
     const first = copy.shift()
     if (first.length > 0) {
       first.forEach(name => {
-        this.combination(script + (script ? ':' : '') + name, copy, result)
+        this.combination(script + (script ? this.ops.separator : '') + name, copy, result)
       })
     } else {
       result[script] = this.mapper(script)

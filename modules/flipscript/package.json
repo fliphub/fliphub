@@ -1,7 +1,7 @@
 {
   "name": "flipscript",
-  "version": "0.0.3",
-  "main": "index.js",
+  "version": "0.0.4",
+  "main": "src/index.js",
   "description": "fluent script building; flip the script on em",
   "scripts": {
     "diggy": "node test/fixtures/diggy.js",

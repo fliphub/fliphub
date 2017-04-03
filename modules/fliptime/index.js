@@ -37,6 +37,48 @@ class Timer {
     return this
   }
 
+  stop(name) {
+    if (this.times[name].end) return this.lap(name)
+
+    this.times[name].end = microtime.now()
+    this.times[name].diff = this.times[name].end - this.times[name].start
+    return this
+  }
+
+  /**
+   * returns the diff in microseconds for a timer or a lap
+   * @param {string} name
+   * @param {boolean} [laps]
+   * @return {number} microseconds
+   */
+  took(name, laps = false) {
+    if (laps) {
+      return this
+        .laps[name]
+        .map(lap => lap.diff)
+        .reduce(((a, b) => a + b), 0) +
+        this.times[name].diff || 0
+    }
+    return this.times[name].diff
+  }
+
+  msTook(name, laps = false) {
+    return this.took(name, laps) / 1000
+  }
+
+  parsedTook(name, laps = false) {
+    const parse = require('./parse')
+    const micro = this.took(name, laps)
+    const parsed = parse(micro)
+    return (parsed.toString())
+  }
+
+  parseMicro(micro) {
+    const parse = require('./parse')
+    const parsed = parse(micro)
+    return (parsed.toString())
+  }
+
   logLaps(name = null) {
     if (name === null) name = this.index
 
@@ -48,20 +90,12 @@ class Timer {
 
     // console.log(this.times[name], this.laps[name])
     const level = '⏲  laps ' + name + ' took: '
-    console.log(level + msg)
-    return this
-  }
-
-  stop(name) {
-    if (this.times[name].end) return this.lap(name)
-
-    this.times[name].end = microtime.now()
-    this.times[name].diff = this.times[name].end - this.times[name].start
+    console.log(level + this.parseMicro(msg))
     return this
   }
 
   log(name) {
-    const msg = this.times[name].diff + 'ms'
+    const msg = this.parseMicro(this.times[name].diff) + 'ms'
     const level = '⏲  ' + name + ' took: '
     console.log(level + msg)
     return this

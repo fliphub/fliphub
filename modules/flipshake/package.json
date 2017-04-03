@@ -1,0 +1,38 @@
+{
+  "name": "flipshake",
+  "version": "0.0.1",
+  "main": "index.js",
+  "description": "make shakes.",
+  "devDependencies": {
+    "fosho": "*",
+    "ava": "^0.18.2"
+  },
+  "dependencies": {
+    "flipchain": "*",
+    "flipscript": "*",
+    "flipcache": "*",
+    "flipfile": "*",
+    "to-arr": "*",
+    "izz": "*",
+    "fliplog": "*"
+  },
+  "keywords": [
+    "generator",
+    "tree-shake",
+    "shake",
+    "magic",
+    "fluent",
+    "chain",
+    "fliphub",
+    "flipbox"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

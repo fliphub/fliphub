@@ -17,7 +17,7 @@ fluent
   .step('too-short', 'list')
     .choices('way,too,easy,so-many-choices')
   .step('check-please', 'list')
-    .choices('way,too,easy,so-many-choices')
+    .checkboxes('way,too,easy,so-many-choices')
   .step('view', 'list')
     .choice('React')
     .choice('Inferno')

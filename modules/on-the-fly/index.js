@@ -1,5 +1,5 @@
 const {resolve} = require('path')
-const find = require('flipfile/find')
+const find = require('flipfind')
 const del = require('flipfile/del')
 
 module.exports = function runtimeConfig(configPath, directory, output) {

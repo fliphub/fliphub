@@ -25,7 +25,8 @@
     "flipfile": "*",
     "fuse-box": "^1.4.1-beta.18",
     "mono-root": "0.0.6",
-    "flipcache": "*"
+    "flipcache": "*",
+    "flipfind": "*"
   },
   "_devDependencies": {
     "onthefly": "0.0.9"

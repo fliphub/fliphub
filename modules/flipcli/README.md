@@ -1,4 +1,4 @@
-# flipcli ⛓🖥
+# ⛓🖥 flipcli 
 
 > easy, powerful, interactive, fluent cli.
 

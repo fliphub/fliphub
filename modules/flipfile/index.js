@@ -16,6 +16,7 @@ const del = require('./del')
 
 module.exports = {
   getFileAndPath,
+  fileAndDir: getFileAndPath,
   getDirectories,
   isDir,
   isFile,

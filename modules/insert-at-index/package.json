@@ -1,8 +1,11 @@
 {
   "name": "insert-at-index",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "description": "insert a value, or an array, into an array at an index",
+  "scripts": {
+    "test": "node test/index"
+  },
   "keywords": [
     "array",
     "insert",

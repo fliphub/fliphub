@@ -1,21 +1,61 @@
 # 🔈 changelog 🔈
 
+# part 63 - apr 3 17
+
 # part 62 - apr 2 17
-- fliplog
+- ⛓🔈 fliplog
   - 📒🚚 move tests & examples to /test
   - added progress bar
-  - adding docs for fun, sparkly, bar, beep, box, formatting, progress, highlight, bar, update doDiffs -> diff, emojis
+  - 📚 adding docs for fun, sparkly, bar, beep, box, formatting, progress, highlight, bar, update doDiffs -> diff, emojis
   - 📦⬆📦⬇ adjust deps
-- fliphub-monorepo
+  - ⚒🐛 fix capturing
+  - added a formatter fn cb for data, for use later
+- 🏗💠🥕 fliphub-monorepo
   - update deps move some into optionalDependencies
-- examples
+- 📘 examples
   - updating package jsons
-  - finding cycle in deps
+  - ⚒ finding cycle in deps
+  - 👾 add minimal
 - misc minor updates in git commits
-- minor package keyword changes, readme emoji and such
+- 🗝️ minor package keyword changes, readme emoji and such
 - 🖥 flipcli
-  - add shorthand choices, so nice
-  - expanding shorthand with a shorthandFactory for all question options
+  - ⛓ add shorthand choices, so nice
+  - 🏭 expanding shorthand with a shorthandFactory for all question options
+- ⛓🔎 flipfind
+  - 📒🚚 take beginnig part out of flipfile
+  - 🆕 start
+  - 📖 add readme
+  - 📜 add pkgjson
+  - 📦⬆ add deps
+  - 🔬 add tests
+    - debug test
+    - failing / non-existing-file test
+    - file only
+    - obj
+    - relative
+    - shorthand
+  - 🔊 add debug mode
+  - ⚡ optimize
+  - 📚 add docs
+  - 📘 add examples
+- 🥕 mono-root
+  - 📖 add to readme
+- 🎯 fliphub-resolve
+  - 📖 start adding some docs for readme pt2
+- ⛓⌛ fliptime
+  - 📚 more to readme
+  - 🎁 adding .took
+  - 🔬 added tests
+- 📚 docs
+  - ⛓ add awesome-fluent.md
+  - ℹ️️ add explanation for Replace/Define
+- 🏗💠🔮 flipfam setup badge
+  - https://img.shields.io/badge/%F0%9F%8F%97%20%F0%9F%92%A0-flipfam-9659F7.svg
+- 📒 flipfile
+ - 🚑🐛 added missing files to pkg json files
+- insert-at-index
+  - 🔬 add test
+  - 📚 update docs
 
 - ⚒💚🔬 🆕👶 🏗💠🔎📦⬆
 - 💚 travis working to install now
@@ -33,11 +73,17 @@
   - 🔎📦⬆ neutrino-middleware-progress
 - ⛓ flipchain
   - 📦⬇🖇 deps down using simpler prefix inline instead of the whole fliphub-helpers just for the prefix util
+  - 🚑🐛 fix bug when importing that prefix
 - 🖇 fliphub-helpers
   - remove some utils that have been moved to other modules (stringContainsAnyOf)
   - improve str/prefix
 - 👕 allow var
 - 📝 for readme with dep checking
+
+- ⛓🔈 fliplog
+  - 🎁💤 sleepfor
+  - 📖 add readme
+  - 😊 update description & emoji
 
 # part 61 - apr 1 17
 - wrote commits using emoji again finally
@@ -49,7 +95,7 @@
   - add missing deps
   - add light
   - publish for the name
-- docs
+- 📚 docs
   - add server.md
   - add cli.md
   - do some solid research for cli before expanding on fluent-cli to ensure best choice before investing

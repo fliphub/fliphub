@@ -1,0 +1,39 @@
+{
+  "name": "flipfind",
+  "version": "0.1.1",
+  "description": "auto-find & resolve a file or path that is somewhere nearby in an optimized manner",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "ava --verbose"
+  },
+  "devDependencies": {
+    "ava": "*",
+    "fosho": "*"
+  },
+  "dependencies": {
+    "mono-root": "*",
+    "fliphub-resolve": "*",
+    "flipfile": "*",
+    "app-root-path": "^2.0.1",
+    "fliplog": "*",
+    "does-include": "*"
+  },
+  "keywords": [
+    "auto",
+    "find-file",
+    "file",
+    "find",
+    "resolve",
+    "fliphub",
+    "flipbox"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

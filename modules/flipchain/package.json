@@ -1,12 +1,13 @@
 {
   "name": "flipchain",
-  "version": "0.1.5",
-  "description": "chains for the builder of builders - from webpack chain",
+  "version": "0.3.0",
+  "description": "core chaining library, heavily based on [webpack-chain](https://github.com/mozilla-rpweb/webpack-chain)",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"
   },
   "files": [
+    "indexc.js",
     "Chainable.js",
     "ChainedMapExtendable.js",
     "ChainedMapTill.js",
@@ -23,6 +24,8 @@
     "arr-to-obj": "*"
   },
   "keywords": [
+    "fluent",
+    "chain",
     "fliphub-chain",
     "webpack-chain",
     "fusebox-chain",

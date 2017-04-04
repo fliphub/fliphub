@@ -7,7 +7,7 @@ class ChainedMap extends Chainable {
     this.shorthands = []
     this.chainableMethods = []
     this.store = new Map()
-  
+
     if (!this.name) this.name = this.constructor.name
     this.className = this.constructor.name
   }
@@ -202,6 +202,16 @@ class ChainedMap extends Chainable {
       acc[key] = value
       return acc
     }, {})
+  }
+
+  when(condition, trueBrancher = Function.prototype, falseBrancher = Function.prototype) {
+    if (condition) {
+      trueBrancher(this)
+    } else {
+      falseBrancher(this)
+    }
+
+    return this
   }
 }
 

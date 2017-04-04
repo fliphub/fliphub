@@ -16,10 +16,11 @@
 
 > easy, powerful, interactive, fluent cli.
 
-
 ## full api
 
-extending [vorpal](https://github.com/dthree/vorpal) it comes with all the goodies
+extending [vorpal](https://github.com/dthree/vorpal) it comes with all the goodies, nestable interactive command action stories with *~10x* less lines of code than any other lib.
+
+![allthat](https://cloud.githubusercontent.com/assets/4022631/24635847/06b3d836-188b-11e7-9e5c-f3362c8b70ca.gif)
 
 ```js
 const {CLI, log} = require('flipcli')
@@ -45,6 +46,9 @@ CLI.program()
 ```
 
 ## storytelling
+
+![cli](https://cloud.githubusercontent.com/assets/4022631/24635848/06c91a0c-188b-11e7-9d7b-9c6f1c433d46.gif)
+
 ```js
 const CLI = require('flipcli')
 
@@ -74,6 +78,7 @@ easyButton.run()
 
 
 ## extendable
+
 ```js
 const {
   vorpal,

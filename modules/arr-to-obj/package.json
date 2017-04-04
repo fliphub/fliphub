@@ -1,8 +1,8 @@
 {
   "name": "arr-to-obj",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
-  "description": "convert arrays to objects (arr to obj)",
+  "description": "> convert arrays to objects, with customizers. (values as keys, keys as values, values as values and keys)",
   "dependencies": {
     "izz": "*"
   },

@@ -2,6 +2,43 @@
 
 # part 63 - apr 3 17
 
+- 🚁 on the fly
+  - 📛 updated badges, readme
+  - 📦⬆📦⬇ swap flipfile finding file for 🔎 flipfind
+- 💾💸 flipcache
+  - 📦⬆📦⬇ swap built in autofind with 🔎 flipfind
+  - export all files so they can be used individually
+- 🎀⛓ json-chain
+  - 📚 add docs
+  - 📦⬆🎁 add dotprop set and get
+  - 🎁 add .set .get .delete .remove aliases
+
+- 📚📚📚📖📖📖
+
+- 🤝 flipshake
+  - 🆕 start
+  - ✚ add pkgjson
+  - 📝🔬 add test todos
+  - add fixtures
+  - 📦⬆📦⬇ add deps
+  - 🆒 added query string require statements by generating out the permutations of requires
+
+
+  - need to 📘 add examples & readme
+- 📜 flipscript
+  - ✚ add .separator to options in permutations, for flipshake
+  - 🚑🐛 fix wrong pkg main field
+  - and it works ^w^
+- play/bench for env experiment
+
+- ⛓ flipchain
+  - 📚 docs
+  - 📖📘 examples
+- 📚📖📘 readme & examples update
+  - [to-arr], does-include, izz, flipcli, 💤 sleepfor, 💯 fosho, fliphub-alias, 🗺 remap-by, 👶 childparent, 💾💸 flipcache, {arr-to-obj}, , 🙃 🚩 flipflag
+
+
+
 # part 62 - apr 2 17
 - ⛓🔈 fliplog
   - 📒🚚 move tests & examples to /test
@@ -49,10 +86,11 @@
 - 📚 docs
   - ⛓ add awesome-fluent.md
   - ℹ️️ add explanation for Replace/Define
-- 🏗💠🔮 flipfam setup badge
-  - https://img.shields.io/badge/%F0%9F%8F%97%20%F0%9F%92%A0-flipfam-9659F7.svg
+  - 🏗💠🔮 flipfam setup badge
+    - https://img.shields.io/badge/%F0%9F%8F%97%20%F0%9F%92%A0-flipfam-9659F7.svg
 - 📒 flipfile
  - 🚑🐛 added missing files to pkg json files
+ - 📒🚚 move /find out as the beginning of flipfind
 - insert-at-index
   - 🔬 add test
   - 📚 update docs

@@ -4,6 +4,7 @@ const ChainedMapExtendable = require('flipchain/ChainedMapExtendable')
 const is = require('izz')
 const log = require('fliplog')
 
+// https://github.com/morrisallison/event-station
 class Emitter extends EventEmitter2 {
   // constructor(args) {
   //   super(args)

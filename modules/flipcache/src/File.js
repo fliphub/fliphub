@@ -2,19 +2,7 @@ const {resolve, dirname} = require('path')
 const {read, write, exists, isAbs} = require('flipfile')
 const JSONChain = require('json-chain')
 const ConfigStore = require('configstore')
-
-function autoResolve(path) {
-  if (!path) return path
-  // if (!isAbs(path)) return path
-  const cwd = resolve(process.cwd(), path)
-  const main = resolve(dirname(require.main.filename), path)
-  // const root = resolve(appRootPath, path)
-  // console.log(cwd, main)
-
-  if (exists(cwd)) return cwd
-  if (exists(main)) return main
-  return path
-}
+const flipfind = require('flipfind')
 
 // try to run a bin
 //   - if it fails, use node
@@ -31,7 +19,7 @@ module.exports = class File {
     this.to = this.parent.to.bind(this.parent)
     this.from = this.parent.from.bind(this.parent)
 
-    this.absPath = autoResolve(path)
+    this.absPath = flipfind(path) || path
     if (!path) this.store(path)
 
     this.contents = ''
@@ -43,6 +31,10 @@ module.exports = class File {
     // timestamps
     this.lastWritten = false
     this.lastRead = false
+
+    // shorthands / alias
+    this.prepend = this.prependContent.bind(this)
+    this.append = this.appendContent.bind(this)
   }
 
   store(name) {

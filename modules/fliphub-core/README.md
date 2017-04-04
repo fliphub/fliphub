@@ -1,50 +1,59 @@
-flipbox
-
-workflow
-
-events
-ops
-chains
-
------
+# 💠⚛ fliphub-core
 
 
-defaults
-presets
-box
+[![NPM version][fliphub-core-npm-image]][fliphub-core-npm-url]
+[![MIT License][license-image]][license-url]
+[![fliphub][gitter-badge]][gitter-url]
+[![flipfam][flipfam-image]][flipfam-url]
 
+[fliphub-core-npm-image]: https://img.shields.io/npm/v/fliphub-core.svg
+[fliphub-core-npm-url]: https://npmjs.org/package/fliphub-core
+[license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
+[license-url]: https://spdx.org/licenses/MIT
+[gitter-badge]: https://img.shields.io/gitter/room/fliphub/pink.svg
+[gitter-url]: https://gitter.im/fliphub/Lobby
+[flipfam-image]: https://img.shields.io/badge/%F0%9F%8F%97%20%F0%9F%92%A0-flipfam-9659F7.svg
+[flipfam-url]: https://www.npmjs.com/package/flipfam
 
-might not need Apps or Apps context if all is in configs and we have ops do lifecycle?
+> the core of fliphub, an extensible hub api for building programs with an event-based core/workflow/context/presets
 
+## 📦 usage
+```bash
+yarn add fliphub-core
+npm i fliphub-core --save
+```
 
-we do not need to keep the original app around
-
- workflow
-   - context
-     - (toConfig)
-     - config
-     - bundler
-       - api
-       - config
-   - box
-     - context
-     - config
-
-
-using the workflow as a model-type, we can use chains and do filtering ops and such...
+```js
+const FlipHubCore = require('fliphub-core')
+```
 
 
 
-----------
+## core
+
+### workflow
+
+### context
 
 
-- move renameByProp to another helper lib, simplify
+### events
+
+### hub
+
+### presets
+
+### filterhub
 
 
 
+### exports / extending
 
 
+### deps
 
+
+### flipchain
+- [ ] need to update docs here
 
 
 # fliphub-core
@@ -58,57 +67,3 @@ using the workflow as a model-type, we can use chains and do filtering ops and s
   - toConfig
 
 -
-
-
-
-events:
-  # on these 2 steps, nothing is done to any of them
-  #
-  # this is where things decorate the box
-  # which they would do by using the workflow context
-  #
-  # abstracting the system out, these registered hubs will be using the module
-  # default hubs are added here - filterhub, opshub, flaghub|clihub
-  #
-  # only clihub (and user hubs) will run here
-  # clihub will call filtering if it is needed  
-  #
-  - box:init
-  - app:init
-
-
-  # this step will only be run when
-  # 1. calling `box.setup()`
-  # 2. clihub says setup
-  # 3. calling another op,
-  #    which will trigger an event for that op,
-  #    which will be subscribed to by setup
-  - box:ops.setup.start
-  - box:ops.setup.end
-
-  # added events by things such as presets...
-  - any added events here
-
-  # things that need to run when they are done
-  - app:ops.setup.start
-  - app:ops.setup.end
-
-  # all operations after setup is complete
-  # will run setup if it has not been run already
-  - box:ops.*
-  - app:ops.*
-
-
-  filter should decorate the core with the filter op
-
-
-
-
-
-
-
-
-
-
-
---------

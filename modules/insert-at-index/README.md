@@ -1,12 +1,12 @@
 # [...🎯...] insert-at-index
 
-[![NPM version][npm-image]][npm-url]
+[![NPM version][insert-at-index-npm-image]][insert-at-index-npm-url]
 [![MIT License][license-image]][license-url]
 [![fliphub][gitter-badge]][gitter-url]
 [![flipfam][flipfam-image]][flipfam-url]
 
-[npm-image]: https://img.shields.io/npm/v/insert-at-index.svg
-[npm-url]: https://npmjs.org/package/insert-at-index
+[insert-at-index-npm-image]: https://img.shields.io/npm/v/insert-at-index.svg
+[insert-at-index-npm-url]: https://npmjs.org/package/insert-at-index
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-url]: https://spdx.org/licenses/MIT
 [gitter-badge]: https://img.shields.io/gitter/room/fliphub/pink.svg
@@ -14,6 +14,7 @@
 [flipfam-image]: https://img.shields.io/badge/%F0%9F%8F%97%20%F0%9F%92%A0-flipfam-9659F7.svg
 [flipfam-url]: https://www.npmjs.com/package/flipfam
 
+> insert a value, or an array, into an array at an index
 
 ## 📦 usage
 ```bash

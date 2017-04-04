@@ -1,6 +1,6 @@
 {
   "name": "sleepfor",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "browser": "index.js",
   "description": "sleepfor(1000); sleeping using while loops.",

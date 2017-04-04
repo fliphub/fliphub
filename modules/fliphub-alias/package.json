@@ -1,8 +1,8 @@
 {
   "name": "fliphub-alias",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "main": "index.js",
-  "description": "require, handling, and resolving aliases for use with build tools/systems/bundlers",
+  "description": "require, handle, & resolve aliases for use with any build tool/system/bundler",
   "engines": {
     "node": ">= 7.7.2",
     "npm": ">= 4.1.2"

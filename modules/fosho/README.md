@@ -1,4 +1,19 @@
-# fosho
+# 💯 fosho
+
+[![NPM version][fosho-npm-image]][fosho-npm-url]
+[![MIT License][license-image]][license-url]
+[![fliphub][gitter-badge]][gitter-url]
+[![flipfam][flipfam-image]][flipfam-url]
+
+[fosho-npm-image]: https://img.shields.io/npm/v/fosho.svg
+[fosho-npm-url]: https://npmjs.org/package/fosho
+[license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
+[license-url]: https://spdx.org/licenses/MIT
+[gitter-badge]: https://img.shields.io/gitter/room/fliphub/pink.svg
+[gitter-url]: https://gitter.im/fliphub/Lobby
+[flipfam-image]: https://img.shields.io/badge/%F0%9F%8F%97%20%F0%9F%92%A0-flipfam-9659F7.svg
+[flipfam-url]: https://www.npmjs.com/package/flipfam
+
 > don't just be sure, be fosho.
 
 ![https://github.com/fliphub/fliphub](https://media.giphy.com/media/xT0BKk9aPtLzKJiUi4/giphy.gif)
@@ -18,7 +33,16 @@
 - [x] uses [power-assert](https://github.com/power-assert-js/power-assert)
 
 
-# example (avajs)
+
+## 📦 usage
+```bash
+yarn add fosho
+npm i fosho --save
+```
+
+# 📘 examples
+
+### example (avajs)
 ```js
 const test = require('ava')
 const fosho = require('fosho')
@@ -81,6 +105,14 @@ test('plan fosho', (t) => {
 })
 ```
 
+## exports
 
-## resources
+it also exports [fliplog](https://www.npmjs.com/package/fliplog) [chai assert](http://chaijs.com/api/assert/) and [chai should](http://chaijs.com/guide/styles/#should)
+
+
+```js
+const {fosho, log, should, assert} = require('chai')
+```
+
+### resources
 - https://lingojam.com/IzzleTranslator

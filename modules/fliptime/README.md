@@ -1,13 +1,17 @@
 # ⛓⏲ fliptime
-[![NPM version][npm-image]][npm-url]
+
+
+[![NPM version][fliptime-image]][fliptime-url]
 [![MIT License][license-image]][license-url]
 [![fliphub][gitter-badge]][gitter-url]
-[npm-image]: https://img.shields.io/npm/v/fliptime.svg
-[npm-url]: https://npmjs.org/package/fliptime
+[fliptime-image]: https://img.shields.io/npm/v/fliptime.svg
+[fliptime-url]: https://npmjs.org/package/fliptime
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-url]: https://spdx.org/licenses/MIT
 [gitter-badge]: https://img.shields.io/gitter/room/fliphub/pink.svg
 [gitter-url]: https://gitter.im/fliphub/Lobby
+
+> fluent timer with laps, microtime + parsing, multiple timers
 
 ## usage
 ```bash

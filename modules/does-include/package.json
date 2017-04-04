@@ -1,6 +1,6 @@
 {
   "name": "does-include",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "main": "index.js",
   "description": "find whether a string (or arr<string>) contains any, or all of another array of strings.",
   "keywords": [

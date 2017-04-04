@@ -2,7 +2,7 @@
   "name": "flipfile",
   "version": "0.0.10",
   "main": "index.js",
-  "description": "file helpers for reading, writing, and detecting existence or types.",
+  "description": "file helpers for reading, writing, deleting, checking types & existence, extracting metadata, walking, globbing, and more.",
   "dependencies": {
     "expose-hidden": "*",
     "mkdirp": "^0.5.1",

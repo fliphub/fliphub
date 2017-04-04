@@ -1,7 +1,7 @@
 {
   "name": "es5exports",
-  "version": "0.0.2",
-  "description": "when you want named exports in es5",
+  "version": "0.0.3",
+  "description": "easy named exports in es5",
   "main": "index.js",
   "author": "James <aretecode@gmail.com>",
   "scripts": {

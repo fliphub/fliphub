@@ -1,4 +1,6 @@
-const is = require('izz')
+// @TODO: optimize
+const isArr = require('izz').arr
+const isObj = require('izz').obj
 
 function defaultKeyFn({val, i, array, obj}) {
   // if (typeof val === 'object') {
@@ -17,7 +19,7 @@ function arrToObj(array, keyValFns = {}) {
   const val = keyValFns.valFn || defaultValFn
 
   const obj = {}
-  if (!is.arr(array) && is.obj(array)) return array
+  if (!isArr(array) && isObj(array)) return array
   const len = array.length
   for (let i = 0; i < len; i++) {
     const _val = val({val: array[i], i, array, obj})

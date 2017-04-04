@@ -3,13 +3,13 @@
 > find and resolve files automatically
 > searches nearby paths in an optimized order
 
-[![NPM version][npm-image]][npm-url]
+[![NPM version][flipfind-npm-image]][flipfind-npm-url]
 [![MIT License][license-image]][license-url]
 [![fliphub][gitter-badge]][gitter-url]
 [![flipfam][flipfam-image]][flipfam-url]
 
-[npm-image]: https://img.shields.io/npm/v/flipfind.svg
-[npm-url]: https://npmjs.org/package/flipfind
+[flipfind-npm-image]: https://img.shields.io/npm/v/flipfind.svg
+[flipfind-npm-url]: https://npmjs.org/package/flipfind
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-url]: https://spdx.org/licenses/MIT
 [gitter-badge]: https://img.shields.io/gitter/room/fliphub/pink.svg

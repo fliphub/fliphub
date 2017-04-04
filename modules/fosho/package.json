@@ -1,6 +1,6 @@
 {
   "name": "fosho",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "main": "index.js",
   "description": "extends power-assert, izz, fuse-box-test-runner, chai assert & should... not just sure... fosho. throws if not",
   "dependencies": {

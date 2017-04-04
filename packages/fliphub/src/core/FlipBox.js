@@ -57,6 +57,15 @@ module.exports = class FlipBox extends Core {
     return this
   }
 
+  /**
+   * @see Core.create
+   * @return {Core}
+   */
+  setupApps() {
+    if (!this.config.apps) this.config = {apps: [this.config]}
+    return this
+  }
+
   constructor(config) {
     super(config)
       .setupDebug(config)
@@ -83,6 +92,7 @@ module.exports = class FlipBox extends Core {
    * @return {Core}
    */
   create() {
+    this.setupApps()
     this.state.created = true
 
     // instantiate

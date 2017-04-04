@@ -30,6 +30,8 @@
   - 🚑🐛 fix wrong pkg main field
   - and it works ^w^
 - 🏋️⚗ play/bench for env experiment
+- 📚📖📘 readme & examples update
+  - [to-arr], does-include, izz, flipcli, 💤 sleepfor, 💯 fosho, 🏹 fliphub-alias, 🗺 remap-by, 👶 childparent, 💾💸 flipcache, {arr-to-obj}, , 💠 fliphub-core, easy-npm-files, 📒 flipfile, expose-hidden, ⏲ fliptime, es5exports, 🕵🗜 inspector-gadget
 
 - ⛓ flipchain
   - 📚 docs
@@ -38,9 +40,8 @@
   - 📚 docs
   - 📖📘 examples
 
-- 📚📖📘 readme & examples update
-  - [to-arr], does-include, izz, flipcli, 💤 sleepfor, 💯 fosho, 🏹 fliphub-alias, 🗺 remap-by, 👶 childparent, 💾💸 flipcache, {arr-to-obj}, , 💠 fliphub-core, easy-npm-files, 📒 flipfile, expose-hidden, ⏲ fliptime, es5exports, 🕵🗜 inspector-gadget
-
+- 🏗💠🔮 flipfam
+  - 🔗 so many links, so many more todo
 
 
 # part 62 - apr 2 17

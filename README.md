@@ -1,28 +1,54 @@
-# 🏗🏗 fliphub
-[![Build Status](https://travis-ci.org/fliphub/fliphub.svg?branch=master)](https://travis-ci.org/fliphub/fliphub)
+[travis-image]: https://travis-ci.org/fliphub/fliphub.svg?branch=master
+[travis-url]: https://travis-ci.org/fliphub/fliphub
+[flipfam-image]: https://img.shields.io/badge/%F0%9F%8F%97%20%F0%9F%92%A0-flipfam-9659F7.svg
+[flipfam-url]: https://www.npmjs.com/package/flipfam
+[nsp-url]:https://nodesecurity.io/orgs/fliphub/projects/d37f0cc6-02ea-4f05-a8aa-3b6c1e08bd21
+[nsp-image]: https://nodesecurity.io/orgs/fliphub/projects/d37f0cc6-02ea-4f05-a8aa-3b6c1e08bd21/badge
+
+[fliphub-npm-image]: https://img.shields.io/npm/v/fliphub.svg
+[fliphub-npm-url]: https://npmjs.org/package/fliphub
+
+# 🏗💠 fliphub
+[![Build Status][travis-image]](travis-url)
+[![NPM version][fliphub-npm-image]][fliphub-npm-url]
 [![fliphub][gitter-badge]][gitter-url]
-[![NPM version][npm-image]][npm-url]
-[![Dependencies][david-deps-img]][david-deps-url]
-[![Standard JS Style][standard-image]][standard-url]
-[![MIT License][license-image]][license-url]
-[![NSP Status](https://nodesecurity.io/orgs/fliphub/projects/d37f0cc6-02ea-4f05-a8aa-3b6c1e08bd21/badge)](https://nodesecurity.io/orgs/fliphub/projects/d37f0cc6-02ea-4f05-a8aa-3b6c1e08bd21)
 [![Slack][slack-image]][slack-url]
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-![examples-badge](https://img.shields.io/badge/%F0%9F%91%80-examples-8C8E93.svg?style=flat-square)
+[![flipfam][flipfam-image]][flipfam-url]
+[![Dependencies][david-deps-img]][david-deps-url]
+[![MIT License][license-image]][license-url]
+[![Standard JS Style][standard-image]][standard-url]
+[![NSP Status][nsp-image]][nsp-url]
+![examples-badge](https://img.shields.io/badge/📘-examples-blue.svg?style=flat-square)
+[![PRs Welcome](https://img.shields.io/badge/🌽%20PRs-welcome-EFC052.svg?style=flat-square)](http://makeapullrequest.com)
 
-## another refactor is in progress
-### huge wins for simplicity, power, and stability
+> the builder, of builders.
 
-the builder, of builders.
 
-It allows you to create configs that would take hundreds or thousands of lines, with just a few properties.
+
+
 
 ## all you need
 
+enables configs that would take hundreds or thousands of lines, with just a few properties.
+
+
 #### minimal
+
+[see the example](example-minimal)
+
 ```js
 import FlipHub from 'fliphub'
 new FlipHub({entry: './src/index.js'}).build()
+```
+
+## usage
+```bash
+yarn add fliphub
+npm i fliphub --save
+```
+
+```js
+const log = require('fliphub')
 ```
 
 
@@ -53,6 +79,10 @@ const apps = [
 
 FlipHub.init({apps}).build()
 ```
+
+# properties
+- names
+
 
 #### reusability?
 ```js
@@ -113,8 +143,9 @@ FlipHub.init({
 
 
 
-# legend
-- [middleware](#-middleware)
+# 🗝️ legend
+- [presets](#-presets)
+- [hubs](#-hubs)
 - [apps](#-apps)
 - [commander](#-commander)
 - [examples](#-examples)
@@ -122,25 +153,41 @@ FlipHub.init({
 - [🏭 behind the scenes / internal](#-behind-the-scenes)
 
 
-# examples
-- [examples-basic][examples-basic]
-- [examples-basic-build][examples-basic-build]
+# 📘 examples
+- [examples-minimal][examples-minimal]
+- [examples-canadas][examples-canadas]
+- [examples-monorepo][examples-monorepo]
+- [examples-react][examples-react]
+- [examples-react-and-alias][examples-react-and-alias]
+- [examples-typescript][examples-typescript]
+- [examples-node][examples-node]
+- [examples-lint][examples-lint]
 - [examples-compat][examples-compat] 🚧
-- [examples-fliphub][examples-fliphub]
-- [examples-fuse-canadas][examples-fuse-canadas]
-- [examples-fusebox][examples-fusebox]
-- [examples-intermediate][examples-intermediate]
-- [examples-intermediate-tests][examples-intermediate-tests] 🚧
-- [examples-verbose][examples-verbose]
+- [examples-tests][examples-tests] 🚧
+- [examples-webworker][examples-webworker] 🚧
+- [examples-code-splitting][examples-code-splitting] 🚧
+- [examples-es6-ts-config][examples-es6-ts-config] 🚧
 
-### ⚠
-- needs cleaning
-- needs general improvements
-- needs more thought in running them all
-- [todo-examples][todo-examples]
+[example-minimal]: example-minimal
+[examples-compat]: https://github.com/fliphub/fliphub/tree/master/examples/compat
+[examples-react]: https://github.com/fliphub/fliphub/tree/master/examples/react
+[examples-react-and-alias]: https://github.com/fliphub/fliphub/tree/master/examples/react-and-alias
+[examples-canadas]: https://github.com/fliphub/fliphub/tree/master/examples/canadas
+[examples-lint]: https://github.com/fliphub/fliphub/tree/master/examples/lint
+[examples-empty]: https://github.com/fliphub/fliphub/tree/master/examples/empty
+[examples-monorepo]: https://github.com/fliphub/fliphub/tree/master/examples/monorepo
+[examples-typescript]: https://github.com/fliphub/fliphub/tree/master/examples/typescript
+[examples-webworker]: https://github.com/fliphub/fliphub/tree/master/examples/webworker
+[examples-tests]: https://github.com/fliphub/fliphub/tree/master/examples/tests
+[examples-code-splitting]: https://github.com/fliphub/fliphub/tree/master/examples/code-splitting
+[examples-es6-ts-config]: https://github.com/fliphub/fliphub/tree/master/examples/es6-ts-config
+[examples-node]: https://github.com/fliphub/fliphub/tree/master/examples/node
 
 
-# 🔌 middleware
+# 🍰 middleware
+
+# 💠 hubs
+<!-- ![fliphub-core]() -->
 
 ------------------
 
@@ -189,24 +236,44 @@ fliphub.addMiddlewares({
 ### 🔗 resources
 - [🗼 babel aliases][babel-module-resolver]
 - [🕸 webpack aliases][webpack-alias]
+- [🗞️ rollup aliases][rollup-alias]
 - [💣 fusebox aliases][fusebox-alias]
-- ✔️💣🕸
+- [👀 see the alias resolve preset code][https://github.com/fliphub/fliphub/blob/master/packages/fliphub/src/presets/PresetAliasResolve.js]
+- [👀 see the alias require preset code][https://github.com/fliphub/fliphub/blob/master/packages/fliphub/src/presets/PresetAliasRequire.js]
 
 ## 🍰 presets
 
-### add your own presets
+can be used as an array to use the default options
+
 ```js
-.extendPresets({
-  'inferno': {
-    loaders: ['styleloader'],
-    alias: ['moose', 'igloo', 'inferno'],
-    html: '#root',
-  },
-})
+const apps = [{
+  presets: ['alias-resolve', 'neutrino-preset-web', 'eslint'],
+}]
 ```
 
-### built in presets
+### add your own presets
+```js
+class AvaPreset {
+  setArgs(args) {
+    this.args = args
+  }
+  toWebpack() {
+    this.args().isTrue()
+  }
+}
+```
+
+
+
+### built-in presets
+
+![built-in](https://cloud.githubusercontent.com/assets/4022631/24596137/d6701e94-17f1-11e7-8fff-61a5e1b6baca.png)
+
 - [built in presets][src-presets]
+
+### neutrino presets
+
+![neutrino-presets](https://cloud.githubusercontent.com/assets/4022631/24596136/d66fc43a-17f1-11e7-94ec-35ed09198891.png)
 
 
 ## 🍦 default settings
@@ -549,34 +616,6 @@ used for finding available ports if preferred ones are not available
 - needs docs
 - needs more fusebox support, only supports html file
 
-
-## 📚🚧 (need docs)
-- HMR
-- include
-- builderInstance
-- init
-- instructions
-- tasks
-- copy
-- define
-- uglify
-- analyze
-- clean
-- provide
-
-
-
-## 🏭 behind the scenes
-  ## core
-  ## middleware
-  - flattening
-
-  ## builders
-  ## core
-
-  ## 🖇 helpers
-    reference & context
-
 ## 📅 plans
 - [board](https://github.com/fliphub/fliphub/issues#boards?repos=82865013)
 
@@ -585,7 +624,6 @@ used for finding available ports if preferred ones are not available
 - [fusebox][fusebox-url]
 - [rollup][rollup-url]
 - [another bundler? request it][new-issue-url]
-
 
 
 [new-issue-url]: https://github.com/fliphub/fliplog/issues/new
@@ -601,16 +639,6 @@ used for finding available ports if preferred ones are not available
 
 [flow-middleware]: https://github.com/fliphub/fliphub/tree/master/flow/MiddlewareInterface
 [flow-app]: https://github.com/fliphub/fliphub/tree/master/flow/MiddlewareInterface
-
-[examples-basic]: https://github.com/fliphub/fliphub/tree/master/example/configs/basic
-[examples-basic-build]: https://github.com/fliphub/fliphub/tree/master/example/configs/basic-build
-[examples-compat]: https://github.com/fliphub/fliphub/tree/master/example/configs/compat
-[examples-fliphub]: https://github.com/fliphub/fliphub/tree/master/example/configs/fliphub
-[examples-fuse-canadas]: https://github.com/fliphub/fliphub/tree/master/example/configs/fuse-canadas
-[examples-fusebox]: https://github.com/fliphub/fliphub/tree/master/example/configs/fusebox
-[examples-intermediate]: https://github.com/fliphub/fliphub/tree/master/example/configs/intermediate
-[examples-intermediate-tests]: https://github.com/fliphub/fliphub/tree/master/example/configs/intermediate-tests
-[examples-verbose]: https://github.com/fliphub/fliphub/tree/master/example/configs/verbose
 
 [todo-flags]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/flags.md
 [todo-aliasing]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/aliasing.md
@@ -633,8 +661,6 @@ used for finding available ports if preferred ones are not available
 [todo-tests]: https://github.com/fliphub/fliphub/tree/master/docs/todos/tests.md
 
 
-[npm-image]: https://img.shields.io/npm/v/fliphub.svg
-[npm-url]: https://npmjs.org/package/fliphub
 [david-deps-img]: https://david-dm.org/fliphub/fliphub.svg
 [david-deps-url]: https://david-dm.org/fliphub/fliphub
 
@@ -687,7 +713,7 @@ used for finding available ports if preferred ones are not available
 [yargs]: https://www.npmjs.com/package/yargs
 [node-flag]: https://www.npmjs.com/package/node-flag
 
-[standard-image]: https://img.shields.io/badge/code%20style-standard%2Bes6+-brightgreen.svg
+[standard-image]: https://img.shields.io/badge/%F0%9F%91%95%20code%20style-standard%2Bes6+-blue.svg
 [standard-url]: https://github.com/aretecode/eslint-config-aretecode
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-url]: https://spdx.org/licenses/MIT

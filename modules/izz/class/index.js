@@ -1,1 +1,1 @@
-module.exports = (Obj) => toString.call(Obj) === '[object Function]'
+module.exports = (Obj) => (/^\s*class\s/).test(Obj.toString())

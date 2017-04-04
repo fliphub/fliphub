@@ -7,8 +7,8 @@
 // https://gist.github.com/s4y/1215700
 // http://krasimirtsonev.com/blog/article/Nodejs-managing-child-processes-starting-stopping-exec-spawn
 // https://www.npmjs.com/package/approot
-const exists = require('flipfile/exists')
 const path = require('path')
+const exists = require('flipfile/exists')
 
 function splitSlashAndPop(str) {
   // split at every folder

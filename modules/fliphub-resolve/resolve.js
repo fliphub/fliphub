@@ -1,4 +1,4 @@
-const path = require('path')
+const {isAbsolute, resolve} = require('path')
 const rooter = require('mono-root')
 const timer = require('fliptime')
 const {exists} = require('flipfile')
@@ -67,7 +67,7 @@ class Resolver {
 
   fn(named = false) {
     // create
-    const resolve = (paths) => {
+    const resolves = (paths) => {
       // scope
       let self = instance || this
       if (named !== false && instances[named]) {
@@ -85,13 +85,13 @@ class Resolver {
       // @TODO: think more... maybe an optional?
       // take non relative paths, make them relative?
       if (!paths.includes('./')) {
-        if (exists(path.resolve(self.root, paths))) {
-          return path.resolve(self.root, paths)
+        if (exists(resolve(self.root, paths))) {
+          return resolve(self.root, paths)
         }
-        return path.resolve(self.root, paths)
+        return resolve(self.root, paths)
       }
 
-      return path.resolve(self.root, paths)
+      return resolve(self.root, paths)
     }
     const resolver = (paths) => {
       if (!paths) return paths
@@ -100,13 +100,13 @@ class Resolver {
         if (typeof paths === 'object') return resolver.obj(paths)
       }
 
-      if (!paths || path.isAbsolute(paths)) return paths
-      return resolve(paths)
+      if (!paths || isAbsolute(paths)) return paths
+      return resolves(paths)
     }
 
     // decorate
-    resolver.resolveTo = (paths, dir) => path.resolve(dir, paths)
-    resolver.resolve = resolve
+    resolver.resolveTo = (paths, dir) => resolves(dir, paths)
+    resolver.resolve = resolves
 
     // bind this resolver as the first arg
     resolver.arr = resolveArr.bind(this, resolver)

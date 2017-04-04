@@ -3,7 +3,7 @@ const {match} = require('deep-replace')
 
 // const isRelish = (file) => isRel('./' + file)
 
-module.exports = function resolveDeep(resolve, object, blacklist = ['not-this-file']) {
+function resolveDeep(resolve, object, blacklist = ['not-this-file']) {
   let test = (file) =>
     (isRel(file) && !blacklist.includes(file)) // || isRelish(file)
 
@@ -16,3 +16,5 @@ module.exports = function resolveDeep(resolve, object, blacklist = ['not-this-fi
 
   return object
 }
+
+module.exports = resolveDeep

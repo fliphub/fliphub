@@ -1,8 +1,8 @@
 {
   "name": "izz",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "main": "index.js",
-  "description": "is type shorthands for fliphub",
+  "description": "is type shorthands for fliphub, hundreds of type checks, modular exports",
   "scripts": {
     "test": "node .test.js"
   },

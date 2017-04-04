@@ -49,6 +49,7 @@ function npmUp(currentPkgPath) {
 }
 
 const appRootPath = require('app-root-path').toString()
+
 function rootable(args = {depth: 4, asObj: false}) {
   const paths = {
     farthest: false,

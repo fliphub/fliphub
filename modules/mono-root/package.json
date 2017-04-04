@@ -1,6 +1,6 @@
 {
   "name": "mono-root",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "main": "index.js",
   "description": "find the root path in monorepos",
   "dependencies": {

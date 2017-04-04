@@ -157,7 +157,7 @@
   },
   "ava": {
     "files": [
-      "test/build.js"
+      "test/*.js"
     ],
     "concurrency": 5,
     "failFast": true,

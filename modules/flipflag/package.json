@@ -1,10 +1,18 @@
 {
   "name": "flipflag",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "main": "index.js",
+  "description": "cli flags with aliases, from argv, env, globals, --env.flags, callbacks, preserves casing",
   "scripts": {
-    "test": "node examples.js --env"
+    "test": "NODE_ENV=eh node test/examples.js --env"
   },
+  "keywords": [
+    "cli",
+    "flags",
+    "argv",
+    "env",
+    "globals"
+  ],
   "engines": {
     "node": ">= 7.7.2",
     "npm": ">= 4.1.2"

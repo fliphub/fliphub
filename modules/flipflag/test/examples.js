@@ -1,5 +1,5 @@
 const timer = require('fliptime')
-const flags = require('./')
+const flags = require('../')
 
 timer.start('calling flags')
 

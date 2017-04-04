@@ -22,3 +22,11 @@ https://darrenderidder.github.io/talks/ModulePatterns/#/
 https://github.com/lerna/lerna
 https://github.com/guigrpa/oao/tree/master/src
 https://github.com/ziflex/gulp-tasks-monorepo
+
+
+
+
+php
+https://speakerdeck.com/fabpot/a-monorepo-vs-manyrepos
+https://github.com/splitsh/lite
+https://www.tomasvotruba.cz/blog/2017/01/31/how-monolithic-repository-in-open-source-saved-my-laziness/

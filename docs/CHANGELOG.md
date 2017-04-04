@@ -29,13 +29,17 @@
   - ✚ add .separator to options in permutations, for flipshake
   - 🚑🐛 fix wrong pkg main field
   - and it works ^w^
-- play/bench for env experiment
+- 🏋️⚗ play/bench for env experiment
 
 - ⛓ flipchain
   - 📚 docs
   - 📖📘 examples
+- 🙃 🚩 flipflag
+  - 📚 docs
+  - 📖📘 examples
+
 - 📚📖📘 readme & examples update
-  - [to-arr], does-include, izz, flipcli, 💤 sleepfor, 💯 fosho, fliphub-alias, 🗺 remap-by, 👶 childparent, 💾💸 flipcache, {arr-to-obj}, , 🙃 🚩 flipflag
+  - [to-arr], does-include, izz, flipcli, 💤 sleepfor, 💯 fosho, 🏹 fliphub-alias, 🗺 remap-by, 👶 childparent, 💾💸 flipcache, {arr-to-obj}, , 💠 fliphub-core, easy-npm-files, 📒 flipfile, expose-hidden, ⏲ fliptime, es5exports, 🕵🗜 inspector-gadget
 
 
 

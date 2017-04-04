@@ -1,0 +1,23 @@
+{
+  "name": "flipfam-lerna",
+  "version": "0.0.2",
+  "description": "the fliphub modules as a single package - flipfam.",
+  "main": "index.js",
+  "engines": {
+    "node": ">= 7.8.0",
+    "npm": ">= 4.2.0"
+  },
+  "dependencies": {},
+  "keywords": [
+    "fliphub"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

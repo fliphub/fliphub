@@ -1,15 +1,19 @@
+
+https://github.com/badges/shields/pull/547
+https://github.com/badges/shields/commit/52b0369c1494cb692fe1f82f74766af46180b47b
 %F0%9F%91%A5
 %F0%9F%8F%97
 ?style=flat-square&colorA=EFC052
 
 
-[![NPM version][npm-image]][npm-url]
+
+[![NPM version][izz-npm-image]][izz-npm-url]
 [![MIT License][license-image]][license-url]
 [![fliphub][gitter-badge]][gitter-url]
 [![flipfam][flipfam-image]][flipfam-url]
 
-[npm-image]: https://img.shields.io/npm/v/flipfind.svg
-[npm-url]: https://npmjs.org/package/flipfind
+[izz-npm-image]: https://img.shields.io/npm/v/izz.svg
+[izz-npm-url]: https://npmjs.org/package/izz
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-url]: https://spdx.org/licenses/MIT
 [gitter-badge]: https://img.shields.io/gitter/room/fliphub/pink.svg
@@ -19,12 +23,12 @@
 
 ## 📦 usage
 ```bash
-yarn add fliptime
-npm i fliptime --save
+yarn add izz
+npm i izz --save
 ```
 
 ```js
-const timer = require('fliptime')
+const izz = require('izz')
 ```
 
 ## 📘 examples

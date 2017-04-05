@@ -37,9 +37,17 @@ class ChainedMap extends Chainable {
       const fn = this[key]
       const value = obj[key]
 
-      // const fnStr = typeof fn === 'function' ? fn.toString() : ''
-      // if (fnStr.includes('return this') || fnStr.includes('=> this')) {
-      return this[key](value)
+      if (this[key] && this[key] instanceof Chainable) {
+        return this[key].merge(value)
+      }
+      else if (typeof this[key] === 'function') {
+        // const fnStr = typeof fn === 'function' ? fn.toString() : ''
+        // if (fnStr.includes('return this') || fnStr.includes('=> this')) {
+        return this[key](value)
+      }
+      else {
+        this.set(key, value)
+      }
     })
     return this
   }

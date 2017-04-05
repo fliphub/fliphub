@@ -39,18 +39,31 @@ class ChainedMapExtendable extends ChainedMap {
   }
 
   // @TODO: extendBool which would add `no` firstChar.toUpperCase() + rest()
+  //
+  // maybe was doing this to bind the prefix variable?
+  // this.extendWith(methods.map((method) => (0, addPrefix)(method, prefix)), !val, prefix)
   extendBool(methods, val, prefix = 'no') {
+    this.extendPrefixed(methods, !val, prefix)
+    return this
+  }
+
+  extendPrefixed(methods, val, prefix = 'no', inverseValue = 'todo') {
     this.extendWith(methods, val)
-    this.extendWith(methods.map((method) => (0, addPrefix)(method, prefix)), !val, prefix)
+    this.extendWith(methods.map((method) => addPrefix(method, prefix)), !val, prefix)
     return this
   }
 
   extendWith(methods, val, prefix) {
-    const objMethods = (0, arrToObj)(methods, val)
+    const objMethods = arrToObj(methods, val)
     const keys = Object.keys(objMethods)
     this.shorthands = [...this.shorthands, ...keys]
     keys.forEach((method) => {
-      this[method] = (value = objMethods[method]) => this.set((0, removePrefix)(method, 'no'), value)
+      // value = objMethods[method]
+      this[method] = (value) => {
+        if (value === undefined || value === null) value = val
+        if (prefix) return this.set(removePrefix(method, prefix), value)
+        return this.set(method, value)
+      }
     })
     return this
   }

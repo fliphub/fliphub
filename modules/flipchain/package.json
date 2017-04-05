@@ -1,10 +1,10 @@
 {
   "name": "flipchain",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "core chaining library, heavily based on [webpack-chain](https://github.com/mozilla-rpweb/webpack-chain)",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js && node test-simple.js"
   },
   "files": [
     "indexc.js",

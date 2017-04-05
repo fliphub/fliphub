@@ -1,3 +1,4 @@
+// https://github.com/sindresorhus/awesome-nodejs#documentation
 // [fliphub-core]: https://www.npmjs.com/package/fliphub-core
 //
 // # 🕵🗜🔎 inspector-gadget

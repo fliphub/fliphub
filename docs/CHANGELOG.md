@@ -1,5 +1,56 @@
 # 🔈 changelog 🔈
 
+# part 65 - apr 4 17
+- 👂 flipevent
+  - 🆕 start
+  - 📒🚚 extract from fliphub-core
+- 💠💗 fliphub-core
+  - 📖📚 docs
+- fliphtml
+  - part4
+  - ⚗ experiment with gom
+  - 🏸 make static server serve them all
+  - 📝 add todos for server with webpack with multiple html files
+  - 🐦 add fixtures
+  - 📝 add links
+- 📖📚 docs
+  - 🤸 splitting up into files
+  - ✍ updating contents
+  - 📝 adding todos
+- ⛓ flipchain
+  - 📖 add create-once-get-three docs
+  - 📘 add examples of merging and hydrating
+  - 📘👋 simple example
+  - 📘🕳🏊 advanced example
+  - 📝 add todo
+  - 🚑🐛 fix extending with prefixes
+- ⛓🔈 fliplog
+  - 🎁 add .expose
+- 💍 tiny-promise-map
+  - 📖 readme setup
+  - 🔬 test setup
+  - ⛓ add .chain and .map exports
+-  🏗💠 fliphub
+  - ⛰🍰 env preset
+    - update args
+    - 📖 expanding docs
+    - 📖 adding wiki
+- 🏗💠🔮 flipfam
+  - 📦⬇ update dependencies for unreleased deps
+
+# part 64 - apr 3 17
+- 🏗💠 fliphub
+  - 🍰 🙃 🚩 updating preset-flags
+  - 📖📘📚 adding flags example, updating readmes
+  - 🍰📝 add PresetNoop to presets/todo
+  - 🍰📝 add PresetPkg to presets/todo
+- 🙃🛳 flipport
+  - 📒🚚🖇 move out of fliphub-helpers
+  - 🆕 create
+  - 📖 add readme
+- 📚 docs
+  - 📦 add dependencies.md
+
 # part 63 - apr 3 17
 
 - 🚁 on the fly
@@ -12,9 +63,7 @@
   - 📚 add docs
   - 📦⬆🎁 add dotprop set and get
   - 🎁 add .set .get .delete .remove aliases
-
 - 📚📚📚📖📖📖
-
 - 🤝 flipshake
   - 🆕 start
   - ✚ add pkgjson
@@ -22,8 +71,6 @@
   - add fixtures
   - 📦⬆📦⬇ add deps
   - 🆒 added query string require statements by generating out the permutations of requires
-
-
   - need to 📘 add examples & readme
 - 📜 flipscript
   - ✚ add .separator to options in permutations, for flipshake
@@ -32,7 +79,6 @@
 - 🏋️⚗ play/bench for env experiment
 - 📚📖📘 readme & examples update
   - [to-arr], does-include, izz, flipcli, 💤 sleepfor, 💯 fosho, 🏹 fliphub-alias, 🗺 remap-by, 👶 childparent, 💾💸 flipcache, {arr-to-obj}, , 💠 fliphub-core, easy-npm-files, 📒 flipfile, expose-hidden, ⏲ fliptime, es5exports, 🕵🗜 inspector-gadget
-
 - ⛓ flipchain
   - 📚 docs
   - 📖📘 examples
@@ -42,6 +88,11 @@
 
 - 🏗💠🔮 flipfam
   - 🔗 so many links, so many more todo
+- 🏗💠
+  - 📖 wip readme glob generator
+  - 📖 readme improvements
+  - 📚 misc minor docs changes
+  - 📝 misc todos
 
 
 # part 62 - apr 2 17

@@ -8,11 +8,12 @@
 [fliphub-npm-image]: https://img.shields.io/npm/v/fliphub.svg
 [fliphub-npm-url]: https://npmjs.org/package/fliphub
 
+<!-- [![Slack][slack-image]][slack-url] -->
+
 # 🏗💠 fliphub
 [![Build Status][travis-image]](travis-url)
 [![NPM version][fliphub-npm-image]][fliphub-npm-url]
 [![fliphub][gitter-badge]][gitter-url]
-[![Slack][slack-image]][slack-url]
 [![flipfam][flipfam-image]][flipfam-url]
 [![Dependencies][david-deps-img]][david-deps-url]
 [![MIT License][license-image]][license-url]
@@ -27,32 +28,53 @@
 
 
 
-## all you need
+### 👾 all you need
+#### [see the example](example-minimal)
 
 enables configs that would take hundreds or thousands of lines, with just a few properties.
 
 
-#### minimal
-
-[see the example](example-minimal)
-
 ```js
-import FlipHub from 'fliphub'
+const FlipHub = require('fliphub')
 new FlipHub({entry: './src/index.js'}).build()
 ```
 
-## usage
+## 📦 usage
 ```bash
 yarn add fliphub
 npm i fliphub --save
 ```
 
-```js
-const log = require('fliphub')
-```
+<!-- legend for all the packages 0.0?
+[cli][docs-cli]
+-->
 
+# 🗝️ legend
+- [introduction](#-intro)
+- [all the apps](#-all-the-apps)
+- [flipfam][flipfam-url]
+- [fliphub-core](#fliphub-core)
+  - [presets](#-presets)
+  - [hubs](#-hubs)
+- [examples](#-examples)
+- [apps](#-apps)
+- [cli](#-cli)
+- [terminology](#-terminology)
+
+
+
+### 👋 intro
+- explain the goals, mentality, reasoning
+
+## 📅❗ **__[changelog][changelog]__**
+keep up to date! updated frequently.
+
+[changelog]: https://github.com/fliphub/fliphub/blob/master/docs/CHANGELOG.md
+
+<!-- also see the [board](https://github.com/fliphub/fliphub/issues#boards?repos=82865013) -->
 
 #### all the apps
+
 one app? two apps? 100 apps? fusebox, rollup, _and_ webpack? nodejs server, inferno, and react? existing configs? happy and no happy pack? at the same time? no sweat.
 
 ```js
@@ -66,9 +88,8 @@ const apps = [
   {
     name: 'infernod',
     entry: './src/index.js',
-    presets: ['inferno'],
+    presets: ['inferno', 'neutrino-preset-happypack'],
     html: './src/index.html',
-    happypack: true,
   },
   {
     name: 'backend',
@@ -80,11 +101,19 @@ const apps = [
 FlipHub.init({apps}).build()
 ```
 
-# properties
-- names
 
 
-#### reusability?
+
+
+
+
+
+
+
+
+
+
+#### ♻️ reusability?
 ```js
 const { FlipHub } = require('fliphub')
 const apps = [
@@ -99,7 +128,6 @@ const apps = [
 ]
 
 FlipHub.init({
-  apps,
   presets: {
     front: {
       entry: './src/index.js',
@@ -107,10 +135,13 @@ FlipHub.init({
       fusebox: true,
     },
   },
+  apps,
 }).build()
 ```
 
-[they are configured for each environment by default](#-default settings)
+[docs-presets-default]: https://github.com/fliphub/fliphub/wiki/presets-default
+
+[they are configured for each environment by default][docs-presets-default]
 [and can be customized for any config you want](#-flags)
 [it can build itself with webpack, fusebox, or rollup, with the flip of an env flag][src-pkg-json]
 
@@ -143,14 +174,6 @@ FlipHub.init({
 
 
 
-# 🗝️ legend
-- [presets](#-presets)
-- [hubs](#-hubs)
-- [apps](#-apps)
-- [commander](#-commander)
-- [examples](#-examples)
-- [terminology](#-terminology)
-- [🏭 behind the scenes / internal](#-behind-the-scenes)
 
 
 # 📘 examples
@@ -167,8 +190,9 @@ FlipHub.init({
 - [examples-webworker][examples-webworker] 🚧
 - [examples-code-splitting][examples-code-splitting] 🚧
 - [examples-es6-ts-config][examples-es6-ts-config] 🚧
+- [examples-flags][examples-flags] 🚧
 
-[example-minimal]: example-minimal
+[examples-minimal]: https://github.com/fliphub/fliphub/tree/master/examples/minimal
 [examples-compat]: https://github.com/fliphub/fliphub/tree/master/examples/compat
 [examples-react]: https://github.com/fliphub/fliphub/tree/master/examples/react
 [examples-react-and-alias]: https://github.com/fliphub/fliphub/tree/master/examples/react-and-alias
@@ -182,360 +206,108 @@ FlipHub.init({
 [examples-code-splitting]: https://github.com/fliphub/fliphub/tree/master/examples/code-splitting
 [examples-es6-ts-config]: https://github.com/fliphub/fliphub/tree/master/examples/es6-ts-config
 [examples-node]: https://github.com/fliphub/fliphub/tree/master/examples/node
-
-
-# 🍰 middleware
-
-# 💠 hubs
-<!-- ![fliphub-core]() -->
-
-------------------
-
-### add your own middleware
-- you can add your own middleware before building apps
-- the name of the middleware maps in as a hook for the properties on the app
-- optional index property to insert middleware at any position
-- [middleware interface][flow-middleware]
-
-#### example
-```js
-fliphub.addMiddlewares({
-  index: 999, // optional
-  name: 'propertyOnApp',
-  inject(app, helpers) {
-    helpers.log.text('❗ middleware for `.propertyOnApp`!')
-    return app
-  },
-})
-```
-
-
-## 🐛 debugging
-- ⚙ with full options for debugging everything in the flipping process, debugging is a breeze.
-- see [debugging - deep](#deep-debugging) for all of the options
+[examples-flags]: https://github.com/fliphub/fliphub/tree/master/examples/flags
 
 
 
-## 🏹 aliasing
-
-### problems
-  - relatively importing files is a major pain `../../../../../utils`
-  - when refactoring, relative imports requires updating all files affected
-  - manually resolving paths to root
-    - bloats the code  
-    - adds knowledge about the structure to files that should not need it, such as presentation layer / ui components
-  - [multiple versions of any npm packages][shrinkwrap]   
-    - [multiple react refs][react-refs-error] when multiple versions of react are loaded
-    - dependencies have different versions of the same dependency
-    - servers such as heroku keep caches where there are multiple versions
-
-### solutions
-  - using aliases, you can force a single version of a dependency
-  - write your aliases relatively to your [home](#home)
-
-### 🔗 resources
-- [🗼 babel aliases][babel-module-resolver]
-- [🕸 webpack aliases][webpack-alias]
-- [🗞️ rollup aliases][rollup-alias]
-- [💣 fusebox aliases][fusebox-alias]
-- [👀 see the alias resolve preset code][https://github.com/fliphub/fliphub/blob/master/packages/fliphub/src/presets/PresetAliasResolve.js]
-- [👀 see the alias require preset code][https://github.com/fliphub/fliphub/blob/master/packages/fliphub/src/presets/PresetAliasRequire.js]
-
-## 🍰 presets
-
-can be used as an array to use the default options
-
-```js
-const apps = [{
-  presets: ['alias-resolve', 'neutrino-preset-web', 'eslint'],
-}]
-```
-
-### add your own presets
-```js
-class AvaPreset {
-  setArgs(args) {
-    this.args = args
-  }
-  toWebpack() {
-    this.args().isTrue()
-  }
-}
-```
-
-
-
-### built-in presets
-
-![built-in](https://cloud.githubusercontent.com/assets/4022631/24596137/d6701e94-17f1-11e7-8fff-61a5e1b6baca.png)
-
-- [built in presets][src-presets]
-
-### neutrino presets
-
-![neutrino-presets](https://cloud.githubusercontent.com/assets/4022631/24596136/d66fc43a-17f1-11e7-94ec-35ed09198891.png)
-
-
-## 🍦 default settings
-- [see the code][src-defaults]
-
-### default defaults
-```
-{
-  env: {
-     production: {
-       uglify: true,
-       defineProduction: true,
-       run: false,
-       compile: true,
-       useSourceMaps: false,
-       sourceMapTool: 'hidden',
-     },
-     development: {
-       noEmitErrors: true,
-     },
-  }
-}
-```
-
-### adding your own defaults
-this would make it so if `fusebox` [flag](#flags) are true, it would add the fusebox property to any app that has passed [filters](#filters) and is being built.
-```js
-fliphub.addDefaults({
-  flags: {
-    // this can also be a objects,
-    // or an array of strings
-    // or a string
-    names: [{flag: 'fusebox', type: 'bool', default: false}],
-    cb: ({fusebox}) => {
-      return {fusebox}
-    },
-  },
-})
-```
-
-### ⚠
-- ✔️💣🕸
-- needs docs
-- [todo-presets][todo-presets]
-
-
-## params
-- converts shorthand code to webpack configs
-- [read the code][src-params]
-- ✔️💣🕸
-
-## 💣🛅 fusebox
-- converts webpack configs to fusebox configs
-- [read the code][src-fusebox-middleware]
-- ✔️💣
-- [todo-build-systems][todo-build-systems]
-- needs to pass in more of the config
-
-## ☺️️🛅 happypack
-- [happypack][happypack]
-- ✔️🕸
-
-### defaults
-```js
-happypack: {
-  cache: false,
-  threads: 4,
-  include: [
-    './',
-  ],
-}
-```
-```js
-{
-  _noop: true,
-  clean: false, // bool, or array<string>
-}
-```
-
-
-## 🗺 sourcemaps
-- ✔️💣🕸
-
-### defaults
-```js
-env: {
-  development: {
-    useSourceMaps: true,
-    sourceMapTool: '#source-map',
-  }
-  production: {
-    useSourceMaps: true,
-    sourceMapTool: 'hidden',
-  },
-}
-```
-
-## ⚖️ loaders
-- ✔️💣🕸
-- .loaderOptions
-
-### defaults
-```js
-loaders: {
-  'babel': {},
-  'json': {},
-},
-```
-
-
+# 💠 hubs (middleware +)
+[docs hubs][docs-hubs]
 
 ## 🚩 flags
-flags can be used to find global variables passed around for configuration
-from [globals][node-global]
-
-### defaults
-```js
-flags: {
-  names: [
-    {flag: 'compile'},
-    {flag: 'exec'},
-    {flag: 'run'},
-    {flag: 'test'},
-  ],
-  cb: ({compile, exec, run, test}) => {
-    var decorated = {compile, exec, run, test}
-    if (test) {
-      if (decorated.presets) {
-        decorated.presets.push('test')
-        decorated.presets.push('mocha')
-      }
-      else decorated.presets = ['test', 'mocha']
-    }
-    // helpers.log.verbose(decorated)
-    return decorated
-  },
-}
-```
-
-### examples
-```js
-flags: [
-  {
-    names: ['html'],
-    cb({html}) {
-      if (!html) return {}
-      var template = `./back/verbose/${html}.html`
-      return {html: [{template}]}
-    },
-  },
-  {
-    names: [{flag: 'run', type: 'bool', default: false}],
-    cb({run}) {
-      return {run}
-    },
-  },
-],
-```
-
-### resources
-- [yargs][yargs]
-- [node-flag][node-flag]
-- ✔️💣🕸
-
-### ⚠
-- needs ungreedy search
-- [todo-flags][todo-flags]
-
-
-## ♼ environment
-is an extension of [flags](#flags) as a middleware using flags
-
-### defaults
-```js
-env: {
-  production: {
-    uglify: true,
-    defineProduction: true,
-    run: false,
-    compile: true,
-    sourceMaps: false,
-    sourceMapTool: 'hidden',
-  },
-  development: {
-    noEmitErrors: true,
-  },
-}
-```
-
 ## ☕🏳️ filters
 white [flags](#flags) are used to filter which apps are run for different [operations](#app-operations)
 
 apps, and app operations can be filtered based on flags either per app, or for all apps.
 [see the examples](#examples)
 
-
-## configOut
-- writes the generated config to a file, for use with [babel-module-resolver][babel-module-resolver]
-- ✔️💣🕸
+## 🏹 aliasing
+[see the alias docs][docs-alias]
 
 
-## polyfills
-- can be used currently only for polyfilling window when you `.exec` in [app operations](#app-operations)
-### ⚠
-- ✔️🕸
-- needs docs
-- [todo-polyfill][todo-polyfill]
+## 🍰 presets
 
+[see the preset documentation][docs-presets]
 
-## externals
-- allows you to exclude paths from a bundle
-- ✔️💣🕸
-- [webpack externals][webpack-externals]
-- [fuse exclude][fuse-arithmetic]
+```js
+const apps = [{
+  presets: ['alias-resolve', 'neutrino-preset-web', 'eslint'],
+}]
 
-
-
-## tests
-- run tests in mocha
-- run tests in karma
-- ^ while running dev servers at the same time
-
-### ⚠
-- ✔️💣🕸
-- needs docs
-- needs links to code
-- needs links to karma and mocha
-- [todo-tests][todo-tests]
-
-
-# 👑⚔️ commander
-
-### resources
-- [commanderjs][commanderjs]
-
-### ⚠
-- needs docs
-- needs lots of work
-- [todo-commander][todo-commander]
+const appsWithArgs = [{
+  presets: {
+    aliasResolve: __dirname,
+    presetWeb: null,
+    eslint: require('./.eslintrc.js')
+  },
+}]
+```
 
 
 
-# apps
-- multiple apps [flow-app][flow-app]
+## 🐛 debugging
+- ⚙ with full options for debugging everything in the flipping process, debugging is a breeze.
+- inside of every [workflow][src-core-workflow], there is `.log`, [fliplog][fliplog-url]
+[see the docs for debugging][docs-debugging]
 
-### app-operations
-  - 🏃🏸 running
-    - 🔮🌐 automatic safety in ports
-  - ⌛ compiling
-    - 👂 compileEnd
-  - 💀 executing
-  - 👻 mediator
-- ⛴ releasing scripts
-  - 📦🏗 package builder
-  - pipeline
-  - task running
-  - 💚📜 scripts created for ci environments
-  - 🔮📜 scripts for all environments and servers created and added to your packages
-  - 📦⬇ keep your dependencies at root to [avoid symlinks][com-avoid-symlinks] and [massive package sizes][com-massive-package-sizes]
 
-### ⚠
-- needs docs
+[src-core-workflow]: https://github.com/fliphub/fliphub/tree/master/packages/fliphub-core/src
+[src-fliphubp-hubs]: https://github.com/fliphub/fliphub/tree/master/packages/fliphub/src/hubs
+[src-fliphubp-configdefaulter]: https://github.com/fliphub/fliphub/blob/master/packages/fliphub/src/hubs/ConfigDefaulter.js
+[src-fliphubp-presets]: https://github.com/fliphub/fliphub/tree/master/packages/fliphub/src/presets
+[src-fliphub-core]: https://github.com/fliphub/fliphub/tree/master/packages/fliphub/src/core
+
+
+[docs-cli]: https://github.com/fliphub/fliphub/tree/master/docs/cli.md
+[docs-cli]: https://github.com/fliphub/fliphub/tree/master/docs/cli.md
+[docs-alias]: https://github.com/fliphub/fliphub/tree/master/docs/cli.md
+[docs-presets]: https://github.com/fliphub/fliphub/tree/master/docs/cli.md
+[docs-dependencies]: https://github.com/fliphub/fliphub/tree/master/docs/dependencies.md
+[docs-debugging]: https://github.com/fliphub/fliphub/tree/master/docs/debugging.md
+[docs-event-lifecycle]: https://github.com/fliphub/fliphub/tree/master/docs/event-lifecycle.md
+[docs-hubs]: https://github.com/fliphub/fliphub/tree/master/docs/hubs.md
+[docs-next]: https://github.com/fliphub/fliphub/tree/master/docs/next.md
+[docs-operations]: https://github.com/fliphub/fliphub/tree/master/docs/operations.md
+[docs-preset-sourcemaps]: https://github.com/fliphub/fliphub/tree/master/docs/preset-sourcemaps.md
+[docs-preset-html]: https://github.com/fliphub/fliphub/tree/master/docs/preset-html.md
+[docs-preset-default]: https://github.com/fliphub/fliphub/tree/master/docs/preset-default.md
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# properties (link to interfaces)
+all optional
+any options from any bundler (usually will not work without at least `entry`, and `output`)
+
+### parent config
+  - inheritable by each app
+  - when using a single app, the parent config is the app config
+  - same properties as app, but
+    - no name
+    - no bundler properties
+    - has the apps property
+
+### app
+  - presets: `Object` | `Array<string>`
+  - flips `Array<Bundlers>` | `Bundler`
+  - inherit: `boolean`, whether to inherit the parent config
+  - root: `string`, path to resolve paths to
+  - defaults: `boolean`, disables all defaults
+
 
 
 
@@ -545,85 +317,34 @@ apps, and app operations can be filtered based on flags either per app, or for a
 # 🕳 digging deeper
 
 ## 🖇 helpers
-
-## 🐛 deep-debugging
-inside of every workflow, there is [fliplog][fliplog-url]
-
-### defaults
-```js
-debug: {
-  missingMiddleware: false,
-  missingLoaders: true,
-  devServer: true,
-  middleware: true,
-  loaders: false,
-  verbose: false,
-  built: false,
-  decorated: true,
-  time: true,
-  filter: true,
-  defaults: false,
-  happypack: false,
-  presets: false,
-  out: true,
-  order: false,
-  params: false,
-  alias: true,
-  fuse: true,
-  exec: true,
-  flags: true,
-  testOutput: true,
-}
-```
+- see flipfam
 
 
 
-## 📒 files
-[flipfile][flipfile-url]
-
-## 🌐 port
-used for finding available ports if preferred ones are not available
-
-
-## html
-
-## example
-```js
-{
-  flags: {
-    // selector=your-custom-root-react-id
-    // htmlfile='./src/index.html'
-    // htmlfiles=['./src/index.html', './src/page2.html']
-    // template=[{template: './src/index.html'}]
-    names: [
-      'selector',
-      'htmlfile',
-      'template',  
-      {flag: 'htmlfiles', type: 'array'},
-    ],
-    cb: ({selector, htmlfile, template, htmlfiles}) => {
-      if (selector) return {html: `#${selector}`}
-      if (htmlfile) return {html: htmlfile}
-      if (htmlfiles) return {html: [htmlfiles]}
-      if (template) return {html: template}
-    },
-  },
-}
-```
-
-### ⚠
-- ✔️🕸
-- needs docs
-- needs more fusebox support, only supports html file
-
-## 📅 plans
-- [board](https://github.com/fliphub/fliphub/issues#boards?repos=82865013)
-
-# 🏗 build systems / builders
+# 🏗 build systems
 - [webpack][webpack-url]
 - [fusebox][fusebox-url]
 - [rollup][rollup-url]
 - [another bundler? request it][new-issue-url]
+
+
+
+
+
+# v0
+v0 is still available as [flipbox][flipbox-url] but is unmaintained.
+
+[flipbox-url]: https://www.npmjs.com/package/flipbox
+
+
+
+
+
+
+
+
+
+
 
 
 [new-issue-url]: https://github.com/fliphub/fliplog/issues/new
@@ -640,25 +361,6 @@ used for finding available ports if preferred ones are not available
 [flow-middleware]: https://github.com/fliphub/fliphub/tree/master/flow/MiddlewareInterface
 [flow-app]: https://github.com/fliphub/fliphub/tree/master/flow/MiddlewareInterface
 
-[todo-flags]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/flags.md
-[todo-aliasing]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/aliasing.md
-[todo-compat]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/compat.md
-[todo-HMR]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/HMR.md
-[todo-loaders]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/loaders.md
-[todo-middleware]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/middleware.md
-[todo-polyfill]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/polyfill.md
-[todo-presets]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/presets.md
-[todo-tasks]: https://github.com/fliphub/fliphub/tree/master/docs/todos/middleware/tasks.md
-[todo-architecture]: https://github.com/fliphub/fliphub/tree/master/docs/todos/architecture.md
-[todo-build-systems]: https://github.com/fliphub/fliphub/tree/master/docs/todos/build-systems.md
-[todo-commander]: https://github.com/fliphub/fliphub/tree/master/docs/todos/commander.md
-[todo-core]: https://github.com/fliphub/fliphub/tree/master/docs/todos/core.md
-[todo-docs]: https://github.com/fliphub/fliphub/tree/master/docs/todos/docs.md
-[todo-examples]: https://github.com/fliphub/fliphub/tree/master/docs/todos/examples.md
-[todo-helpers]: https://github.com/fliphub/fliphub/tree/master/docs/todos/helpers.md
-[todo-later-soon-next]: https://github.com/fliphub/fliphub/tree/master/docs/todos/later-soon-next.md
-[todo-perf]: https://github.com/fliphub/fliphub/tree/master/docs/todos/perf.md
-[todo-tests]: https://github.com/fliphub/fliphub/tree/master/docs/todos/tests.md
 
 
 [david-deps-img]: https://david-dm.org/fliphub/fliphub.svg

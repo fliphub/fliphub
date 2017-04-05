@@ -1,5 +1,8 @@
 # 🔈 changelog 🔈
 
+# part 66 - apr 4-5 17
+
+
 # part 65 - apr 4 17
 - 👂 flipevent
   - 🆕 start
@@ -17,6 +20,7 @@
   - 🤸 splitting up into files
   - ✍ updating contents
   - 📝 adding todos
+  - 📘📖 prepping for gitbook
 - ⛓ flipchain
   - 📖 add create-once-get-three docs
   - 📘 add examples of merging and hydrating

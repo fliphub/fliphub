@@ -1,19 +1,18 @@
 {
   "name": "flipfam",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "the fliphub modules as a single package - flipfam.",
   "main": "index.js",
-  "engines": {
-    "node": ">= 7.8.0",
-    "npm": ">= 4.2.0"
+  "optionalDependencies": {
+    "flip": "1.0.0",
+    "flippack": "*",
+    "fliphub": "*"
   },
   "dependencies": {
-    "flip": "*",
     "inspector-gadget": "*",
     "arr-to-obj": "*",
     "fliplog": "*",
     "fliphub-cli-inferno": "*",
-    "fliphub": "*",
     "flipscript": "*",
     "flipcache": "*",
     "flipchain": "*",
@@ -26,7 +25,6 @@
     "fliptime": "*",
     "fliphelp": "*",
     "fliphtml": "*",
-    "flippack": "*",
     "json-chain": "*",
     "regexes": "*",
     "sleepfor": "*",

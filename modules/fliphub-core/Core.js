@@ -1,5 +1,6 @@
 const log = require('fliplog')
 
+// aka: nub/heart/axis/core/api/center/middle/pivot/focus/hubs/hub
 module.exports = class Core {
 
   /**

@@ -14,11 +14,11 @@ class Emitter extends EventEmitter2 {
 
 /**
  * @example
- * ````
+ * ```
  * this.workflow.evt.name('name-of-event-scoped-to->').core().emit(data)
  * this.workflow.evt.name('name-of-event-scoped-to->').context('name').emit(data)
  * this.workflow.evt.core().name('eh').cb(this.cb)
- * ````
+ * ```
  */
 class EventChain extends ChainedMapExtendable {
 

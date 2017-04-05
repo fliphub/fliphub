@@ -1,6 +1,6 @@
 {
   "name": "fliphub-core",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "main": "index.js",
   "description": "the core of fliphub, an extensible hub api",
   "keywords": [

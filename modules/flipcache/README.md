@@ -15,6 +15,8 @@
 [flipfam-image]: https://img.shields.io/badge/%F0%9F%8F%97%20%F0%9F%92%A0-flipfam-9659F7.svg
 [flipfam-url]: https://www.npmjs.com/package/flipfam
 
+> [temporary], safe, restorable, cacheable, configurable, chainable/fluent data
+
 ## 📦 usage
 ```bash
 yarn add flipcache
@@ -42,5 +44,12 @@ const mocha = flipcache
 ```
 
 ```js
-const datas = flipcache.from('./index.js').load().json().update({eh: true}).parse().clean()
+const datas = flipcache
+  .from('./index.js')
+  .load()
+  .json()
+  .update({eh: true})
+  .parse() // optional, is done for you
+  .clean()
+  .write()
 ```

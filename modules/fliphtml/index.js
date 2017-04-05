@@ -3,7 +3,8 @@ const {walk, isRel} = require('flipfile')
 const resolve = require('fliphub-resolve')
 const gom = require('gom')
 const parser = require('flip-gom-html-parser')
-const Tasks = require('./Tasks')
+const flipcache = require('flipcache')
+const Tasks = require('./tasks')
 
 // @TODO: output to file,
 // - static serving html for all html files
@@ -26,7 +27,6 @@ class HTML {
 
 // https://github.com/the-grid/gom/blob/master/spec/GOM.coffee#L189
 class HTMLs {
-
   // needs to subscribe to html webpack, or fusebox, and then call the callback
   // with the gom html
   add(contents, files, cb) {
@@ -38,7 +38,7 @@ class HTMLs {
   // --------------
 
   from(cb) {
-    const args = cb(gom, files)
+    const args = cb(this.files)
     this.setup(args)
   }
 
@@ -60,6 +60,9 @@ class HTMLs {
   }
   constructor() {
     Object.assign(this, {
+      htmls: [],
+      tasks: [],
+
       file: false,
       files: [],
       configs: [],

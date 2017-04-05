@@ -1,8 +1,8 @@
 {
   "name": "fliphtml",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
-  "description": "html plugins for webpack, rollup, fusebox",
+  "description": "html plugins for webpack, rollup, fusebox, generating html on nodejs",
   "keywords": [
     "webpack",
     "rollup",
@@ -13,9 +13,11 @@
     "html-webpack-plugin": "2.28.0",
     "fliplog": "*",
     "flipfile": "*",
+    "flipcache": "*",
     "fliphub-resolve": "*",
     "gom": "0.1.14",
-    "flip-gom-html-parser": "0.0.5"
+    "flip-gom-html-parser": "0.0.5",
+    "fuse-box": "^1.4.1-beta.22"
   },
   "author": "James <aretecode@gmail.com>",
   "homepage": "https://github.com/fliphub/fliphub#readme",
@@ -25,5 +27,8 @@
   },
   "bugs": {
     "url": "https://github.com/fliphub/fliphub/issues"
+  },
+  "devDependencies": {
+    "express": "^4.15.2"
   }
 }

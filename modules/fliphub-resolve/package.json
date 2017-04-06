@@ -1,6 +1,6 @@
 {
   "name": "fliphub-resolve",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "dependencies": {
     "deep-replace": "*",
     "flipfile": "*",
@@ -10,7 +10,7 @@
     "izz": "*"
   },
   "main": "index.js",
-  "description": "resolve objects, arrays, or your app root",
+  "description": "resolve objects, arrays, strings, to app, monorepo, or custom scopes",
   "keywords": [
     "helpers",
     "utils",

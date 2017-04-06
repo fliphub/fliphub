@@ -25,4 +25,11 @@ console.assert(aintHas === false, '.has correctly reports values not there')
 console.assert(hubub === 'hubub', 'can use .set and .get in chain, with dotprop')
 console.assert(typeof test === 'object', 'can .get without any modifications')
 
+
+const ifNotEmpty = new JSONChain(pkg)
+  .setIfNotEmpty('scripts.test', 'ava --verbose')
+  .setIfNotEmpty('scripts.devDependencies', {'ava': '*'})
+
+console.log(ifNotEmpty)
+
 console.log('all assertions pass :-)')

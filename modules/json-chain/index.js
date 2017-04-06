@@ -28,6 +28,12 @@ module.exports = class JSONChain {
     this.current = val
     return this
   }
+  setIfNotEmpty(key, val) {
+    this.parse()
+    if (this.has(key)) return this
+    this.update(key, val)
+    return this
+  }
   has(key) {
     this.parse()
     if (key.includes('.')) return dotProp.has(this.data, key)

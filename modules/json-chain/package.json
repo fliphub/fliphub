@@ -1,6 +1,6 @@
 {
   "name": "json-chain",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "fluent chaining for json with dot-prop access",
   "main": "index.js",
   "scripts": {

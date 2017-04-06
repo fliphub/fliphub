@@ -55,3 +55,11 @@ const has = chain.has('version')
 
 ## ✍ writing to file
 - has `.toString` and `.toJSON` methods for auto-stringifying when cast to `string` or `JSON.stringify`
+
+## 👾 keep it simple
+```js
+const chain = new JSONChain(pkg)
+  .updateIfNotEmpty('scripts.test', 'ava --verbose')
+  .updateIfNotEmpty('scripts.devDependencies', {'ava': '*'})
+  .write()
+```

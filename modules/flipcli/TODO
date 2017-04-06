@@ -4,3 +4,5 @@ also need to have
 
 https://github.com/enquirer/enquirer
 https://github.com/dthree/vorpal/wiki/api-%7C-vorpal.command
+
+infinitely nestable `choose-your-own-adventure` style chainable interactive cli

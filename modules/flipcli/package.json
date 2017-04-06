@@ -1,16 +1,16 @@
 {
   "name": "flipcli",
   "description": "flipcli creation, minimal, powerful.",
-  "version": "0.0.4",
-  "main": "index.js",
+  "version": "0.0.7",
+  "main": "src/index.js",
   "scripts": {
-    "test": "ava"
+    "test": "ava --verbose"
   },
   "optionalDependencies": {
     "fuzzy": "*"
   },
   "devDependencies": {
-    "ava": "*",
+    "ava": "^0.19.0",
     "fosho": "*"
   },
   "dependencies": {

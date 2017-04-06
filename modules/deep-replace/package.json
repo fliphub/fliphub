@@ -1,10 +1,14 @@
 {
   "name": "deep-replace",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "main": "index.js",
-  "description": "deep replace js objects as far down as you like by property string or regex or fn match",
-  "script": {
-    "test": "true"
+  "description": "deep replace objects using property string, regex, fn match",
+  "scripts": {
+    "test": "ava --verbose"
+  },
+  "devDependencies": {
+    "fosho": "*",
+    "ava": "^0.19.0"
   },
   "files": [
     "del.js",

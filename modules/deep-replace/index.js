@@ -1,4 +1,4 @@
-const deepReplaceProp = require('./prop')
+const deepReplaceProp = require('./delProp')
 const deepReplaceMatch = require('./match')
 const del = require('./del')
 
@@ -7,7 +7,7 @@ const exportee = {
   match: deepReplaceMatch,
   deepReplaceMatch,
 
-  prop: deepReplaceProp,
+  delProp: deepReplaceProp,
   deepReplaceProp,
 }
 module.exports = exportee

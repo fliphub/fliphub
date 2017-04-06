@@ -1,0 +1,23 @@
+const log = require('fliplog')
+const Fluent = require('../src')
+
+Fluent.program()
+  .command('release')
+    .actionPrompt('confirm')
+      .type('confirm')
+      .message('Are you sure you want to release APPNAME. Continue?')
+    .step('env')
+      .checkbox('production', true)
+      .checkbox('development', false)
+    .then((args) => {
+      if (args.continue) log.yellow('Good move.').echo()
+      else log.bold('Off we go!.').data(args).echo()
+    })
+  .command('skeleton')
+    .alias('seed')
+    .alias('scaffold')
+    .actionPrompt('is this cool or what?', 'confirm')
+  .parse()
+  .show()
+
+// log.quick(program)

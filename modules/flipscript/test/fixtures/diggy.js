@@ -1,0 +1,6 @@
+console.log('bumbididodidangadangdiggigiggi')
+console.log('\n')
+console.log(process.env.NODE_ENV)
+console.log('\n')
+console.log(process.argv.slice(2))
+console.log('\n')

@@ -1,0 +1,3 @@
+- support `arguments`
+- support Array.from
+- support Object.values

@@ -1,5 +1,1045 @@
 # 🔈 changelog 🔈
 
+
+--------
+
+# part 66 - apr 5 17
+- 🏗💠 fliphub, 🔬🍰 🔬📦 📚🔗📖📘 🛁📒🚚 ⚙🛡
+  - 📝🍰🌎 preset provide in presets/todos
+  - 🔗 more readme links
+  - 📖 gitbook fiddling, documentation expansion
+  - 🔬🍰 test for presets as obj
+  - 📖📦 doc for packages
+  - 📖📒🚚🏰 move around the docs structure
+  - 🔫 add bullet-points
+  - 🛁 clean the presets-defaults
+  - 🔗 update links from refactor2 to master
+  - ⚙ expand on config
+  - ⚙🛡 add safety in bundlerFlipper when merging to fallback to object if they are inheriting/using-reusable configs
+  - 🍰⚙ added preset-reusable
+  - 🔬🚨 failing tests for reusable inheriting fliphub configs (via plugins, though it should not be needed since configs are inherited if inherited is not false so...)
+  - 📘 examples
+  - 🔬📦 update test dependencies for ava
+
+- 🎯 fliphub-resolve & 🥕 mono-root
+  - 📖 docs part 2
+  - 📘 examples
+- 📜 flipscript
+  - 🔬🚨 update test for permutator to use commas instead of spaces
+- 🕳 deep-replace
+  - 📖 adding docs
+  - 🔬 test setup
+- ⛓🔈 fliplog
+  - 🎁 trackConsole
+  - ⌨️⚒ fix typo where using .quick would use arguments even if it was only length 1 which was a harder to read log
+  - 🔍🎨 add missing color red shorthand
+- 💯 fosho
+  - 🚧 add .t method to scope `t` for shorter asserting
+- 🖥 flipcli
+  - 🔬 more tests
+- 🎀⛓ json-chain
+  - 🎁 .setIfNotEmpty
+  - 🔬 updated
+  - 📚 add docs
+  - 📦⬆🎁 add dotprop set and get
+  - 🎁 add .set .get .delete .remove aliases
+- 💾💸 flipcache
+  - 🗑 add `.del`
+  - 🎀⛓ update with latest json-chain
+  - 👣 adding .dir
+  - 🔬 added test
+  - 📦⬆📦⬇ swap built in autofind with 🔎 flipfind
+  - export all files so they can be used individually
+🏗💠🔮 flipfam
+ - added fliphub back to dep from optionalDependencies
+ - updated 🎯 fliphub-resolve & 🥕 mono-root
+ - used 💾💸 to create exports
+ - 🔬 added tests
+
+---
+- ⛓🔈 fliplog
+  - ☕ filtering - added support for function
+  - 🎁 add .expose
+  - 🐌 add .slow mode
+  - 📖🛰 docs for `space`
+  - 📖 updated readme to reflect
+  - 📖🏗💠🔮 added flipfam to readme
+  - ⚒🐛 fix capturing
+  - 📝 update todos
+  - 🛁⚗ clean experiment
+---
+
+# part 65 - apr 4 17
+- 👂 flipevent
+  - 🆕 start
+  - 📒🚚 extract from fliphub-core
+- 💠💗 fliphub-core
+  - 📖📚 docs
+- fliphtml
+  - part4
+  - ⚗ experiment with gom
+  - 🏸 make static server serve them all
+  - 📝 add todos for server with webpack with multiple html files
+  - 🐦 add fixtures
+  - 📝 add links
+- 📖📚 docs
+  - 🤸 splitting up into files
+  - ✍ updating contents
+  - 📝 adding todos
+  - 📘📖 prepping for gitbook
+- ⛓ flipchain
+  - 📖 add create-once-get-three docs
+  - 📘 add examples of merging and hydrating
+  - 📘👋 simple example
+  - 📘🕳🏊 advanced example
+  - 📝 add todo
+  - 🚑🐛 fix extending with prefixes
+- ⛓🔈 fliplog
+  - 🎁 add .expose
+- 💍 tiny-promise-map
+  - 📖 readme setup
+  - 🔬 test setup
+  - ⛓ add .chain and .map exports
+-  🏗💠 fliphub
+  - ⛰🍰 env preset
+    - update args
+    - 📖 expanding docs
+    - 📖 adding wiki
+- 🏗💠🔮 flipfam
+  - 📦⬇ update dependencies for unreleased deps
+
+# part 64 - apr 3 17
+- 🏗💠 fliphub
+  - 🍰 🙃 🚩 updating preset-flags
+  - 📖📘📚 adding flags example, updating readmes
+  - 🍰📝 add PresetNoop to presets/todo
+  - 🍰📝 add PresetPkg to presets/todo
+- 🙃🛳 flipport
+  - 📒🚚🖇 move out of fliphub-helpers
+  - 🆕 create
+  - 📖 add readme
+- 📚 docs
+  - 📦 add dependencies.md
+
+# part 63 - apr 3 17
+
+- 🚁 on the fly
+  - 📛 updated badges, readme
+  - 📦⬆📦⬇ swap flipfile finding file for 🔎 flipfind
+- 💾💸 flipcache
+  - 📦⬆📦⬇ swap built in autofind with 🔎 flipfind
+  - export all files so they can be used individually
+- 🎀⛓ json-chain
+  - 📚 add docs
+  - 📦⬆🎁 add dotprop set and get
+  - 🎁 add .set .get .delete .remove aliases
+- 📚📚📚📖📖📖
+- 🤝 flipshake
+  - 🆕 start
+  - ✚ add pkgjson
+  - 📝🔬 add test todos
+  - add fixtures
+  - 📦⬆📦⬇ add deps
+  - 🆒 added query string require statements by generating out the permutations of requires
+  - need to 📘 add examples & readme
+- 📜 flipscript
+  - ✚ add .separator to options in permutations, for flipshake
+  - 🚑🐛 fix wrong pkg main field
+  - and it works ^w^
+- 🏋️⚗ play/bench for env experiment
+- 📚📖📘 readme & examples update
+  - [to-arr], does-include, izz, flipcli, 💤 sleepfor, 💯 fosho, 🏹 fliphub-alias, 🗺 remap-by, 👶 childparent, 💾💸 flipcache, {arr-to-obj}, , 💠 fliphub-core, easy-npm-files, 📒 flipfile, expose-hidden, ⏲ fliptime, es5exports, 🕵🗜 inspector-gadget
+- ⛓ flipchain
+  - 📚 docs
+  - 📖📘 examples
+- 🙃 🚩 flipflag
+  - 📚 docs
+  - 📖📘 examples
+
+-------
+
+- 🏗💠🔮 flipfam
+  - 🔗 so many links, so many more todo
+- 🏗💠
+  - 📖 wip readme glob generator
+  - 📖 readme improvements
+  - 📚 misc minor docs changes
+  - 📝 misc todos
+
+
+# part 62 - apr 2 17
+- ⛓🔈 fliplog
+  - 📒🚚 move tests & examples to /test
+  - added progress bar
+  - 📚 adding docs for fun, sparkly, bar, beep, box, formatting, progress, highlight, bar, update doDiffs -> diff, emojis
+  - 📦⬆📦⬇ adjust deps
+  - ⚒🐛 fix capturing
+  - added a formatter fn cb for data, for use later
+- 🏗💠🥕 fliphub-monorepo
+  - update deps move some into optionalDependencies
+- 📘 examples
+  - updating package jsons
+  - ⚒ finding cycle in deps
+  - 👾 add minimal
+- misc minor updates in git commits
+- 🗝️ minor package keyword changes, readme emoji and such
+- 🖥 flipcli
+  - ⛓ add shorthand choices, so nice
+  - 🏭 expanding shorthand with a shorthandFactory for all question options
+- ⛓🔎 flipfind
+  - 📒🚚 take beginnig part out of flipfile
+  - 🆕 start
+  - 📖 add readme
+  - 📜 add pkgjson
+  - 📦⬆ add deps
+  - 🔬 add tests
+    - debug test
+    - failing / non-existing-file test
+    - file only
+    - obj
+    - relative
+    - shorthand
+  - 🔊 add debug mode
+  - ⚡ optimize
+  - 📚 add docs
+  - 📘 add examples
+- 🥕 mono-root
+  - 📖 add to readme
+- 🎯 fliphub-resolve
+  - 📖 start adding some docs for readme pt2
+- ⛓⌛ fliptime
+  - 📚 more to readme
+  - 🎁 adding .took
+  - 🔬 added tests
+- 📚 docs
+  - ⛓ add awesome-fluent.md
+  - ℹ️️ add explanation for Replace/Define
+  - 🏗💠🔮 flipfam setup badge
+    - https://img.shields.io/badge/%F0%9F%8F%97%20%F0%9F%92%A0-flipfam-9659F7.svg
+- 📒 flipfile
+ - 🚑🐛 added missing files to pkg json files
+ - 📒🚚 move /find out as the beginning of flipfind
+- insert-at-index
+  - 🔬 add test
+  - 📚 update docs
+
+- ⚒💚🔬 🆕👶 🏗💠🔎📦⬆
+- 💚 travis working to install now
+- 🔬🚨 tests   
+  - 🏴 adding glob for exec on lerna.json
+  - ⚒ fixing flipcache, fliphelp,  tests
+  - 🛁 remove missing tests on depflip, tiny-promise-map, regexes, emoji-by-name
+  - 👣 update fliphub tests with fusebox with absolute paths
+  - 🔮🦄💍 use async instead of promises
+  - 💚 should be ready for travis
+- 👶 childparent
+  - 🆕 extracted child-to-parent-methods into childparent module  
+  - 📖 add basic example
+- 🏗💠 fliphub
+  - 🔎📦⬆ neutrino-middleware-progress
+- ⛓ flipchain
+  - 📦⬇🖇 deps down using simpler prefix inline instead of the whole fliphub-helpers just for the prefix util
+  - 🚑🐛 fix bug when importing that prefix
+- 🖇 fliphub-helpers
+  - remove some utils that have been moved to other modules (stringContainsAnyOf)
+  - improve str/prefix
+- 👕 allow var
+- 📝 for readme with dep checking
+
+- ⛓🔈 fliplog
+  - 🎁💤 sleepfor
+  - 📖 add readme
+  - 😊 update description & emoji
+
+# part 61 - apr 1 17
+- wrote commits using emoji again finally
+- remove flipglob from next as it is a module now
+
+- flipfam
+  - start
+  - add deps
+  - add missing deps
+  - add light
+  - publish for the name
+- 📚 docs
+  - add server.md
+  - add cli.md
+  - do some solid research for cli before expanding on fluent-cli to ensure best choice before investing
+- fliplog
+  - add boxen,
+  - add sparkly,
+  - add babar,
+  - add ora,
+  - add node-notifier,
+  - add beeper (with .inspect so it only beeps on echo)
+  - add test-fun to run it
+  - add cli-highlight, and strip out the annoying html tags
+  - add random shuffling to defaults on sparkly & babar
+- flipcache
+  - add configstore dep
+  - add store method
+  - default to store if no file path passed in
+  - add static .file method
+- flipscripts
+  - added tags
+  - added dargs
+  - moved test deps to devDependencies
+- flipchain
+  - add .append & .append as commonly it is being used to .get.concat.set or +=
+  - safety to setting .name
+- fliphub-cli
+  - clean up and use flipcli
+  - add todos
+- flipcli
+  - a lot of fiddling and thinking and reading to get a simple example
+    that does what is expected part 1
+  - first simple example is working, so nice and short!!!
+  - two steps + confirm, exactly how it should be.
+  - add Stepper with .run op
+  - add vorpal command integration
+  - add .actionPrompt
+  - add all main actions from vorpal to cli
+  - add log, vorpal, and inquirer to exports
+  - split into multiple files
+  - export all in index
+  - move Presets in as a todo
+  - add examples to readme
+- fliphtml
+  - expanding for chaining
+  - simplify the handling before it is working to avoid too much magic hard to debug
+  - simplified copying and setting up
+  - rename to fliphtml
+  - fork gom-html-parser since it had no main field
+
+# part 60 - mar 31 17
+- flipglob
+  - adding minimatch
+  - add izz
+  - add isGlob
+- fliplog
+  - making echo default fn rather than log and aliasing echo
+  - adding diffs instead of dodiffs
+  - safety to diffs
+  - safety to stringify
+- depflip
+  - move glob-fs out,
+  - fix dupe keys in pkg json
+- flippack
+  - cleaning old ScriptPermutator
+  - cleaning PackageFinder
+  - cleaning publisher a little, adding comments
+  - updating deps
+  - updating PackageManager to use flipcache
+  - adding README
+- fliphub-core
+  - add link to workflow song
+- add .log.* to .gitignore
+- fliplog
+  - fix bug in echoing when echoing `false`
+- html-plugin
+  - adding deps
+- fluent-cli
+  - create
+  - mock out an interface example
+  - setup pkgjson with deps
+- fliphub
+  - minor update to presets/todo/opshub/run
+  - clean some deps
+
+---
+
+# part 59 - mar 31 17
+- attempt to configure commonchunks for nodejs, not easy
+- docs
+  - add a few to splitting
+- json-chain
+  - create
+  - add toJSON, toString, has, del, val, parse, update
+  - add chainable functionality
+  - make pkgjson
+- flipcache
+  - flush out two examples
+  - chain it up
+  - use json-chain
+  - add deps
+  - split into individual files
+  - ran initial log test, looks good
+  - adding .create to the File, if it does not exist
+  - child-to-parent-methods from json to File
+  - returning File when calling update on json
+  - some cleaning and jsdocs
+  - adding .backup to Files
+- eslint
+  - allowing return assign
+- flipchain
+  - add aliasMethods
+- flipscript
+  - adding Binner
+  - move ava to devDependencies
+  - splitting into files
+  - testing stdout contents, working
+  - adding autostringify if using anything but letters, numbers, and more than 1 dash
+- onthefly
+  - add missing pkgjson metadata
+- make jsonchain
+  - move files there from flipcache
+- added some autoresolving, will be good to improve on
+- TODOs
+  - move TODO to docs
+  - updating
+- docs
+  - adding some vorpal links to flipcache, cli, etc
+- minimal test
+  - added a simple ava example seed
+- fliphub-cli
+  - clean up the files
+- inspector-gadget
+  - added missing pkgjson description
+  - added picture
+- easy-npm-files
+  - updating todos
+  - updating exposer
+  - using flipcache
+  - add description
+  - improving
+  - needs one last pass for dealing with paths, then should be good to go
+- izz
+  - added is.glob
+  - added todo
+- committing to github
+
+# part 58 - mar 30 17
+- filter out large file that prevented committing
+- started git.md
+- typos on flags.name(s)
+- clean backup
+- fix docs links
+- updated on-the-fly 📇
+  - to run without a trace
+  - installation docs
+  - updated docs for without a trace
+  - published under onthefly as well as it uses that for the bin
+  - 📦⬆💸 add flipcache for use later
+- flipscript
+  - hacking on it
+  - fixing prefixing
+  - adding toCmd
+  - fixing group index and order
+  - add ops.run
+  - adding tests
+    - test toString
+    - test toCmd on all scripts
+    - toCmd on one script
+    - lerna
+    - prefixes not duplicated
+    - prefixes respected
+    - npm adds doubledash
+    - npm deepEqual
+- inspector-gadget
+  - export util
+  - export disabling of custom inspection
+  - docs for custom
+  - readme picture
+- izz
+  - extend is_js
+  - add .includes
+  - add .glob
+- fosho
+  - adding diff logging in equals
+  - adding occurrs/includesTimes
+  - multi-arg support for izz
+- 📒 flipfile
+  - add glob-fs
+  - expanding readme
+  - add fs-extra under /extra.js
+  - add all.js to export all
+  - added ava for testing
+  - added test for export
+  - examples to readme
+  - flat export of path in all
+- expose-hidden
+  - return object for convenience
+  - make second arg allow no binding
+  - update docs to reflect
+  - add .version to it, good practice
+- flipcache
+  - started
+  - added detached child experiment, success, cool
+  - planned a bit
+- fliphelp
+  - started
+  - experimented with tern
+  - added screenshots of result
+- docs
+  - add bench.md
+  - add more to monorepo
+
+---
+
+# part 57 - mar 29 17
+- update todos
+- moving out uvxyz
+- json plugin into rollup for now
+- more splitting up the examples
+- starting on an array of flips.to
+- got array of flips.to working first round, sweet
+- starting multiple apps with flip.to arrays
+- fixed typo on fliplog filters with conditional _filters_ reset
+- 9 bundles at once works :success: but memory leak with eventemitter2
+- updating linting-example
+- updating typescript example
+- adding eslintrc with airbnb
+- move out old examples
+- add in empty minify-examples to start
+- start webworker example
+- move out old example/z into random
+- move out old example/es6+ts into es6-ts-cconfig-example
+- move out old example/tests into tests
+- start updating readme
+- adding tap args for presets
+- added aliasing to web preset to require built in middleware as updating docs and examples
+- todo on with loader merge for inferno preset
+- adding the readme2
+- move more of pkgmngr topkgmngr
+- moving around cli
+- making flipscript
+- add flippack for flipping package json scripts
+- export appRootPath in mono-root
+- gulp doc list
+- finally move babelrc for minify out of fliphub src
+- add find to flipfile
+- make on-the-fly
+- making fluent flags
+- continuing flipscript
+- adding back accidentally deleted flipglob
+- having flipscript use fliphub-core
+- adding contextType to fliphub-core
+- adding extend increment
+- making the chainedmap return this on extension methods
+- adding extendType to flipchain
+- add izz.any
+- add izz.realNotEmpty
+- tostring the flags, nice and simple
+- update fliptime to use microtime
+- add fliptime to fliplog
+- clean up quick a bit for the arguments
+- format fliptime a little
+- start advice.md
+- expand flipglob a little
+- adding lots to flipscript, docblocks, full features
+- starting toString on flipscript
+- pushing to github, somehow committed but didn't push
+
+---
+
+# part 56 - mar 28 17
+https://github.com/mozilla-neutrino/neutrino-dev/issues/151
+- painfully debug typo in webpack-chain https://github.com/mozilla-neutrino/webpack-chain/pull/21
+- update webpack-chain pr https://github.com/mozilla-neutrino/webpack-chain/pull/19
+- updating foldername to fliphub from fliphub2
+- example/temps working
+- set rollupdefaults to preset defaults
+- handle replacing things in rollup that are webpack and fusebox only with entry points
+- adding resolveall to rollup
+- update webpack-chain pr again
+- update presets to use fuse-box instead of fsbx
+- better resolving with prettier relative paths
+- splitting and updating node example
+- splitting and updating canadas example
+- add .name to chained by default
+- add outputToString method on bundler config for support from webpack to fusebox and rollup
+- fix double slash in alias to fusebox
+- add PresetWeb to move react/inferno/web out of PresetBabel
+- change .resolve.alias to .alias for fusebox and rollup
+- add rollup-plugin-alias
+- updating empty example
+- update rollup defaults to resolve output paths from webpack...
+- html preset part 3
+- pr updating fuse-box spinner https://github.com/fuse-box/fuse-box/pull/442
+- decorating fliplog with .color(text) shorthands
+- making fliplog implement PSR-3
+- making fliplog callable as a fn
+- make extend-hidden object
+- fix extra : used in fliplog if no text or title
+- make does-include module with {any, all}
+- update fliphub-core pkg json
+- update flipfile pkgjson
+- cleaning some folders like yuge into playground
+- cleaning old flipchain from modules/next
+- adding missing pkjsons for lerna
+- pkgjson for emoji-by-name
+- updating fosho to use extend-hidden
+- rename extend-hidden to expose-hidden
+- update inspector-gadget docs
+- publish packages
+- make repo for fliplog
+- update readme badge url for codestyle
+- update gitter room
+- update gitter badge
+- fix some screenshots
+- publish the modules
+- push to github
+- 🚮 delete fake it generated src
+
+# part 55 - mar 27 17
+- move .each and .all to izz from fosho
+- testing other bundlers to ensure output for all :-)
+- make fusebox default set flipto
+- make bundlerflipper re-init and re-merge if to is changed
+- add del to flipfile
+- add log to fliphub exports
+- clean neutrino-preset
+- update neutrino preset toWebpack fn as workflow changes where the config and bundler api are
+- continue on examples
+- fix toConfig for contexts -> have them use bundler.api.config if available
+- neutrino with newest version breaking with immutables, revert some changes, make issue
+
+# part 54 - mar 26 17
+- going to add tests for bundling, make sure it all works, then good to go :-)
+- remove generated mocks woops
+- update todos, remove dist
+- add isRizzle, add power assert, convert all fuse tests to 10x smaller scoped
+- test preset inheritence
+- test multiple apps
+- test default to webpack
+- test flipto rollup
+- verbose reporting for fosho logging diffs and failures
+- build tests
+  - fix calling .build on context on buildSync op
+  - adding buildSync test
+  - adding buildFast test
+  - adding build output exists test
+  - adding auto calling setup in ops if it was not explicitly called
+- add safety to stop the spinner in fliplog
+- starting defaults
+  - adding defaults prop to configs
+  - adding to configDefaulter
+  - adding monorepo mode for resolving easier
+- fixing alias resolve
+- fixing preset merging when args exist and they are undefined which triggered falsy condition and did not set them over
+- extending fusebox default preset
+- fix regression in merging configs in bundler flipper
+
+---
+
+# part 53 - mar 26 17
+- add .properties/hasProps to fosho
+- add exports property test to ensure fliphub exports everything it should
+- add to-arr dep to fosho
+- add flipfile to fosho for the izzes there
+- fix delete on obj.pluginIndex if merging undefined
+- start validator hub
+- a little docs on flipfile
+- make spinner stop when building resolves
+- add opt to to-arr to allow returning keys
+- make fliphub-resolve auto resolve objects and arrays in the fn
+- add fosho.aintHasString
+- added scoping to resolver for multi resolve
+- add isAbs to flipfile...
+- fix resolving when trying to go closer if it fails when it is as a monorepo package
+- add shush to fliplog
+- more eslint
+- pushing to github
+
+# part 52 - mar 25 17
+- https://github.com/fuse-box/fuse-box/pull/434 to move fuse-box OptimizeJsPlugin out of FlipHub
+- add html and json as defaults for fuse-box
+- add keywords and better description to fliplog
+- filter out some deps on depflip
+- ⛓ add chainedchain to flipchain for later, abstract of what is used in workflow
+- 🚮 clean out presets/todo/Config used in ^
+- more emoji to emoji-commits
+- more test todos
+- preset html part 2 - fair bit to go
+- pt 2 on PresetTarget
+- pt 2 on PresetLibrary
+- add schema md to docs
+- move resource docs into docs/resources
+- made fosho module
+  - extend chai
+    - extend assert
+      - bind first arg to have nice shorthands
+    - extend should
+    - extend izz
+      - make non-fns -> fns
+      - bind first arg to have nice shorthands
+- add izz.all
+  - apply first arg as .call if it is array, if fn supports!
+- ava test hub
+- add fusebox should to fosho
+- improve fosho, do cloning, add aint, more tests
+- add getOwn to fliphub helpers
+- cleaning fosho
+- add log mode to fosho
+- more tests, working nicely
+- export log and fosho and assert and should in fosho
+- add passing in ava.t to fosho for assertion planning
+- add test using it
+- exposing on on core from workflow
+- basic docs to fosho
+- basic docs to izz
+- testing events on fliphub
+- adding lodash.isplainobject to izz
+- better api for registering presets
+- making events default to * if there is no current context
+- fix useAll and addAll typo
+- was returning too early when merging children presets!!!
+- test working for event and adding presets and passing down args
+- starting to configure logger for only on workflow
+- simplify ops by removing built fn as now workflow has all contexts
+- moving hubs to be registered internally now that there are tests to register client-side
+- add some docs
+- export fliphub-core with fliphub
+- add test fixtures
+- add deep-replace/del
+- use deep-replace/del in added workflow reset
+- add reset test
+- add fosho eq equals preMuch deepEquals
+- add back temp moved tests
+- adding lifecycle method tests for hub
+- add .each to fosho
+- test for core lifecycle methods calling previous
+
+# part 51 - mar 24 17
+- start arithmetic filtering for fliplog for better debugging
+- get event emitting lifecycle up for hubs
+- add is.ci
+- setup is running, preset hubs connect properly, such a major clean
+- updating eslint rules - no-undef
+- fix silly typos
+- change flipchain from calling init on construct
+- fix another typo with the config and contexts
+- make hub extend chainable
+- adding depth to fliplog for less verbose debugging
+- adding .lines in fliplog to find where you logged
+- add validation to chainable when merging another chain without calling toConfig
+- running fliphub works without using .toConfig
+- move config to rollup config so the parent BundlerConfig is no longer used for anything more than its original values...
+- trying sparky
+- adding simple babel compile - wondering why everyone doesn't build with babel and then bundle with webpack...
+- commenting out invalid syntax in preset todos
+- pt2 optimizejs preset
+- updating todos
+- make optimizejs plugin for fusebox
+- add a bunch of emoji to fliplog
+- adding spinner to fliplog
+- start tests
+- add validation error throwing for izz
+- start flipglobs - fluent-globs
+- add capturing to fliplog
+- fliplog progress bar
+- adding more to spiner in fliplog
+- start from for fromObj in fliplog
+- adding from to flipchain
+- conver spinner to ts for fusebox
+
+# part 50 - mar 23 17
+- make insert-at-index module
+- start fliphub-core for the api for hubs
+- make remap-by module
+- make fliphub-core into a module
+- start making filterhub compatible
+- getFlips into context
+- big refactor of simplicity...
+- adding name from constructor name to hubs
+- it is running
+- using lodash.own
+
+---
+
+# part 49 - mar 23 17
+- adding neutrino-preset-copy
+- adding neutrino-preset-clean
+- adding PresetEslint to built ins out of `next`
+- adding eslint example
+- start emoji-by-name module
+- add .catch to fliplog
+- making fliplog a callable function with fn prototype
+- adding PresetResolveAll
+- fixing deep-replace which used console.verbose
+- missing return typo in resolver -.-
+- configuring preseteslint example with fliphub, working
+- fixing flags with flipto needs to merge not replace
+- update more eslint rules
+- add eol resource links in docs
+- starting to fix filtering for logs - issue was not resetting if silent
+- added silent option to silent all
+- add basic assert tests for filtering
+- reduce complexity in presetter
+- move `ops` out of box
+- start workflow
+- going to refactor, committing
+
+# part 48 - mar 22 17
+- starting /examples folder
+- used faker to generate out the data set
+- add fusebox chain to next - extracted from fliphub-chain early iteration
+- move fliphub-chain and fliphub-bundles to `modules/next`
+- setup lerna for the examples
+- fix missing alias dep
+- start preset-eslint
+- move `deps` from next into `depflip` module
+- add babel-loader-builder to modules-sub
+- update env in babel-loader-builder
+- add z.js to build fliphub with a clean minimal config
+- update todos
+- fix exit on node preset
+- add missing deps when bundling (webpack analyze and rollup file size)
+- start PresetInferno
+- fixing `fliplog` bug where it checks if it has data, but undefined means it falsely thinks it does not
+- fix typo in presetter for passing in args
+- alias require preset example working
+- issues with the monorepo requiring, researching, adding to docs
+- made an awesome solution, monono, to use monorepos without require issues, and without monorepo issues
+- make example for monono
+- rename it mahna
+- update the resolving for require.main
+- fix typo on aliases -> alias
+- add modulesDirectories to examples and modulesDirectories to env from mahna
+- fix horrible typo on alias requiring -.-
+- added boxInit to presets, used with flags, fixed flipto from flags
+- minor logging tidy
+- adding support to aliasResolve for fusebox
+- add read.json to flipfile
+- updating todos
+- play with alpha publishing...
+- update eslint rules
+- some cleanup
+- expanding eas-npm-files
+- part 2 PresetEslint with toRollup, toWebpack, toFuseBox
+- simple bash file to publish
+- adding inserting file ls to pkg files in PkgExposer
+- resolving dependency installation issues across all modules
+- adding neutrino-middleware-progress
+- publishing in beta
+
+# part 47 - mar 22 17
+- clean artifact of eslint
+- clean artifact in presetflags
+- adding flips using flags
+- find `clean-obj` lib, use it to simplify
+- part 3 on PresetAliasResolve
+- part 3 on PresetAliasRequire
+- move alias out of helpers into fliphub-alias module
+- update todos
+- update fliplog's readme
+
+# part 46 - mar 21 17
+- renaming modules2 into modules-sub, reordering some into `_next`
+- adding aretecode-eslint-config to modules-sub
+- updating aretecode-eslint-config deps
+- fixing name in inspector-gadget
+- better merging with shorthands in flipchain
+- adding CONTRIBUTING in docs for later
+- adding http://makeapullrequest.com badge
+- add emoji-commits as submodule
+- add how to use as a url in emoji-commits
+- abstract out `mergeFor` from flipConfig into `Presets`
+- reducing dependencies
+- sleepfor module
+- clean up fliphub helpers duplication with modules
+- add hasUsed to presets as happypack was not registering
+- use node_env in defaultsenv
+- fix happypack-preset naming
+- play with threads, pools, child processes, vm, tosourcing
+- make super simple tiny-promise-map for sync promise execing - almost 2x as fast
+- added buildSync and buildFast
+- use output path for webpack and rollup in y config
+- push to github
+
+# part 45 - mar 20 17
+- update pkg jsons to remove strict engine and do >=
+- add arrOf to izz
+- setup slack team
+- add slackin
+- add badge
+- updating travis integration for org
+- pt 3 of PresetFlags
+  - supporting arrOf strings,
+  - decorating obj,
+  - added aliasing
+- updated todos
+- resources to cache preset for later
+
+# part 44 - mar 20 17
+- add `boxen` todo for fliplog
+- fix array order in config for plugins - needs to keep a `holey` array until the end to retain position unless an object is used
+- adding https://github.com/nolanlawson/optimize-js
+- start adding support for preset args
+- start on monorepo `yuge` example to do a real test
+- add `to-arr` module
+- start enableTags, disableTags, tags for logs
+- swap cli-table for cli-table2 in fliplog
+- add deep-diff dep for fliplog
+- fix having Object.assign backwards in arr-to-obj defaults...
+- added schema validation
+- fixing preset initting
+- supporting preset args pt 2
+- add splitting to to-arr
+- add nodesecurity
+- more finicking with tags for logs, disabled for now, updated todos
+- added PresetMinify for babeli
+- move the preset registering out of the defaults env since I know the functionality works and there are getting to be a lot of presets, just keep the defaults as `using` the presets for now, and keeping just registering `minify` & `uglify` in defaults to make sure it stays working
+- clean neutrino-preset-happypack a little
+- test fusebox, webpack, and rollup with babili on the yuge project
+- add PresetBabel
+- start on PresetTypeScript part 2... not so nice with rollup
+- run two apps at the same time
+- gitignore yuge until I move it to an examples only pr
+- push to github
+- prettier to eslint
+
+# part 43 - mar 19 17
+- update webpack-chain so it will allow merging plugins
+- submit pr
+- izz-class just for the webpack-chain pr
+- updating todos
+- [x] built in presets get registered by config defaulter
+- atom theme https://github.com/aretecode/one-dark-syntax-colors-of-the-year-pantone
+- setup nuclide for atom for types in refactor 3
+
+# part 42 - mar 19 17
+- update github issues
+- rename array-to-object folder -> arr-to-obj
+- remove build folder
+- fix something with fliphub helpers not showing in git
+- add build folder to gitignore
+
+# part 41 - mar 19 17
+- better mergeable config
+  - reusable for fusebox and rollup
+  - change bundlerconfig -> bundler config extractor
+- do quick comparison between the 3 bundlers for speed
+- module arr-to-obj
+- added izz.class
+- push to github
+- keep playground out of commit but include fliphub2 this time
+- experiment with oao
+- rename examples -> fliphub-examples
+
+# part 40 - mar 18 17
+- adding fusebox
+- updating the `to` method as fusebox is `toFuse*B*ox`
+- sourceMaps working for all 3!
+- do happypack preset for neutrino part 2/3
+- module flip-neutrino-preset-happypack
+- fixed up happypack preset again
+
+# part 39 - mar 18 17
+- update eslint-plugin-no-for-each badges
+- use neutrino for config if webpack
+- fork neutrino to do `entry` point fixes
+- writing preset todos for neutrino
+- starting PresetLibrary
+- starting PresetTarget
+- starting PresetVisualize
+- cleaning & reordering presets, moving neutrino from config to Bundlers, starting Bundlers to go alongside the configs (as APIS)
+- starting defaults rollup
+- started defaults typescript
+- added izz.notReal
+- experiment with require nodejs hijacker to see about installing missing deps
+- add PresetProgress
+- add Presetter
+- start DefaultFuseBox
+- get rollup working
+- updating ts interfaces - big update
+
+# part 38 - mar 17 17
+- exposing filter method on flipbox to allow client filtering, adjusting setup filter
+- using the confighub in core
+- static init back to fliphub
+- add preset chain
+- expose preset fn on fliphub
+- add presets
+- tidy presets
+- use a preset
+- fix arrToObj presets
+- use arrToObj to simplify preset assignment
+- add config defaulter
+- filter props for just appconfig and flipconfig
+- add inherit props
+- improving default chainable merge
+- making app config inherit from flipconfig and merge in
+- adding toConfigs for presets to staet using them
+- adding `add`, `addAll`, `use`, `useAll` to presets and AppConfig for presets to use
+- change `arrToObj` to use `undefined` with valAsKey to allow defaults being used
+- experiment with babel-register to see speed diff
+- flipflag module, add node to packagejson engine
+- adding es5exports module
+
+# part 37 - mar 16 17
+- updated fliplog with debugFor which returns a new instance
+- izz module
+- adding more resolve options for use in flipconfig
+
+# part 36 - mar 16 17
+- fliptime module
+- updating inspector
+- updating log
+- mono-root module
+- resolve module
+- deep-replace module
+- fliplog module updated
+- flipfile module
+- some thoughts on ts
+- updating inferno pr
+
+# part 35 - mar 16 17
+- fix some readme links
+- minor tweaks to log and chain and inspector
+- make a package exposer to allow better modular exports!
+- adding easy-npm-files as a module
+- interfacing the hub
+- starting to run the config to test it and see where it breaks
+
+# part 34 - mar 16 17
+- adding license badge
+- add code style badge
+- start prototyping a more minimal powerful interface
+- extracting built in core code into presets
+- xterm to log
+- api chain example
+- preset default env
+- preset replace
+- preset uglify
+- preset define env
+- preset sourceMap
+- is.windows
+- cleaning core and hubs
+- start neutrino-happypack-plugin
+- gitignore playground which has next refactor wip
+- add modules folder for handling a bunch of flat submodules without cluttering packages
+- a bit of cleanup on logs
+- publish flipchain
+- publish fliplog
+- publish inspector-gadget
+- start cleaning up some globals
+- add refactor notice
+- push to github
+
+# part 33 - mar 15 17
+- plan stripping it down
+- start stripping it down
+## helpers:
+- add `rooter`
+- expand file
+- fix up inspect helper with safety
+- add javascript stringify to inspector
+- add deps extractor
+- add str helpers (strHasAny, prefix)
+- add context
+- improve `debugFor`
+
+# part 32 - mar 14 17
+- major fliphub-helpers revamp
+- add `jsonParse` just easy accessor
+- add `lap` to timer
+- add `minimalist` to flags
+
+# part 31 - mar 13 17
+- use chain for logging! lovely
+- putting a new fusebox folder to start splitting and simplifying and using presets
+
 # part 30 - mar 13 17
 - play around with webpack chain as ts
 - pushing to github

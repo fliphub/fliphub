@@ -1,0 +1,27 @@
+{
+  "name": "fliphelp",
+  "version": "0.0.1",
+  "main": "index.js",
+  "dependencies": {
+    "estraverse": "^4.2.0",
+    "expose-hidden": "*",
+    "fliplog": "*",
+    "tern": "^0.21.0",
+    "tern-node-express": "^0.4.0"
+  },
+  "scripts": {
+    "test": "node test"
+  },
+  "keywords": [
+    "tern",
+    "auto",
+    "help",
+    "types",
+    "docs",
+    "ast",
+    "generated",
+    "fliphub"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "license": "MIT"
+}

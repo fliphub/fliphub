@@ -1,0 +1,32 @@
+{
+  "name": "fliphub-examples-canadas",
+  "version": "0.1.10",
+  "description": "fliphub examples",
+  "main": "src/index.js",
+  "keywords": [
+    "examples",
+    "fliphub",
+    "flipbox"
+  ],
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "babel-plugin-inferno": "^2.0.0",
+    "babel-preset-env": "^1.2.2",
+    "depflip": "*",
+    "flipflag": "*",
+    "fliphub": "0.1.0",
+    "fliptime": "*"
+  },
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

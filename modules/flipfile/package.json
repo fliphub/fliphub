@@ -1,0 +1,43 @@
+{
+  "name": "flipfile",
+  "version": "0.0.10",
+  "main": "index.js",
+  "description": "file helpers for reading, writing, deleting, checking types & existence, extracting metadata, walking, globbing, and more.",
+  "dependencies": {
+    "expose-hidden": "*",
+    "mkdirp": "^0.5.1",
+    "glob-fs": "0.1.6",
+    "fs-extra": "2.1.2"
+  },
+  "files": [
+    "all.js", "del.js", "exists.js", "extra.js", "fileName.js", "getDirectories.js",
+    "getFileAndPath.js", "glob.js", "isDir.js", "isFile.js", "isFileOrDir.js", "isRel.js",
+    "promise.js", "read.js", "walk.js", "write.js"
+  ],
+  "devDependencies": {
+    "ava": "^0.19.0"
+  },
+  "scripts": {
+    "test": "ava"
+  },
+  "keywords": [
+    "file",
+    "fs",
+    "read",
+    "write",
+    "exists",
+    "walk",
+    "isAbsolute",
+    "fliphub",
+    "flipbox"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

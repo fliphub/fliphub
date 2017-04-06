@@ -1,0 +1,30 @@
+{
+  "name": "flipport",
+  "version": "0.0.1",
+  "main": "index.js",
+  "description": "find if a port is available, fallback to first open port if not.",
+  "scripts": {
+    "_test": "ava --verbose"
+  },
+  "devDependencies": {
+    "ava": "^0.19.0",
+    "fosho": "*"
+  },
+  "keywords": [
+    "flip",
+    "find",
+    "port",
+    "open",
+    "fliphub",
+    "flipbox"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

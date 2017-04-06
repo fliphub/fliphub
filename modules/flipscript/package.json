@@ -1,0 +1,51 @@
+{
+  "name": "flipscript",
+  "version": "0.0.5",
+  "main": "src/index.js",
+  "description": "fluent script building; flip the script on em",
+  "scripts": {
+    "diggy": "node test/fixtures/diggy.js",
+    "test": "ava --verbose"
+  },
+  "optionalDependencies": {
+    "npm-run-path": "2.0.2"
+  },
+  "devDependencies": {
+    "ava": "^0.19.0",
+    "fosho": "*"
+  },
+  "dependencies": {
+    "semver": "^5.3.0",
+    "np": "*",
+    "flipfile": "*",
+    "flipchain": "*",
+    "flipcache": "*",
+    "fliplog": "*",
+    "execa": "0.6.3",
+    "flipglob": "*",
+    "insert-at-index": "*",
+    "izz": "*",
+    "to-arr": "*",
+    "fliphub-core": "*",
+    "dargs": "*"
+  },
+  "keywords": [
+    "fluent",
+    "flags",
+    "scripts",
+    "package-scripts",
+    "pkgflip",
+    "flipscript",
+    "fliphub",
+    "flipbox"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

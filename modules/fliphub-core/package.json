@@ -1,0 +1,37 @@
+{
+  "name": "fliphub-core",
+  "version": "0.0.5",
+  "main": "index.js",
+  "description": "the core of fliphub, an extensible hub api",
+  "keywords": [
+    "core",
+    "api",
+    "hubs",
+    "fliphub",
+    "flipbox"
+  ],
+  "dependencies": {
+    "eventemitter2": "^3.0.1",
+    "fliplog": "*",
+    "inspector-gadget": "*",
+    "flipchain": "*",
+    "remap-by": "*",
+    "arr-to-obj": "*",
+    "deepmerge": "^1.3.2",
+    "deep-replace": "*",
+    "lodash.camelcase": "^4.3.0",
+    "izz": "*",
+    "flipflag": "*",
+    "fliphub-resolve": "*",
+    "lodash.forown": "^4.4.0"
+  },
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

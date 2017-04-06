@@ -1,0 +1,3 @@
+fosho.t(t).data(scripts.toCmd().args).includes('--')
+t.pass(fosho(data.get('_npm')).eq('diggy'))
+https://www.npmjs.com/package/fluent-assert

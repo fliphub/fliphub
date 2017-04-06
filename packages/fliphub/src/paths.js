@@ -1,6 +1,7 @@
+// @TODO: put this in pathmaster
 const appRoot = require('app-root-path')
 const path = require('path')
-const helpers = require('./lib/file')
+const helpers = require('flipfile')
 const {mkdirp, isDir} = helpers
 
 // https://github.com/fuse-box/fuse-box/blob/master/src/Config.ts

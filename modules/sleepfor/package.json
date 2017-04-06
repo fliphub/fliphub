@@ -1,0 +1,25 @@
+{
+  "name": "sleepfor",
+  "version": "0.0.2",
+  "main": "index.js",
+  "browser": "index.js",
+  "description": "sleepfor(1000); sleeping using while loops.",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "sleep",
+    "sleepfor",
+    "fliphub",
+    "flipbox"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "fliphub-examples-webworker",
+  "version": "0.1.10",
+  "description": "fliphub examples",
+  "main": "src/index.js",
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

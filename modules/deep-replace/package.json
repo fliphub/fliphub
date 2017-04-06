@@ -1,0 +1,37 @@
+{
+  "name": "deep-replace",
+  "version": "0.0.7",
+  "main": "index.js",
+  "description": "deep replace objects using property string, regex, fn match",
+  "scripts": {
+    "test": "ava --verbose"
+  },
+  "devDependencies": {
+    "fosho": "*",
+    "ava": "^0.19.0"
+  },
+  "files": [
+    "del.js",
+    "index.js",
+    "match.js",
+    "prop.js"
+  ],
+  "keywords": [
+    "deep",
+    "replace",
+    "object",
+    "obj",
+    "fliphub",
+    "delete-recursive",
+    "delete-reference"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

@@ -1,0 +1,42 @@
+const cli = require('../src')
+
+const fluent = new cli()
+fluent
+  .step('presets', 'checkbox', '[presets message]')
+    .checkbox('production', true)
+    .checkbox('development', false)
+  .step('approved')
+    .checkbox('magical', true)
+    .checkbox('unicorns', false)
+      .child('unicorn babies', 'input')
+        .input('so cute!')
+        .toSteps()
+  .step('confirm or deny?', 'confirm')
+    .child('fosho fosho?', 'confirm')
+    .toSteps()
+  .step('too-short', 'list')
+    .choices('way,too,easy,so-many-choices')
+  .step('check-please', 'list')
+    .checkboxes('way,too,easy,so-many-choices')
+  .step('view', 'list')
+    .choice('React')
+    .choice('Inferno')
+    .choice('Vue')
+    .choice('Angular')
+    .choice('other')
+    .step('other', 'input').when(answers => answers.view == 'view.other')
+
+  // .end()
+  // .confirm('me', 'nothing')
+  // .checkbox('omg', false)
+  // .stepChild('stepchild', 'stepchild msg', 'list')
+  //   .input('omg')
+
+// log.quick(eh)
+// log.quick(fluent.toConfig())
+// const steps = fluent.toConfig().steps
+// inquirer.prompt(steps).then((answers) => {
+//   console.log(JSON.stringify(answers, null, '  '))
+// }).catch(log.catch)
+
+fluent.run()

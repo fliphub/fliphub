@@ -1,4 +1,4 @@
-const {execSyncStd} = require('./scripty')
+const {execSyncStd} = require('./Scripty')
 const Chainable = require('./chain/Chainable')
 
 class Commanderer extends Chainable {

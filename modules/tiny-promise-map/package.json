@@ -1,0 +1,28 @@
+{
+  "name": "tiny-promise-map",
+  "version": "0.0.3",
+  "main": "index.js",
+  "description": "simple, minimal, tiny promise maps & chains to execute promises in order.",
+  "devDependencies": {
+    "fosho": "*",
+    "ava": "^0.18.2"
+  },
+  "scripts": {
+    "test": "ava --verbose"
+  },
+  "keywords": [
+    "promise",
+    "map",
+    "fliphub",
+    "flipbox"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

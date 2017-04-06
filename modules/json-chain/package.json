@@ -1,0 +1,31 @@
+{
+  "name": "json-chain",
+  "version": "0.0.3",
+  "description": "fluent chaining for json with dot-prop access",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/index"
+  },
+  "names": [
+    "json-chain", "fluent-json", "flipj", "flipjson"
+  ],
+  "keywords": [
+    "json",
+    "fluent",
+    "chain",
+    "fliphub"
+  ],
+  "dependencies": {
+    "dot-prop": "4.1.1"
+  },
+  "license": "MIT",
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

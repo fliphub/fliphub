@@ -1,0 +1,45 @@
+const Chainable = require('./Chainable')
+
+class ChainedSet extends Chainable {
+  constructor(parent) {
+    super(parent)
+    this.store = new Set()
+  }
+  add(value) {
+    this.store.add(value)
+    return this
+  }
+  prepend(value) {
+    this.store = new Set([value, ...this.store])
+    return this
+  }
+  clear() {
+    this.store.clear()
+    return this
+  }
+  delete(value) {
+    this.store.delete(value)
+    return this
+  }
+  values() {
+    return [...this.store]
+  }
+  has(value) {
+    return this.store.has(value)
+  }
+  merge(arr) {
+    this.store = new Set([...this.store, ...arr])
+    return this
+  }
+  when(condition, trueBrancher = Function.prototype, falseBrancher = Function.prototype) {
+    if (condition) {
+      trueBrancher(this)
+    } else {
+      falseBrancher(this)
+    }
+
+    return this
+  }
+}
+
+module.exports = ChainedSet

@@ -1,0 +1,5 @@
+- the better the problem is defined, the better the solution will be
+- 15 minute rule
+- eslint
+- there is never any code that is more permanent than temporary code
+- measure twice, cut once

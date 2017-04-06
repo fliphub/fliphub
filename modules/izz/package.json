@@ -1,0 +1,44 @@
+{
+  "name": "izz",
+  "version": "0.0.10",
+  "main": "index.js",
+  "description": "is type shorthands for fliphub, hundreds of type checks, modular exports",
+  "scripts": {
+    "test": "node .test.js"
+  },
+  "dependencies": {
+    "is": "^3.2.1",
+    "is_js": "0.9.0",
+    "lodash.isplainobject": "4.0.6",
+    "to-arr": "*",
+    "is-glob": "3.1.0"
+  },
+  "keywords": [
+    "helpers",
+    "utils",
+    "typeof",
+    "fliphub",
+    "flipbox",
+    "is",
+    "is-bindable",
+    "is-windows",
+    "is-promise",
+    "is-generator",
+    "is-object",
+    "is-function",
+    "is-bindable",
+    "is-real",
+    "is-set",
+    "is-type",
+    "type"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

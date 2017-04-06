@@ -1,6 +1,7 @@
 node_modules
 .idea
 npm-debug.log
+*.log.*
 dist
 .DS_Store
 .eslintcache
@@ -12,3 +13,12 @@ lerna-debug.log
 .happypack
 .fusebox
 .flipbox
+yarn.lock
+build
+
+flip-gom-html-parser
+#playground
+#!playground
+playground
+yuge
+public

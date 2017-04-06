@@ -1,82 +1,166 @@
-const evts = require('./Events')
-const AppsContext = require('./AppsContext')
-const makeHelpers = require('../lib')
-const Hubs = require('../hubs/LifeCycleHub')
-const Filter = require('../hubs/FilterHub')
+const timer = require('fliptime')
+const log = require('fliplog')
+const flipflag = require('flipflag')
+const {Core, resolve} = require('fliphub-core')
+const Hubs = require('../hubs')
+const Workflow = require('./Workflow')
+const Ops = require('./Ops')
 
-// @TODO: export this for easy hub extension
-const AbstractHub = require('../hubs/AbstractHub')
+/**
+ * @classdesc
+ *
+ * each step will call the previous step
+ * if you opt to not call it yourself for finer grain control
+ *
+ * order:
+ * 1. create
+ * 2. init
+ * 3. setup
+ */
+module.exports = class FlipBox extends Core {
+  static init(config) {
+    return new FlipBox(config)
+  }
 
-// @TODO: auto decorator that is for chaining all methods
-class FlipBox {
+  setupDebug(config) {
+    // setup for benchmarking with buildFast
+    if (!flipflag('apps')) timer.start('totals')
+    timer.start('flip')
+    timer.start('setup')
+    log.filter(config.debug)
+    log.filter([
+      '!toconfig',
+      '!initConfig',
+      '!adding',
+      '!flag',
+      '!flags',
+      '!events',
+      '!time',
+      '!preset',
+      '!call',
+      '!setup',
+      '!extract',
+      '!apps',
+      // '!used',
+      '!args',
+      // '!core&create',
+    ])
+    return this
+  }
+
+  // maybe auto do higher if multi apps?
+  setupRoot(config) {
+    if (!config.root) {
+      this.resolver = resolve.scoped(config.root).setRoot(1)
+      config.root = this.resolver.root
+    }
+    return this
+  }
+
+  /**
+   * @see Core.create
+   * @return {Core}
+   */
+  setupApps() {
+    if (!this.config.apps) this.config = {apps: [this.config]}
+    return this
+  }
+
   constructor(config) {
-    global._timer.start('flip')
-    global._timer.start('setup')
-    this.helpers = makeHelpers(config)
-    this.inspect = inspectorGadget(this, ['hubs', 'filter'])
-    this.debugFor = this.helpers.debugForKeys(config)
-    this.root = this.helpers.resolve.root
-    this.setupEvents()
+    super(config)
+      .setupDebug(config)
+      .setupRoot(config)
 
-    // @TODO:
-    // remove, this was test usage of place it would be done
-    // this.evts.on('translate.*', (data) => console._exit(data))
-
-    this.setup(config)
-
-    this.fullAuto = this.build = () => {
-      if (this.filtered.length === 0) return
-      global._timer.start('build')
-      const built = this.apps.build()
-      this.built = built
-      global._timer.stop('build').log('build')
-      global._timer.stop('flip').log('flip')
-      return built
+    this.config = config
+    this.state = {
+      created: false,
+      initted: false,
+      setup: false,
     }
-    this.mediator = () => this.built[0]
 
-    global._timer.stop('setup').log('setup')
+    // add the ops regardless,
+    // update/mutate on create with real workflow
+    this.ops = new Ops({core: this})
+
+    // log.text('====================================').color('bold').echo()
   }
 
-  // @TODO:
-  // make this happen after instantiate
-  // such as in `build`
-  // or add another lifecycle event, `instantiate` instead of `setup`
-  //
-  // so we could do dry runs and such as needed
-  setup(config) {
-    this.hubs = new Hubs(this)
-    this.apps = new AppsContext(config.apps, this)
+  /**
+   * @since 0.1.0
+   * @see @next this.init
+   * @see fliphub-core/Workflow
+   * @return {Core}
+   */
+  create() {
+    this.setupApps()
+    this.state.created = true
 
-    // if this filters auto and it is before apps are decorated
-    // then it will only do `defaultApps`, `--apps`, and passed in filters
-    this.filter = new Filter(this)
-    this.filter.onBoxSetup({apps: this.apps, box: this})
-    this.filtered = this.filter.filterAuto().filteredNames
-    if (this.filtered.length === 0)
-      console.text(`🕳  had no apps, all empty eh.`, {color: 'bold'})
-    else this.apps.setup()
+    // instantiate
+    this.workflow = new Workflow(this, this.config)
+    this.ops.workflow = this.workflow
+
+    // was coreStart
+    log
+      .text('fliphub-core-create')
+      .tags('core,init,create')
+      .data(this.workflow)
+      .verbose(3)
+      .echo()
+
+    // add hubs before we create
+    Hubs.forEach((Hub) =>
+      this.hub(new Hub(this.workflow)))
+
+    // emit
+    this.workflow.coreCreate()
+
+    return this
   }
 
-  // should really be on `AppsContext` ?
-  setupEvents() {
-    this.evts = evts
-    this.emit = (a1, a2, a3, a4, a5) => {
-      this.evts.emit(a1, a2, a3, a4, a5)
-    }
-    this.evts.onAny(function(event, value) {
-      // if (event == 'removeListener') return
-      // console._text('FLIPBOX: ' + event)
-    })
+  /**
+   * @since 0.1.0
+   * @see @prev this.create
+   * @see @next this.setup
+   * @return {Core}
+   */
+  init() {
+    if (!this.state.created) this.create()
+    this.state.initted = true
+    this.workflow.coreInit()
+    return this
+  }
 
-    // this.emitForApp = this.onApp =
-    this.on = (name, handler) => this.evts.on(name, handler)
+  /**
+   * @since 0.1.0
+   * @see @prev this.init
+   *
+   * @fires context.*.merge.pre
+   * @fires context.*.init.pre
+   * @fires context.*.init
+   * @fires context.*.init.post
+   * @fires context.*.merge.post
+   *
+   * @return {Core}
+   */
+  setup() {
+    if (!this.state.initted) this.init()
+    this.state.setup = true
+    const {config, workflow} = this
+
+    workflow.coreConfig.merge(config)
+    workflow.log
+      .tags('setup,apps')
+      .text('👨‍🔧  ⌛  setting up: ')
+      .xterm('yellow')
+      .echo()
+
+    workflow.contextsFrom(config.apps)
+    workflow.emitForContexts('merge.pre')
+    workflow.emitForContexts('init.pre')
+    workflow.emitForContexts('init')
+    workflow.emitForContexts('init.post')
+    workflow.emitForContexts('merge.post')
+
+    return this
   }
 }
-
-// FlipBox.cli = makeHelpers.lib
-FlipBox.helpers = makeHelpers.lib
-FlipBox.flags = FlipBox.helpers.flags.searchAll
-FlipBox.AbstractHub = AbstractHub
-FlipBox.init = config => new FlipBox(config)
-module.exports = FlipBox

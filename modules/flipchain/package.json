@@ -1,0 +1,46 @@
+{
+  "name": "flipchain",
+  "version": "0.4.0",
+  "description": "core chaining library, heavily based on [webpack-chain](https://github.com/mozilla-rpweb/webpack-chain)",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js && node test-simple.js"
+  },
+  "files": [
+    "indexc.js",
+    "Chainable.js",
+    "ChainedMapExtendable.js",
+    "ChainedMapTill.js",
+    "ChainedSet.js",
+    "ChainedMap.js"
+  ],
+  "engines": {
+    "node": ">= 7.7.2",
+    "npm": ">= 4.1.2"
+  },
+  "dependencies": {
+    "deepmerge": "^1.3.2",
+    "inspector-gadget": "*",
+    "arr-to-obj": "*"
+  },
+  "keywords": [
+    "fluent",
+    "chain",
+    "fliphub-chain",
+    "webpack-chain",
+    "fusebox-chain",
+    "webpack",
+    "fliphub",
+    "flipbox",
+    "fusebox"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

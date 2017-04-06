@@ -1,0 +1,27 @@
+{
+  "name": "arr-to-obj",
+  "version": "0.0.4",
+  "main": "index.js",
+  "description": "> convert arrays to objects, with customizers. (values as keys, keys as values, values as values and keys)",
+  "dependencies": {
+    "izz": "*"
+  },
+  "keywords": [
+    "utils",
+    "array",
+    "object",
+    "array-to-object",
+    "arr-to-obj",
+    "fliphub",
+    "flipbox"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

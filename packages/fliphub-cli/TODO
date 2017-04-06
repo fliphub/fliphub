@@ -1,0 +1,66 @@
+
+# add list of todos to the cli
+
+# *** important ***
+- presets
+- handle `--` property
+
+# other
+- config generating (file creator? can just be json?),
+  - bundlers
+  - dev servers
+  - assets
+  - targets
+  - apps
+- docs / help
+- apis for people to build their own clis :3
+- make it work for inferno
+- fluent cli super simple
+
+some opts
+- monorepo mode
+  - mahna
+  - auto-alias
+- typescript or babel
+- releasing
+- logging
+- commands-on-pkg-json
+
+------------
+
+# cli
+  - [ ] cleanup
+  - [x] split up libs
+  - [ ] define architecture
+# flipfile
+  - [x] flipfile should have glob-fs
+
+- [ ] flipcmd?
+  - [ ] could do defaults for every command here with defining production...
+  - [x] change-file-then-restore
+
+- [x] flipscript
+- [ ] flippack
+- [ ] easy-npm-files
+- [ ] presets
+- [ ] use fliphub-core?
+- [ ] tests
+- [ ] docs
+
+- [ ] fliphub-resolve
+  - [ ] extend with the helpers in src
+  - [ ] improve scopes and reduce complexity
+  - [ ] improve script running with execa
+
+# flags
+- [ ] do a cleanup on flags,
+- [ ] split into a class,
+- [ ] make it safer,
+- [ ] find-and-remove option
+- [ ] better options,
+- [ ] chainable
+- [ ] support for ` -- ` handling (see how libs handle this)
+- [ ] manage resetting argv so it is ignored if conflicting arguments...
+
+- [ ] instead of subscribing every built in hub & preset, connect them to a caller?
+- [ ] only subscribe if used, at least

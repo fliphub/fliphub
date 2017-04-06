@@ -1,0 +1,27 @@
+{
+  "name": "mono-root",
+  "version": "0.0.10",
+  "main": "index.js",
+  "description": "find the root path in monorepos",
+  "dependencies": {
+    "flipfile": "*",
+    "app-root-path": "^2.0.1"
+  },
+  "keywords": [
+    "flip",
+    "helpers",
+    "utils",
+    "debugging",
+    "fliphub",
+    "flipbox"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

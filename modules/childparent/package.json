@@ -1,0 +1,23 @@
+{
+  "name": "childparent",
+  "version": "0.0.2",
+  "main": "index.js",
+  "description": "👶 add child methods to parent, or parent methods to child, optionally binding thisArg.",
+  "keywords": [
+    "child",
+    "parent",
+    "methods",
+    "bind",
+    "fliphub",
+    "flipbox"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

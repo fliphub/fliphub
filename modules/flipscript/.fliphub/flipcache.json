@@ -1,0 +1,8 @@
+{
+  "npmBin": "/Users/james/code/fliphub/modules/flipscript/node_modules/.bin",
+  "bin.npm": false,
+  "eh": "giveitago",
+  "bin": {
+    "npm": false
+  }
+}

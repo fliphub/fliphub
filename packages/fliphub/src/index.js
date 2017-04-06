@@ -1,16 +1,24 @@
-// require('./lib/alias/hijacker')(require('path').resolve(__dirname, '../'))
-const FlipBox = require('./core/FlipBox')
-const cli = require('./hubs/CliHub')
-const paths = require('./paths')
+// require('babel-core/register')
+// require('babel/dist/external-helpers')
 
-exports.paths = paths
-exports.cli = cli
-exports.helpers = FlipBox.helpers
-exports.flags = FlipBox.flags
-// exports.isWebpackCli = FlipBox.isWebpackCli
-// exports.fuseCommander = FlipBox.fuseCommander
-// exports.arithmetics = FlipBox.helpers.arithmetics
-exports['default'] = FlipBox
+const log = require('fliplog')
+const core = require('fliphub-core')
+let FlipHub = require('./core/FlipBox')
 
-module.exports = FlipBox.helpers.es5exports(exports['default'], exports)
-// module.exports = FlipBox
+FlipHub.FlipHub = FlipHub
+FlipHub = Object.assign(FlipHub, core)
+FlipHub.log = log
+
+// const cli = require('./hubs/CliHub')
+// const paths = require('./paths')
+// const es5exports = require('es5exports')
+//
+// exports.paths = paths
+// exports.cli = cli
+// exports.helpers = FlipBox.helpers
+// exports.flags = FlipBox.flags
+// exports['default'] = FlipBox
+//
+// module.exports = es5exports(exports['default'], exports)
+
+module.exports = FlipHub

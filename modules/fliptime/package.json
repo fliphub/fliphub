@@ -1,0 +1,37 @@
+{
+  "name": "fliptime",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "fluent timer with laps, microtime + parsing, multiple timers",
+  "devDependencies": {
+    "ava": "^0.18.2",
+    "sleepfor": "*",
+    "fosho": "*"
+  },
+  "scripts": {
+    "test": "ava --verbose"
+  },
+  "dependencies": {
+    "microtime": "2.1.2"
+  },
+  "keywords": [
+    "debugging",
+    "chain",
+    "fluent",
+    "logging",
+    "timer",
+    "stopwatch",
+    "benchmark",
+    "profile",
+    "fliphub"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

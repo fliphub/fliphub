@@ -1,0 +1,55 @@
+{
+  "name": "flipcli",
+  "description": "flipcli creation, minimal, powerful.",
+  "version": "0.0.7",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "ava --verbose"
+  },
+  "optionalDependencies": {
+    "fuzzy": "*"
+  },
+  "devDependencies": {
+    "ava": "^0.19.0",
+    "fosho": "*"
+  },
+  "dependencies": {
+    "commander": "^2.9.0",
+    "execa": "^0.6.1",
+    "inquirer": "^3.0.6",
+    "flipchain": "*",
+    "vorpal": "1.11.4",
+    "flipfile": "*",
+    "flipflag": "*",
+    "fliplog": "*",
+    "flipscript": "*",
+    "flipcache": "*",
+    "inquirer-autocomplete-prompt": "0.8.0",
+    "to-arr": "*",
+    "lodash.sortby": "^4.7.0"
+  },
+  "keywords": [
+    "cli",
+    "vorpal",
+    "fluent",
+    "interactive",
+    "chain",
+    "easy",
+    "creation",
+    "minimal",
+    "nodejs",
+    "fliphub",
+    "flipbox",
+    "webpack-chain",
+    "flipchain"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

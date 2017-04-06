@@ -1,0 +1,11 @@
+// need to have a cli for it ;-)
+const shake = require('./shakable')
+// const {eh, canada} = shake('eh,canada')
+// console.log({eh, canada})
+const {eh, canada} = require('package/?eh,canada.js')
+console.log({eh, canada})
+
+// const {eh, canada} = require('package/?eh,canada.js')
+// const justEh = require('package/?eh.js')
+// const justCanada = require('package/?canada.js')
+// const canadaAndEhReverse = require('package/?eh,canada.js')

@@ -1,7 +1,10 @@
 # 🔈 changelog 🔈
 
+
+--------
+
 # part 66 - apr 5 17
--  🏗💠 fliphub
+- 🏗💠 fliphub, 🔬🍰 🔬📦 📚🔗📖📘 🛁📒🚚 ⚙🛡
   - 📝🍰🌎 preset provide in presets/todos
   - 🔗 more readme links
   - 📖 gitbook fiddling, documentation expansion
@@ -12,9 +15,12 @@
   - 🛁 clean the presets-defaults
   - 🔗 update links from refactor2 to master
   - ⚙ expand on config
-  - 🛡 add safety in bundlerFlipper when merging to fallback to object if they are inheriting/using-reusable configs
+  - ⚙🛡 add safety in bundlerFlipper when merging to fallback to object if they are inheriting/using-reusable configs
   - 🍰⚙ added preset-reusable
   - 🔬🚨 failing tests for reusable inheriting fliphub configs (via plugins, though it should not be needed since configs are inherited if inherited is not false so...)
+  - 📘 examples
+  - 🔬📦 update test dependencies for ava
+
 - 🎯 fliphub-resolve & 🥕 mono-root
   - 📖 docs part 2
   - 📘 examples
@@ -32,19 +38,23 @@
 - 🖥 flipcli
   - 🔬 more tests
 - 🎀⛓ json-chain
-  - 🎁 .updateIfNotEmpty
+  - 🎁 .setIfNotEmpty
   - 🔬 updated
+  - 📚 add docs
+  - 📦⬆🎁 add dotprop set and get
+  - 🎁 add .set .get .delete .remove aliases
 - 💾💸 flipcache
   - 🗑 add `.del`
   - 🎀⛓ update with latest json-chain
   - 👣 adding .dir
   - 🔬 added test
+  - 📦⬆📦⬇ swap built in autofind with 🔎 flipfind
+  - export all files so they can be used individually
 🏗💠🔮 flipfam
  - added fliphub back to dep from optionalDependencies
  - updated 🎯 fliphub-resolve & 🥕 mono-root
  - used 💾💸 to create exports
  - 🔬 added tests
-- 🔬📦 update test dependencies for ava
 
 ---
 - ⛓🔈 fliplog

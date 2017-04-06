@@ -24,9 +24,26 @@ function gtg(key, args) {
     .echo()
 }
 
+// scope it so it doesn't need to be passed in every time
+let scoped = null
+
 // https://github.com/avajs/ava#assertions
 const foshizzle = (arg, t) => {
+  if (!t && scoped) t = scoped
   if (!t) t = power
+  // if (t && !scoped) {
+  //   scoped = t
+  // }
+  // else if (t && scoped && scoped._test && t._test && scoped._test.title != t._test.title) {
+  //   scoped = t
+  // }
+  // else if (!t && scoped) {
+  //   t = scoped
+  // }
+  // else if (!t) {
+  //   t = power
+  // }
+
   Fosho = {}
 
   const shoulds = should(arg)
@@ -143,5 +160,6 @@ foshizzle.assert = assert2
 foshizzle.should = should2
 foshizzle.fosho = foshizzle
 foshizzle.log = log
+foshizzle.t = (t) => scoped = t
 
 module.exports = foshizzle

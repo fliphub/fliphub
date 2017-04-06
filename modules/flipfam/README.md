@@ -12,7 +12,7 @@
 # 🔗 **__[changelog][changelog]__**❗
 keep up to date! updated daily.
 
-[changelog]: https://github.com/fliphub/fliphub/blob/refactor2/docs/CHANGELOG.md
+[changelog]: https://github.com/fliphub/fliphub/blob/master/docs/CHANGELOG.md
 
 
 ## ⛓🔈 fliplog
@@ -406,12 +406,19 @@ uses:
 
 [flipport][flipport]
 
+## 🕳 deep-replace
+
+[![NPM version][deep-replace-npm-image]][deep-replace-npm-url]
+
+[deep-replace-npm-image]: https://img.shields.io/npm/v/deep-replace.svg
+[deep-replace-npm-url]: https://npmjs.org/package/deep-replace
+
+> deep replace objects using property string, regex, fn match
+
+[deep-replace][deep-replace]
 
 ## fliphub-helpers
 [fliphub-helpers][fliphub-helpers]
-
-## deep-replace
-[deep-replace][deep-replace]
 
 ## regexes
 [regexes][regexes]
@@ -432,9 +439,6 @@ uses:
 ==============================
 
 # (need images, descriptions here, etc)
-
-## 🎯 fliphub-resolve
-[fliphub-resolve][fliphub-resolve]
 
 ## depflip
 [depflip][depflip]
@@ -459,7 +463,27 @@ uses:
 ## mahna
 [mahna][mahna]
 
-## mono-root
+
+## 🎯 fliphub-resolve
+
+[![NPM version][fliphub-resolve-npm-image]][fliphub-resolve-npm-url]
+
+[fliphub-resolve-npm-image]: https://img.shields.io/npm/v/fliphub-resolve.svg
+[fliphub-resolve-npm-url]: https://npmjs.org/package/fliphub-resolve
+
+
+[fliphub-resolve][fliphub-resolve]
+
+
+## 🥕 mono-root
+
+[![NPM version][mono-root-npm-image]][mono-root-npm-url]
+
+[mono-root-npm-image]: https://img.shields.io/npm/v/mono-root.svg
+[mono-root-npm-url]: https://npmjs.org/package/mono-root
+
+> find the root path in monorepos
+
 [mono-root][mono-root]
 
 ## 🇳☺️️ neutrino-preset-happypack

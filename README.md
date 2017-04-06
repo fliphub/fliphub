@@ -62,10 +62,6 @@ npm i fliphub --save
 - [terminology](#-terminology)
 
 
-
-### 👋 intro
-- explain the goals, mentality, reasoning
-
 ## 📅❗ **__[changelog][changelog]__**
 keep up to date! updated frequently.
 
@@ -237,7 +233,7 @@ const appsWithArgs = [{
 # v0
 v0 is still available as [flipbox][flipbox-url] but is unmaintained.
 
-
+[docs-wip]: https://github.com/fliphub/fliphub/tree/master/docs
 [docs-build-systems]: https://github.com/fliphub/fliphub/wiki/supported-build-systems
 [docs-presets-add-your-own]: https://github.com/fliphub/fliphub/wiki/presets-add-your-own
 [wip-docs]: https://github.com/fliphub/fliphub/tree/master/docs

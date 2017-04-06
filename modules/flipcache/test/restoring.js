@@ -5,12 +5,16 @@ test.todo('config')
 test.todo('restore')
 test.todo('from to')
 
-const config = flipcache
-  .to('.config.js')
-  .json()
-  .load()
-  .update('eh', ['some values'])
-  .write()
+test('should be able to chain read load update write', t => {
+  const config = flipcache
+    .to('.config.js')
+    .json()
+    .load()
+    .update('eh', ['some values'])
+    .write()
+
+  t.pass()
+})
 
 // is a .to example
 // on-the-fly

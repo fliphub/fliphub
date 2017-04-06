@@ -53,3 +53,23 @@ const datas = flipcache
   .clean()
   .write()
 ```
+
+### 👣 dir
+
+```js
+const datas = flipcache
+  .from('./index.js')
+  .dir(__dirname)
+  .json()
+  .setIfNotEmpty({eh: true})
+  .write()
+```
+
+## 🔗 more
+- for json, [json-chain][json-chain] is used
+- for resolving paths (unless .dir is used), [flipfind][flipfind] is used
+- for all fs operations, [flipfile][flipfile] is used
+
+[json-chain]: https://www.npmjs.com/package/json-chain
+[flipfind]: https://www.npmjs.com/package/flipfind
+[flipfile]: https://www.npmjs.com/package/flipfile

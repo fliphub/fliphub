@@ -1,5 +1,5 @@
 const {resolve, dirname} = require('path')
-const {read, write, exists, isAbs} = require('flipfile')
+const {read, write, exists, isAbs, del} = require('flipfile')
 const JSONChain = require('json-chain')
 const ConfigStore = require('configstore')
 const flipfind = require('flipfind')
@@ -19,6 +19,7 @@ module.exports = class File {
     this.to = this.parent.to.bind(this.parent)
     this.from = this.parent.from.bind(this.parent)
 
+    this.opts = {path}
     this.absPath = flipfind(path) || path
     if (!path) this.store(path)
 
@@ -35,6 +36,11 @@ module.exports = class File {
     // shorthands / alias
     this.prepend = this.prependContent.bind(this)
     this.append = this.appendContent.bind(this)
+  }
+
+  dir(dir) {
+    this.absPath = resolve(dir, this.opts.path)
+    return this
   }
 
   store(name) {
@@ -59,7 +65,6 @@ module.exports = class File {
     this.contents = contents
     return this
   }
-
   write(contents) {
     this.contents = contents || this.contents
     const string = this.isJSON ? this.contents.toJSON() : this.contents
@@ -87,10 +92,15 @@ module.exports = class File {
       this.parse()
       this.has = (key) => this.contents.has(key)
       this.val = (val) => this.contents.val(val)
-      this.update = (key, val) => {
+      this.setIfNotEmpty = (key, val) => {
+        this.contents.setIfNotEmpty(key, val)
+        return this
+      }
+      this.set = (key, val) => {
         this.contents.update(key, val)
         return this
       }
+      this.update = this.set
     }
     else {
       this.contents = read(this.absPath)
@@ -109,6 +119,11 @@ module.exports = class File {
   // if we have no file
   create() {
     write(this.absPath, '{}')
+    return this
+  }
+
+  del() {
+    del(this.absPath)
     return this
   }
 

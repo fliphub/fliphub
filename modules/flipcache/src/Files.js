@@ -23,7 +23,7 @@ module.exports = class Files extends ChainedMapExtendable {
       'autoRemove',
       'autoSave',
       'data',
-      'dir',
+      'dir', // is used by File not Files
       'onChanged',
       '_to',
       '_from',

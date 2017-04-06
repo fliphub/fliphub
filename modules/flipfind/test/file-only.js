@@ -5,10 +5,10 @@ const {src} = require('./fixtures/files')
 
 test('finds with file only - without ext', t => {
   const found = Finder.file('eh').find()
-  fosho(found).str().isAbs().exists().eq(src)
+  fosho(found, t).str().isAbs().exists().eq(src)
 })
 
 test('finds with file only - with ext', t => {
   const found = Finder.file('eh.js').find()
-  fosho(found).str().isAbs().exists().eq(src)
+  fosho(found, t).str().isAbs().exists().eq(src)
 })

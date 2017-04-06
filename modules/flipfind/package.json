@@ -1,13 +1,13 @@
 {
   "name": "flipfind",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "auto-find & resolve a file or path that is somewhere nearby in an optimized manner",
   "main": "src/index.js",
   "scripts": {
     "test": "ava --verbose"
   },
   "devDependencies": {
-    "ava": "*",
+    "ava": "^0.19.0",
     "fosho": "*"
   },
   "dependencies": {

@@ -26,11 +26,12 @@ test(`creates a permutation of script operations
   //
   // check if it already exists
   // addScript('help')
-  scriptCreator.env('dev prod devprod')
-  scriptCreator.apps('app1 app2')
-  scriptCreator.addOperations('test compile run dry')
+  scriptCreator.env('dev,prod,devprod')
+  scriptCreator.apps('app1,app2')
+  scriptCreator.addOperations('test,compile,run,dry')
 
   const scripts = scriptCreator.run()
+  console.log(scripts.scripts)
   fosho(Object.keys(scripts.scripts), t).lengthOf(24)
   // console.log(scripts)
 })

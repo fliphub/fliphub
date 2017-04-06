@@ -31,7 +31,7 @@ const FlipHubCore = require('fliphub-core')
 
 ### ❔ when
 
-there are multiple things [context](#context), one [core](#core), one [workflow](#workflow) to connect them, and reusable configurations that optionally can be inherited
+there are multiple things [context](#-context), one [core](#-core), one [workflow](#-workflow) to connect them, and reusable configurations that optionally can be inherited
 
 ### ❔ why
 
@@ -65,9 +65,8 @@ this allows extremely easy maintenance and extension because
 
 
 
-## ✳️⛓ context
+## ✳️ context
 - extends [flipchain/ChainedMapExtendable](https://www.npmjs.com/package/flipchain)
-
 
 ## ⚙ configs
 - options/config/opts/prefs/settings/args
@@ -98,7 +97,7 @@ this allows extremely easy maintenance and extension because
 
 
 ## 👂 events & 📚 docs
-[🔗 events & docs](https://github.com/fliphub/fliphub/blob/refactor2/modules/fliphub-core/readme-docs.md)
+[🔗 events & docs](https://github.com/fliphub/fliphub/blob/master/modules/fliphub-core/readme-docs.md)
 
 
 
@@ -202,7 +201,7 @@ lodash.forown
 
 
 
-[src-core-event]: https://github.com/fliphub/fliphub/blob/refactor2/modules/fliphub-core/Events.js
+[src-core-event]: https://github.com/fliphub/fliphub/blob/master/modules/fliphub-core/Events.js
 [deps-eventemitter2]: https://github.com/asyncly/EventEmitter2
 [deps-flipchain]: https://www.npmjs.com/package/flipchain
 [deps-fliplog]: https://www.npmjs.com/package/fliplog

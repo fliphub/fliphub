@@ -1,5 +1,7 @@
 ## 📚 docs
 
+# 💮 workflow
+
 ### constructor
 ```js
 /**
@@ -98,7 +100,7 @@
 
 
 
-# Event (available on workflow as .evt & .evts)
+# 👂 Event (available on workflow as .evt & .evts)
 ### constructor
 ```js
 /**

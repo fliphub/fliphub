@@ -1,6 +1,13 @@
-# preset-env
+# 🍰⛰ preset-env
 
-## args
+# ❔
+
+### what
+uses common configurations for `production` and `development` environments.
+- [preset-flags][preset-flags]
+
+
+## 🐬 args
 ```js
 this.args = {
   production: {
@@ -14,6 +21,8 @@ this.args = {
   },
 }
 ```
+
+## 🍦 defaults
 
 #### production
 

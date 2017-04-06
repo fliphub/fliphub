@@ -1,7 +1,63 @@
 # 🔈 changelog 🔈
 
-# part 66 - apr 4-5 17
+# part 66 - apr 5 17
+-  🏗💠 fliphub
+  - 📝🍰🌎 preset provide in presets/todos
+  - 🔗 more readme links
+  - 📖 gitbook fiddling, documentation expansion
+  - 🔬🍰 test for presets as obj
+  - 📖📦 doc for packages
+  - 📖📒🚚🏰 move around the docs structure
+  - 🔫 add bullet-points
+  - 🛁 clean the presets-defaults
+  - 🔗 update links from refactor2 to master
+  - ⚙ expand on config
+  - 🛡 add safety in bundlerFlipper when merging to fallback to object if they are inheriting/using-reusable configs
+  - 🍰⚙ added preset-reusable
+  - 🔬🚨 failing tests for reusable inheriting fliphub configs (via plugins, though it should not be needed since configs are inherited if inherited is not false so...)
+- 🎯 fliphub-resolve & 🥕 mono-root
+  - 📖 docs part 2
+  - 📘 examples
+- 📜 flipscript
+  - 🔬🚨 update test for permutator to use commas instead of spaces
+- 🕳 deep-replace
+  - 📖 adding docs
+  - 🔬 test setup
+- ⛓🔈 fliplog
+  - 🎁 trackConsole
+  - ⌨️⚒ fix typo where using .quick would use arguments even if it was only length 1 which was a harder to read log
+  - 🔍🎨 add missing color red shorthand
+- 💯 fosho
+  - 🚧 add .t method to scope `t` for shorter asserting
+- 🖥 flipcli
+  - 🔬 more tests
+- 🎀⛓ json-chain
+  - 🎁 .updateIfNotEmpty
+  - 🔬 updated
+- 💾💸 flipcache
+  - 🗑 add `.del`
+  - 🎀⛓ update with latest json-chain
+  - 👣 adding .dir
+  - 🔬 added test
+🏗💠🔮 flipfam
+ - added fliphub back to dep from optionalDependencies
+ - updated 🎯 fliphub-resolve & 🥕 mono-root
+ - used 💾💸 to create exports
+ - 🔬 added tests
+- 🔬📦 update test dependencies for ava
 
+---
+- ⛓🔈 fliplog
+  - ☕ filtering - added support for function
+  - 🎁 add .expose
+  - 🐌 add .slow mode
+  - 📖🛰 docs for `space`
+  - 📖 updated readme to reflect
+  - 📖🏗💠🔮 added flipfam to readme
+  - ⚒🐛 fix capturing
+  - 📝 update todos
+  - 🛁⚗ clean experiment
+---
 
 # part 65 - apr 4 17
 - 👂 flipevent
@@ -89,6 +145,8 @@
 - 🙃 🚩 flipflag
   - 📚 docs
   - 📖📘 examples
+
+-------
 
 - 🏗💠🔮 flipfam
   - 🔗 so many links, so many more todo

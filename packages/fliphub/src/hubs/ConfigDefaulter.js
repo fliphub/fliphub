@@ -25,6 +25,7 @@ const {
   PresetResolveAll,
   PresetEslint,
   PresetWeb,
+  PresetReusable,
 } = require('../presets')
 
 // @TODO:
@@ -57,6 +58,7 @@ module.exports = class ConfigDefaulter extends Hub {
       .add('resolve-all', new PresetResolveAll(workflow))
       .add('eslint', new PresetEslint(workflow))
       .add('fusebox', new PresetDefaultsFuseBox(workflow))
+      .add('reusable', new PresetReusable(workflow))
 
       // .add('alias-loader': new PresetAliasRequire)
       // .add('uglify', new PresetUglify)

@@ -27,7 +27,6 @@ module.exports = class PresetEslint {
 
   // Usage shows default values
   toWebpack() {
-    console.log('using?')
     const eslint = require('neutrino-middleware-eslint')
     const rules = {eslint: this.args}
     const options = {eslint: {useEslintrc: true}}

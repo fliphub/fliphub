@@ -23,7 +23,7 @@ const apps = [{
 
 ### add your own presets
 ```js
-class AvaPreset {
+class CustomPreset {
   setArgs(args) {
     this.args = args
   }

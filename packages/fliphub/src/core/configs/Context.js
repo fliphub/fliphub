@@ -52,6 +52,10 @@ module.exports = class ContextConfig extends ChainedMap {
     return this
   }
   // {name: preset}
+  // prependPresets(presets) {
+  //   this.presets.prependAll(presets)
+  //   return this
+  // }
   addPresets(presets) {
     this.presets.addAll(presets)
     return this
@@ -60,6 +64,10 @@ module.exports = class ContextConfig extends ChainedMap {
     this.presets.add(name, preset)
     return this
   }
+  // prependPreset(name, preset) {
+  //   this.presets.prepend(name, preset)
+  //   return this
+  // }
 
   mergeParent() {
     // @NOTE: technically this should be parent when we instantiate

@@ -1,4 +1,3 @@
-
 ### defaults
 ```js
 debug: {

@@ -1,3 +1,4 @@
+// https://webpack.js.org/guides/development/#source-maps
 // where our files end up
 output: {
   // files go into here

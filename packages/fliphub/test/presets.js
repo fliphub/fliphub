@@ -110,6 +110,25 @@ test(`can add + use presets,
   createWith(t)
 })
 
+test('can use presets in object format', (t) => {
+  t.plan(1)
+  const FlipHub = require('../src')
+  const flips = new FlipHub({
+    root: __dirname,
+    apps: [{
+      presets: {
+        resolveAll: __dirname,
+        ava: new AvaPreset(() => fosho(true, t)),
+      },
+      name: 'eh',
+      entry: './src/index.js',
+      output: './public/eh',
+    }],
+  })
+
+  foReal(flips, t)
+})
+
 test(`returns config and does nothing else`, (t) => {
   t.plan(2)
   const {config} = createWith(t)

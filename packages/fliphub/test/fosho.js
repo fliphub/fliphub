@@ -3,7 +3,7 @@ const {fosho, log} = require('fosho')
 
 class Workflow {}
 
-test.only('fosho', (t) => {
+test('fosho', (t) => {
   fosho('eh')
     .isReal()
     .isStr()

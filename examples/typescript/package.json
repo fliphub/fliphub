@@ -18,7 +18,7 @@
     "url": "https://github.com/fliphub/fliphub/issues"
   },
   "devDependencies": {
-    "fliphub": "0.1.0-beta.7",
+    "fliphub": "0.1.0",
     "izz": "*",
     "realm-utils": "^1.0.8",
     "rollup-plugin-typescript": "^0.8.1"

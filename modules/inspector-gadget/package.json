@@ -12,6 +12,7 @@
     "javascript-stringify": "^1.6.0"
   },
   "keywords": [
+    "flip",
     "inspect",
     "helpers",
     "utils",

@@ -39,7 +39,6 @@ module.exports = class PresetTypeScript {
   toWebpack(config, workflow) {
     // workflow.log.quick(workflow.current.bundler.api.config)
     const ts = require('awesome-typescript-loader')
-    console.log(config)
     workflow.current.bundler.api.config.module
       .rule('awesome-typescript-loader')
       .test(/\.tsx?$/)

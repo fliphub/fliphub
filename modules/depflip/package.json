@@ -1,6 +1,6 @@
 {
   "name": "depflip",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "finding, extracting, checking, installing deps",
   "main": "index.js",
   "author": "James <aretecode@gmail.com>",

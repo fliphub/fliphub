@@ -43,7 +43,6 @@ module.exports = class BundlerConfig extends ChainedMapExtendable {
 
   toConfig() {
     const config = this.entries()
-    // console.log(config)
     return config
   }
 }

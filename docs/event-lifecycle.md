@@ -1,7 +1,8 @@
-## 👂📢 events
+# 👂📢 event-lifecycle
 
+### 📢 emitted
 
-the events emitted are
+the events emitted are:
 
 ```js
 core.config
@@ -19,22 +20,11 @@ contexts.configs.done
 contexts.create.done
 ```
 
-any class extending [hub][https://github.com/fliphub/fliphub/blob/master/modules/fliphub-core/Hub.js] will have the following methods subscribed to the events, if they exist.
+### 🏊
+- any class extending [hub][src-hub] will have the following methods subscribed to the events, if they exist.
+- see [hubs][src-hub] and [presets][presets-add-your-own] for more on how the events are used
+- [see the fliphub-core docs][docs-fliphub-core]
 
-```js
-preConfigs
-preCreates
-postConfigs
-postCreates
-preInit
-init
-postInit
-onCreate
-onConfig
-preConfig
-postConfig
-coreCreate
-coreConfig
-coreInit
-coreSetup
-```
+[src-hub]: https://github.com/fliphub/fliphub/blob/master/modules/fliphub-core/Hub.js
+[presets-add-your-own]: https://github.com/fliphub/fliphub/wiki/presets-add-your-own
+[docs-fliphub-core]: https://github.com/fliphub/fliphub/tree/master/modules/fliphub-core

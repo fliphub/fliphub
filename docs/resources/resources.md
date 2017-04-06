@@ -31,5 +31,5 @@ https://www.npmjs.com/package/snack-cli
 https://www.npmjs.com/package/progress-string
 https://www.npmjs.com/package/commit-cli
 https://www.npmjs.com/package/gendiff-cli
-
+https://sugarjs.com/docs/
 https://www.npmjs.com/package/fuzzy

@@ -15,7 +15,10 @@ module.exports = class BundlerFlipper extends Hub {
     if (api && api.config) {
       config = workflow.current.bundler.api.config
     }
-    const toConfiged = config.toConfig()
+
+    // fallback to object if they are inheriting/using-reusable configs
+    const toConfiged = config.toConfig() || {}
+    
     const to = context.flips.to
     this.to = to
 

@@ -16,14 +16,14 @@ module.exports = class PresetFlags {
   }
 
   coreInit(core, context) {
-    const config = context.config
-    const names = []
-    const flags = [{
-      names,
-      cb,
-    }]
-
-    flipflag.findAll(flags)
+  //   const config = context.config
+  //   const names = []
+  //   const flags = [{
+  //     names,
+  //     cb,
+  //   }]
+  //
+  //   flipflag.findAll(flags)
   }
 }
 

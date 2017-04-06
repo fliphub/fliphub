@@ -4,7 +4,7 @@
   "description": "fliphub examples",
   "main": "src/index.js",
   "devDependencies": {
-    "fliphub": "0.1.0-beta.7"
+    "fliphub": "0.1.0"
   },
   "keywords": [
     "examples",

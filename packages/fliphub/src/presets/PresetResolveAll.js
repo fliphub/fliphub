@@ -30,7 +30,7 @@ module.exports = class PresetResolveAll {
     const props = ['alias', 'output', 'entry']
 
     const test = (file) => {
-      console.log(file)
+      // console.log(file)
       return false
     }
 

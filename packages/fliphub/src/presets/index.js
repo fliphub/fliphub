@@ -23,6 +23,9 @@ const PresetAliasResolve = require('./PresetAliasResolve')
 const PresetEslint = require('./PresetEslint')
 const PresetResolveAll = require('./PresetResolveAll')
 
+const PresetReusable = require('./PresetReusable')
+const PresetConfigLoader = require('./PresetConfigLoader')
+
 module.exports = {
   DefaultsEnv,
   PresetNeutrino,
@@ -45,4 +48,6 @@ module.exports = {
   PresetEslint,
   PresetResolveAll,
   PresetWeb,
+  PresetReusable,
+  PresetConfigLoader,
 }

@@ -27,6 +27,7 @@ test('fosho', (t) => {
     .isBelow(2)
     .above(-1)
       .below(2)
+  t.pass()
 })
 
 test('fosho not a nice boulder...', (t) => {
@@ -60,6 +61,7 @@ test('fns', (t) => {
   fosho(fnb)
     .fn()
     .aintInstanceOf(Workflow)
+  t.pass()
 })
 
 test('async / promises', async (t) => {

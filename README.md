@@ -39,7 +39,7 @@ const FlipHub = require('fliphub')
 new FlipHub({entry: './src/index.js'}).build()
 ```
 
-## 📦 usage
+### 📦 installation
 ```bash
 yarn add fliphub
 npm i fliphub --save
@@ -49,7 +49,7 @@ npm i fliphub --save
 [cli][docs-cli]
 -->
 
-# 🗝️ legend
+### 🗝️ legend
 - [introduction](#-intro)
 - [all the apps](#-all-the-apps)
 - [flipfam][flipfam-url]
@@ -79,17 +79,18 @@ one app? two apps? 100 apps? fusebox, rollup, _and_ webpack? nodejs server, infe
 
 ```js
 const FlipHub = require('fliphub')
+
+// take an existing config, flip it to fusebox or rollup or webpack
+const config = require('./webpack.config.js')
+config.flips = {to: 'fusebox'}
+
 const apps = [
-  {
-    name: 'reacted',
-    config: './webpack.config.js'
-    flips: {to: 'fusebox'},
-  },
+  config,
+
   {
     name: 'infernod',
     entry: './src/index.js',
-    presets: ['inferno', 'neutrino-preset-happypack'],
-    html: './src/index.html',
+    presets: ['inferno', 'neutrino-preset-happypack', 'web'],
   },
   {
     name: 'backend',
@@ -129,23 +130,19 @@ const apps = [
 
 FlipHub.init({
   presets: {
-    front: {
+    reusable: {
       entry: './src/index.js',
-      html: '#root',
-      fusebox: true,
+      flips: {to: 'fusebox'},
     },
   },
   apps,
 }).build()
 ```
 
-[docs-presets-default]: https://github.com/fliphub/fliphub/wiki/presets-default
-
 [they are configured for each environment by default][docs-presets-default]
 [and can be customized for any config you want](#-flags)
-[it can build itself with webpack, fusebox, or rollup, with the flip of an env flag][src-pkg-json]
 
-## the problem
+## ⚠️ the problem
 - [build systems are notorious for their difficulty][medium-webpack-difficulty].
 - finding and setting up the right
   - scripts
@@ -165,10 +162,10 @@ FlipHub.init({
 - time intensive; switching build systems for 1 app is grueling
 - ... all of the above for _every application_
 
-## the solution
-- [with the flip of a flag](#flags), you can go from [webpack][webpack], to [fusebox][fusebox], or any other supported build system.
-- [existing webpack configs](#compat) can be used and enhanced with ease.
-- [create plugins](#create-your-own-plugins) to start converting your build system to another, flip the switch to keep compatibility without breaking everything,
+## ✔️ the solution
+- [with the flip of a flag](#-flags), you can go from [webpack][webpack-url], to [fusebox][fusebox-url], to [rollup][rollup-url] or any other supported [build system][docs-build-systems].
+- [existing configs](#-examples) can be used and enhanced with ease.
+- [easily create presets & hubs][docs-presets-add-your-own] to start converting your build system to another, flip the switch to keep compatibility without breaking everything,
 
 
 
@@ -192,35 +189,23 @@ FlipHub.init({
 - [examples-es6-ts-config][examples-es6-ts-config] 🚧
 - [examples-flags][examples-flags] 🚧
 
-[examples-minimal]: https://github.com/fliphub/fliphub/tree/master/examples/minimal
-[examples-compat]: https://github.com/fliphub/fliphub/tree/master/examples/compat
-[examples-react]: https://github.com/fliphub/fliphub/tree/master/examples/react
-[examples-react-and-alias]: https://github.com/fliphub/fliphub/tree/master/examples/react-and-alias
-[examples-canadas]: https://github.com/fliphub/fliphub/tree/master/examples/canadas
-[examples-lint]: https://github.com/fliphub/fliphub/tree/master/examples/lint
-[examples-empty]: https://github.com/fliphub/fliphub/tree/master/examples/empty
-[examples-monorepo]: https://github.com/fliphub/fliphub/tree/master/examples/monorepo
-[examples-typescript]: https://github.com/fliphub/fliphub/tree/master/examples/typescript
-[examples-webworker]: https://github.com/fliphub/fliphub/tree/master/examples/webworker
-[examples-tests]: https://github.com/fliphub/fliphub/tree/master/examples/tests
-[examples-code-splitting]: https://github.com/fliphub/fliphub/tree/master/examples/code-splitting
-[examples-es6-ts-config]: https://github.com/fliphub/fliphub/tree/master/examples/es6-ts-config
-[examples-node]: https://github.com/fliphub/fliphub/tree/master/examples/node
-[examples-flags]: https://github.com/fliphub/fliphub/tree/master/examples/flags
 
+# 📚 documentation
+
+- [📖 see the wiki][wiki-url]
+- [🚧 see the work-in-progress docs][docs-wip]
 
 
 # 💠 hubs (middleware +)
 [docs hubs][docs-hubs]
 
-## 🚩 flags
-## ☕🏳️ filters
-white [flags](#flags) are used to filter which apps are run for different [operations](#app-operations)
 
-apps, and app operations can be filtered based on flags either per app, or for all apps.
-[see the examples](#examples)
+## 🚩 flags
+#### ☕🏳️ filters
+white-list flags are used to filter which apps are run for different [operations][wiki-url]
 
 ## 🏹 aliasing
+
 [see the alias docs][docs-alias]
 
 
@@ -242,13 +227,41 @@ const appsWithArgs = [{
 }]
 ```
 
+<!--
+# 🕳 digging deeper
+## 🖇 tools
+- see flipfam
+-->
 
 
-## 🐛 debugging
-- ⚙ with full options for debugging everything in the flipping process, debugging is a breeze.
-- inside of every [workflow][src-core-workflow], there is `.log`, [fliplog][fliplog-url]
-[see the docs for debugging][docs-debugging]
+# v0
+v0 is still available as [flipbox][flipbox-url] but is unmaintained.
 
+
+[docs-build-systems]: https://github.com/fliphub/fliphub/wiki/supported-build-systems
+[docs-presets-add-your-own]: https://github.com/fliphub/fliphub/wiki/presets-add-your-own
+[wip-docs]: https://github.com/fliphub/fliphub/tree/master/docs
+[wiki-url]: https://github.com/fliphub/fliphub/wiki
+[flipbox-url]: https://www.npmjs.com/package/flipbox
+[webpack-url]: https://webpack.js.org/
+[rollup-url]: rollupjs.org
+[fusebox-url]: fuse-box.org
+[docs-presets-default]: https://github.com/fliphub/fliphub/wiki/presets-default
+[examples-minimal]: https://github.com/fliphub/fliphub/tree/master/examples/minimal
+[examples-compat]: https://github.com/fliphub/fliphub/tree/master/examples/compat
+[examples-react]: https://github.com/fliphub/fliphub/tree/master/examples/react
+[examples-react-and-alias]: https://github.com/fliphub/fliphub/tree/master/examples/react-and-alias
+[examples-canadas]: https://github.com/fliphub/fliphub/tree/master/examples/canadas
+[examples-lint]: https://github.com/fliphub/fliphub/tree/master/examples/lint
+[examples-empty]: https://github.com/fliphub/fliphub/tree/master/examples/empty
+[examples-monorepo]: https://github.com/fliphub/fliphub/tree/master/examples/monorepo
+[examples-typescript]: https://github.com/fliphub/fliphub/tree/master/examples/typescript
+[examples-webworker]: https://github.com/fliphub/fliphub/tree/master/examples/webworker
+[examples-tests]: https://github.com/fliphub/fliphub/tree/master/examples/tests
+[examples-code-splitting]: https://github.com/fliphub/fliphub/tree/master/examples/code-splitting
+[examples-es6-ts-config]: https://github.com/fliphub/fliphub/tree/master/examples/es6-ts-config
+[examples-node]: https://github.com/fliphub/fliphub/tree/master/examples/node
+[examples-flags]: https://github.com/fliphub/fliphub/tree/master/examples/flags
 
 [src-core-workflow]: https://github.com/fliphub/fliphub/tree/master/packages/fliphub-core/src
 [src-fliphubp-hubs]: https://github.com/fliphub/fliphub/tree/master/packages/fliphub/src/hubs
@@ -270,79 +283,6 @@ const appsWithArgs = [{
 [docs-preset-sourcemaps]: https://github.com/fliphub/fliphub/tree/master/docs/preset-sourcemaps.md
 [docs-preset-html]: https://github.com/fliphub/fliphub/tree/master/docs/preset-html.md
 [docs-preset-default]: https://github.com/fliphub/fliphub/tree/master/docs/preset-default.md
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# properties (link to interfaces)
-all optional
-any options from any bundler (usually will not work without at least `entry`, and `output`)
-
-### parent config
-  - inheritable by each app
-  - when using a single app, the parent config is the app config
-  - same properties as app, but
-    - no name
-    - no bundler properties
-    - has the apps property
-
-### app
-  - presets: `Object` | `Array<string>`
-  - flips `Array<Bundlers>` | `Bundler`
-  - inherit: `boolean`, whether to inherit the parent config
-  - root: `string`, path to resolve paths to
-  - defaults: `boolean`, disables all defaults
-
-
-
-
-
-
-
-# 🕳 digging deeper
-
-## 🖇 helpers
-- see flipfam
-
-
-
-# 🏗 build systems
-- [webpack][webpack-url]
-- [fusebox][fusebox-url]
-- [rollup][rollup-url]
-- [another bundler? request it][new-issue-url]
-
-
-
-
-
-# v0
-v0 is still available as [flipbox][flipbox-url] but is unmaintained.
-
-[flipbox-url]: https://www.npmjs.com/package/flipbox
-
-
-
-
-
-
-
-
 
 
 

@@ -7,6 +7,7 @@ class Timer {
     this.times = {}
     this.laps = {}
     this.index = 0
+    this.microtime = microtime
   }
 
   start(name = null) {

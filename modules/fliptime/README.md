@@ -82,3 +82,21 @@ const microseconds = timer.took('eh')
 const ms = timer.msTook('eh')
 const parsed = timer.parsedTook()
 ```
+
+### 🏊 additional
+
+```js
+const now = timer.microtime.now()
+const micro = timer.parseMicro(now)
+
+timer.times = {}
+timer.laps = {}
+timer.index = 0
+```
+
+#### example
+```js
+timer.times[name].start
+timer.times[name].end
+timer.times[name].diff
+```

@@ -21,7 +21,7 @@ const toarr = require('to-arr')
 const ChainedMap = require('flipchain/ChainedMapExtendable')
 const isGlob = require('izz/glob')
 
-// @TODO: take the glonb filling I did in inferno-cli
+// @TODO: take the glob filtering I did in inferno-cli
 class Glob extends ChainedMap {
   static start(parent) {
     return new Glob(parent)
@@ -39,25 +39,50 @@ class Glob extends ChainedMap {
   }
 
   // can be array and auto transform to a pattern
-  anyWithExt() {}
+  // anyWithExt() {}
+  // onlyOne() {}
 
-  onlyOne() {}
-
-  // '+(' + apps.join('|') + ')'
+  /**
+   * @since 0.0.1
+   * @example '+(multiple-apps|or-another)'
+   * @example 'single-mode-scope'
+   * @param  {string | Array<string>} names
+   * @return {Glob}
+   */
   any(names) {
-    this.str += '+(' + toarr(names).join('|') + ')'
+    const notReal = !names || names === ''
+
+    names = toarr(names)
+
+    const emptyArr = names.length === 0
+    const singleMode = names.length === 1
+
+    if (singleMode) {
+      this.str = names
+      return this
+    }
+
+
+    // else if (emptyArr || notReal) {
+    //   this.str = '*'
+    //   this.str = null
+    //   return this
+    // }
+
+    this.str += '+(' + names.join('|') + ')'
     return this
   }
 
+  // could output like commander
+  // help() {}
 
-  anyOne() {}
+  // anyOne() {}
 
   // make multiple globs to
-  folders() {}
+  // folders() {}
 
   // to give it back in compatible format such as
-  //
-  asArray() {}
+  // asArray() {}
 
   // or() {}
   // pattern() {}
@@ -77,17 +102,22 @@ class Glob extends ChainedMap {
    * .doesItMatch(`tests/eh.js`)
    * .doesItMatch(`tests/folders/canada.js`)
    * .doesItMatch(`src/canada/-test.js`)
+   *
+   * @param {string} globs
+   * @return {mixed} @see minimatch
    */
   doesItMatch(globs) {
     return minimatch(globs)
   }
 
-  isGlob(glob) {
-    return isGlob(glob)
+  /**
+   * @since 0.0.1
+   * @param {string} str
+   * @return {boolean}
+   */
+  isGlob(str) {
+    return isGlob(str)
   }
-
-  // could output like commander
-  help() {}
 
   toString() {
     return this.str
@@ -95,9 +125,9 @@ class Glob extends ChainedMap {
 }
 
 
-// to do globs.glob.glob to do multiple globs more simply
-class Globs {
-
-}
+/**
+ * @TODO: globs.glob.glob to do multiple globs more simply
+ */
+// class Globs {}
 
 module.exports = Glob

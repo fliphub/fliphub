@@ -1,0 +1,5 @@
+# ⛓🍯 flipglob
+
+🚧
+
+> fluent globbing

@@ -19,23 +19,11 @@ module.exports = class Files extends ChainedMapExtendable {
   constructor(parent) {
     super(parent)
     this.extend([
-      'autoRestore',
-      'autoRemove',
-      'autoSave',
       'data',
-      'dir', // is used by File not Files
       'onChanged',
-      '_to',
-      '_from',
     ])
 
     this
-      // false | number - puts file contents back
-      .autoRestore(false)
-      // false | number - for temporary files
-      .autoRemove(false)
-      // false | true - to change things and make sure they get saved
-      .autoSave(false)
       // todo
       .data({})
       // null | function | Enum[FlipCache.methods]
@@ -50,19 +38,110 @@ module.exports = class Files extends ChainedMapExtendable {
   }
 
   /**
+   * @TODO:
+   *  write the configs to a file,
+   *  then when writing and checking `lastWritten`
+   *  should have a `flipcache` `nodeconfig` which contains those
+   *  so it can save when the `autoRestore` was slated
+   *  then check against when it was last written
+   *
+   * @param  {number | boolean} timeout
+   * @param  {string} type
+   * @return {Files}
+   */
+  autoFactory(timeout, type) {
+    this.set(type, timeout)
+
+    const {from, to} = this.entries()
+    let fromAbs
+    let toAbs
+
+    if (from) fromAbs = from.absPath
+    if (to) toAbs = to.absPath
+
+    const args = {
+      from: fromAbs,
+      to: toAbs,
+      timeout,
+      type,
+    }
+
+    this.parent.autoFactory(args)
+    return this
+  }
+
+  // false | number - puts file contents back
+  autoRestore(timeout = 2000) {
+    return this.autoFactory(timeout, 'autoRestore')
+  }
+  // false | number - for temporary files
+  autoRemove(timeout = 2000) {
+    return this.autoFactory(timeout, 'autoRemove')
+  }
+  // false | true - to change things and make sure they get saved
+  // autoSave(val) {}
+
+  dir(dir) {
+    if (this.get('to')) this.get('to').dir(dir)
+    if (this.get('from')) this.get('from').dir(dir)
+    return this
+  }
+
+  /**
    * @TODO: needs to re-resolve relative with .flip/
    *
    * takes a `from`, adds a `to`, writes
    * @return {Files}
    */
   backup() {
-    const {_to, _from} = this.entries()
-    if (_to) return this
+    const from = this.get('from')
+    const to = this.get('to')
+    const fromContent = from.load().contents
 
-    const file = new File(_from.absPath, this)
-    this._to(file).setContent(_from.contents).write()
+    // console.log('backup...', fromContent)
+    if (to) {
+      to.setContent(fromContent).write()
+    }
+    else {
+      const file = new File(from.absPath + '-backup', this)
+        .setContent(fromContent)
+        .write()
+
+      this.set('to', file)
+    }
+    // console.log('backup complete...')
+
     return this
   }
+
+  /**
+   * could just have a FileFactory here too
+   * adds methods from Files to File for chaining
+   * @private
+   * @param  {File} file
+   * @return {Files}
+   */
+  decorateFile(file) {
+    file.autoRemove = (timeout) => {
+      this.autoRemove(timeout)
+      return file
+    }
+    file.autoRestore = (timeout) => {
+      this.autoRestore(timeout)
+      return file
+    }
+    file.from = (args) => {
+      this.from(args)
+      return file
+    }
+    file.to = (args) => {
+      this.to(args)
+      return file
+    }
+    // file.autoSave = this.autoSave.bind(this)
+    return this
+  }
+
 
   /**
    * this is the backup, or output config file
@@ -73,11 +152,12 @@ module.exports = class Files extends ChainedMapExtendable {
    * @return {File}
    */
   to(path) {
-    if (this.get('_to')) return this.get('_to')
-    if (!path) path = this.get('_from')
+    if (this.get('to')) return this.get('to')
+    if (!path) path = this.get('from')
 
     const file = new File(path, this)
-    this._to(file)
+    this.decorateFile(file)
+    this.set('to', file)
     return file
   }
 
@@ -91,9 +171,10 @@ module.exports = class Files extends ChainedMapExtendable {
    * @return {File}
    */
   from(path) {
-    if (this.get('_from')) return this.get('_from')
+    if (this.get('from')) return this.get('from')
     const file = new File(path, this)
-    this._from(file)
+    this.decorateFile(file)
+    this.set('from', file)
     return file
   }
 
@@ -104,17 +185,17 @@ module.exports = class Files extends ChainedMapExtendable {
    * @return {boolean}
    */
   hasChanged() {
-    return this.get('_from').read() !== this.get('_to').read()
+    return this.get('from').read() !== this.get('to').read()
   }
 
   /**
-   * takes the `_from` (original),
-   * writesthe contents of `_to` (the backup)
+   * takes the `from` (original),
+   * writesthe contents of `to` (the backup)
    *
    * @return {Files}
    */
   restore() {
-    this.get('_from').write(this.get('_to'))
+    this.get('from').write(this.get('to'))
     return this
   }
 }

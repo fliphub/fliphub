@@ -1,6 +1,6 @@
 {
   "name": "flipcache",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "[temporary], safe, restorable, cacheable, configurable, chainable/fluent data",
   "main": "src/index.js",
   "scripts": {
@@ -11,6 +11,7 @@
     "fosho": "*"
   },
   "dependencies": {
+    "sleepfor": "*",
     "fliplog": "*",
     "flipchain": "*",
     "flipfile": "*",

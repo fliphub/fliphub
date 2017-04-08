@@ -38,7 +38,7 @@ const onthefly = flipcache
 
 ```js
 const mocha = flipcache
-  .from('mochaOptsFile')
+  .from('mochaOptsFile').end()
   .to('mochaOptsBackupFile')
   .autoRestore(2000)
 ```

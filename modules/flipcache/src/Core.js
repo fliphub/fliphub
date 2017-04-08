@@ -1,16 +1,19 @@
 const detachedParent = require('./detached/parent')
 const Files = require('./Files')
 
+let singleton
+
 // @core
 class FlipCache {
   static init(files = []) {
-    return new FlipCache(files)
+    if (!singleton) singleton = new FlipCache(files)
+    return singleton
   }
   static to(name) {
-    return new FlipCache().add(name).to(name)
+    return FlipCache.init().add(name).to(name)
   }
   static from(name) {
-    return new FlipCache().add(name).from(name)
+    return FlipCache.init().add(name).from(name)
   }
   static file(name) {
     return FlipCache.init().file(name)
@@ -30,7 +33,17 @@ class FlipCache {
     return this._files[name]
   }
 
+  autoFactory({from, to, timeout, type}) {
+    if (!this.catcher) {
+      this.catcher = true
+      // and on sigterm etc
+      // process.on('UncaughtException', e => {})
+      detachedParent({from, to, timeout, type, PATH: process.env.PATH})
+    }
+  }
+
   // @TODO: ---
+  // - [ ] Files would call .parent?
   //
   // need to
   // 1. be able to cancel the autoRemove & autoRestore
@@ -38,18 +51,26 @@ class FlipCache {
   // 3. be able to update the contents on autoSave when we update
   //
   // seems difficult when it is detached...
-  autoRestore() {
-    detachedParent({env: 'here'})
-    return this
-  }
-  autoRemove() {
-    detachedParent({env: 'here'})
-    return this
-  }
-  autoSave() {
-    detachedParent({env: 'here'})
-    return this
-  }
+  // autoRestore() {
+  //   return this
+  // }
+  // autoRemove() {
+  //   detachedParent({env: 'here'})
+  //   return this
+  // }
+  // autoSave() {
+  //   detachedParent({env: 'here'})
+  //   return this
+  // }
+
+  /**
+   * autoDelete
+   * autoRestore
+   * autoSave
+   *
+   * explicitSave explicitDelete explicitRestore?
+   * may need a listener to the file?
+   */
 
   // --- @ops ---
   restore(name) { return this._files[name].restore() }

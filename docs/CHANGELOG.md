@@ -1,5 +1,69 @@
 # 🔈 changelog 🔈
 
+# part 68 - apr 7 17
+
+
+# part 67 - apr 6 17
+
+- 🔥🖥 fliphub-inferno-cli
+  - ⛓🖥 using latest flipcli
+  - 🚧
+- ⛓🖥 flipcli 🔌📜 🚩📦⬆ 🔮⛰ ℹ️
+  - 🔌 add .use for middleware, firstly for 📜 flipscript
+  - 🚩📦⬆ add flipflag as dep
+  - 🔮⛰ auto env
+  - ℹ️️ comments
+- ⛓📜 flipscript 📐 💸 ⚒🏃⛰👣 🆙🎀 🆕⌛ 🔬🔬 👽👽
+  - ⛓📜 flipscript
+  - 🚩🚩 if last arg was doubledash which we do not need unless there are flags after it, pop it off
+  - ⚒🏃⛰👣  fix running with no env & no PATH, passing in empty env causes EONENT
+  - 📐 some refactor
+  - 🆙🎀 better detection with special-character regexing for stringifying flags
+  - 🆕 adding Remember for estimating progress of a script
+  - 🆕⌛ implement estimator
+  - 💸 use flipcache to store and read results
+  - ⛓🚩 make Flag class chainable
+  - 🔬 update tests for better stringifying
+  - 🔬⛓🚩 update tests for updated chainable flags
+  - 📦 move deps to deps file
+  - 👽 export Flag and Remember
+  - 👽 export deps
+  - 🔬 add test for using prefixer and just flag
+  - 🔬 test for globarg only, added shorthand options, added globarg
+- ⏲ fliptime 👽💸
+  - 👽 export microtime
+  - 💸 add docs for parse and properties
+- 💸 flipcache
+  - 📦⬆💤 add sleepfor
+  - 🚓 add force bypassing loaded file cache
+  - 🚑🐛 add missing .get!
+  - ✅ finishing detachedParent
+  - 🆙⛓🗺 update map to remove _ functions
+  - 🆙 update File.toString
+  - 🆙 update .load
+  - 🔬 autoDelete test working
+  - 🔬 autoRestore test working
+  - 🔬 test for backup working
+  - 🔬 test for backupAndRestore
+  - 🔬 test for error handling safety when restoring
+- 🚩 flipflag 🎁🤖 ⛓ 🍴
+  - 🎁🤖 added .findAndRemove
+  - 🆕 started fluent
+  - 🍴 forked minimist to upgrade it
+  - ✚ added objToArr for possible use
+- 📚 docs ✚✚✚
+  - ✚ add redux, webworker, process, types
+- 💤 sleepFor 💍📖
+  - 💍 return a promise.resolve so it can be awaited for testing
+  - 📖 some inline jsdocs
+- ⛓ flipglob 📖📝
+  - 📖 minor docs update
+  - 📖 add readme for future
+  - 📝 add todo for emoji choices and todo
+- 💯 fosho 🎁
+  - 🎁 add .aint(flipfile fns)
+- 🏗💠🔮 flipfam 👽📒
+  - 👽📒 export all files so they can be used individually
 
 --------
 
@@ -49,7 +113,6 @@
   - 👣 adding .dir
   - 🔬 added test
   - 📦⬆📦⬇ swap built in autofind with 🔎 flipfind
-  - export all files so they can be used individually
 🏗💠🔮 flipfam
  - added fliphub back to dep from optionalDependencies
  - updated 🎯 fliphub-resolve & 🥕 mono-root

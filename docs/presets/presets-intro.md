@@ -35,12 +35,17 @@ class CustomPreset {
 
 ### built-in presets
 
+[👀 see the built in presets code][src-presets]
+
 ![built-in](https://cloud.githubusercontent.com/assets/4022631/24596137/d6701e94-17f1-11e7-8fff-61a5e1b6baca.png)
 
-- [built in presets][src-presets]
 
 ### neutrino presets
 
+all [🔗 neutrino presets and middleware][neutrino-docs] are compatible with fliphub.
+
 ![neutrino-presets](https://cloud.githubusercontent.com/assets/4022631/24596136/d66fc43a-17f1-11e7-94ec-35ed09198891.png)
 
-all neutrino presets and middleware are compatible with fliphub.
+
+[neutrino-docs]: https://neutrino.js.org/presets/
+[src-presets]: https://github.com/fliphub/fliphub/tree/master/packages/fliphub/src/presets

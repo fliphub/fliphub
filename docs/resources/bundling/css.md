@@ -4,7 +4,7 @@ https://survivejs.com/webpack/styling/loading/
 https://www.davidmeents.com/blog/journey-into-react-part-4-styling-with-scss-and-webpack/
 https://blog.madewithenvy.com/webpack-2-postcss-cssnext-fdcd2fd7d0bd
 https://github.com/dinbror/blazy
-
+https://webpack.js.org/plugins/commons-chunk-plugin/#explicit-vendor-chunk
 
 module: {
     rules: [

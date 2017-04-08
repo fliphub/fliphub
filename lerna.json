@@ -13,6 +13,9 @@
   "commands": {
     "exec": {
       "ignore": "+(flip-gom-html-parser|babel-loader-builder|flip-webpack-chain|flip-neutrino)"
+    },
+    "bootstrap": {
+      "loglevel": "verbose"
     }
   }
 }

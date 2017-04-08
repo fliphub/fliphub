@@ -5,6 +5,9 @@ const Vorpal = require('vorpal')
 const ChainedMapExtendable = require('flipchain/ChainedMapExtendable')
 const ChainedSets = require('flipchain/ChainedSet')
 const _sortBy = require('lodash.sortby')
+const flipscript = require('flipscript')
+const flipcache = require('flipcache')
+const flipflag = require('flipflag')
 
 const vorpal = new Vorpal()
 
@@ -44,6 +47,8 @@ class ChainedSet extends ChainedSets {
 
 
 module.exports = {
+  flipcache,
+  flipscript,
   orderByKeys,
   ChainedMap,
   ChainedSet,
@@ -51,4 +56,5 @@ module.exports = {
   log,
   inquirer,
   vorpal,
+  flipflag,
 }

@@ -5,10 +5,13 @@ const Script = require('./Script')
 module.exports = class Scripts extends ChainedMap {
   constructor(parent) {
     super(parent)
-    delete this.parent
 
+    this.run = this.parent.run.bind(this.parent)
     this.index = -1
     this.scripts = {}
+
+    this.parent.npm = (script) => this.parent.add().npm(script)
+    this.npm = (script) => this.add().npm(script)
   }
 
   /**

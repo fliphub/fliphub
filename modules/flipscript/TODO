@@ -1,3 +1,5 @@
+- [ ] allow using `&&` and `|`
+
 - [x] try to run a bin
   - [x] if it fails, use node
   - [x] store that it failed so we know when we try again

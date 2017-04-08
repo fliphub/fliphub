@@ -4,5 +4,47 @@
   "eh": "giveitago",
   "bin": {
     "npm": false
+  },
+  "remembers": {
+    "{\"bin\":\"npm\",\"args\":[\"run-script\",\"diggy:nested\"],\"opts\":{\"cwd\":\"/Users/james/code/fliphub/modules/flipscript\",\"preferLocal\":false}}": {
+      "times": [
+        {
+          "diff": 622160
+        },
+        {
+          "diff": 606583
+        },
+        {
+          "diff": 600475
+        },
+        {
+          "diff": 645006
+        },
+        {
+          "diff": 630569
+        }
+      ],
+      "avg": 618556
+    },
+    "{\"bin\":\"npm\",\"args\":[\"run-script\",\"diggy\",\"--\",\"--env.zoolala=aoao\",\"-e\"],\"opts\":{\"cwd\":\"/Users/james/code/fliphub/modules/flipscript\",\"preferLocal\":false,\"env\":{\"NODE_ENV\":\"magic\",\"PATH\":\"/Users/james/.nvm/versions/node/v7.8.0/lib/node_modules/npm/bin/node-gyp-bin:/Users/james/code/fliphub/modules/flipscript/node_modules/.bin:/Users/james/.nvm/versions/node/v7.8.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin\"}}}": {
+      "times": [
+        {
+          "diff": 642797
+        },
+        {
+          "diff": 628495
+        },
+        {
+          "diff": 619641
+        },
+        {
+          "diff": 678457
+        },
+        {
+          "diff": 653401
+        }
+      ],
+      "avg": 642347
+    }
   }
 }

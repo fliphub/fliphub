@@ -1,5 +1,5 @@
 const test = require('ava')
-const fosho = require('fosho')
+const {fosho, log} = require('fosho')
 const {ScriptFlip} = require('../src')
 
 
@@ -37,5 +37,6 @@ test('lerna decorates and prefixes', (t) => {
     .bin('tsc')
 
   fosho(script.toString(), t)
-    .findStr('--scope=+(inferno-app1|inferno-app2|inferno)')
+    .findStr('--scope="+(inferno-app1|inferno-app2|inferno)"')
+    .findStr('-- node')
 })

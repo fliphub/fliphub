@@ -44,6 +44,34 @@ function parseAliases(aliases) {
   }
 }
 
+/**
+ * defaults to process.argv,
+ * but can clone it, pass it in, and edit a copy or another array
+ *
+ * @param  {string} needle
+ * @param  {array} [argvScoped=process.argv]
+ * @param  {boolean} [ignoreFirst=true]
+ * @return {any}
+ */
+function findAndRemove(needle, argvScoped = process.argv, ignoreFirst = true) {
+  // eslint-disable-next-line
+  let foundVal = undefined
+  let i = 0
+  if (ignoreFirst) i = 2
+
+  for (i = i; i < argvScoped.length; i++) {
+    const arg = argvScoped[i]
+    if (arg.includes(needle)) {
+      foundVal = val(arg)
+      // console.log({foundVal, arg, i, needle})
+      if (foundVal === '') foundVal = true
+      argvScoped.splice(i, 1)
+    }
+  }
+
+  return foundVal
+}
+
 function searchAll(nEeDlE, options) {
   if (!options) options = {}
 
@@ -348,6 +376,8 @@ const flaggerObj = {
   get,
   argv,
   minimist,
+  findAndRemove,
+  searchAndDestroy: findAndRemove,
   // yargs,
 }
 

@@ -1,5 +1,16 @@
 const ChainedMapExtendable = require('flipchain/ChainedMapExtendable')
+const log = require('fliplog')
 const File = require('./File')
+
+// interface DetachedParentArgs {
+//   from: ?AbsPath,
+//   to: ?AbsPath,
+//   start: Timestamp,
+//   end: boolean || Timestamp,
+//   timeout: number,
+//   type: string,
+//   key: string, // @example: 'from:AbsPath,to:AbsPath'
+// }
 
 /**
  * @TODO:
@@ -15,9 +26,11 @@ module.exports = class Files extends ChainedMapExtendable {
 
   /**
    * @param {any} parent
+   * @param {boolean} meta - if using itself to cache
    */
-  constructor(parent) {
+  constructor(parent, meta = false) {
     super(parent)
+
     this.extend([
       'data',
       'onChanged',
@@ -35,6 +48,27 @@ module.exports = class Files extends ChainedMapExtendable {
 
     // alias
     this.src = this.to.bind(this)
+
+    if (meta === false) this.setupMeta()
+  }
+
+  /**
+   * sets up a flipcache file to store the backups to
+   * ensure subsequent autoRestore requests do not overwrite original
+   *
+   * @since 0.0.6
+   * @return {Files}
+   */
+  setupMeta() {
+    this.meta = new Files(this, true)
+      .to('.fliphub/flipcaches.json')
+      .json()
+      .load()
+      .setIfNotEmpty('autoRestore', {})
+      .setIfNotEmpty('autoRemove', {})
+      .setIfNotEmpty('backups', {})
+
+    return this
   }
 
   /**
@@ -56,14 +90,44 @@ module.exports = class Files extends ChainedMapExtendable {
     let fromAbs
     let toAbs
 
-    if (from) fromAbs = from.absPath
-    if (to) toAbs = to.absPath
+    let key = ''
+
+    if (from) {
+      fromAbs = from.absPath
+      key += 'from:' + fromAbs
+    }
+    if (to) {
+      toAbs = to.absPath
+      key += 'to:' + toAbs
+    }
 
     const args = {
       from: fromAbs,
       to: toAbs,
+      start: Date.now(),
+      end: false,
       timeout,
       type,
+      key,
+    }
+
+    if (this.meta) {
+      const cacheForType = this.meta.get(type)
+      if (!cacheForType[key]) cacheForType[key] = []
+
+      const index = cacheForType[key].length - 1
+      const last = cacheForType[key][index]
+
+      // if it has been longer than the original timeout
+      // something may have gone wrong
+      // so only ignore it if the time is less
+      if (last && last.end === false)
+        if (Date.now() - last.start <= last.timeout)
+          return this
+
+      cacheForType[key].push(args)
+
+      this.meta.write()
     }
 
     this.parent.autoFactory(args)
@@ -91,12 +155,37 @@ module.exports = class Files extends ChainedMapExtendable {
    * @TODO: needs to re-resolve relative with .flip/
    *
    * takes a `from`, adds a `to`, writes
+   *
+   * force:
+   * - whether to backup
+   *   if it has already been backed up
+   *   within the operation timeout of restore or remove...
+   * - or string for binding to `pre` other operations?
+   *
+   * @param {number} force how much time between backups
    * @return {Files}
    */
-  backup() {
+  backup(force = 2000) {
     const from = this.get('from')
     const to = this.get('to')
     const fromContent = from.load().contents
+
+
+    // could go in a fn `getKey?` if I use it again
+    let key = ''
+    if (from) key += 'from:' + from.absPath
+    if (to) key += 'to:' + to.absPath
+
+    const backup = this.meta.get('backups')[key]
+    // if (backup) log.quick(Date.now(), backup.start, (Date.now() - backup.start), force)
+    if (backup && (Date.now() - backup.start) <= force) {
+      // console.log('did not backup, was not forced ---------')
+      return this
+    } else {
+      this.meta.get('backups')[key] = {start: Date.now()}
+      // this.meta.set('backups.' + key, {start: Date.now()})
+      this.meta.write()
+    }
 
     // console.log('backup...', fromContent)
     if (to) {

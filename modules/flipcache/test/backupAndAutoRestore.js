@@ -14,7 +14,7 @@ test('should be able to autoRestore', t => {
 
   config
     .from()
-      .setContent('this is no good')
+      .setContent('// this is no good')
       .write()
 
   const toContents = config.to().load(true).contents.trim()

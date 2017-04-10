@@ -17,7 +17,7 @@ test.skip('should be able to handle errors and process exits', t => {
     .dir(__dirname)
     .autoRestore(600)
     .from()
-      .setContent('should not be here when an error comes')
+      .setContent('// should not be here when an error comes')
       .write()
 
   // could even process exit here

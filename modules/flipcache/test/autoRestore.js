@@ -11,7 +11,7 @@ test('should be able to autoRestore', t => {
     .dir(__dirname)
     .autoRestore(1000)
     .from()
-      .setContent('auto-restore-changed')
+      .setContent('// auto-restore-changed')
       .write()
 
   return new Promise(resolve => setTimeout(() => {

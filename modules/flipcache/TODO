@@ -36,3 +36,37 @@ temp
 - has changed (fusebox)
 - autoremove (timeout...) on sigkill, then restore
 - remove
+
+
+
+// --- from Core ---
+
+// @TODO: ---
+// - [ ] Files would call .parent?
+//
+// need to
+// 1. be able to cancel the autoRemove & autoRestore
+// 2. be able to reset the timeout on autoSave when we update
+// 3. be able to update the contents on autoSave when we update
+//
+// seems difficult when it is detached...
+// autoRestore() {
+//   return this
+// }
+// autoRemove() {
+//   detachedParent({env: 'here'})
+//   return this
+// }
+// autoSave() {
+//   detachedParent({env: 'here'})
+//   return this
+// }
+
+/**
+ * autoDelete
+ * autoRestore
+ * autoSave
+ *
+ * explicitSave explicitDelete explicitRestore?
+ * may need a listener to the file?
+ */

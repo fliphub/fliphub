@@ -2,25 +2,68 @@ const del = require('flipfile/del')
 const read = require('flipfile/read')
 const write = require('flipfile/write')
 const log = require('fliplog')
+const FlipCache = require('../Core')
 // const File = require('../File')
 
 // --- variables/config ---
 
 let cb
 let timeoutId
-let {type, from, to, timeout, debug} = process.env
+let {type, from, to, timeout, debug, key} = process.env
 if (from === 'undefined') from = undefined
 if (to === 'undefined') to = undefined
+
+// get the last one
+// mark it as ended
+function end() {
+  const meta = FlipCache
+    .to('.fliphub/flipcaches.json')
+    .json()
+    .load(true)
+    .setIfNotEmpty('autoRestore', {})
+    .setIfNotEmpty('autoRemove', {})
+    .setIfNotEmpty('backups', {})
+
+  const cacheForType = meta.get(type)
+  const cache = cacheForType[key]
+
+  if (!cache) {
+    return log
+      .data({meta: meta.clean(), key, type, cacheForType})
+      .red('had no cache in child')
+      .echo(false)
+  }
+
+  const lastOfType = cache.length - 1
+  const last = cache[lastOfType]
+
+  if (!last) {
+    return log
+      .data({meta: meta.clean(), key, type, cacheForType})
+      .red('had no meta in child')
+      .echo(false)
+  }
+
+  last.end = Date.now()
+  meta.write()
+
+  return log
+    .data({meta: meta.clean(), key, type, cacheForType})
+    .red('child cache meta end')
+    .echo(false)
+}
 
 // --- ops ---
 
 function autoRestore(fromPath, toPath) {
   // log.quick({from, to}, read(from), read(to))
+  end()
   write(fromPath, read(toPath))
   if (debug) console.log('restored')
 }
 
 function autoRemove(path) {
+  end()
   del(path)
   if (debug) console.log('deleted/removed')
 }

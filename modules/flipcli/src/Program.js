@@ -1,11 +1,17 @@
+const {inspectorGadget} = require('inspector-gadget')
 const {ChainedMap, ChainedSet, vorpal, flipflag, flipscript} = require('./deps')
 
 const {ScriptFlip} = flipscript
 
+const ignore = [
+  'parent', 'workflow', 'currentVorpal', '_parent', 'util', 'lodash',
+]
+
 module.exports = class Program extends ChainedMap {
   constructor(parent) {
     super(parent)
-    this.actions = new ChainedSet(this)
+    this.inspect = inspectorGadget(this)
+    this.actions = new ChainedSet(this, ignore)
     this.middleware = {}
   }
 
@@ -28,6 +34,18 @@ module.exports = class Program extends ChainedMap {
       this.vorpal.show(show)
       return this
     }
+    this.hide = () => {
+      this.vorpal.hide()
+      return this
+    }
+    this.history = (id) => {
+      this.vorpal.history(id)
+      return this
+    }
+    this.localStorage = this.vorpal.localStorage
+    this.commands = this.vorpal.commands
+    this.util = this.vorpal.util
+    this.vorpal.inspect = inspectorGadget(this, ignore.concat(['vorpal']))
 
     // as a preset?
     this.parseEnv = (argv = process.argv) => {

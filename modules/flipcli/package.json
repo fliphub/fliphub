@@ -19,6 +19,7 @@
     "inquirer": "^3.0.6",
     "flipchain": "*",
     "vorpal": "1.11.4",
+    "inspector-gadget": "*",
     "flipfile": "*",
     "flipflag": "*",
     "fliplog": "*",

@@ -1,13 +1,45 @@
 # 🔈 changelog 🔈
 
+# part 69 - apr 9 17
+
+- 🔥🖥 fliphub-inferno-cli 🔋🆙🍰
+  - 🆙⛓🖥 using latest flipcli
+  - 🔋🆙🍰 converting adding presets
+  - 🔋🆙 converting tests
+  - 🔋🆙 converting script building
+  - 🔋🆙 converting from commander to vorpal with flipcli
+- ⛓🖥 flipcli 📦⬆🕵🗜  ℹ️🎁
+  - 🎁 add .separator
+  - 🎁 add .hide
+  - 🎁 add .history
+  - 🎁 add .localStorage
+  - ℹ️️ jsdocs to question
+  - 📦⬆🕵🗜 add inspector-gadget dep
+  - 🕵🗜 inspector-gadget on vorpal
+- ⛓🍯 flipglob, fliphelp
+  - 📖 start updating readme
+- ⛓🔈 fliplog
+  - 📖🛰 docs for `space`
+  - ⚒🛰 fix spaces, make it append to `text`
+  - ⚒🐛 fix capturing
+  - 🎁💤 sleepfor
+  - ⚒⛓🔗 fix flipchain link
+  - 📜 script to run test-all
+- 📚 docs ✚ added helpful-info/concurrency
+
 # part 68 - apr 7 17
 
+- ⛓💸 flipcache 📇ℹ️️🛁🔬⛑
+  - 📇🎀📒 add json metadata meta cache file to ensure only a single operation to a single file at a time
+  - ℹ️️ minor Core comments
+  - 🛁 minor Core clean
+  - 🔬 adding concurrency test
+  - ⛑ safety with the timeout and ending
+
+---
 
 # part 67 - apr 6 17
 
-- 🔥🖥 fliphub-inferno-cli
-  - ⛓🖥 using latest flipcli
-  - 🚧
 - ⛓🖥 flipcli 🔌📜 🚩📦⬆ 🔮⛰ ℹ️
   - 🔌 add .use for middleware, firstly for 📜 flipscript
   - 🚩📦⬆ add flipflag as dep
@@ -51,8 +83,7 @@
   - 🆕 started fluent
   - 🍴 forked minimist to upgrade it
   - ✚ added objToArr for possible use
-- 📚 docs ✚✚✚
-  - ✚ add redux, webworker, process, types
+- 📚 docs ✚✚✚ add redux, webworker, process, types
 - 💤 sleepFor 💍📖
   - 💍 return a promise.resolve so it can be awaited for testing
   - 📖 some inline jsdocs
@@ -60,6 +91,7 @@
   - 📖 minor docs update
   - 📖 add readme for future
   - 📝 add todo for emoji choices and todo
+  - 🛰
 - 💯 fosho 🎁
   - 🎁 add .aint(flipfile fns)
 - 🏗💠🔮 flipfam 👽📒
@@ -124,10 +156,8 @@
   - ☕ filtering - added support for function
   - 🎁 add .expose
   - 🐌 add .slow mode
-  - 📖🛰 docs for `space`
   - 📖 updated readme to reflect
   - 📖🏗💠🔮 added flipfam to readme
-  - ⚒🐛 fix capturing
   - 📝 update todos
   - 🛁⚗ clean experiment
 ---
@@ -310,7 +340,7 @@
 - 📝 for readme with dep checking
 
 - ⛓🔈 fliplog
-  - 🎁💤 sleepfor
+  - 📦⬆💤 sleepfor
   - 📖 add readme
   - 😊 update description & emoji
 

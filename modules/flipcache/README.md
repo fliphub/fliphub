@@ -65,6 +65,19 @@ const datas = flipcache
   .write()
 ```
 
+### 👽 exports
+
+```js
+const {
+  File,
+  Files,
+  Core,
+  JSONChain,
+  ConfigStore,
+  FlipFind,
+} = require('flipcache')
+```
+
 ## 🔗 more
 - for json, [json-chain][json-chain] is used
 - for resolving paths (unless .dir is used), [flipfind][flipfind] is used

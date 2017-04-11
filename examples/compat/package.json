@@ -5,7 +5,11 @@
   "main": "src/index.js",
   "author": "James <aretecode@gmail.com>",
   "dependencies": {
-    "pixi": "*"
+    "pixi.js": "^4.3.5"
+  },
+  "devDependencies": {
+    "webpack": "^2.3.3",
+    "fliphub": "*"
   },
   "homepage": "https://github.com/fliphub/fliphub#readme",
   "repository": {

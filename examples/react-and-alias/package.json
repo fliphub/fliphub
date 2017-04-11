@@ -33,7 +33,7 @@
     "babel-preset-env": "^1.2.2",
     "depflip": "*",
     "flipflag": "*",
-    "fliphub": "0.1.0",
+    "fliphub": "^0.1.7",
     "fliplog": "^0.1.12",
     "fliptime": "*",
     "neutrino": "^5.0.2",

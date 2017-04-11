@@ -2,7 +2,7 @@
 // const requirePath = require('../Bundlers/utils/requirePreset')
 var Module = require('module')
 var pathModule = require('path')
-const missingModule = require('../regexes/missing-module.js')
+const missingModule = require('regexes/missing-module.js')
 console.log(missingModule)
 // process.exit(0)
 module.constructor.prototype.require =
@@ -21,7 +21,7 @@ function(requested) {
       const {execSync} = require('child_process')
       const matches = err.message.match(missingModule)
       const match = matches[1]
-      execSync('npm install --save-dev ' + match, {stdio: 'inherit'})
+      execSync('npm install --save ' + match, {stdio: 'inherit'})
       console.log('caughtcha', match)
       delete require.cache[require.resolve(requested)]
       return require(requested)

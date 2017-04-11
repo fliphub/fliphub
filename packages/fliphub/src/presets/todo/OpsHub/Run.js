@@ -36,8 +36,6 @@ module.exports = {
 // https://sungwoncho.io/run-multiple-apps-in-one-droplet/
 // http://serverfault.com/questions/208656/routing-to-various-node-js-servers-on-same-machine
 
-const Config = require('../config/config')
-
 class Server {
   // devServer: {
   //   contentBase: path.join(__dirname, "dev"),

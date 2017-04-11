@@ -1,8 +1,14 @@
+https://github.com/tomachristian/css-entry-webpack-plugin
 https://css-tricks.com/css-modules-part-2-getting-started/
 https://www.bensmithett.com/smarter-css-builds-with-webpack/
 https://survivejs.com/webpack/styling/loading/
 https://www.davidmeents.com/blog/journey-into-react-part-4-styling-with-scss-and-webpack/
 https://blog.madewithenvy.com/webpack-2-postcss-cssnext-fdcd2fd7d0bd
+
+https://neutrino.js.org/presets/neutrino-preset-web/
+https://neutrino.js.org/middleware/neutrino-middleware-style-loader/
+
+
 https://github.com/dinbror/blazy
 https://webpack.js.org/plugins/commons-chunk-plugin/#explicit-vendor-chunk
 

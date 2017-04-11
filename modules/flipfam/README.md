@@ -441,6 +441,14 @@ uses:
 # (need images, descriptions here, etc)
 
 ## depflip
+
+[![NPM version][depflip-npm-image]][depflip-npm-url]
+
+[depflip-npm-image]: https://img.shields.io/npm/v/depflip.svg
+[depflip-npm-url]: https://npmjs.org/package/depflip
+
+> finding, extracting, checking, & installing dependencies
+
 [depflip][depflip]
 
 ## fliphelp

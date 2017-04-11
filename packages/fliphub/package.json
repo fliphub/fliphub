@@ -1,6 +1,6 @@
 {
   "name": "fliphub",
-  "version": "0.1.0",
+  "version": "0.1.7",
   "description": "the builder of builders",
   "main": "src/index.js",
   "bin": "bin/flip",
@@ -21,7 +21,7 @@
     "help": "node flip --help",
     "example-compat": "webpack --config example/configs/compat/mediator.js",
     "mocha-dist": "mocha ./dist/fliphub-tests.js",
-    "_postinstall": "node depflip"
+    "postinstall": "node bin/deps"
   },
   "files": [
     "bin",

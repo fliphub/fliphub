@@ -1,5 +1,48 @@
 # 🔈 changelog 🔈
 
+# part 70 - apr 10 17
+
+- ✍
+  - https://twitter.com/aretecode/status/851344090033602560 post on package name for flip and fliphub
+  - update gitter integrations
+
+- ⛓🖥 flipcli 🎁☮️🆙
+  - 🆕🎁 starting auto-cli-to-interactive-presets
+  - 🆙 add more missing from vorpal: .types, .hidden, .cancel, added comments
+  - ☮️ .message aliased as .description in Question for compatibility with vorpal
+  - ✅ have basic cli-to-interactive working
+  - 🆙 continuing cli presets
+- 💯 fosho 📝
+  - 📝 assertion writing todo https://github.com/fliphub/fliphub/issues/62
+- 📚 docs ✚ added good/bad in webpack
+  - https://img.shields.io/badge/%E2%9B%93-fluent-9659F7.svg?style=flat-square fluent badge
+- ⛓ flipchain 📖🌊
+  - 📖🌊 rock skipping analogy https://github.com/fliphub/fliphub/issues/61
+- 🙃🍑 fliphtml 📦⬆⛓🕸🛅🤾  📖
+  - 📦⬆⛓ add missing flipchain dep
+  - 📦⬆🕸🛅🤾 add webpack server and history dep
+  - 📖 add intro readme with 🚧🚧🚧
+- 📘 examples 📦⬆🔖
+  - 📦⬆🔖 update fliphub version
+- ⛓💸 flipcache 📖👽
+  - 👽 export more deps
+  - 📖👽 exports in docs
+- 🙃📒 flipfile 📦⬆
+  - 📦⬆ add node-path-extras
+- 🕳 deep-replace ⚒ fix missing files in pkgjson
+- 📦🙃 depflip 🖥📖 📧
+  - 🖥 add a bin to install dev deps
+  - 🖥 cli for deps extractor
+  - 📖 docs
+  - 📧 emailing npm about dynamic installs
+
+@TODO:
+  - dev server
+  - decorate each of the commands with `-p`, `-d` and `-l` for logging and envs
+  - fix the scoping when there are no packages
+
+---
+
 # part 69 - apr 9 17
 
 - 🔥🖥 fliphub-inferno-cli 🔋🆙🍰

@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+const flipflag = require('flipflag')
+const extract = flipflag('extract')
+const install = flipflag('install')
+const dev = flipflag('dev')
+
+if (extract) {
+  const DepsExtractor = require('./depsExtractor')
+  const extractor = new DepsExtractor()
+  extractor.usingGlob(extract) // 'packages/**/*.js'
+
+  if (install) {
+    require('./installDep')(extractor.onlyExternal())
+  }
+}
+else if (dev) {
+  require('./dev.js')
+}
+else {
+  console.log('cli usage: --extract="glob" --install=boolean --dev=boolean')
+}

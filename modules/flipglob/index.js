@@ -63,11 +63,11 @@ class Glob extends ChainedMap {
     }
 
 
-    // else if (emptyArr || notReal) {
-    //   this.str = '*'
-    //   this.str = null
-    //   return this
-    // }
+    else if (emptyArr || notReal) {
+      this.str = '*'
+      // this.str = null
+      return this
+    }
 
     this.str += '+(' + names.join('|') + ')'
     return this

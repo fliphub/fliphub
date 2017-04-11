@@ -1,5 +1,7 @@
-const FlipCache = require('flipcache')
-const {orderByKeys} = require('./deps')
+const log = require('fliplog')
+const {orderByKeys, flipcache, flipscript, toarr} = require('./deps')
+
+const scripts = flipscript
 
 /**
  * @TODO:
@@ -15,17 +17,14 @@ const {orderByKeys} = require('./deps')
  *   it should (be able to) reset argv, then re-run program
  */
 class Presets {
-  use(name) {
-    const preset = FlipCache.file(name).json().load()
+  use() {
+    const preset = flipcache.file(name).json().load().read()
     const presets = preset.presets
-    const scopes = preset.apps
 
-    // @TODO: clean
-    const benvs = (presets.build || []).map(build => '--' + build)
-    const eenvs = (presets.env || []).filter(env => !benvs.includes('--' + env))
-    const envs = benvs.concat(eenvs)
+    const scopes = preset.packages
 
-    // delete presets.env
+    // would take env out of the args of each...?
+    const multipliers = ''
 
     // @TODO:
     // should be able to use merge with chain
@@ -33,44 +32,56 @@ class Presets {
     // should be able to run programs without a double subprogram
     // just edit flags, require program without cache
     //
-    Object.keys(presets).forEach(cmd => envs.forEach(env => {
-      const flags = presets[cmd].map(flag => {
-        const f = '--' + flag
-        // we only need it once
-        if (envs.includes(f)) return ''
-        return f
-      }).join(' ')
+    Object.keys(presets).forEach(cmd => multipliers.forEach(env => {
+      const script = scripts
+        .add()
+        .node()
+        .raw('flip.js')
+        .raw(cmd)
+        .raw(scopes)
+        // .env(env)
 
-      // @TODO:
-      console.log(cmd, flags)
-      if (env) this.parent.defineEnv('NODE_ENV', env.replace('--', ''))
-
-      // @TODO:
-      // const hasFlags = this.parent.cmdr.hasOption(cmd, flags)
-      // const hasEnv = this.parent.cmdr.hasOption(cmd, env)
-      // if (hasFlags && !hasEnv) env = ''
-      // if (!hasFlags && hasEnv) flags = ''
-
-      // console.log(this.parent.cmdr.optionsFor())
-      this.parent.execSync(`node ${this.parent.flipper} ${cmd} ${scopes} ${flags} ${env}`.replace(/\n/gmi, ''))
+      presets[cmd].map.forEach(flag => script.flag(flag))
     }))
+
+    log.quick(scripts)
   }
 
+  /**
+   * @param  {string | Array<string>} val
+   * @param  {string} prop
+   * @return {Object}
+   */
+  getKeyFlag(val, prop) {
+    if (typeof val === 'string') return {key: prop, flag: val}
+    const split = val.split('.')
+    const key = split.shift()
+    const flag = split.pop()
+    return {split, key, flag}
+  }
+
+  /**
+   * @TODO:
+   * - [ ] need to add some decorator/transformer that changes it when saving...
+   *
+   * @param {Object} preset
+   * @param {Array<string>} order
+   */
   add(preset, order) {
     let presets = {}
-    const {name} = preset
 
-    preset.presets.forEach((presetted) => {
-      const split = presetted.split('.')
-      const key = split.shift()
-      const flag = split.pop()
-      if (!presets[key]) presets[key] = []
-      presets[key].push(flag)
-    })
+    Object
+      .keys(preset)
+      .forEach(prop => {
+        toarr(preset[prop])
+        .forEach(val => {
+          const {key, flag} = this.getKeyFlag(val, prop)
+          if (!presets[key]) presets[key] = []
+          presets[key].push(flag)
+        })
+      })
 
-    preset.presets = orderByKeys(presets, order)
-
-    console.log(preset)
+    presets = orderByKeys(presets, order)
   }
 }
 

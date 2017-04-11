@@ -16,6 +16,10 @@ module.exports = class Question extends ChainedMap {
       'default',
     ])
     this._choices = new ChainedSet(this)
+
+    this.description = this.message.bind(this)
+    // this.checked = this.default.bind(this)
+
     this.shorthandFactory(['checkbox', 'confirm', 'input', 'list', 'choice'])
   }
 

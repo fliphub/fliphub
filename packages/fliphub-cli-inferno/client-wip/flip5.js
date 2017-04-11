@@ -4,13 +4,15 @@ const {
   log,
   flipscript,
   flipcache,
-} = require('../src')
+  StepsFrom,
+} = require('../fliphub/packages/fliphub-cli-inferno')
 
 const {ScriptFlip} = flipscript
 const cli = new CLI()
 const program = cli.program()
 const scripts = new ScriptFlip().debug(true)
 
+// extract commands and interactive from this
 program
   .command('lint [packages]')
   .option('-j, --js', 'lint js')
@@ -20,4 +22,5 @@ program
   .action(({packages, options}) => {
   })
 
-log.quick(program.commands)
+StepsFrom.init().handle(program)
+// log.quick();

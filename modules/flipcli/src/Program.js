@@ -26,6 +26,8 @@ module.exports = class Program extends ChainedMap {
 
     // this.vorpal.actionPrompt = this.actionPrompt.bind(this)
 
+    // --- vorpal instance
+
     this.delimiter = (delimiter = '🏗  fliphub ➜') => {
       this.vorpal.delimiter(delimiter)
       return this
@@ -42,6 +44,11 @@ module.exports = class Program extends ChainedMap {
       this.vorpal.history(id)
       return this
     }
+    this.parse = (argv = process.argv) => {
+      this.vorpal.parse(argv)
+      return this
+    }
+
     this.localStorage = this.vorpal.localStorage
     this.commands = this.vorpal.commands
     this.util = this.vorpal.util
@@ -71,8 +78,10 @@ module.exports = class Program extends ChainedMap {
       return this.parse(argv)
     }
 
-    this.parse = (argv = process.argv) => {
-      this.vorpal.parse(argv)
+    // --- vorpal current ---
+    // https://github.com/dthree/vorpal/wiki/Docs-%7C-Using-Arrow-Functions
+    this.types = (id) => {
+      this.currentVorpal.types(id)
       return this
     }
 
@@ -86,19 +95,38 @@ module.exports = class Program extends ChainedMap {
       return this
     }
 
+    this.allowUnknownOptions = (...args) => {
+      this.currentVorpal = this.vorpal.autocomplete(...args)
+      return this
+    }
+    this.autocomplete = (...args) => {
+      this.currentVorpal = this.vorpal.description(...args)
+      return this
+    }
+
     // autocomplete, allowUnknownOptions
     this.description = (...args) => {
-      // console.log('adding command...', args)
       this.currentVorpal = this.vorpal.description(...args)
       return this
     }
     this.action = (...args) => {
-      // console.log('adding action...', args)
       this.currentVorpal.action(...args)
       return this
     }
     this.option = (...args) => {
       this.currentVorpal.option(...args)
+      return this
+    }
+    this.cancel = (...args) => {
+      this.currentVorpal.cancel(...args)
+      return this
+    }
+    this.help = (...args) => {
+      this.currentVorpal.help(...args)
+      return this
+    }
+    this.remove = (...args) => {
+      this.currentVorpal.remove(...args)
       return this
     }
 

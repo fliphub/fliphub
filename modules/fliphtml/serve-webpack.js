@@ -2,7 +2,7 @@ const {join} = require('path')
 const express = require('express')
 const webpack = require('webpack')
 const devMiddleware = require('webpack-dev-middleware')
-const historyAPIFallback = require('history-api-fallback')
+const historyAPIFallback = require('express-history-api-fallback')
 
 const app = express()
 const config = {}

@@ -5,6 +5,7 @@ const gom = require('gom')
 const parser = require('flip-gom-html-parser')
 const flipcache = require('flipcache')
 const Tasks = require('./tasks')
+const HTMLChain = require('./HTML')
 
 // @TODO: output to file,
 // - static serving html for all html files
@@ -27,9 +28,19 @@ class HTML {
 
 // https://github.com/the-grid/gom/blob/master/spec/GOM.coffee#L189
 class HTMLs {
+  add(name) {
+    // const h = new HTML(this)
+    const h = new HTMLChain(this)
+    h.add = this.add.bind(this)
+
+    this.htmls.push(h)
+
+    return h
+  }
+
   // needs to subscribe to html webpack, or fusebox, and then call the callback
   // with the gom html
-  add(contents, files, cb) {
+  do(contents, files, cb) {
     this.htmls.push(new HTML(contents, cb))
     this.tasks.push(new Tasks(files))
     return this
@@ -152,4 +163,6 @@ class HTMLs {
   }
 }
 
+HTMLs.$ = gom()
+HTMLs.HTMLs = HTMLs
 module.exports = HTMLs

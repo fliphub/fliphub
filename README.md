@@ -29,7 +29,7 @@
 
 
 ### 👾 all you need
-#### [see the example](example-minimal)
+#### [see the example](examples/minimal)
 
 enables configs that would take hundreds or thousands of lines, with just a few properties.
 

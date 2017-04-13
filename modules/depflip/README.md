@@ -38,7 +38,8 @@ depflip --dev=true
 
 # extracts dependencies from a glob
 # installs external ones
-depflip --extract="packages/**/*.js" --install=true
+# filters out ava and fosho
+depflip --extract="packages/**/*.js" --install=true --ignore="ava,fosho"
 ```
 
 [depcheck](https://www.npmjs.com/package/depcheck)

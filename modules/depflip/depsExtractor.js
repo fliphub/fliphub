@@ -3,6 +3,7 @@ const timer = require('fliptime')
 const read = flipfile.read
 const isRel = flipfile.isRel
 
+// https://github.com/fuse-box/fuse-box/blob/2.0/src/analysis/plugins/ImportDeclaration.ts
 function makeReqStr(matches) {
   let str = `` +
   (`(?:\\s*require\\(['|"]*)`) +

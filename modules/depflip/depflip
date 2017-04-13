@@ -1,9 +1,15 @@
 #!/usr/bin/env node
 
 const flipflag = require('flipflag')
+const toarr = require('to-arr')
+
 const extract = flipflag('extract')
 const install = flipflag('install')
+const ignore = flipflag('ignore')
+const only = flipflag('only')
 const dev = flipflag('dev')
+
+console.log({extract, install, ignore, only, dev})
 
 if (extract) {
   const DepsExtractor = require('./depsExtractor')
@@ -15,7 +21,10 @@ if (extract) {
   }
 }
 else if (dev) {
-  require('./dev.js')
+  let filter = false
+  if (ignore) filter = dep => !toarr(ignore).includes(dep)
+  else if (only) filter = dep => toarr(only).includes(dep)
+  require('./dev.js')(filter)
 }
 else {
   console.log('cli usage: --extract="glob" --install=boolean --dev=boolean')

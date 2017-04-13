@@ -149,6 +149,8 @@ class ChainedMap extends Chainable {
       if (this.shorthands.includes(key)) {
         const existing = this.get(key)
         if (existing) {
+          if (existing === value) return this
+          if (typeof existing === 'string') return this[key]([existing, value])
           const merged = deepmerge(existing, value)
           return this[key](merged)
         }

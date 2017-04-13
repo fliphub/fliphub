@@ -41,6 +41,19 @@ module.exports = class Presets extends Hub {
 
   // --- single ---
 
+  getConfigured(name) {
+    const preset = this
+      .list
+      .get(name)
+
+    const args = this
+      .used
+      .get(name)
+
+    if (preset.setArgs) preset.setArgs(args)
+    return preset
+  }
+
   hasUsed(name) {
     name = camelCase(name)
 
@@ -71,18 +84,18 @@ module.exports = class Presets extends Hub {
     name = camelCase(name)
 
     log
-    .color('green')
-    .tags('preset,use,args')
-    .text('using preset: ' + name)
-    .echo()
+      .color('green')
+      .tags('preset,use,args')
+      .text('using preset: ' + name)
+      .echo()
 
     if (this.used.has(name)) {
       log
-      .tags('preset,use,args,has')
-      .preset('warning')
-      .text('Preset already has ' + name)
-      .data({args, used: this.used.get(name)})
-      .echo()
+        .tags('preset,use,args,has')
+        .preset('warning')
+        .text('Preset already has ' + name)
+        .data({args, used: this.used.get(name)})
+        .echo()
 
       // if it already has it and the args are empty
       // ignore --- for now
@@ -126,9 +139,9 @@ module.exports = class Presets extends Hub {
     name = camelCase(name)
 
     log
-    .tags('add,preset')
-    .text('adding: ' + name)
-    .echo()
+      .tags('add,preset')
+      .text('adding: ' + name)
+      .echo()
 
     if (this.list.has(name)) {
       log

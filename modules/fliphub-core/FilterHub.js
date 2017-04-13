@@ -18,6 +18,8 @@ module.exports = class FilterHub extends Hub {
       .tags('filter').text('☕  🏳️  ' + msg).xterm(223).echo()
     this.debugFor = ({data, msg}) => log
       .tags('filter').text(msg).color('white').data(data).echo()
+
+    this.coreInit(workflow)
   }
 
   /**
@@ -28,6 +30,13 @@ module.exports = class FilterHub extends Hub {
     this.filter()
     workflow.filterContexts(this.list)
     workflow.core.filter = this.filter.bind(this)
+    workflow.core.config[workflow.contextTypes || 'apps'] = workflow
+      .core.config[workflow.contextTypes]
+      .filter((config, i) => {
+        return (this.list.includes(config.name))
+      })
+
+    // log.quick(workflow.core.config[workflow.contextType])
     // log.data(workflow).color(1'bold').verbose(5).text('filtered...').echo()
     return this
   }

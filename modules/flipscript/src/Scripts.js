@@ -29,6 +29,9 @@ module.exports = class Scripts extends ChainedMap {
     return this.current
   }
 
+  /**
+   * @return {Array}
+   */
   toCmd() {
     return Object
       .values(this.scripts)

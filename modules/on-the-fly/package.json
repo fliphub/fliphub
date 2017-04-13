@@ -23,7 +23,7 @@
     "babel-core": "*",
     "babel-preset-env": "^1.2.2",
     "flipfile": "*",
-    "fuse-box": "^1.4.1-beta.18",
+    "fuse-box": "^1.4.1-beta.22",
     "mono-root": "0.0.6",
     "flipcache": "*",
     "flipfind": "*"

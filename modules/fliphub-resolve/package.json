@@ -1,6 +1,6 @@
 {
   "name": "fliphub-resolve",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "dependencies": {
     "deep-replace": "*",
     "flipfile": "*",

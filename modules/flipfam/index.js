@@ -1,4 +1,5 @@
 const flips = {}
+flips["fliphash"] = require('fliphash')
 flips["arrToObj"] = require('arr-to-obj')
 flips["babelLoaderBuilder"] = require('babel-loader-builder')
 flips["childparent"] = require('childparent')

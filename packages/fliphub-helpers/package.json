@@ -6,7 +6,7 @@
   "scripts": {
     "copy": "node pkgxp --copy",
     "clean": "node pkgxp --del",
-    "prepublish": "npm run copy",
+    "_prepublish": "npm run copy",
     "postpublish": "npm run clean",
     "test": "true"
   },

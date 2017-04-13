@@ -28,7 +28,7 @@
   - ⛑🔬🐦 safety in test mocks for changing content
 - 🙃# fliphash 🆕🔬📖
   - 🆕📖🔬 create, docs, tests, publish
-- 🔎 🎯 flipfind
+- 🔎 🎯 flipfind ⛑
   - ⛑ add safety to globbing as it can throw an lstat error when reading & writing in multiple processes
 - ⏲ fliptime
   - ⛑ safety, fallback to performance.now and Date
@@ -36,6 +36,7 @@
 - 📚 docs
   - ✚ add symlinks and exports
   - ✚ add more to sourcemaps, css, webpack, community
+  - ✚ start improving awesome-fluent
 
 - 🏗💠 fliphub
   - 🤾 devServer sticky multi spinner link with animation

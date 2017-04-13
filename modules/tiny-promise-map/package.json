@@ -5,7 +5,7 @@
   "description": "simple, minimal, tiny promise maps & chains to execute promises in order.",
   "devDependencies": {
     "fosho": "*",
-    "ava": "^0.18.2"
+    "ava": "^0.19.0"
   },
   "scripts": {
     "test": "ava --verbose"

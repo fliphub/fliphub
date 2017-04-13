@@ -106,7 +106,7 @@ module.exports = class Program extends ChainedMap {
 
     // autocomplete, allowUnknownOptions
     this.description = (...args) => {
-      this.currentVorpal = this.vorpal.description(...args)
+      this.currentVorpal = this.currentVorpal.description(...args)
       return this
     }
     this.action = (...args) => {

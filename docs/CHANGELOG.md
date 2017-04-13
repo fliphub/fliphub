@@ -1,5 +1,97 @@
 # 🔈 changelog 🔈
 
+# part 73 - apr 13 17
+
+
+# part 72 - apr 12 17
+
+- ⛓🔈 fliplog 🎁®️🚩⚾  📚📘  ⚡🦐
+  - 🎁 add .registerConsole
+  - 🎁⚾ add .registerCatch
+  - 📒 start .toFile
+  - 🚩 handle flags to debug all debugging
+  - 📚 add docs in readme for the flag
+  - 📚 add docs in readme for .registerCatch & .registerConsole
+  - 📘 add examples in readme for .registerCatch & .registerConsole & flag
+  - ⚡🦐 adjust more imports
+  - 🌀⌨️⚒ fix spinner frame type check, check Array not string
+- ⛓💸 flipcache
+  - 🚮🐦 clean mocks after test
+  - 🔬 re-enable all tests
+  - ⛑ safety for non-existing-file in detached
+  - 🎁 add .hashcache -> Cache
+    - ℹ️️ jsdocs
+    - 🎁 .hash, .staleTimeout, .debug, .hashChanged, .isStale, .canBeUsed, .bustIfNeeded, .setContent, .bustOnChange, .bust, .onBusted
+    - 🔬 test basic .canBeUsed with consistent and random content
+    - 🔬📝 test todos for other functionality
+  - ⚒🔬 fix issue where tests are runningin multiple threads, running and coming back, adjust timeout, improve checks, add debug
+  - ⛑🔬🐦 safety in test mocks for changing content
+- 🙃# fliphash 🆕🔬📖
+  - 🆕📖🔬 create, docs, tests, publish
+- 🔎 🎯 flipfind
+  - ⛑ add safety to globbing as it can throw an lstat error when reading & writing in multiple processes
+- ⏲ fliptime
+  - ⛑ safety, fallback to performance.now and Date
+
+- 📚 docs
+  - ✚ add symlinks and exports
+  - ✚ add more to sourcemaps, css, webpack, community
+
+- 🏗💠 fliphub
+  - 🤾 devServer sticky multi spinner link with animation
+  - ⚒☕ fixing filtering
+  - 📦⬆🗼🏋️🏗 adding babel-loader builder
+  - 🎁🍰 add PresetDefine
+  - 🎁🍰 adding presets for inferno and react in babel & web
+  - 🎁🍰 preset Alias works for preset require + preset resolve
+  - ⚒🏹 fix aliasing, add option to resolving for force resolving if it thinks it is an absolute path
+  - ⚒🍰📑 fix PresetHTML not returning plugin for webpack
+  - 🤢 had to add preset looping .preDecorate
+  - copy old compile op for webpack for more debugging later
+  - big webpack chain fix for plugins and calling neutrino dependent plugins
+  - docs on ops
+  - adding fliphash and flipcache to estimate duration and hydrateFromCache
+
+- 💠💗 fliphub-core
+  - 🍰 add .getConfigured for Presets if needing to call some presets at different times
+
+@TODO:
+  - [ ] .whenFlag(flagNames, cb)
+  - [x] dev server
+    - [x] neutrino devserver
+    - [ ] express dev server
+    - [ ] more verbose devserver output, use ops
+  - decorate each of the commands with `-p`, `-d` and `-l` for logging and envs
+  - [ ] build a chrome only bundle and a compat bundle
+
+# part 71 - apr 11 17
+- 📦🙃 depflip
+  - ⚡ use require.resolve instead of requiring
+  - ☕🏴🏳️ add .ignore and .only flags
+- 📦 hoist dependencies
+- 🔬 unify ava version, update minimal test example
+- ⛓ flipchain
+  - 🆙 update mergeReal with existing if values are the same
+- 🏗💠 fliphub
+  - 🆙 update debug config so it does not go to bundler
+  - 🆙 have debug override default debug filter
+  - 🎁 add devServer op
+  - 🎁 add 🙃🛳 flipport
+  - ⚒ fix array entry point https://github.com/fliphub/fliphub/issues/65
+  - 🆕 start PresetAlias
+  - 🎁🍰 add PresetCopy
+  - 🎁🍰📑 add PresetHTML just for webpack for now
+- ⛓🍯 flipglob
+  - ⚒ fix the scoping when there are no packages
+- ⛓🔈 fliplog 📖 & 🎁 🌀🌀🌀 & ⚡& 🎨🌀
+  - 🌀🌀🌀 multispinner: .addSpinner .removeSpinner .startSpinners .stopSpinners https://github.com/fliphub/fliplog/issues/2#issuecomment-293445710
+  - 📖🎨🌀 colored spinners + docs
+  - 📖🌀🌀🌀 docs for multi spinner
+  - 📖⚡ docs for performance
+
+
+-----
+
 # part 70 - apr 10 17
 
 - ✍
@@ -35,11 +127,6 @@
   - 🖥 cli for deps extractor
   - 📖 docs
   - 📧 emailing npm about dynamic installs
-
-@TODO:
-  - dev server
-  - decorate each of the commands with `-p`, `-d` and `-l` for logging and envs
-  - fix the scoping when there are no packages
 
 ---
 
@@ -361,7 +448,7 @@
 
 - ⚒💚🔬 🆕👶 🏗💠🔎📦⬆
 - 💚 travis working to install now
-- 🔬🚨 tests   
+- 🔬🚨 tests
   - 🏴 adding glob for exec on lerna.json
   - ⚒ fixing flipcache, fliphelp,  tests
   - 🛁 remove missing tests on depflip, tiny-promise-map, regexes, emoji-by-name
@@ -369,7 +456,7 @@
   - 🔮🦄💍 use async instead of promises
   - 💚 should be ready for travis
 - 👶 childparent
-  - 🆕 extracted child-to-parent-methods into childparent module  
+  - 🆕 extracted child-to-parent-methods into childparent module
   - 📖 add basic example
 - 🏗💠 fliphub
   - 🔎📦⬆ neutrino-middleware-progress

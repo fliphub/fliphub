@@ -1,4 +1,8 @@
 // https://webpack.js.org/guides/development/#source-maps
+https://webpack.js.org/loaders/source-map-loader/#components/sidebar/sidebar.jsx
+https://webpack.js.org/plugins/source-map-dev-tool-plugin/#components/sidebar/sidebar.jsx
+https://webpack.js.org/concepts/output/#output-sourcemapfilename
+
 // where our files end up
 output: {
   // files go into here

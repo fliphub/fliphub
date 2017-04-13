@@ -10,3 +10,9 @@ cause lots of trouble:
 - style loading
 - context
 - using `vue`
+
+
+biggest issue hands down is style loading with less/sass/scss/css/prefixing/cssnext etc
+second biggest is due
+
+other common ones are typescript and paths, but those problems are usually fixed

@@ -1,5 +1,6 @@
 const detachedParent = require('./detached/parent')
 const Files = require('./Files')
+const Cache = require('./Cache')
 
 let singleton
 
@@ -8,6 +9,9 @@ class FlipCache {
 
   // --- 🏭 ---
 
+  static reinit(files = []) {
+    return new FlipCache(files)
+  }
   static init(files = []) {
     if (!singleton) singleton = new FlipCache(files)
     return singleton
@@ -21,9 +25,16 @@ class FlipCache {
   static file(name) {
     return FlipCache.init().file(name)
   }
+  static hashCache(name = './.fliphub/fliphashcache.json') {
+    const flipcache = FlipCache.init()
+    return new Cache(flipcache, flipcache.add(name).to(name))
+  }
 
   constructor(files = []) {
     this._files = files
+    this.to = (name) => this.add(name).to(name)
+    this.from = (name) => this.add(name).from(name)
+    this.hashCash = (name) => FlipCache.hashCash(name)
   }
 
   autoFactory(args) {

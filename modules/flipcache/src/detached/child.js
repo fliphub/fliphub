@@ -1,17 +1,21 @@
 const del = require('flipfile/del')
 const read = require('flipfile/read')
 const write = require('flipfile/write')
+const exists = require('flipfile/exists')
 const log = require('fliplog')
 const FlipCache = require('../Core')
 // const File = require('../File')
 
 // --- variables/config ---
-
+// function detached() {
 let cb
 let timeoutId
 let {type, from, to, timeout, debug, key} = process.env
 if (from === 'undefined') from = undefined
 if (to === 'undefined') to = undefined
+// debug = !!debug
+// verbose = !!verbose
+debug = false
 
 // get the last one
 // mark it as ended
@@ -29,9 +33,11 @@ function end() {
 
   if (!cache) {
     return log
-      .data({meta: meta.clean(), key, type, cacheForType})
+      .emoji('child')
+      .data({key, type})
+      // .data({meta: meta.clean(), key, type, cacheForType})
       .red('had no cache in child')
-      .echo(false)
+      .echo(debug)
   }
 
   const lastOfType = cache.length - 1
@@ -39,18 +45,21 @@ function end() {
 
   if (!last) {
     return log
-      .data({meta: meta.clean(), key, type, cacheForType})
+      .emoji('child')
+      // .data({meta: meta.clean(), key, type, cacheForType})
       .red('had no meta in child')
-      .echo(false)
+      .echo(debug)
   }
 
   last.end = Date.now()
   meta.write()
 
   return log
-    .data({meta: meta.clean(), key, type, cacheForType})
-    .red('child cache meta end')
-    .echo(false)
+    .emoji('baby')
+    .data({key})
+    // .data({meta: meta.clean(), key, type, cacheForType})
+    .red('child cache meta, written')
+    .echo(debug)
 }
 
 // --- ops ---
@@ -58,14 +67,15 @@ function end() {
 function autoRestore(fromPath, toPath) {
   // log.quick({from, to}, read(from), read(to))
   end()
+  if (!exists(toPath)) write(toPath, '{}')
   write(fromPath, read(toPath))
-  if (debug) console.log('restored')
+  log.emoji('baby').blue('restored').echo(debug)
 }
 
 function autoRemove(path) {
   end()
   del(path)
-  if (debug) console.log('deleted/removed')
+  log.emoji('baby').blue('deleted/removed: ' + path).echo(debug)
 }
 
 // --- handle ---
@@ -98,7 +108,7 @@ function callAndClear() {
   cb()
 
   // so it will not be called again in case multiple events occurr
-  cb = () => {}
+  cb = () => { /* noop */ }
   clearTimeout(timeoutId)
 }
 
@@ -110,3 +120,6 @@ process.once('SIGINT', callAndClear)
 // And the exit event shuts down the child.
 process.once('exit', callAndClear)
 // process.once('beforeExit', callAndClear)
+// }
+
+// detached()

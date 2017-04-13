@@ -2,14 +2,16 @@ const test = require('ava')
 const {fosho, log} = require('fosho')
 const flipcache = require('../src')
 
-test('should be able to autoRestore', t => {
-  const config = flipcache
+test('should be able to autoRestore', async t => {
+  const config = flipcache.reinit()
     .from('./fixtures/fromBackupAndRestore.js')
+      .setContent('// this is good')
+      .write()
       .end()
     .to('./fixtures/toBackupAndRestore.js')
       .end()
     .dir(__dirname)
-    .backup()
+    .backup(0)
     .autoRestore(500)
 
   config
@@ -22,10 +24,9 @@ test('should be able to autoRestore', t => {
 
   t.notDeepEqual(toContents, fromContents)
 
-  return new Promise(resolve => setTimeout(() => {
-    const toRestored = config.to().load(true).contents
-    const fromRestored = config.from().load(true).contents
-    t.deepEqual(toRestored, fromRestored)
-    resolve()
-  }, 1000))
+  await new Promise(resolve => setTimeout(resolve, 2000))
+
+  const toRestored = config.to().load(true).contents
+  const fromRestored = config.from().load(true).contents
+  t.deepEqual(toRestored, fromRestored)
 })

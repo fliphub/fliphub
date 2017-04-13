@@ -72,9 +72,11 @@ const {
   File,
   Files,
   Core,
+  Cache,
   JSONChain,
   ConfigStore,
   FlipFind,
+  fliphash,
 } = require('flipcache')
 ```
 

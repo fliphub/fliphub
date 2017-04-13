@@ -1,6 +1,6 @@
 const test = require('ava')
 const {fosho, log} = require('fosho')
-const flipcache = require('../src')
+let flipcache = require('../src')
 
 function callRestore(index) {
   return flipcache
@@ -12,22 +12,24 @@ function callRestore(index) {
     .to('./fixtures/toConcurrency.js')
       .end()
     .dir(__dirname)
-    .backup(5000)
+    .backup(20000)
     .autoRestore(500)
+    .debug(true)
 }
 
-test.only('will not enqueue more restores if one is already in progress', t => {
+test(`will not enqueue more restores
+  if one is already in progress`, async t => {
+  await new Promise(resolve => setTimeout(resolve, 10000))
+  // flipcache = flipcache.reinit()
   const config = callRestore('0')
-  callRestore(1)
-  callRestore(2)
-  callRestore(3)
-  callRestore(4)
+  callRestore('1')
+  callRestore('2')
+  callRestore('3')
+  callRestore('4')
 
-  return new Promise(resolve => setTimeout(() => {
-    const toRestored = config.to().load(true).contents
-    const fromRestored = config.from().load(true).contents
-    t.deepEqual(toRestored, fromRestored)
-    t.deepEqual(toRestored, '// from concurrency original 0')
-    resolve()
-  }, 1000))
+  await new Promise(resolve => setTimeout(resolve, 20000))
+  const toRestored = config.to().load(true).contents
+  const fromRestored = config.from().load(true).contents
+  t.deepEqual(toRestored, fromRestored)
+  t.deepEqual(toRestored, '// from concurrency original 0')
 })

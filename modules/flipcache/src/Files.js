@@ -49,6 +49,9 @@ module.exports = class Files extends ChainedMapExtendable {
     // alias
     this.src = this.to.bind(this)
 
+    // has to be explicit false for echoing
+    if (!this.has('debug')) this.set('debug', false)
+
     if (meta === false) this.setupMeta()
   }
 
@@ -67,7 +70,18 @@ module.exports = class Files extends ChainedMapExtendable {
       .setIfNotEmpty('autoRestore', {})
       .setIfNotEmpty('autoRemove', {})
       .setIfNotEmpty('backups', {})
+      .setIfNotEmpty('fileChanges', {})
 
+    return this
+  }
+
+  /**
+   * @since 0.0.10
+   * @param {boolean} [should=true]
+   * @return {Files}
+   */
+  debug(should = true) {
+    this.set('debug', should)
     return this
   }
 
@@ -109,6 +123,7 @@ module.exports = class Files extends ChainedMapExtendable {
       timeout,
       type,
       key,
+      debug: this.get('debug'),
     }
 
     if (this.meta) {
@@ -121,9 +136,16 @@ module.exports = class Files extends ChainedMapExtendable {
       // if it has been longer than the original timeout
       // something may have gone wrong
       // so only ignore it if the time is less
-      if (last && last.end === false)
-        if (Date.now() - last.start <= last.timeout)
+      if (last && last.end === false) {
+        if ((Date.now() - last.start) <= last.timeout) {
           return this
+        }
+      }
+
+      // log
+      //   .blue('updating cache: ' + key)
+      //   .data(args)
+      //   .echo(this.get('debug'))
 
       cacheForType[key].push(args)
 
@@ -134,17 +156,31 @@ module.exports = class Files extends ChainedMapExtendable {
     return this
   }
 
-  // false | number - puts file contents back
+  /**
+   * false | number - puts file contents back
+   * @param  {number | boolean} [timeout=2000]
+   * @return {Files}
+   */
   autoRestore(timeout = 2000) {
     return this.autoFactory(timeout, 'autoRestore')
   }
-  // false | number - for temporary files
+
+  /**
+   * false | number - for temporary files
+   * @param  {number | boolean} [timeout=2000]
+   * @return {Files}
+   */
   autoRemove(timeout = 2000) {
     return this.autoFactory(timeout, 'autoRemove')
   }
+  // @TODO:
   // false | true - to change things and make sure they get saved
   // autoSave(val) {}
 
+  /**
+   * @param  {string} dir directory to resolve paths to
+   * @return {Files}
+   */
   dir(dir) {
     if (this.get('to')) this.get('to').dir(dir)
     if (this.get('from')) this.get('from').dir(dir)
@@ -168,26 +204,44 @@ module.exports = class Files extends ChainedMapExtendable {
   backup(force = 2000) {
     const from = this.get('from')
     const to = this.get('to')
-    const fromContent = from.load().contents
-
 
     // could go in a fn `getKey?` if I use it again
     let key = ''
     if (from) key += 'from:' + from.absPath
     if (to) key += 'to:' + to.absPath
 
-    const backup = this.meta.get('backups')[key]
-    // if (backup) log.quick(Date.now(), backup.start, (Date.now() - backup.start), force)
-    if (backup && (Date.now() - backup.start) <= force) {
-      // console.log('did not backup, was not forced ---------')
+    const backups = this.meta.get('backups')
+    const backup = backups[key]
+    const diff = backup ? Date.now() - backup.start : 0
+    if (backup && diff <= force) {
+      // log
+      //   .emoji('cache')
+      //   .blue('did not back up, was not forced: ')
+      //   .data({diff, key, backup})
+      //   .echo(this.get('debug'))
+
       return this
     } else {
-      this.meta.get('backups')[key] = {start: Date.now()}
-      // this.meta.set('backups.' + key, {start: Date.now()})
+      backups[key] = {start: Date.now()}
+      this.meta.set('backups', backups)
+
+      // log
+      //   .emoji('cache')
+      //   .blue('backing up metadata... ' + key)
+      //   .data({backup, force, diff})
+      //   .echo(this.get('debug'))
+
       this.meta.write()
     }
 
-    // console.log('backup...', fromContent)
+    const fromContent = from.load().contents
+
+    // log
+    //   .emoji('cache')
+    //   .blue('backing up...')
+    //   .data({fromContent, diff})
+    //   .echo(this.get('debug'))
+
     if (to) {
       to.setContent(fromContent).write()
     }
@@ -198,7 +252,6 @@ module.exports = class Files extends ChainedMapExtendable {
 
       this.set('to', file)
     }
-    // console.log('backup complete...')
 
     return this
   }

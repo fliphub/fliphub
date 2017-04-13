@@ -1,8 +1,9 @@
-const {resolve, dirname} = require('path')
-const {read, write, exists, isAbs, del} = require('flipfile')
+const {resolve} = require('path')
+const {read, write, exists, del} = require('flipfile')
 const JSONChain = require('json-chain')
 const ConfigStore = require('configstore')
 const flipfind = require('flipfind')
+const sleepfor = require('sleepfor')
 
 // try to run a bin
 //   - if it fails, use node
@@ -66,12 +67,33 @@ module.exports = class File {
   }
   setContent(contents) {
     this.contents = contents
+    this.parse()
     return this
   }
-  write(contents) {
+
+  // http://stackoverflow.com/questions/34968763/is-there-any-risk-to-read-write-the-same-file-content-from-different-sessions
+  safeReadWrite() {
+    while (this.isWriting()) {
+      console.log('------ISWRITING----')
+      sleepfor(12)
+    }
+  }
+
+  write(contents = null) {
     this.contents = contents || this.contents
-    write(this.absPath, this.toString())
+    const str = this.toString()
+
+    this.safeReadWrite()
+
+    // to ensure multiple parallel processes do not read/write at the same time
+    write(this.absPath + '-writing', '')
+    write(this.absPath, str)
+
+    if (contents !== null) this.parse()
     this.lastWritten = Date.now()
+
+    del(this.absPath + '-writing')
+
     return this
   }
 
@@ -83,11 +105,15 @@ module.exports = class File {
   exists() {
     return exists(this.absPath)
   }
+  isWriting() {
+    return exists(this.absPath + '-writing')
+  }
   read(force = false) {
     if (!this.exists()) this.create()
     if (this.isLoaded === true && force === false) return this.contents
 
     if (this.isJSON) {
+      this.safeReadWrite()
       this.contents = read(this.absPath)
       this.parse()
       this.get = (key) => this.contents.get(key)
@@ -113,13 +139,15 @@ module.exports = class File {
     return this.contents
   }
   parse() {
+    if (this.isJSON !== true) return this
     this.contents = new JSONChain(this.contents)
     return this
   }
 
   // if we have no file
   create() {
-    write(this.absPath, '{}')
+    this.contents = '{}'
+    write(this.absPath, this.contents)
     return this
   }
 

@@ -22,8 +22,8 @@ const exts = ['js', 'ts', 'jsx', 'tsx', 'sql']
 // https://www.npmjs.com/package/node-modules-path
 class Finder {
   static from(file, dir) {
-    const finder = new Finder(file, dir)
-    return finder.find()
+    const instance = new Finder(file, dir)
+    return instance.find()
   }
   static file(file) {
     return new Finder(file)
@@ -246,27 +246,33 @@ class Finder {
       return file
     }
 
-    const files = globfs.use(globToAbs).readdirSync(glob)
+    try {
+      const files = globfs.use(globToAbs).readdirSync(glob)
 
-    globs = globs.filter(file => doesInclude(file.abs, files))
+      globs = globs.filter(file => doesInclude(file.abs, files))
 
-    log
-      .text('glob')
-      .data({files, glob, globs})
-      .echo(this.opts.debug)
+      log
+        .text('glob')
+        .data({files, glob, globs})
+        .echo(this.opts.debug)
 
-    if (globs.length === 1) {
-      this.update(globs.shift())
-    }
-    else if (this.opts.dir) {
-      globs = globs.filter(file =>
-        exists(file.abs) && doesInclude(file.abs, this.opts.dir))
-      this.update(globs.shift())
-    }
-    // because 0 means we did not find it
-    else if (globs.length > 0) {
-      globs = globs.filter(file => exists(file.abs))
-      this.update(globs.shift())
+      if (globs.length === 1) {
+        this.update(globs.shift())
+      }
+      else if (this.opts.dir) {
+        globs = globs.filter(file =>
+          exists(file.abs) && doesInclude(file.abs, this.opts.dir))
+        this.update(globs.shift())
+      }
+      // because 0 means we did not find it
+      else if (globs.length > 0) {
+        globs = globs.filter(file => exists(file.abs))
+        this.update(globs.shift())
+      }
+    } catch (error) {
+      log
+        .data({error})
+        .echo(this.opts.debug)
     }
   }
 

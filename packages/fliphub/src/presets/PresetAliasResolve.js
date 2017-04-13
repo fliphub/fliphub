@@ -1,4 +1,4 @@
-const resolve = require('fliphub-resolve')
+const resolver = require('fliphub-resolve')
 const log = require('fliplog')
 
 module.exports = class PresetRequireAlias {
@@ -6,10 +6,18 @@ module.exports = class PresetRequireAlias {
     this.args = []
   }
 
+  // handle .alias, or .resolve.alias
   toWebpack(config) {
-    const {alias} = config
+    const resolve = config.get('resolve')
+    let alias = config.get('alias') || (resolve ? resolve.alias : null)
+
     if (!alias) return null
-    return resolve.obj(alias)
+
+    return {
+      resolve: {
+        alias: resolver.obj(alias, [], true),
+      },
+    }
   }
 
   // @TODO: if aliases are outside of the homedir, warn

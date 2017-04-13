@@ -15,6 +15,7 @@ module.exports = class BundlerConfig extends ChainedMapExtendable {
 
   derefAndClean(config = Object) {
     const data = Object.assign({}, {}, config)
+    delete data.debug
     delete data.name
     delete data.unified
     delete data.flips

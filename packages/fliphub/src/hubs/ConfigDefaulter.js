@@ -20,12 +20,16 @@ const {
   PresetBabel,
   PresetTypeScript,
   PresetFlags,
+  PresetAlias,
   PresetAliasResolve,
   PresetAliasRequire,
   PresetResolveAll,
   PresetEslint,
   PresetWeb,
   PresetReusable,
+  PresetCopy,
+  PresetHTML,
+  PresetDefine,
 } = require('../presets')
 
 // @TODO:
@@ -44,6 +48,7 @@ module.exports = class ConfigDefaulter extends Hub {
       .add('library', new PresetLibrary(workflow))
       .add('target', new PresetTarget(workflow))
       .add('progress', new PresetProgress(workflow))
+      .add('define', new PresetDefine(workflow))
       .add('define-env', new PresetDefineEnv(workflow))
       .add('source-map', new PresetSourceMap(workflow))
       .add('defaults-env', new DefaultsEnv(workflow))
@@ -53,13 +58,15 @@ module.exports = class ConfigDefaulter extends Hub {
       .add('web', new PresetWeb(workflow))
       .add('typescript', new PresetTypeScript(workflow))
       .add('flags', new PresetFlags(workflow))
+      .add('alias', new PresetAlias(workflow))
       .add('alias-require', new PresetAliasRequire(workflow))
       .add('alias-resolve', new PresetAliasResolve(workflow))
       .add('resolve-all', new PresetResolveAll(workflow))
       .add('eslint', new PresetEslint(workflow))
       .add('fusebox', new PresetDefaultsFuseBox(workflow))
       .add('reusable', new PresetReusable(workflow))
-
+      .add('html', new PresetHTML(workflow))
+      .add('copy', new PresetCopy(workflow))
       // .add('alias-loader': new PresetAliasRequire)
       // .add('uglify', new PresetUglify)
       // .add('babili', new PresetMinify)
@@ -94,18 +101,19 @@ module.exports = class ConfigDefaulter extends Hub {
           workflow.core.config.apps.push(cloned)
         })
         // delete original since we cloned for each bundler
-        // workflow.core.config.apps = workflow.core.config.apps.slice([i], 1)
+        // workflow.core.config.apps = workflow.core.config.apps.slice(i, 1)
         delete workflow.core.config.apps[i]
       }
     })
 
     workflow.core.config.apps = workflow.core.config.apps.filter(a => a)
 
-    workflow.log
-    .tags('extract,default,apps,bundlers,flips')
-    .white('config extracted multiple apps')
-    .data(workflow.core.config)
-    .echo()
+    workflow
+      .log
+      .tags('extract,default,apps,bundlers,flips')
+      .white('config extracted multiple apps')
+      .data(workflow.core.config)
+      .echo()
   }
 
   /**

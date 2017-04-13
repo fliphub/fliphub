@@ -34,6 +34,7 @@ module.exports = class PresetRequireAlias {
 
     let aliases
     const hasResolve = presets.hasUsed('resolveAlias')
+
     this.aliaser = new Aliaser(context.config.get('root'), this.args.dir)
     // log.quick(context, workflow)
 
@@ -58,9 +59,12 @@ module.exports = class PresetRequireAlias {
     this.aliases = aliases
 
     const resolveAlias = {resolve: {alias: aliases}}
+
     // handle merging
     if (config.alias) config.merge(resolveAlias)
     else config.merge(resolveAlias)
+
+    // log.quick(config)
   }
 
   toRollup(config) {

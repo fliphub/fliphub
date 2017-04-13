@@ -1,12 +1,22 @@
+const log = require('fliplog')
+
 class PresetDefineEnv {
   // if this is defined, others are not
   // toConfig(bundler, app) {}
   // from() {}
   // to() {}
 
+  constructor() {
+    this.args = [process.env.NODE_ENV || 'development']
+  }
+
   fromWebpack() {}
   fromRollup() {}
   fromFuseBox() {}
+
+  setArgs(args) {
+    if (args) this.args = args
+  }
 
   // toConfig...
   toRollup() {
@@ -30,15 +40,19 @@ class PresetDefineEnv {
   }
   toWebpack() {
     const {EnvironmentPlugin, DefinePlugin} = require('webpack')
-    return (neutrino, envs = [process.env.NODE_ENV || 'development']) => {
+    return (config, workflow, neutrino) => {
+      const envs = this.args
       const env = (Array.isArray(envs) ? envs : [])
-      neutrino.config
-      .plugin('env')
-      .use(EnvironmentPlugin, ['NODE_ENV', ...env])
 
-      return neutrino.config
-      .plugin('define')
-      .use(DefinePlugin, ['process.env.NODE_ENV', ...env])
+      config
+        .plugin('env')
+        .use(EnvironmentPlugin, ['NODE_ENV', ...env])
+
+      config
+        .plugin('define')
+        .use(DefinePlugin, ['process.env.NODE_ENV', ...env])
+
+      // return config
     }
   }
 

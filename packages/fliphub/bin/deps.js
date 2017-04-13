@@ -1,1 +1,1 @@
-require('depflip/dev.js')
+require('depflip/depflip')

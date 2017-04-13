@@ -31,18 +31,18 @@ module.exports = class Config extends ChainedMapExtendable {
       switch (key) {
         case 'plugins': {
           let plugins = this.get('plugins') || []
-          // log.verbose().data(plugins).text('plugins').echo()
+          log.verbose().data(plugins).text('plugins').echo()
 
           if (pluginIndex) {
-            // log.verbose().data(pluginIndex).text('pluginIndex').echo()
+            log.verbose().data(pluginIndex).text('pluginIndex').echo()
             plugins = insertArrAt(plugins, pluginIndex, value)
           }
           else if (is.arr(value)) {
-            // log.verbose().data(key).text('pluginConcat').echo()
+            log.verbose().data(key).text('pluginConcat').echo()
             plugins = plugins.concat(value)
           }
           else {
-            // log.verbose().data(key).text('PLUGINDEEPMERGE').echo()
+            log.verbose().data(key).text('PLUGINDEEPMERGE').echo()
             plugins = deepmerge(plugins, value)
           }
 

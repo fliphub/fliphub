@@ -18,13 +18,18 @@ const PresetWeb = require('./PresetWeb')
 const PresetTypeScript = require('./PresetTypeScript')
 const PresetFlags = require('./PresetFlags')
 
+const PresetAlias = require('./PresetAlias')
 const PresetAliasRequire = require('./PresetAliasRequire')
 const PresetAliasResolve = require('./PresetAliasResolve')
+
 const PresetEslint = require('./PresetEslint')
 const PresetResolveAll = require('./PresetResolveAll')
 
 const PresetReusable = require('./PresetReusable')
 const PresetConfigLoader = require('./PresetConfigLoader')
+const PresetCopy = require('./PresetCopy')
+const PresetHTML = require('./PresetHTML')
+const PresetDefine = require('./PresetDefine')
 
 module.exports = {
   DefaultsEnv,
@@ -43,6 +48,7 @@ module.exports = {
   PresetBabel,
   PresetTypeScript,
   PresetFlags,
+  PresetAlias,
   PresetAliasRequire,
   PresetAliasResolve,
   PresetEslint,
@@ -50,4 +56,7 @@ module.exports = {
   PresetWeb,
   PresetReusable,
   PresetConfigLoader,
+  PresetCopy,
+  PresetHTML,
+  PresetDefine,
 }

@@ -1,6 +1,7 @@
 const test = require('ava')
 const sleepfor = require('sleepfor')
 const {fosho} = require('fosho')
+const {exists} = require('flipfile')
 const flipcache = require('../src')
 
 test('should be able to autoRemove', async t => {
@@ -11,10 +12,13 @@ test('should be able to autoRemove', async t => {
     .load()
     .update('eh', ['some values'])
     .write()
-    .autoRemove(100)
+    .autoRemove(500)
 
-  fosho(config.absPath).exists()
-  await new Promise(resolve => setTimeout(resolve, 300))
+  // might affect travis?
+  await new Promise(resolve => setTimeout(resolve, 100))
+
+  t.true(exists(config.absPath))
+  await new Promise(resolve => setTimeout(resolve, 1000))
   fosho(config.absPath).aintExists()
   t.pass()
 })

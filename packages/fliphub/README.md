@@ -11,7 +11,7 @@
 <!-- [![Slack][slack-image]][slack-url] -->
 
 # 🏗💠 fliphub
-[![Build Status][travis-image]](travis-url)
+[![Build Status][travis-image]][travis-url]
 [![NPM version][fliphub-npm-image]][fliphub-npm-url]
 [![fliphub][gitter-badge]][gitter-url]
 [![flipfam][flipfam-image]][flipfam-url]

@@ -1,7 +1,10 @@
 # 🔈 changelog 🔈
 
 # part 73 - apr 13 17
-
+- ⚒📖💚🔬 minor fixes 📚
+  - ⚒📖💚 fix travis link in readme
+  - ⚒🔬 minor fix for running tests for flipcache
+  - 📚 docs - add vid link, graphs & routing links
 
 # part 72 - apr 12 17
 

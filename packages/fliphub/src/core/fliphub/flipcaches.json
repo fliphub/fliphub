@@ -10,5 +10,9 @@
       "files": "1031024541",
       "hash": "1031024541"
     }
+  },
+  "-125061135": {
+    "contents": "[{output:{path:'/Users/james/code/fliphub/packages/fliphub/public',filename:'eh'},plugins:[function () {}],entry:{index:['/Users/james/code/fliphub/packages/fliphub/src/index.js']}},{output:{path:'/Users/james/code/fliphub/packages/fliphub/public',filename:'eh'},plugins:[function () {}],entry:{index:['/Users/james/code/fliphub/packages/fliphub/src/index.js']}}]",
+    "time": 1492142307045
   }
 }

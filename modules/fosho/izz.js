@@ -33,6 +33,10 @@ Object.keys(izz).forEach((key) => {
 })
 
 
+izz.between = function between(arg, min, max) {
+  return arg >= min && arg <= max
+}
+
 // const {
 //   getFileAndPath,
 //   getDirectories,

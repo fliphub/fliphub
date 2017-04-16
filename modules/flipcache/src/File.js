@@ -1,3 +1,4 @@
+const {lstatSync} = require('fs')
 const {resolve} = require('path')
 const {read, write, exists, del} = require('flipfile')
 const JSONChain = require('json-chain')
@@ -20,6 +21,7 @@ module.exports = class File {
   constructor(path, parent) {
     this.parent = parent
     // this.files = parent
+
     this.to = this.parent.to.bind(this.parent)
     this.from = this.parent.from.bind(this.parent)
 
@@ -40,7 +42,32 @@ module.exports = class File {
     // shorthands / alias
     this.prepend = this.prependContent.bind(this)
     this.append = this.appendContent.bind(this)
+
+    this.stats = false
   }
+
+  /**
+   * @TODO:
+   * - [ ] chain conditionals
+   * - [ ] set up some safety mode with mocking functionality
+   * - [ ] this should be as a middleware, .use(info), .use(datefns)
+   *
+   * @return {Date}
+   */
+  lastModified() {
+    if (this.stats === false) this.stats = lstatSync(this.absPath)
+    return this.stats.mtime
+  }
+
+  /**
+   * @see File.absPath
+   * @return {lstatSync}
+   */
+  info() {
+    if (this.stats === false) this.stats = lstatSync(this.absPath)
+    return this.stats
+  }
+
 
   dir(dir) {
     this.absPath = resolve(dir, this.opts.path)

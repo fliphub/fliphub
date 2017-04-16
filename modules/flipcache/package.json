@@ -1,6 +1,6 @@
 {
   "name": "flipcache",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "[temporary], safe, restorable, cacheable, configurable, chainable/fluent data",
   "main": "src/index.js",
   "scripts": {

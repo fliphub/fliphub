@@ -2,6 +2,7 @@ also need to have
 - flipflags able to edit flags as an easy cmd (to run cmds again)
 - vorpal
 
+https://www.npmjs.com/package/prompt
 https://github.com/enquirer/enquirer
 https://github.com/dthree/vorpal/wiki/api-%7C-vorpal.command
 

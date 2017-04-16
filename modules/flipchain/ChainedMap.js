@@ -207,9 +207,13 @@ class ChainedMap extends Chainable {
       const value = obj[key]
       if (value === undefined) return acc
       if (Array.isArray(value) && !value.length) return acc
-      if (Object.prototype.toString.call(value) === '[object Object]' && !Object.keys(value).length)
+      if (Object.prototype.toString.call(value) === '[object Object]' &&
+          Object.keys(value).length === 0) {
         return acc
+      }
+      
       acc[key] = value
+
       return acc
     }, {})
   }

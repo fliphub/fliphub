@@ -1,5 +1,0 @@
-{
-  "eh": [
-    "some values"
-  ]
-}

@@ -18,6 +18,72 @@ class Timer {
     this.laps = {}
     this.index = 0
     this.microtime = microtime
+    this.tillNow = this.tillNow.bind(this)
+    this.tillNowSatisfies = this.tillNowSatisfies.bind(this)
+  }
+
+  parse(time) {
+    const parse = require('./parse')
+    const parsed = parse(time * 1000)
+    return parsed
+  }
+
+  /**
+   * @param  {number} time microseconds
+   * @return {Object} {ms, s, m, h, d, y}
+   */
+  tillNow(time) {
+    const now = Date.now()
+    const then = time
+
+    // @TODO just /, then / by diff
+    const inSec = require('date-fns/difference_in_seconds')
+    const inMin = require('date-fns/difference_in_minutes')
+    const inHours = require('date-fns/difference_in_hours')
+    const inDays = require('date-fns/difference_in_days')
+    const inYears = require('date-fns/difference_in_years')
+
+    return {
+      ms: now - then,
+      s: inSec(now, then),
+      m: inMin(now, then),
+      h: inHours(now, then),
+      d: inDays(now, then),
+      y: inYears(now, then),
+    }
+  }
+
+  /**
+   * check if a time diff matches a specificiation
+   * @param  {number | Diff} time
+   * @param  {Object} specificiation
+   * @return {boolean}
+   */
+  tillNowSatisfies(time, specificiation) {
+    // use object or string
+    let till
+    if (typeof time === 'object') till = time
+    else till = this.tillNow(time)
+
+    // get data with longhand usage
+    let {hours, days, minutes, seconds, years} = specificiation
+
+    // shorthand usage
+    const {h, d, m, s, y} = specificiation
+    if (h) hours = h
+    if (d) days = d
+    if (m) minutes = m
+    if (s) seconds = s
+    if (y) years = y
+
+    // check diffs
+    if (hours) return till.h >= hours
+    if (days) return till.d >= days
+    if (minutes) return till.m >= minutes
+    if (seconds) return till.s >= seconds
+    if (years) return till.s >= years
+
+    return false
   }
 
   start(name = null) {

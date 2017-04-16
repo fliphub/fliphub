@@ -1,0 +1,38 @@
+// from https://github.com/zeit/ms/blob/master/index.js
+// needs to be ms first
+// if (typeof time === 'string') then use time by name?
+// obj(ms) {
+//   var s = 1000
+//   var m = s * 60
+//   var h = m * 60
+//   var d = h * 24
+//   var y = d * 365.25
+//
+//   return {
+//     ms,
+//     s: time / s,
+//     m: time / m,
+//     h: time / h,
+//     y: time / y,
+//     d: time / d,
+//   }
+// }
+
+
+// const nowMs = Date.now()
+// const now = this.parse(nowMs)
+// const then = this.parse(time)
+//
+// const diff = this.parse((nowMs - time) * 1000)
+// console.log({diff})
+// return diff
+// console.log({now, then})
+//
+// return {
+//   ms: now.ms - then.ms,
+//   s: now.s - then.s,
+//   m: now.m - then.m,
+//   h: now.h - then.h,
+//   // y: now.y - then.y,
+//   d: now.d - then.d,
+// }

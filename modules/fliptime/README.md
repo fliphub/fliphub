@@ -1,9 +1,9 @@
 # ⛓⏲ fliptime
 
-
 [![NPM version][fliptime-image]][fliptime-url]
 [![MIT License][license-image]][license-url]
 [![fliphub][gitter-badge]][gitter-url]
+
 [fliptime-image]: https://img.shields.io/npm/v/fliptime.svg
 [fliptime-url]: https://npmjs.org/package/fliptime
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
@@ -11,7 +11,7 @@
 [gitter-badge]: https://img.shields.io/gitter/room/fliphub/pink.svg
 [gitter-url]: https://gitter.im/fliphub/Lobby
 
-> fluent timer with laps, microtime + parsing, multiple timers, (fallback to performance & Date)
+> fluent timer with laps, microtime + parsing, multiple timers, (fallback to performance & Date), shorthand diffs & specifications
 
 ## usage
 ```bash
@@ -81,6 +81,41 @@ timer.stop('eh')
 const microseconds = timer.took('eh')
 const ms = timer.msTook('eh')
 const parsed = timer.parsedTook()
+```
+
+### ⚖️ tillNow
+
+diff for each: milliseconds, seconds, minutes, hours, days, years.
+
+
+```js
+const now = Date.now()
+sleepfor(60000)
+const {ms, s, m, h, d, y} = timer.tillNow(now)
+
+// ms === 60000
+// s === 60
+// m === 1
+// h === 0
+// d === 0
+// y === 0
+
+
+```
+
+### ⚖️ tillNowSatisfies
+
+check that the difference is `equal or greater than` specification.
+
+```js
+const then = Date.now()
+sleepfor(60000)
+
+// seconds, hours, minutes, days, years...
+// or shorthand: s, h, m, d, y
+//
+// true: >= 60 seconds
+const satisfies = timer.tillNowSatisfies(then, {seconds: 60})
 ```
 
 ### 🏊 additional

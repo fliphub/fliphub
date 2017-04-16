@@ -1,5 +1,5 @@
 const test = require('ava')
-const fosho = require('fosho')
+const {fosho, log} = require('fosho')
 const sleepfor = require('sleepfor')
 const timer = require('../')
 
@@ -57,4 +57,27 @@ test('laps', async t => {
   await done
   timer.logLaps('canada')
   fosho(timer.msTook('canada', true), t).isAbove(9000)
+})
+
+
+test('tilNow', t => {
+  const now = Date.now()
+
+  // const obj = timer.parse(now)
+  sleepfor(1000)
+  const diff = timer.tillNow(now)
+
+  fosho(diff.s, t).num()
+  fosho(diff.h, t).num()
+  fosho(diff.m, t).num()
+  fosho(diff.d, t).num()
+  t.true(diff.ms >= 1000)
+  // fosho(diff.ms, t).between(900, 1100)
+  t.pass()
+})
+
+test('tillNowSatisfies', t => {
+  const now = Date.now()
+  sleepfor(1000)
+  t.true(timer.tillNowSatisfies(now, {seconds: 1}))
 })

@@ -59,6 +59,7 @@ module.exports = function parse(nano) {
   var mm = ss / 60
   var hh = mm / 60
   var dd = hh / 24
+  // var yy = dd / 365.25
 
   var microseconds = Math.round((ms % 1) * 1000)
   var milliseconds = Math.floor(ms % 1000)
@@ -66,6 +67,23 @@ module.exports = function parse(nano) {
   var minutes = Math.floor(mm % 60)
   var hours = Math.floor(hh % 24)
   var days = Math.floor(dd)
+  // var years = Math.floor(yy)
 
-  return {microseconds, milliseconds, seconds, minutes, hours, days, toString}
+  return {
+    microseconds,
+    micro: microseconds,
+    milliseconds,
+    ms: milliseconds,
+    seconds,
+    s: seconds,
+    minutes,
+    m: minutes,
+    hours,
+    h: hours,
+    days,
+    d: days,
+    // years,
+    // y: years,
+    toString,
+  }
 }

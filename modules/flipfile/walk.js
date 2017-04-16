@@ -1,5 +1,6 @@
 var fs = require('fs')
 
+// https://www.npmjs.com/package/walk
 module.exports = function walk(dir, options) {
   var defaults = {
     recursive: true,
@@ -7,7 +8,7 @@ module.exports = function walk(dir, options) {
   options = Object.assign(defaults, options)
   var results = []
   var list = fs.readdirSync(dir)
-  list.forEach(function(file) {
+  list.forEach((file) => {
     file = dir + '/' + file
     var stat = fs.statSync(file)
 

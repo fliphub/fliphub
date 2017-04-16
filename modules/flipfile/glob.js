@@ -1,1 +1,1 @@
-module.exports = require('glob-fs')
+module.exports = require('glob')

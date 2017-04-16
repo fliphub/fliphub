@@ -27,7 +27,7 @@ const flipfile = require('flipfile')
 ```
 
 
-## api (everything is synchronous)
+## 🌐 api (everything is synchronous)
 
 - getFileAndPath `(file: stringPath) => {file: string, dir: string}`
 - getDirectories `(src: string, blacklist: Array<string>) => array<string>`
@@ -42,7 +42,7 @@ const flipfile = require('flipfile')
 - isFileOrDir `(file: stringPath) => bool`
 - walk `(dir: stringPath, {recursive: true}) => Array<string | Array<Array<string>>`
 - [mkdirp](https://www.npmjs.com/package/mkdirp)
-
+- [node-path-extras exports](https://www.npmjs.com/package/node-path-extras)
 
 ## size
 
@@ -72,14 +72,16 @@ additionally there are 3 files not exported in the index
 - or if you prefer destructuring, from `flipfile/all`
   - exports everything in [#api](#api) alongside these additional ones
   - exports a flattened `path` module
-- [glob](https://www.npmjs.com/package/glob-fs)
+- [glob](https://www.npmjs.com/package/glob)
   - `require('flipfile/glob')`
 - [extra](https://www.npmjs.com/package/fs-extra)
   - `require('flipfile/extra')`
   - @NOTE: everything in `extra` is exported flat as well
 - [promise](https://www.npmjs.com/package/fs-promise)     
   - `require('flipfile/glob')`
-  - @NOTE: fs-promise is a dependency, so it will check if it's installed and if not, export is an empty object
+  - @NOTE:
+    - [fs-promise](https://www.npmjs.com/package/fs-promise) is not a dependency, so it will check if it's installed and if not, export is an empty object
+    - [glob-fs](https://www.npmjs.com/package/glob-fs) got 💩 depreciated in favor of [node-glob](https://www.npmjs.com/package/glob)
 
 ```js
 const {
@@ -108,9 +110,9 @@ if (exists(src)) {
 
 -------
 
-### TODO:
+### 📝 TODO:
 
-#### chain:
+#### ⛓ chain:
 
 ```js
 const flipfile = require('flipfile')

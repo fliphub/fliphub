@@ -12,3 +12,6 @@ https://github.com/danethurber/webpack-manifest-plugin
 https://github.com/danethurber/webpack-manifest-plugin/tree/master/spec
 https://webpack.js.org/guides/code-splitting-libraries/#manifest-file
 https://medium.com/connect-the-dots/caching-assets-long-term-with-webpack-5ad24a4c39bd#.58yunf3an
+
+http://www.developersite.org/101-35917-webpack
+https://github.com/shlomiassaf/webpack-dll-bundles-plugin

@@ -8,3 +8,4 @@ https://github.com/kriskowal/uncommonjs/blob/master/tests/specification.md
 https://shouldjs.github.io/
 https://github.com/dareid/chakram/
 https://github.com/visionmedia/supertest
+https://github.com/avajs/ava/issues/185

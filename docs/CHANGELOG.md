@@ -1,10 +1,105 @@
 # 🔈 changelog 🔈
 
+# part 76 - apr 16 17
+
+- 🔬👕 ava eslint rules, ⚗ experiment with prettier max len
+
+- 🙃📒 flipfile
+  - ⚗⚖️ benchmark experiment with globs switch glob-fs to node-glob, fast glob is not really much better
+  - 📦⬆📦⬇ swapped glob-fs for node-glob
+  - 📖💩 updated readme for glob depreciation
+
+- 📦🙃 depflip & 🔎🎯 flipfind
+  - 🐴📦⬆ temp added glob-fs until converted
+  - 🔗 update links
+
+- ⚡🤸 d-l-l
+  - 🔊 better debugging
+
+- 🛁📘 clean an example artifact log
+
+# part 75 - apr 15 17
+
+- ⚡🤸 d-l-l
+  - 🆕 created
+  - ⚗🤸 experiment with dll plugin
+  - 🏷 setup repo & publish
+  - 💚 add travis config
+  - 🔬 add ~tests~ that just run build scripts in front & back end examples
+  - 🌐📚 solid api docs
+  - 📖📘📚️ readme, examples, docs
+  - 🔗 add links
+  - 🎁 all api functionality listed as of this wiki commit https://github.com/fliphub/d-l-l/wiki/%F0%9F%8C%90-api/0f696aa29d121d10670e80307fe663a634fffbb9
+  - 📘 adding frontend example
+  - 📘 adding node example
+  - 📅📝 plan todos
+  - ⛓💸 flipcache goodness
+  - ℹ️ jsdocs
+  - 🎁 all functionality found in docs
+
+- 🚩 flipflag
+  - 📦⬇ remove yargs
+  - 📦⬇ move around deps
+
+- 😊 emoji commits
+  - ⎁, 🗝️, ▶️◀️👾, 🤸🍰, ✚😊
+  - ▶️◀️👾 combine & simplify some sections
+  - 🤸🍰 split out presets to make it easier to search
+  - 🔗🎃 hrefs for helpful tips n tricks
+  - ✚ add 😊😊😊 -- 📶⛰💯🕵🗜🐉✍👓⚾⭐🚁🆑💤😊🥕🚱⛏🎁🆕🆙🚓🚔📑👽🦐
+  - https://github.com/aretecode/emoji-commits/commit/4ba448956a3401e0cbae60003f762e28a61bc33f
+
+
+# part 74 - apr 14 17
+- 🔬⚗ code coverage experiment
+- 🛁📜 better cleaning script
+- ⚗🤸 experiment with dll plugin add links
+
+- 📚 docs
+  - 🆕 start lint.md
+  - 🆕 start editor.md
+  - 🌐 add api to md-template
+
+- ⛓💸 flipcache 🎁📒ℹ️️
+  - 🎁📒ℹ️️ add File.info
+  - 🎁📒ℹ️️ add File.lastModified
+
+- ⛓⏲ fliptime 🎁📖📘
+  - 🎁 added .tillNow
+  - 📖📘 added docs for tillNow
+  - 🎁 added .tillNowSatisfies
+  - 📖📘 added docs for .tillNowSatisfies
+
+- 💯fosho - 🎁 added .between
+
+@TODO:
+  - [ ] add flip-ts to flip js to ts, and ts to js (would convert, then run autofixing lint and prettier)
+  - [ ] should add flippath to be pathmaster, have File, flipfile, flipcache, fliphub resolve etc, optimized, usable everywhere
+  - [ ] .whenFlag(flagNames, cb)
+  - [x] dev server
+    - [x] neutrino devserver
+    - [ ] express dev server
+    - [ ] more verbose devserver output, use ops
+  - decorate each of the commands with `-p`, `-d` and `-l` for logging and envs
+  - [ ] build a chrome only bundle and a compat bundle
+
+
+
+
+
+
+
+---------
+---------
+---------
+
 # part 73 - apr 13 17
 - ⚒📖💚🔬 minor fixes 📚
   - ⚒📖💚 fix travis link in readme
   - ⚒🔬 minor fix for running tests for flipcache
   - 📚 docs - add vid link, graphs & routing links
+- ⏲💚🔬📒 debugging travis file existing timing
+- 🍰 add commented out code for PresetAssetGraph todo
 
 # part 72 - apr 12 17
 
@@ -31,7 +126,7 @@
   - ⛑🔬🐦 safety in test mocks for changing content
 - 🙃# fliphash 🆕🔬📖
   - 🆕📖🔬 create, docs, tests, publish
-- 🔎 🎯 flipfind ⛑
+- 🔎🎯 flipfind ⛑
   - ⛑ add safety to globbing as it can throw an lstat error when reading & writing in multiple processes
 - ⏲ fliptime
   - ⛑ safety, fallback to performance.now and Date
@@ -59,14 +154,6 @@
 - 💠💗 fliphub-core
   - 🍰 add .getConfigured for Presets if needing to call some presets at different times
 
-@TODO:
-  - [ ] .whenFlag(flagNames, cb)
-  - [x] dev server
-    - [x] neutrino devserver
-    - [ ] express dev server
-    - [ ] more verbose devserver output, use ops
-  - decorate each of the commands with `-p`, `-d` and `-l` for logging and envs
-  - [ ] build a chrome only bundle and a compat bundle
 
 # part 71 - apr 11 17
 - 📦🙃 depflip

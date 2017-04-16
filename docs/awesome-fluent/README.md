@@ -17,3 +17,6 @@ http://thejsguy.com/2016/01/05/improve-code-readability-in-javascript-with-fluen
 https://modernweb.com/fluent-apis-and-method-chaining/
 https://www.smashingmagazine.com/2012/10/designing-javascript-apis-usability/
 https://en.wikipedia.org/wiki/Fluent_interface
+
+
+http://stackoverflow.com/questions/29228064/why-can-array-prototype-foreach-not-be-chained

@@ -25,3 +25,19 @@ const izz = require('izz')
 ```
 
 ## 📘 examples
+
+
+
+## 🌐 api
+
+### `fn`
+
+#### arguments
+- name
+  - type: `type`
+  - default: `value`
+  - info: > ...
+
+#### returns
+#### since
+#### example

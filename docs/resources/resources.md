@@ -33,3 +33,6 @@ https://www.npmjs.com/package/commit-cli
 https://www.npmjs.com/package/gendiff-cli
 https://sugarjs.com/docs/
 https://www.npmjs.com/package/fuzzy
+https://www.npmjs.com/package/verror
+https://www.npmjs.com/package/xregexp
+https://www.npmjs.com/package/mout

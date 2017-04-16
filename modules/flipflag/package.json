@@ -1,6 +1,6 @@
 {
   "name": "flipflag",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "main": "index.js",
   "description": "cli flags with aliases, from argv, env, globals, --env.flags, callbacks, preserves casing",
   "scripts": {
@@ -11,18 +11,17 @@
     "flags",
     "argv",
     "env",
-    "globals"
+    "globals",
+    "node"
   ],
-  "engines": {
-    "node": ">= 7.7.2",
-    "npm": ">= 4.1.2"
+  "optionalDependencies": {
+    "yargs": "^6.6.0"
   },
   "devDependencies": {
-    "yargs": "^6.6.0"
+    "fliptime": "*"
   },
   "dependencies": {
     "minimalist": "^1.0.0",
-    "fliptime": "*",
     "izz": "*"
   },
   "author": "James <aretecode@gmail.com>",

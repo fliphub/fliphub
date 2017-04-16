@@ -232,7 +232,7 @@ class Finder {
     if (rel.includes('./')) rel = rel.replace('./', '')
 
     const glob = `**/${rel}*`
-    const globfs = require('flipfile/glob')()
+    const globfs = require('glob-fs')()
     let globs = []
 
     function globToAbs(file) {

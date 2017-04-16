@@ -14,14 +14,15 @@
     "clear-require": "^2.0.0",
     "depcheck": "*",
     "escape-string-regexp": "^1.0.5",
-    "flipfile": "*",
+    "flipfile": "0.0.11",
     "flipflag": "*",
     "fliplog": "^0.1.26",
     "fliptime": "^1.0.0",
     "regexes": "*",
     "require-uncached": "^1.0.3",
     "resolve-from": "^2.0.0",
-    "to-arr": "0.0.2"
+    "to-arr": "0.0.2",
+    "glob-fs": "*"
   },
   "homepage": "https://github.com/flip-box/fliphub#readme",
   "repository": {

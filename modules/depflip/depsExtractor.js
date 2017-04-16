@@ -3,6 +3,9 @@ const timer = require('fliptime')
 const read = flipfile.read
 const isRel = flipfile.isRel
 
+// https://github.com/depcheck/depcheck/blob/master/src/parser/jsx.js#L7 haha
+// https://github.com/depcheck/depcheck/blob/master/src/parser/typescript.js
+// https://www.npmjs.com/package/deps-regex !!!
 // https://github.com/fuse-box/fuse-box/blob/2.0/src/analysis/plugins/ImportDeclaration.ts
 function makeReqStr(matches) {
   let str = `` +
@@ -49,7 +52,7 @@ class DepsExtractor {
 
   usingGlob(glob, excludes = [/node_modules/]) {
     timer.start('glob')
-    let globfs = require('flipfile/glob')()
+    let globfs = require('glob-fs')()
     function ignore(file) {
       for (let i in excludes)
         if (excludes[i].test(file.path)) file.exclude = true

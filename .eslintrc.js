@@ -2,17 +2,17 @@ module.exports = {
   parser: 'babel-eslint',
   // parser: 'typescript-eslint-parser',
   extends: 'aretecode',
-  // plugins: [
-  //   'typescript',
-  // ],
+  plugins: [
+    'ava',
+    // 'typescript',
+  ],
   ext: ['.ts', '.js'],
   globals: {
-    '$FlipBox': true,
-    'asNeeded': true,
-    'webpack': true,
-    'fusebox': true,
-    'FlipValidationError': true,
-    'inspectorGadget': true,
+    asNeeded: true,
+    webpack: true,
+    fusebox: true,
+    FlipValidationError: true,
+    inspectorGadget: true,
   },
   rules: {
     'require-jsdoc': 0,
@@ -25,7 +25,7 @@ module.exports = {
     'brace-style': 0,
     'prefer-template': 0,
     'global-require': 0,
-    "flowtype/require-parameter-type": 0,
+    'flowtype/require-parameter-type': 0,
     'prefer-const': 0,
     'no-undefined': 0,
     'prefer-spread': 0,
@@ -35,5 +35,40 @@ module.exports = {
     'no-bitwise': 0,
     'no-return-assign': 0,
     'no-var': 0,
-  }
+
+    // on node only...
+    'import/no-dynamic-require': 'warn',
+
+    // because prettier...
+    // 'max-len': ['warn', {code: 60}],
+
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "never",
+    }],
+
+    'ava/assertion-arguments': 'error',
+    'ava/no-async-fn-without-await': 'error',
+    'ava/no-cb-test': 'error',
+    'ava/no-duplicate-modifiers': 'error',
+    'ava/no-identical-title': 'error',
+    'ava/no-ignored-test-files': 'error',
+    'ava/no-invalid-end': 'error',
+    'ava/no-nested-tests': 'error',
+    'ava/no-only-test': 'error',
+    'ava/no-skip-assert': 'error',
+    'ava/no-skip-test': 'error',
+    'ava/no-statement-after-end': 'error',
+    'ava/no-todo-implementation': 'error',
+    'ava/no-todo-test': 'warn',
+    'ava/no-unknown-modifiers': 'error',
+    'ava/prefer-async-await': 'error',
+    'ava/prefer-power-assert': 'off',
+    'ava/test-ended': 'error',
+    'ava/test-title': ['error', 'if-multiple'],
+    'ava/use-test': 'error',
+  },
 }

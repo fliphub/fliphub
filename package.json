@@ -4,10 +4,43 @@
   "description": "the builder of builders",
   "main": "src/index.js",
   "scripts": {
-    "test": "lerna exec -- npm run test",
-    "clean": "rm -rf node_modules && lerna exec -- rm -rf node_modules",
+    "_test": "lerna exec -- nyc --reporter=lcov --reporter=text-lcov npm run test",
+    "test": "lerna exec -- nyc --reporter=json npm run test",
+    "clean": "lerna exec -- rimraf coverage && lerna exec -- rimraf .nyc_output",
+    "uninstall": "rm -rf node_modules && lerna exec -- rm -rf node_modules",
     "postinstall": "lerna bootstrap --concurrency=1 --loglevel=verbose"
   },
+  "fliplog": {
+    "todo": "",
+    "presets": [
+      "light/production",
+      "fun",
+      "debugging"
+    ],
+    "use": [
+      "verbose",
+      "color",
+      "xterm",
+      "chalk",
+
+      "timer",
+      "spinner", "ora",
+      "multi-spinner",
+      "box",
+      "sparkly",
+      "beep",
+      "highlight",
+      "!for-blacklist-instead-of-white",
+      "table", "diff",
+      "track", "trace",
+      "json", "stringify",
+      "sleep", "tosource",
+
+      "register", "file",
+      "story"
+    ]
+  },
+
   "directories": {
     "fliphub": "packages/fliphub",
     "cli": "packages/fliphub-cli",
@@ -43,12 +76,15 @@
     "oao": "^0.7.3"
   },
   "devDependencies": {
-    "eslint": "^3.16.1",
     "babel-eslint": "^7.2.0",
+    "eslint": "^3.16.1",
     "eslint-config-aretecode": "1.0.4-alpha.17585ee1",
+    "eslint-plugin-ava": "^4.2.0",
     "flow-bin": "^0.42.0",
     "flowtype": "^2.0.0",
-    "lerna": "2.0.0-beta.38"
+    "lerna": "2.0.0-beta.38",
+    "nyc": "^10.2.0",
+    "webpack": "2.3.3"
   },
   "keywords": [
     "builder",

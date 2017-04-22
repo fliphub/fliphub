@@ -75,11 +75,12 @@ test('can use apps with no real config and inherit reusable configs', (t) => {
     },
   })
 
+  // log.quick(flips.toConfig())
   // does not flip webpack though...
   flips.toConfig().forEach(app => {
     fosho(app.entry, t).aight()
     fosho(app.entry, t).aight()
-    fosho(Object.keys(app).length, t).eq(2)
+    fosho(Object.keys(app).length, t).eq(3)
   })
   t.pass()
   // t.fail('needs to have optional entry')

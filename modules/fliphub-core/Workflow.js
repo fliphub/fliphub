@@ -27,6 +27,7 @@ class Workflow {
 
     // @TODO: flush this out
     this.contextType = 'app'
+    this.contextTypes = 'apps'
 
     // or should we set a filter, and use that and do `getContexts` ?
     // unfiltered? if we want to filter some per app :s ?

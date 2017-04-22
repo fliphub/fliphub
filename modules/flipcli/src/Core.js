@@ -22,14 +22,10 @@ const Choice = require('./Choice')
  *
  */
 class Core extends ChainedMap {
-  // command
-  // option
-  // action
   // alias (I can alias flags myself), parse minimist, change vals
   // [ ] /light.js in fam & flags
-  //
-  // delimiter
-  // show
+
+  // --- setup ---
 
   static program(...args) {
     return Core.init().program(...args)
@@ -55,6 +51,8 @@ class Core extends ChainedMap {
     this.alias = this.parent.alias.bind(this.parent)
     this.action = this.parent.action.bind(this.parent)
   }
+
+  // --- program ---
 
   program(...args) {
     return new Program(this).program(...args)

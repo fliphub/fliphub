@@ -1,4 +1,5 @@
-const HTMLs = require('./index')
+const log = require('fliplog')
+const {HTMLs, $} = require('./index')
 
 const htmls = new HTMLs()
 
@@ -7,7 +8,8 @@ htmls
     .assets(['assets'])
     .html(['html-files'])
   .add('app2')
-    .gom($)
-    .head()
+    .head({}, [$('link', {}, 'theweb')])
+      .script({}, 'eh')
     .body()
-  .run()
+
+log.quick(htmls)

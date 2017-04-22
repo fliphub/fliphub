@@ -100,6 +100,10 @@ class Neutrino extends EventEmitter {
     return new Promise((resolve) => {
       const starting = ora('Starting development server').start()
       const config = this.getWebpackOptions()
+
+      // safety
+      if (!config.devServer) config.devServer = {}
+
       const protocol = config.devServer.https ? 'https' : 'http'
       const host = config.devServer.host || 'localhost'
       const port = config.devServer.port || 5000

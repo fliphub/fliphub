@@ -1,5 +1,5 @@
 const test = require('ava')
-const fosho = require('fosho')
+const {fosho, log} = require('fosho')
 const {ScriptFlip} = require('../src')
 
 // https://github.com/npm/npm/issues/3494
@@ -33,8 +33,9 @@ test('scriptflip creates expected result', (t) => {
     .arg('-e')
 
   const cmd = scripts.toCmd()
-  const env = Object.create(process.env)
+  const env = {}
   env.NODE_ENV = 'magic'
+  env.PATH = process.env.PATH
 
   const expected = [
     {
@@ -50,7 +51,30 @@ test('scriptflip creates expected result', (t) => {
     },
   ]
 
-  fosho(cmd.pop(), t).deepEqual(expected.pop())
+  const actual = cmd.pop()
+  const expect = expected.pop()
+
+  t.deepEqual(actual.bin, expect.bin)
+  t.deepEqual(actual.args, expect.args)
+
+  // this fails when using Object.create!
+  t.deepEqual(actual.env, expect.env)
+  t.deepEqual(actual.env.NODE_ENV, expect.env.NODE_ENV)
+  t.deepEqual(actual.env.PATH, expect.env.PATH)
+  t.deepEqual(Object.keys(actual.env), Object.keys(expect.env))
+  t.deepEqual(Object.values(actual.env), Object.values(expect.env))
+  t.deepEqual(Object.keys(actual.bin), Object.keys(expect.bin))
+
+  // log.quick(
+  //  Object.keys(actual.env),
+  //  Object.keys(expect.env),
+  //  Object.values(actual.env),
+  //  Object.values(expect.env)
+  //  )
+  // log.quick(actual, expect)
+  // t.deepEqual(actual, expect)
+  // t.deepEqual(actual, expect)
+  // t.true(Object.is(actual, expect))
 })
 
 test.skip('something else', (t) => {

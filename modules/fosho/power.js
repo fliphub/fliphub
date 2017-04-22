@@ -123,6 +123,11 @@ class Assert {
     this.isFileOrDir = () =>
       ass.true(isFileOrDir(_obj), m(_obj, OFF, 'isFileOrDir'))
 
+    this.aintAbs = () => ass.true(!isAbs(_obj), m(_obj, OFF, '!isAbs'))
+    this.aintRel = () => ass.true(!isRel(_obj), m(_obj, OFF, '!isRel'))
+    this.aintFile = () => ass.true(!isFile(_obj), m(_obj, OFF, '!isFile'))
+    this.aintExists = () => ass.true(!isFile(_obj), m(_obj, OFF, '!isFile'))
+
     return this
   }
 }

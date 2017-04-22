@@ -1,6 +1,6 @@
 {
   "name": "fliphelp",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "dependencies": {
     "estraverse": "^4.2.0",

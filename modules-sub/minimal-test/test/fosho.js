@@ -7,22 +7,22 @@ class Workflow {}
 
 // https://www.youtube.com/watch?v=d_XVVCVHGlQ&feature=youtu.be&t=9s
 test('fosho', (t) => {
-  fosho('eh')
+  fosho('eh', t)
     .isReal()
     .isStr()
     .str()
     .aintFunction()
 
-  fosho('nice boulder')
+  fosho('nice boulder', t)
     .str()
     .findString('nice')
     .findString('boulder')
 
-  fosho(['one'])
+  fosho(['one'], t)
     .lengthOf(1)
     .typeOf('array')
 
-  fosho(1)
+  fosho(1, t)
     .isAbove(0)
     .isBelow(2)
     .above(-1)
@@ -30,35 +30,33 @@ test('fosho', (t) => {
   t.pass()
 })
 
-test('fosho not a nice boulder...', (t) => {
-  t.throws(() => {
-    fosho({niceBoulder: true})
-      .isReal()
-      .isObj()
-      .instanceOf(Workflow)
-  })
+test.failing('fosho not a nice boulder...', (t) => {
+  fosho({niceBoulder: true})
+    .isReal()
+    .obj()
+    .instanceOf(Workflow)
 })
 
 test('plan fosho', (t) => {
   t.plan(2)
   fosho({niceBoulder: true}, t)
     .isReal()
-    .isObj()
+    .obj()
 })
 
 test('fns', (t) => {
   const fnb = () => {}
   function func() {}
 
-  fosho(fnb)
+  fosho(fnb, t)
     .fn()
     .aintBindable()
-  fosho(func)
+  fosho(func, t)
     .isFunction()
     .bindable()
     .all(['function', 'bindable'])
 
-  fosho(fnb)
+  fosho(fnb, t)
     .fn()
     .aintInstanceOf(Workflow)
   t.pass()

@@ -417,6 +417,17 @@ uses:
 
 [deep-replace][deep-replace]
 
+# 🙃# fliphash
+
+
+[![NPM version][fliphash-npm-image]][fliphash-npm-url]
+
+[fliphash-npm-image]: https://img.shields.io/npm/v/fliphash.svg
+[fliphash-npm-url]: https://npmjs.org/package/fliphash
+
+> simple blazing-fast short string-to-number hasher
+
+
 ## fliphub-helpers
 [fliphub-helpers][fliphub-helpers]
 
@@ -441,6 +452,14 @@ uses:
 # (need images, descriptions here, etc)
 
 ## depflip
+
+[![NPM version][depflip-npm-image]][depflip-npm-url]
+
+[depflip-npm-image]: https://img.shields.io/npm/v/depflip.svg
+[depflip-npm-url]: https://npmjs.org/package/depflip
+
+> finding, extracting, checking, & installing dependencies
+
 [depflip][depflip]
 
 ## fliphelp

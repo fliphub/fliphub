@@ -1,5 +1,235 @@
 # 🔈 changelog 🔈
 
+# part 73 - apr 13 17
+- ⚒📖💚🔬 minor fixes 📚
+  - ⚒📖💚 fix travis link in readme
+  - ⚒🔬 minor fix for running tests for flipcache
+  - 📚 docs - add vid link, graphs & routing links
+
+# part 72 - apr 12 17
+
+- ⛓🔈 fliplog 🎁®️🚩⚾  📚📘  ⚡🦐
+  - 🎁 add .registerConsole
+  - 🎁⚾ add .registerCatch
+  - 📒 start .toFile
+  - 🚩 handle flags to debug all debugging
+  - 📚 add docs in readme for the flag
+  - 📚 add docs in readme for .registerCatch & .registerConsole
+  - 📘 add examples in readme for .registerCatch & .registerConsole & flag
+  - ⚡🦐 adjust more imports
+  - 🌀⌨️⚒ fix spinner frame type check, check Array not string
+- ⛓💸 flipcache
+  - 🚮🐦 clean mocks after test
+  - 🔬 re-enable all tests
+  - ⛑ safety for non-existing-file in detached
+  - 🎁 add .hashcache -> Cache
+    - ℹ️️ jsdocs
+    - 🎁 .hash, .staleTimeout, .debug, .hashChanged, .isStale, .canBeUsed, .bustIfNeeded, .setContent, .bustOnChange, .bust, .onBusted
+    - 🔬 test basic .canBeUsed with consistent and random content
+    - 🔬📝 test todos for other functionality
+  - ⚒🔬 fix issue where tests are runningin multiple threads, running and coming back, adjust timeout, improve checks, add debug
+  - ⛑🔬🐦 safety in test mocks for changing content
+- 🙃# fliphash 🆕🔬📖
+  - 🆕📖🔬 create, docs, tests, publish
+- 🔎 🎯 flipfind ⛑
+  - ⛑ add safety to globbing as it can throw an lstat error when reading & writing in multiple processes
+- ⏲ fliptime
+  - ⛑ safety, fallback to performance.now and Date
+
+- 📚 docs
+  - ✚ add symlinks and exports
+  - ✚ add more to sourcemaps, css, webpack, community
+  - ✚ start improving awesome-fluent
+
+- 🏗💠 fliphub
+  - 🤾 devServer sticky multi spinner link with animation
+  - ⚒☕ fixing filtering
+  - 📦⬆🗼🏋️🏗 adding babel-loader builder
+  - 🎁🍰 add PresetDefine
+  - 🎁🍰 adding presets for inferno and react in babel & web
+  - 🎁🍰 preset Alias works for preset require + preset resolve
+  - ⚒🏹 fix aliasing, add option to resolving for force resolving if it thinks it is an absolute path
+  - ⚒🍰📑 fix PresetHTML not returning plugin for webpack
+  - 🤢 had to add preset looping .preDecorate
+  - copy old compile op for webpack for more debugging later
+  - big webpack chain fix for plugins and calling neutrino dependent plugins
+  - docs on ops
+  - adding fliphash and flipcache to estimate duration and hydrateFromCache
+
+- 💠💗 fliphub-core
+  - 🍰 add .getConfigured for Presets if needing to call some presets at different times
+
+@TODO:
+  - [ ] .whenFlag(flagNames, cb)
+  - [x] dev server
+    - [x] neutrino devserver
+    - [ ] express dev server
+    - [ ] more verbose devserver output, use ops
+  - decorate each of the commands with `-p`, `-d` and `-l` for logging and envs
+  - [ ] build a chrome only bundle and a compat bundle
+
+# part 71 - apr 11 17
+- 📦🙃 depflip
+  - ⚡ use require.resolve instead of requiring
+  - ☕🏴🏳️ add .ignore and .only flags
+- 📦 hoist dependencies
+- 🔬 unify ava version, update minimal test example
+- ⛓ flipchain
+  - 🆙 update mergeReal with existing if values are the same
+- 🏗💠 fliphub
+  - 🆙 update debug config so it does not go to bundler
+  - 🆙 have debug override default debug filter
+  - 🎁 add devServer op
+  - 🎁 add 🙃🛳 flipport
+  - ⚒ fix array entry point https://github.com/fliphub/fliphub/issues/65
+  - 🆕 start PresetAlias
+  - 🎁🍰 add PresetCopy
+  - 🎁🍰📑 add PresetHTML just for webpack for now
+- ⛓🍯 flipglob
+  - ⚒ fix the scoping when there are no packages
+- ⛓🔈 fliplog 📖 & 🎁 🌀🌀🌀 & ⚡& 🎨🌀
+  - 🌀🌀🌀 multispinner: .addSpinner .removeSpinner .startSpinners .stopSpinners https://github.com/fliphub/fliplog/issues/2#issuecomment-293445710
+  - 📖🎨🌀 colored spinners + docs
+  - 📖🌀🌀🌀 docs for multi spinner
+  - 📖⚡ docs for performance
+
+
+-----
+
+# part 70 - apr 10 17
+
+- ✍
+  - https://twitter.com/aretecode/status/851344090033602560 post on package name for flip and fliphub
+  - update gitter integrations
+
+- ⛓🖥 flipcli 🎁☮️🆙
+  - 🆕🎁 starting auto-cli-to-interactive-presets
+  - 🆙 add more missing from vorpal: .types, .hidden, .cancel, added comments
+  - ☮️ .message aliased as .description in Question for compatibility with vorpal
+  - ✅ have basic cli-to-interactive working
+  - 🆙 continuing cli presets
+- 💯 fosho 📝
+  - 📝 assertion writing todo https://github.com/fliphub/fliphub/issues/62
+- 📚 docs ✚ added good/bad in webpack
+  - https://img.shields.io/badge/%E2%9B%93-fluent-9659F7.svg?style=flat-square fluent badge
+- ⛓ flipchain 📖🌊
+  - 📖🌊 rock skipping analogy https://github.com/fliphub/fliphub/issues/61
+- 🙃🍑 fliphtml 📦⬆⛓🕸🛅🤾  📖
+  - 📦⬆⛓ add missing flipchain dep
+  - 📦⬆🕸🛅🤾 add webpack server and history dep
+  - 📖 add intro readme with 🚧🚧🚧
+- 📘 examples 📦⬆🔖
+  - 📦⬆🔖 update fliphub version
+- ⛓💸 flipcache 📖👽
+  - 👽 export more deps
+  - 📖👽 exports in docs
+- 🙃📒 flipfile 📦⬆
+  - 📦⬆ add node-path-extras
+- 🕳 deep-replace ⚒ fix missing files in pkgjson
+- 📦🙃 depflip 🖥📖 📧
+  - 🖥 add a bin to install dev deps
+  - 🖥 cli for deps extractor
+  - 📖 docs
+  - 📧 emailing npm about dynamic installs
+
+---
+
+# part 69 - apr 9 17
+
+- 🔥🖥 fliphub-inferno-cli 🔋🆙🍰
+  - 🆙⛓🖥 using latest flipcli
+  - 🔋🆙🍰 converting adding presets
+  - 🔋🆙 converting tests
+  - 🔋🆙 converting script building
+  - 🔋🆙 converting from commander to vorpal with flipcli
+- ⛓🖥 flipcli 📦⬆🕵🗜  ℹ️🎁
+  - 🎁 add .separator
+  - 🎁 add .hide
+  - 🎁 add .history
+  - 🎁 add .localStorage
+  - ℹ️️ jsdocs to question
+  - 📦⬆🕵🗜 add inspector-gadget dep
+  - 🕵🗜 inspector-gadget on vorpal
+- ⛓🍯 flipglob, fliphelp
+  - 📖 start updating readme
+- ⛓🔈 fliplog
+  - 📖🛰 docs for `space`
+  - ⚒🛰 fix spaces, make it append to `text`
+  - ⚒🐛 fix capturing
+  - 🎁💤 sleepfor
+  - ⚒⛓🔗 fix flipchain link
+  - 📜 script to run test-all
+- 📚 docs ✚ added helpful-info/concurrency
+
+# part 68 - apr 7 17
+
+- ⛓💸 flipcache 📇ℹ️️🛁🔬⛑
+  - 📇🎀📒 add json metadata meta cache file to ensure only a single operation to a single file at a time
+  - ℹ️️ minor Core comments
+  - 🛁 minor Core clean
+  - 🔬 adding concurrency test
+  - ⛑ safety with the timeout and ending
+
+---
+
+# part 67 - apr 6 17
+
+- ⛓🖥 flipcli 🔌📜 🚩📦⬆ 🔮⛰ ℹ️
+  - 🔌 add .use for middleware, firstly for 📜 flipscript
+  - 🚩📦⬆ add flipflag as dep
+  - 🔮⛰ auto env
+  - ℹ️️ comments
+- ⛓📜 flipscript 📐 💸 ⚒🏃⛰👣 🆙🎀 🆕⌛ 🔬🔬 👽👽
+  - ⛓📜 flipscript
+  - 🚩🚩 if last arg was doubledash which we do not need unless there are flags after it, pop it off
+  - ⚒🏃⛰👣  fix running with no env & no PATH, passing in empty env causes EONENT
+  - 📐 some refactor
+  - 🆙🎀 better detection with special-character regexing for stringifying flags
+  - 🆕 adding Remember for estimating progress of a script
+  - 🆕⌛ implement estimator
+  - 💸 use flipcache to store and read results
+  - ⛓🚩 make Flag class chainable
+  - 🔬 update tests for better stringifying
+  - 🔬⛓🚩 update tests for updated chainable flags
+  - 📦 move deps to deps file
+  - 👽 export Flag and Remember
+  - 👽 export deps
+  - 🔬 add test for using prefixer and just flag
+  - 🔬 test for globarg only, added shorthand options, added globarg
+- ⏲ fliptime 👽💸
+  - 👽 export microtime
+  - 💸 add docs for parse and properties
+- 💸 flipcache
+  - 📦⬆💤 add sleepfor
+  - 🚓 add force bypassing loaded file cache
+  - 🚑🐛 add missing .get!
+  - ✅ finishing detachedParent
+  - 🆙⛓🗺 update map to remove _ functions
+  - 🆙 update File.toString
+  - 🆙 update .load
+  - 🔬 autoDelete test working
+  - 🔬 autoRestore test working
+  - 🔬 test for backup working
+  - 🔬 test for backupAndRestore
+  - 🔬 test for error handling safety when restoring
+- 🚩 flipflag 🎁🤖 ⛓ 🍴
+  - 🎁🤖 added .findAndRemove
+  - 🆕 started fluent
+  - 🍴 forked minimist to upgrade it
+  - ✚ added objToArr for possible use
+- 📚 docs ✚✚✚ add redux, webworker, process, types
+- 💤 sleepFor 💍📖
+  - 💍 return a promise.resolve so it can be awaited for testing
+  - 📖 some inline jsdocs
+- ⛓ flipglob 📖📝
+  - 📖 minor docs update
+  - 📖 add readme for future
+  - 📝 add todo for emoji choices and todo
+  - 🛰
+- 💯 fosho 🎁
+  - 🎁 add .aint(flipfile fns)
+- 🏗💠🔮 flipfam 👽📒
+  - 👽📒 export all files so they can be used individually
 
 --------
 
@@ -49,7 +279,6 @@
   - 👣 adding .dir
   - 🔬 added test
   - 📦⬆📦⬇ swap built in autofind with 🔎 flipfind
-  - export all files so they can be used individually
 🏗💠🔮 flipfam
  - added fliphub back to dep from optionalDependencies
  - updated 🎯 fliphub-resolve & 🥕 mono-root
@@ -61,10 +290,8 @@
   - ☕ filtering - added support for function
   - 🎁 add .expose
   - 🐌 add .slow mode
-  - 📖🛰 docs for `space`
   - 📖 updated readme to reflect
   - 📖🏗💠🔮 added flipfam to readme
-  - ⚒🐛 fix capturing
   - 📝 update todos
   - 🛁⚗ clean experiment
 ---
@@ -225,7 +452,7 @@
 
 - ⚒💚🔬 🆕👶 🏗💠🔎📦⬆
 - 💚 travis working to install now
-- 🔬🚨 tests   
+- 🔬🚨 tests
   - 🏴 adding glob for exec on lerna.json
   - ⚒ fixing flipcache, fliphelp,  tests
   - 🛁 remove missing tests on depflip, tiny-promise-map, regexes, emoji-by-name
@@ -233,7 +460,7 @@
   - 🔮🦄💍 use async instead of promises
   - 💚 should be ready for travis
 - 👶 childparent
-  - 🆕 extracted child-to-parent-methods into childparent module  
+  - 🆕 extracted child-to-parent-methods into childparent module
   - 📖 add basic example
 - 🏗💠 fliphub
   - 🔎📦⬆ neutrino-middleware-progress
@@ -247,7 +474,7 @@
 - 📝 for readme with dep checking
 
 - ⛓🔈 fliplog
-  - 🎁💤 sleepfor
+  - 📦⬆💤 sleepfor
   - 📖 add readme
   - 😊 update description & emoji
 

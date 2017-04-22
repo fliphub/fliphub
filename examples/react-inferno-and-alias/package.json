@@ -1,0 +1,44 @@
+{
+  "name": "fliphub-examples-react",
+  "version": "0.1.10",
+  "description": "fliphub examples",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "neutrino start --use neutrino-preset-react"
+  },
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "engines": {
+    "node": ">= 7.7.2",
+    "npm": ">= 4.1.2"
+  },
+  "keywords": [
+    "examples",
+    "fliphub",
+    "flipbox"
+  ],
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  },
+  "devDependencies": {
+    "babel-plugin-inferno": "^2.0.0",
+    "babel-preset-env": "^1.2.2",
+    "depflip": "*",
+    "flipflag": "*",
+    "fliphub": "^0.1.7",
+    "fliplog": "^0.1.12",
+    "fliptime": "*",
+    "neutrino": "^5.0.2",
+    "neutrino-preset-happypack": "*",
+    "neutrino-preset-react": "^5.0.1",
+    "neutrino-preset-web": "5.0.0-beta.1"
+  }
+}

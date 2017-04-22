@@ -18,6 +18,6 @@
     "url": "https://github.com/fliphub/fliphub/issues"
   },
   "devDependencies": {
-    "fliphub": "0.1.0"
+    "fliphub": "0.1.3"
   }
 }

@@ -22,6 +22,16 @@ test(`running a built script
   return t.pass()
 })
 
+test(`can run scripts with : nested, with no flags or env`, async (t) => {
+  const scripts = new ScriptFlip().debug(false)
+  scripts
+    .add()
+    .npm('diggy:nested')
+
+  const results = await scripts.run()
+  return t.pass()
+})
+
 
 // const globScoped = flip.globScope(packages) || '*'
 // const envScope = flip.envScope('PKG_FILTER', packages)

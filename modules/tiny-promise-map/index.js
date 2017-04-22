@@ -62,5 +62,8 @@ function PromiseMap(arr, cb) {
 PromiseMap.obj = Obj
 PromiseMap.chain = PromiseChain
 PromiseMap.map = PromiseMap
+PromiseMap.cb = function promiseCb(cb, ms) {
+  return new Promise(resolve => setTimeout(() => resolve(cb()), ms))
+}
 
 module.exports = PromiseMap

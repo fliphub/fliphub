@@ -2,7 +2,7 @@ const HTMLs = require('./index')
 
 const htmls = new HTMLs()
 
-htmls.add('#root', [], () => {})
+htmls.do('#root', [], () => {})
 htmls.setup('#root')
 
 console.log(htmls)

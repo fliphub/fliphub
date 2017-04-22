@@ -11,7 +11,7 @@
 [gitter-badge]: https://img.shields.io/gitter/room/fliphub/pink.svg
 [gitter-url]: https://gitter.im/fliphub/Lobby
 
-> fluent timer with laps, microtime + parsing, multiple timers
+> fluent timer with laps, microtime + parsing, multiple timers, (fallback to performance & Date)
 
 ## usage
 ```bash
@@ -81,4 +81,22 @@ timer.stop('eh')
 const microseconds = timer.took('eh')
 const ms = timer.msTook('eh')
 const parsed = timer.parsedTook()
+```
+
+### 🏊 additional
+
+```js
+const now = timer.microtime.now()
+const micro = timer.parseMicro(now)
+
+timer.times = {}
+timer.laps = {}
+timer.index = 0
+```
+
+#### example
+```js
+timer.times[name].start
+timer.times[name].end
+timer.times[name].diff
 ```

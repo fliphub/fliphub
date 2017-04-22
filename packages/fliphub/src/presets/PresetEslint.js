@@ -30,6 +30,6 @@ module.exports = class PresetEslint {
     const eslint = require('neutrino-middleware-eslint')
     const rules = {eslint: this.args}
     const options = {eslint: {useEslintrc: true}}
-    return (neutrino) => neutrino.use(eslint, options)
+    return (config, workflow, neutrino) => neutrino.use(eslint, options)
   }
 }

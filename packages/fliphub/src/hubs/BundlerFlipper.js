@@ -18,7 +18,7 @@ module.exports = class BundlerFlipper extends Hub {
 
     // fallback to object if they are inheriting/using-reusable configs
     const toConfiged = config.toConfig() || {}
-    
+
     const to = context.flips.to
     this.to = to
 

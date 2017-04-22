@@ -1,4 +1,3 @@
-const is = require('izz')
 const {AbstractWorkflow} = require('fliphub-core')
 const Context = require('./Context')
 const CoreConfig = require('./configs/Core')

@@ -30,4 +30,11 @@ const sleepfor = require('sleepfor')
 sleepfor(1000)
 ```
 
+can also be used with async await
+
+```js
+await sleepfor(1000)
+```
+
+
 - for more enforced nodejs only sleeping, https://github.com/erikdubbelboer/node-sleep

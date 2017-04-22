@@ -2,6 +2,7 @@ const cleanObj = require('clean-obj')
 const log = require('fliplog')
 const {Presets, ChainedMap} = require('fliphub-core')
 const forOwn = require('lodash.forown')
+const flipport = require('flipport')
 
 const firstToUc = str => str.charAt(0).toUpperCase() + str.slice(1)
 function ucWord(str) {
@@ -15,20 +16,23 @@ module.exports = class ContextConfig extends ChainedMap {
     this.workflow = parent
     delete this.parent
 
-    this.extend([
-      'root',
-      'name',
-      'unified',
-      'from',
-      'to',
-      'flips',
-      'config',
-      'inherit',
-      'presetArgs',
-      'debug',
-      'defaults',
-      'monorepo',
-    ])
+    this
+      .extend([
+        'port',
+        'root',
+        'name',
+        'unified',
+        'from',
+        'to',
+        'flips',
+        'config',
+        'inherit',
+        'presetArgs',
+        'debug',
+        'defaults',
+        'monorepo',
+      ])
+    .port(3000)
   }
 
   /**
@@ -80,6 +84,7 @@ module.exports = class ContextConfig extends ChainedMap {
       flips,
       root,
       debug,
+      port,
     } = this.workflow.coreConfig.toConfig()
 
     super
@@ -87,6 +92,7 @@ module.exports = class ContextConfig extends ChainedMap {
         flips,
         root,
         debug,
+        port,
       })
 
     this

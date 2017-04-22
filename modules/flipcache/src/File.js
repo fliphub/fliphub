@@ -1,13 +1,17 @@
-const {resolve, dirname} = require('path')
-const {read, write, exists, isAbs, del} = require('flipfile')
+const {resolve} = require('path')
+const {read, write, exists, del} = require('flipfile')
 const JSONChain = require('json-chain')
 const ConfigStore = require('configstore')
 const flipfind = require('flipfind')
+const sleepfor = require('sleepfor')
 
 // try to run a bin
 //   - if it fails, use node
 //   - store that it failed so we know when we try again
-
+//
+// @TODO:
+//  - [ ] support buffers, if needed
+//
 // @NOTE:
 // this would mean two files
 // one original, one output,
@@ -63,33 +67,56 @@ module.exports = class File {
   }
   setContent(contents) {
     this.contents = contents
-    return this
-  }
-  write(contents) {
-    this.contents = contents || this.contents
-    const string = this.isJSON ? this.contents.toJSON() : this.contents
-    write(this.absPath, string)
-    this.lastWritten = Date.now()
+    this.parse()
     return this
   }
 
-  // is read, but chainable
-  load() {
-    this.read()
+  // http://stackoverflow.com/questions/34968763/is-there-any-risk-to-read-write-the-same-file-content-from-different-sessions
+  safeReadWrite() {
+    while (this.isWriting()) {
+      console.log('------ISWRITING----')
+      sleepfor(12)
+    }
+  }
+
+  write(contents = null) {
+    this.contents = contents || this.contents
+    const str = this.toString()
+
+    this.safeReadWrite()
+
+    // to ensure multiple parallel processes do not read/write at the same time
+    write(this.absPath + '-writing', '')
+    write(this.absPath, str)
+
+    if (contents !== null) this.parse()
+    this.lastWritten = Date.now()
+
+    del(this.absPath + '-writing')
+
+    return this
+  }
+
+  // is read, but chainable, and only loads if it has not been loaded
+  load(force = false) {
+    this.read(force)
     return this
   }
   exists() {
     return exists(this.absPath)
   }
-  read() {
+  isWriting() {
+    return exists(this.absPath + '-writing')
+  }
+  read(force = false) {
     if (!this.exists()) this.create()
+    if (this.isLoaded === true && force === false) return this.contents
 
-    if (this.isLoaded) {
-      return this.contents
-    }
     if (this.isJSON) {
+      this.safeReadWrite()
       this.contents = read(this.absPath)
       this.parse()
+      this.get = (key) => this.contents.get(key)
       this.has = (key) => this.contents.has(key)
       this.val = (val) => this.contents.val(val)
       this.setIfNotEmpty = (key, val) => {
@@ -112,13 +139,15 @@ module.exports = class File {
     return this.contents
   }
   parse() {
+    if (this.isJSON !== true) return this
     this.contents = new JSONChain(this.contents)
     return this
   }
 
   // if we have no file
   create() {
-    write(this.absPath, '{}')
+    this.contents = '{}'
+    write(this.absPath, this.contents)
     return this
   }
 
@@ -136,6 +165,9 @@ module.exports = class File {
   }
 
   toString() {
+    if (this.isJSON) return this.contents.toJSON()
+    if (typeof this.contents === 'string') return this.contents
+    if (this.contents && this.contents.toString) return this.contents.toString()
     return this.contents
   }
 }

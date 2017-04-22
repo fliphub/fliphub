@@ -52,6 +52,15 @@ module.exports = class PresetHub extends Hub {
     const context = workflow.current
     const bundler = context.bundler
 
+    // pre-decorate
+    // had to add this... -.-
+    this.loopPresets(({preset, args, name}) => {
+      if (!preset) return
+      if (preset.setArgs) preset.setArgs(args)
+      if (preset.preDecorate) preset.preDecorate(context, bundler, this.workflow)
+    })
+
+    // decorate
     this.loopPresets(({preset, args, name}) => {
       log
         .tags('used,args,call,preset')
@@ -71,6 +80,7 @@ module.exports = class PresetHub extends Hub {
       if (preset.decorate) preset.decorate(context, bundler, this.workflow)
     })
 
+    // post-decorate
     this.loopPresets(({preset, args, name}) => {
       if (!preset) return
       if (preset.postDecorate) {
@@ -105,7 +115,9 @@ module.exports = class PresetHub extends Hub {
    */
   callPresetToFrom(workflow) {
     const {fromFn, toFn} = workflow.current.config.getFlips()
+    const bundler = workflow.current.bundler
     const config = workflow.current.bundler.config
+    const contextConfig = workflow.current.config
 
     log
       .tags('call,preset,to,from')
@@ -138,14 +150,18 @@ module.exports = class PresetHub extends Hub {
         let toMerge = preset[toFn](config, workflow)
 
         // if it is a fn (such as with neutrino) call it
-        if (typeof toMerge === 'function') toMerge = toMerge(config)
+        if (typeof toMerge === 'function')
+          toMerge = toMerge(config, workflow, bundler.api)
 
         // if null is returned, ignore
         else if (is.notReal(toMerge)) return
 
         // normal objects returned or
         // handle neutrino presets
+        // else config.merge(toMerge) && contextConfig.merge(toMerge)
         else config.merge(toMerge)
+
+        // log.data({toMerge}).bold('TOMERGE').echo()
 
         return
       }

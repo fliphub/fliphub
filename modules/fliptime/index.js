@@ -1,12 +1,23 @@
 // https://github.com/firefoxes/diff-hrtime/blob/master/diffHrtime.js
 // https://github.com/wadey/node-microtime
-const microtime = require('microtime')
+let microtime
+
+try {
+  microtime = require('microtime')
+} catch (e) {
+  microtime = Date
+}
+
+if (typeof window !== 'undefined' && typeof performance !== 'undefined') {
+  microtime = performance
+}
 
 class Timer {
   constructor() {
     this.times = {}
     this.laps = {}
     this.index = 0
+    this.microtime = microtime
   }
 
   start(name = null) {
@@ -38,8 +49,12 @@ class Timer {
   }
 
   stop(name) {
-    if (this.times[name].end) return this.lap(name)
+    if (this.times[name] && this.times[name].end) return this.lap(name)
 
+    if (!this.times[name]) {
+      console.log('had no times for ' + name)
+      return this
+    }
     this.times[name].end = microtime.now()
     this.times[name].diff = this.times[name].end - this.times[name].start
     return this

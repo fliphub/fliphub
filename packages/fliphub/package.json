@@ -1,6 +1,6 @@
 {
   "name": "fliphub",
-  "version": "0.1.0",
+  "version": "0.1.8",
   "description": "the builder of builders",
   "main": "src/index.js",
   "bin": "bin/flip",
@@ -21,7 +21,8 @@
     "help": "node flip --help",
     "example-compat": "webpack --config example/configs/compat/mediator.js",
     "mocha-dist": "mocha ./dist/fliphub-tests.js",
-    "_postinstall": "node depflip"
+    "postinstall": "node ./bin/deps.js --dev=true --ignore=ava",
+    "_postinstall": "depflip --dev=true --ignore=ava && echo('symlinks are 777')"
   },
   "files": [
     "bin",
@@ -64,7 +65,9 @@
     "browserify": "*",
     "glob": "^7.1.1",
     "bluebird": "^3.5.0",
-    "optimize-js": "^1.0.3"
+    "optimize-js": "^1.0.3",
+    "express": "*",
+    "connect-history-api-fallback": "*"
   },
   "devDependencies": {
     "ava": "^0.19.0",
@@ -137,6 +140,7 @@
     "fliphub-resolve": "*",
     "fliplog": "*",
     "fliptime": "*",
+    "flipcache": "*",
     "fosho": "*",
     "html-webpack-plugin": "^2.28.0",
     "insert-at-index": "*",
@@ -153,7 +157,8 @@
     "remap-by": "*",
     "tiny-promise-map": "*",
     "to-arr": "*",
-    "webpack": "^2.3.2"
+    "webpack": "^2.3.3",
+    "flipport": "*"
   },
   "ava": {
     "files": [

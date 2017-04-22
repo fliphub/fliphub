@@ -38,7 +38,7 @@ const onthefly = flipcache
 
 ```js
 const mocha = flipcache
-  .from('mochaOptsFile')
+  .from('mochaOptsFile').end()
   .to('mochaOptsBackupFile')
   .autoRestore(2000)
 ```
@@ -63,6 +63,21 @@ const datas = flipcache
   .json()
   .setIfNotEmpty({eh: true})
   .write()
+```
+
+### 👽 exports
+
+```js
+const {
+  File,
+  Files,
+  Core,
+  Cache,
+  JSONChain,
+  ConfigStore,
+  FlipFind,
+  fliphash,
+} = require('flipcache')
 ```
 
 ## 🔗 more

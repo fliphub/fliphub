@@ -21,6 +21,7 @@ test('promises can be chained', async t => {
   const mapResults = []
   await chain(promises, (promise, last, index) => {
     mapResults.push({index, last})
+    t.true(Array.isArray(mapResults))
     return promise()
   })
 })

@@ -10,14 +10,17 @@
     "fliphub"
   ],
   "dependencies": {
-    "html-webpack-plugin": "2.28.0",
-    "fliplog": "*",
-    "flipfile": "*",
-    "flipcache": "*",
-    "fliphub-resolve": "*",
-    "gom": "0.1.14",
+    "express-history-api-fallback": "^2.1.0",
     "flip-gom-html-parser": "0.0.5",
-    "fuse-box": "^1.4.1-beta.22"
+    "flipcache": "*",
+    "flipchain": "*",
+    "flipfile": "*",
+    "fliphub-resolve": "*",
+    "fliplog": "*",
+    "fuse-box": "^1.4.1-beta.22",
+    "gom": "0.1.14",
+    "html-webpack-plugin": "2.28.0",
+    "webpack-dev-middleware": "^1.10.1"
   },
   "author": "James <aretecode@gmail.com>",
   "homepage": "https://github.com/fliphub/fliphub#readme",

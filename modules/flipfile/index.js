@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const mkdirp = require('mkdirp')
+const {unique, along, within, contains} = require('node-path-extras')
 const getFileAndPath = require('./getFileAndPath')
 const getDirectories = require('./getDirectories')
 const isDir = require('./isDir')
@@ -32,4 +33,9 @@ module.exports = {
   path,
   fs,
   del,
+  
+  unique,
+  along,
+  within,
+  contains,
 }

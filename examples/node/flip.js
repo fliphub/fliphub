@@ -8,7 +8,7 @@ const apps = [
       'aliasResolve': null,
       'aliasRequire': {
         dir: 'aliases/',
-        files: ['moose', 'igloo', 'react'],
+        files: ['moose'],
       },
     },
 

@@ -1,28 +1,23 @@
 const ChainedMap = require('flipchain/ChainedMapExtendable')
-const flipGlob = require('flipglob')
-const insertAt = require('insert-at-index')
-const real = require('izz/realNotEmpty')
-const toarr = require('to-arr')
-// const binner = require('./binner')
 const Flag = require('./Flag')
+const {flipglob, insertAt, real, toarr, prefixer} = require('./deps')
+// const binner = require('./binner')
 
 // https://www.youtube.com/watch?v=SwSle66O5sU
 const OFF = `${~315 >>> 3}@@`
-
-function prefixer(prefix, names) {
-  return toarr(names).map(name => {
-    if (!name.includes(prefix)) name = prefix + '-' + name
-    return name
-  })
-}
 
 /**
  * @config
  *
  * @TODO:
+ * - [ ] need to change the `_` values to just `.set`
  * - [ ] needs some added index stuff such as adding raw commands
  *       example `exec`
  * - [ ] might need to make `groups` return a new Script?
+ * - [ ] values without `=`, spaced
+ *
+ *
+ *
  * ---
  * prefix app names, for monorepos
  *
@@ -44,7 +39,9 @@ function prefixer(prefix, names) {
 module.exports = class Script extends ChainedMap {
   constructor(parent) {
     super(parent)
-    delete this.parent
+
+    // already bound by parent
+    this.run = this.parent.run
 
     this
       // might also want to do other things here with node, py, etc
@@ -113,6 +110,16 @@ module.exports = class Script extends ChainedMap {
     this.groups = [
       /* 0:*/ [],
     ]
+  }
+
+  /**
+   * @param {string} [stdout]
+   * @see execa
+   * @return {Script}
+   */
+  stdout(stdout = 'inherit') {
+    this.set('stdout', stdout)
+    return this
   }
 
   // --- groups ---
@@ -212,7 +219,7 @@ module.exports = class Script extends ChainedMap {
    */
   flag(name, value = OFF) {
     this.arg(name, value)
-    this.current.dash = '--'
+    this.current.dash('--')
     return this
   }
 
@@ -231,8 +238,8 @@ module.exports = class Script extends ChainedMap {
    */
   arg(name, value = OFF, index = OFF, group = OFF) {
     this._addFlag(index, group)
-    this.current.name = name
-    if (value !== OFF) this.current.value = value
+    this.current.name(name)
+    if (value !== OFF) this.current.value(value)
     return this
   }
 
@@ -247,10 +254,37 @@ module.exports = class Script extends ChainedMap {
    */
   globFlag(name, apps, dash = true) {
     // if (!real(apps)) return this
-    const glob = flipGlob.start().any(apps).toString()
+    const glob = flipglob.start().any(apps).toString()
     if (dash) return this.flag(name, glob)
     return this.arg(name, glob)
   }
+
+  /**
+   * @since 0.0.6
+   * @param {string} name
+   * @param {string | Array<string> | boolean} apps boolean when stringify
+   * @param {boolean | string} [stringify]
+   * @return {Flag}
+   */
+  globArg(name, apps, stringify = true) {
+    // optional shorter args
+    if ((typeof name === 'string' || Array.isArray(name)) && apps === false) {
+      stringify = apps
+      apps = name
+
+      const glob = flipglob.start().any(apps).toString()
+      const val = this.arg(glob)
+
+      if (stringify === false) this.current.stringify(false)
+
+      return val
+    }
+
+    const glob = flipglob.start().any(apps).toString()
+    if (stringify === false) return this.arg(name, glob)
+    return this.arg(name, glob)
+  }
+
 
   /**
    * @since 0.0.3
@@ -260,18 +294,22 @@ module.exports = class Script extends ChainedMap {
    */
   globEnv(env, apps) {
     if (!real(apps)) return this
-    const glob = flipGlob.start().any(apps).toString()
-    return this.envDefine(name, glob)
+    const glob = flipglob.start().any(apps).toString()
+    return this.envDefine(glob, env)
   }
 
   /**
    * @since 0.0.3
    * @param {string} env
    * @param {string | Array<string>} apps
-   * @param {boolean} [dash]
+   * @param {Object} opts {dash: boolean, prefix: boolean}
    * @return {Flag}
    */
-  globEnvAndFlag(env, apps, dash = true) {
+  globEnvAndFlag(env, apps, opts = {}) {
+    const {dash, prefix} = Object.assign({dash: true, prefix: false}, opts)
+
+    if (prefix) apps = prefixer(this.get('prefix') || prefix, apps)
+
     return this
       .globEnv(env, apps)
       .globFlag(env, apps, dash)
@@ -296,12 +334,20 @@ module.exports = class Script extends ChainedMap {
    * @since 0.0.3
    * @see this._env, process.env, execa, child_process
    *
+   * @see http://stackoverflow.com/questions/27688804/how-do-i-debug-error-spawn-enoent-on-node-js
+   *
    * @param {string<production, development, any>} env
+   * @param {string} prop
    * @return {Flag}
    */
-  envDefine(env) {
+  envDefine(env, prop = 'NODE_ENV') {
     const _env = Object.create(process.env)
-    _env.NODE_ENV = env
+    _env[prop] = env
+    _env.PATH = process.env.PATH
+
+    const existing = this.get('_env')
+    if (existing) return this.set('_env', Object.assign(existing, _env))
+
     return this._env(_env)
   }
 
@@ -319,6 +365,10 @@ module.exports = class Script extends ChainedMap {
 
   /**
    * does both
+   *
+   * @see this.env, this.envDefine
+   * @param {string} env
+   * @return {Scripts}
    */
   envs(env) {
     return this
@@ -360,6 +410,8 @@ module.exports = class Script extends ChainedMap {
         .env(env)
     }
     this.scope = (scope) => {
+      if (!scope) return this
+
       const prefix = this.get('prefix')
       if (prefix) scope = prefixer(prefix, scope)
 
@@ -423,7 +475,7 @@ module.exports = class Script extends ChainedMap {
    * @return {string}
    */
   toString() {
-    return this.toArray(true).join(' -- ').replace(/ {2}/, ' ').trim()
+    return this.toArray(true).join(' -- ').replace(/\s{2}/gmi, ' ').trim()
       // .map(group => group.join('###'))
       // .join(' -- ')
       // .replace(/ {2}/, ' ').trim()
@@ -431,10 +483,11 @@ module.exports = class Script extends ChainedMap {
 
   /**
    * @since 0.0.3
-   * @return {string}
+   * @return {Object}
    */
   toCmd() {
     const arr = this.toArray()
+    const stdout = this.get('stdout')
 
     // take group out,
     const group1 = arr.shift()
@@ -450,9 +503,10 @@ module.exports = class Script extends ChainedMap {
       return args.push(arg.trim())
     })
 
-
     // {isBin: _bin} = this.entries()
-    return {bin, args, env: this.get('_env')}
+    const cmds = {bin, args, env: this.get('_env')}
+    if (stdout) cmds.stdout = stdout
+    return cmds
   }
 
   // ---

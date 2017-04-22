@@ -40,7 +40,7 @@ module.exports = class Context extends AbstractContext {
    *
    * @see this.preConfig
    * @event context.config
-   * @param {Object} config - user config / app / opts
+   * @param {Object} opts - user config / app / opts
    */
   initConfig(opts) {
     this.config.merge(this.opts)

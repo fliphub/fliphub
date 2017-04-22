@@ -1,13 +1,14 @@
 {
   "name": "flipfile",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "main": "index.js",
   "description": "file helpers for reading, writing, deleting, checking types & existence, extracting metadata, walking, globbing, and more.",
   "dependencies": {
     "expose-hidden": "*",
     "mkdirp": "^0.5.1",
     "glob-fs": "0.1.6",
-    "fs-extra": "2.1.2"
+    "fs-extra": "2.1.2",
+    "node-path-extras": "0.4.1"
   },
   "files": [
     "all.js", "del.js", "exists.js", "extra.js", "fileName.js", "getDirectories.js",

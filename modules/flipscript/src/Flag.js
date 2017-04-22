@@ -3,13 +3,32 @@ const {Context} = require('fliphub-core')
 
 // https://github.com/adamjeffries/cmdx
 module.exports = class Flag extends Context {
+
+  /**
+   * @since 0.0.6
+   * @see FlipChain
+   * @param {any} parent
+   * @return {Flag}
+   */
+  static init(parent) {
+    return new Flag(parent)
+  }
+
   constructor(parent) {
     super(parent)
-    delete this.parent
-    this.dash = false
-    this.stringify = false
-    this.name = String
-    this.value = undefined
+    // delete this.parent
+
+    /**
+     * @since 0.0.6
+     */
+    this
+      .extend([
+        'dash', 'stringify', 'name', 'value',
+      ])
+      .dash(false)
+      .stringify(false)
+      .name(String)
+      .value(undefined)
 
     // so we can have groups by `--`
     // and index of flags
@@ -17,28 +36,42 @@ module.exports = class Flag extends Context {
     // this.group = 0
   }
 
+  /**
+   * @since 0.0.3
+   * @return {boolean}
+   */
   shouldStringify() {
-    if (this.stringify) return true
-    if (typeof this.value !== 'string') return false
+    const {value, stringify} = this.entries()
+    if (stringify) return true
+    if (typeof value !== 'string') return false
 
     // any letter or number, or -_, but not double dash
-    return !(/[a-zA-Z0-9-_]/.test(this.value) && !this.value.includes('--'))
+    // or has any special character
+    return (
+      (!(/[a-zA-Z0-9-_]/.test(value)) && !value.includes('--')) ||
+      (/[+=~`@#$%^&*().,\/\\:;'"{}|]/).test(value)
+    )
   }
 
+  /**
+   * @since 0.0.3
+   * @return {string}
+   */
   toString() {
     let string = ''
+    let {dash, name, value} = this.entries()
 
     // if dash: --
     // if prefix: (monorepo) e.g. (inferno-compat, lodash.forown)
-    if (this.dash) string = '--'
-    string += this.name
+    if (dash) string = '--'
+    string += name
 
     // if value & stringify: --name='val', name='val'
     // else if value:        name=val,
     // else:                 --name, name
-    if (real(this.value)) {
-      if (this.shouldStringify()) string += `="${this.value}"`
-      else string += `=${this.value}`
+    if (real(value)) {
+      if (this.shouldStringify()) string += `="${value}"`
+      else string += `=${value}`
     }
 
     return string

@@ -1,5 +1,6 @@
 should use ChainedSet for presets...
 
+- need to have the tests write the fixture content in `before`
 
 
 update the slack thing

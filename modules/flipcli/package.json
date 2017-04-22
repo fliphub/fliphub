@@ -1,7 +1,7 @@
 {
   "name": "flipcli",
   "description": "flipcli creation, minimal, powerful.",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "src/index.js",
   "scripts": {
     "test": "ava --verbose"
@@ -19,6 +19,7 @@
     "inquirer": "^3.0.6",
     "flipchain": "*",
     "vorpal": "1.11.4",
+    "inspector-gadget": "*",
     "flipfile": "*",
     "flipflag": "*",
     "fliplog": "*",

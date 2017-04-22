@@ -10,10 +10,7 @@
     "src"
   ],
   "dependencies": {
-    "commander": "^2.9.0",
-    "inquirer": "^3.0.6",
-    "lodash.sortby": "^4.7.0",
-    "minimalist": "^1.0.0"
+    "flipcli": "*"
   },
   "keywords": [
     "fliphub-inferno-cli",

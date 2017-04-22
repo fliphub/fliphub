@@ -17,7 +17,7 @@
     "babel-preset-env": "^1.2.2",
     "depflip": "*",
     "flipflag": "*",
-    "fliphub": "0.1.0",
+    "fliphub": "^0.1.7",
     "fliptime": "*"
   },
   "author": "James <aretecode@gmail.com>",

@@ -4,7 +4,7 @@ module.exports = class PresetReusable {
   }
 
   coreInit(workflow) {
-    console.log('called core init -.-')
+    // console.log('called core init -.-')
     this.workflow = workflow
     workflow.evt.on('')
     workflow

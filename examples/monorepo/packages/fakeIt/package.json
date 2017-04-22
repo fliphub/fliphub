@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "dependencies": {
     "faker": "^4.1.0",
-    "fliphub": "0.1.0",
+    "fliphub": "^0.1.7",
     "fliphub-alias": "*",
     "flipchain": "*",
     "flipfile": "*",

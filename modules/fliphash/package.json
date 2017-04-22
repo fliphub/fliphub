@@ -1,0 +1,30 @@
+{
+  "name": "fliphash",
+  "version": "0.0.1",
+  "description": "simple blazing-fast short string-to-number hasher",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava --verbose"
+  },
+  "devDependencies": {
+    "ava": "^0.19.0",
+    "fosho": "*"
+  },
+  "keywords": [
+    "flip",
+    "hash",
+    "fliphash",
+    "fast",
+    "fliphub"
+  ],
+  "licence": "MIT",
+  "author": "James <aretecode@gmail.com>",
+  "homepage": "https://github.com/fliphub/fliphub#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fliphub/fliphub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fliphub/fliphub/issues"
+  }
+}

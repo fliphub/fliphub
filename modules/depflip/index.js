@@ -1,1 +1,1 @@
-module.exports = require('./deps.js')
+module.exports = require('./installDep')

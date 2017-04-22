@@ -1,9 +1,18 @@
-const {ChainedMap, ChainedSet, vorpal} = require('./deps')
+const {inspectorGadget} = require('inspector-gadget')
+const {ChainedMap, ChainedSet, vorpal, flipflag, flipscript} = require('./deps')
+
+const {ScriptFlip} = flipscript
+
+const ignore = [
+  'parent', 'workflow', 'currentVorpal', '_parent', 'util', 'lodash',
+]
 
 module.exports = class Program extends ChainedMap {
   constructor(parent) {
     super(parent)
-    this.actions = new ChainedSet(this)
+    this.inspect = inspectorGadget(this)
+    this.actions = new ChainedSet(this, ignore)
+    this.middleware = {}
   }
 
   /**
@@ -17,6 +26,8 @@ module.exports = class Program extends ChainedMap {
 
     // this.vorpal.actionPrompt = this.actionPrompt.bind(this)
 
+    // --- vorpal instance
+
     this.delimiter = (delimiter = '🏗  fliphub ➜') => {
       this.vorpal.delimiter(delimiter)
       return this
@@ -25,8 +36,52 @@ module.exports = class Program extends ChainedMap {
       this.vorpal.show(show)
       return this
     }
+    this.hide = () => {
+      this.vorpal.hide()
+      return this
+    }
+    this.history = (id) => {
+      this.vorpal.history(id)
+      return this
+    }
     this.parse = (argv = process.argv) => {
       this.vorpal.parse(argv)
+      return this
+    }
+
+    this.localStorage = this.vorpal.localStorage
+    this.commands = this.vorpal.commands
+    this.util = this.vorpal.util
+    this.vorpal.inspect = inspectorGadget(this, ignore.concat(['vorpal']))
+
+    // as a preset?
+    this.parseEnv = (argv = process.argv) => {
+      if (this.middleware.script) {
+        const snd = flipflag.searchAndDestroy
+        // const production = true
+        // const development = false
+        // const production = snd('p', argv) || snd('production', argv)
+        // const development = snd('d', argv) || snd('development', argv)
+        const production = snd('-p', argv) || snd('--production', argv)
+        const development = snd('-d', argv) || snd('--development', argv)
+
+        if (production) {
+          this.middleware.script.env('NODE_ENV', 'production')
+        }
+        else if (development) {
+          this.middleware.script.env('NODE_ENV', 'development')
+        } else {
+          this.middleware.script.env('NODE_ENV', process.env.NODE_ENV)
+        }
+      }
+
+      return this.parse(argv)
+    }
+
+    // --- vorpal current ---
+    // https://github.com/dthree/vorpal/wiki/Docs-%7C-Using-Arrow-Functions
+    this.types = (id) => {
+      this.currentVorpal.types(id)
       return this
     }
 
@@ -39,9 +94,39 @@ module.exports = class Program extends ChainedMap {
       this.currentVorpal = this.vorpal.command(...args)
       return this
     }
+
+    this.allowUnknownOptions = (...args) => {
+      this.currentVorpal = this.vorpal.autocomplete(...args)
+      return this
+    }
+    this.autocomplete = (...args) => {
+      this.currentVorpal = this.vorpal.description(...args)
+      return this
+    }
+
+    // autocomplete, allowUnknownOptions
+    this.description = (...args) => {
+      this.currentVorpal = this.currentVorpal.description(...args)
+      return this
+    }
     this.action = (...args) => {
-      // console.log('adding action...', args)
       this.currentVorpal.action(...args)
+      return this
+    }
+    this.option = (...args) => {
+      this.currentVorpal.option(...args)
+      return this
+    }
+    this.cancel = (...args) => {
+      this.currentVorpal.cancel(...args)
+      return this
+    }
+    this.help = (...args) => {
+      this.currentVorpal.help(...args)
+      return this
+    }
+    this.remove = (...args) => {
+      this.currentVorpal.remove(...args)
       return this
     }
 
@@ -49,7 +134,26 @@ module.exports = class Program extends ChainedMap {
     return this
   }
 
+  use(middleware) {
+    if (!middleware) {
+      return this
+    }
+    if (middleware instanceof ScriptFlip) {
+      this.middleware.script = middleware
+    }
+    else {
+      const key = middleware.name || middleware.constructor.name
+      this.middleware[key] = middleware
+    }
+    return this
+  }
+
+
   /**
+   * @param {string} name
+   * @param {string} [type]
+   * @param {string} [msg]
+   * @param {Function} [cb]
    * @return {Vorpal}
    */
   actionPrompt(name, type = 'checkbox', msg = null, cb = null) {

@@ -57,7 +57,7 @@ module.exports = class PresetMinify {
 
   toWebpack() {
     const minify = require('neutrino-middleware-minify')
-    return (neutrino) => neutrino.use(minify)
+    return (config, workflow, neutrino) => neutrino.use(minify)
   }
   toRollup() {
     const babili = require('rollup-plugin-babili')

@@ -1,17 +1,20 @@
 {
   "name": "flipcache",
-  "version": "0.0.6",
+  "version": "0.0.11",
   "description": "[temporary], safe, restorable, cacheable, configurable, chainable/fluent data",
   "main": "src/index.js",
   "scripts": {
-    "test": "ava --verbose"
+    "test": "ava --verbose",
+    "posttest": "echo \"removing file\" && node test/fixtures/cleanup"
   },
   "devDependencies": {
     "ava": "^0.19.0",
-    "fosho": "*"
+    "fosho": "*",
+    "fliplog": "*"
   },
   "dependencies": {
-    "fliplog": "*",
+    "fliphash": "*",
+    "sleepfor": "*",
     "flipchain": "*",
     "flipfile": "*",
     "json-chain": "*",

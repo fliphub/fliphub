@@ -4,7 +4,8 @@
   "main": "index.js",
   "description": "monorepos without symlinking or nesting node_module folder structure",
   "dependencies": {
-    "flipfile": "*"
+    "flipfile": "*",
+    "regexes": "*"
   },
   "keywords": [
     "monorepo",

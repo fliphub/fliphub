@@ -10,7 +10,7 @@ module.exports = function installDep(deps) {
   let logged = false
   deps.forEach((dep) => {
     try {
-      require(dep)
+      require.resolve(dep)
     } catch (e) {
       // console.log(e)
       console.log('installing missing: ', dep)

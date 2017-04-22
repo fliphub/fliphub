@@ -1,9 +1,10 @@
 {
   "name": "flipscript",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "src/index.js",
   "description": "fluent script building; flip the script on em",
   "scripts": {
+    "diggy:nested": "node test/fixtures/diggy.js",
     "diggy": "node test/fixtures/diggy.js",
     "test": "ava --verbose"
   },
@@ -18,7 +19,9 @@
     "semver": "^5.3.0",
     "np": "*",
     "flipfile": "*",
+    "fliptime": "*",
     "flipchain": "*",
+    "flipflag": "*",
     "flipcache": "*",
     "fliplog": "*",
     "execa": "0.6.3",

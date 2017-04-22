@@ -51,9 +51,4 @@ const config = {
   ],
 }
 
-if (process.env.NODE_ENV) {
-  const uglify = new webpack.optimize.UglifyJsPlugin(uglify)
-  config.plugins.push(uglify)
-}
-
 module.exports = config
